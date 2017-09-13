@@ -3,3 +3,4 @@ script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 php ${script_dir}/console doctrine:database:drop --force
 php ${script_dir}/console doctrine:database:create
+php ${script_dir}/console doctrine:schema:update --force

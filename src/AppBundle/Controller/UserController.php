@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
 use AppBundle\Entity\User;
 
 class UserController extends Controller {
@@ -12,7 +14,7 @@ class UserController extends Controller {
     /**
      * @Route("/user/create")
      */
-    public function createAction() {
+    public function createAction(LoggerInterface $logger) {
         $em = $this->getDoctrine()->getManager();
 
         $user = new User();
@@ -27,6 +29,7 @@ class UserController extends Controller {
 
         $em->flush();
 
+        $logger->info('Created user: '.$user->getEmail());
         return new Response('Created new user with id '.$user->getId());
     }
 

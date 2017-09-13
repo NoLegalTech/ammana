@@ -31,20 +31,22 @@ class UserController extends Controller {
     }
 
     /**
-     * @Route("/user/show")
+     * @Route("/user/show/{id}")
      */
-    public function showAction($userId) {
+    public function showAction($id) {
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->find($userId);
+            ->find($id);
 
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id '.$userId
+                'No user found for id '.$id
             );
         }
 
-        return new Response('Found user with id '.$user->getId().' and email '.$user->getEmail());
+        return $this->render('user/show.html.twig', array(
+            'user' => $user,
+        ));
     }
 
 }

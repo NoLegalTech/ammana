@@ -20,3 +20,4 @@ composer.lock
 # For deployment
 pre/
 tools/
+.htaccess

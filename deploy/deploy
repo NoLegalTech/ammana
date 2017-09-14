@@ -1,0 +1,30 @@
+#!/bin/bash
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+target=${1:-pre}
+
+get_parameter() {
+    key=$1
+
+    grep $key deploy/parameters.yml | awk 'BEGIN {FS=":"} {print $2}' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
+deploy() {
+    target=$1
+    remote_folder=$2
+    server=$(get_parameter "server")
+
+    echo -n "Deploying $target... "
+    scp ${script_dir}/.htaccess_${target} ${server}:${remote_folder}/.htaccess > /dev/null
+    ssh ${server} "cd ${remote_folder} && git fetch && git pull --rebase" > /dev/null 2> /dev/null
+    echo "OK"
+}
+
+case "$target" in
+    pre)
+        deploy $target "www/pre"
+        ;;
+    pro)
+        deploy $target "www"
+        ;;
+esac

@@ -6,7 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>{% block title %}ammana - seal the deal!{% endblock %}</title>
         {% block stylesheets %}
-            <link href="{{ asset('css/main.css') }}" rel="stylesheet" />
+            {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -112,7 +114,6 @@
                     </li>
                 </ul>
                 <p class="center nospace"><a class="btn" href="#">Contratar</a></p>
-                <!-- / main body -->
                 <div class="clear"></div>
             </main>
         </div>
@@ -225,11 +226,9 @@
         <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 
         {% block javascripts %}
-            <script src="{{ asset('js/main.js') }}"></script>
-            <script src="{{ asset('js/jquery.min.js') }}"></script>
-            <script src="{{ asset('js/jquery.backtotop.js') }}"></script>
-            <script src="{{ asset('js/jquery.mobilemenu.js') }}"></script>
-            <script src="{{ asset('js/jquery.placeholder.min.js') }}"></script>
+            {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
         {% endblock %}
 
     </body>

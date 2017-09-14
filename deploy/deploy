@@ -1,6 +1,9 @@
 #!/bin/bash
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+err=${script_dir}/error.log
+out=${script_dir}/out.log
+
 target=${1:-pre}
 
 get_parameter() {
@@ -14,9 +17,18 @@ deploy() {
     remote_folder=$2
     server=$(get_parameter "server")
 
+    rm -f $err
+    rm -f $out
+
     echo -n "Deploying $target... "
-    scp ${script_dir}/.htaccess_${target} ${server}:${remote_folder}/.htaccess > /dev/null
-    ssh ${server} "cd ${remote_folder} && git fetch && git pull --rebase" > /dev/null 2> /dev/null
+    scp ${script_dir}/.htaccess_${target} ${server}:${remote_folder}/.htaccess > $out  2> $err || {
+        echo "KO"
+        exit 1
+    }
+    ssh ${server} "cd ${remote_folder} && git fetch && git pull --rebase" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
     echo "OK"
 }
 

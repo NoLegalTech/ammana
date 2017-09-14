@@ -3,6 +3,11 @@ ammana
 
 Generator for job protocols.
 
+## Build status
+[![Build Status](https://travis-ci.org/NoLegalTech/ammana.svg?branch=master)](https://travis-ci.org/NoLegalTech/ammana)
+[![Build Status](https://travis-ci.org/NoLegalTech/ammana.svg?branch=pre)](https://travis-ci.org/NoLegalTech/ammana)
+[![Build Status](https://travis-ci.org/NoLegalTech/ammana.svg?branch=dev)](https://travis-ci.org/NoLegalTech/ammana) (pro/pre/dev)
+
 ## Installation
 
 ### On a server

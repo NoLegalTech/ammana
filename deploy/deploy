@@ -25,6 +25,10 @@ deploy() {
         echo "KO"
         exit 1
     }
+    ssh ${server} "cd ${remote_folder} && php tools/composer.phar update && php tools/composer.phar install" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
     ssh ${server} "cd ${remote_folder} && git fetch && git pull --rebase" > $out 2> $err || {
         echo "KO"
         exit 1

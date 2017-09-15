@@ -33,6 +33,10 @@ deploy() {
         echo "KO"
         exit 1
     }
+    ssh ${server} "cd ${remote_folder} && php bin/console doctrine:migrations:migrate" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
     echo "OK"
 }
 

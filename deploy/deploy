@@ -1,0 +1,50 @@
+#!/bin/bash
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+err=${script_dir}/error.log
+out=${script_dir}/out.log
+
+target=${1:-pre}
+
+get_parameter() {
+    key=$1
+
+    grep $key deploy/parameters.yml | awk 'BEGIN {FS=":"} {print $2}' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
+deploy() {
+    target=$1
+    remote_folder=$2
+    server=$(get_parameter "server")
+
+    rm -f $err
+    rm -f $out
+
+    echo -n "Deploying $target... "
+    scp ${script_dir}/.htaccess_${target} ${server}:${remote_folder}/.htaccess > $out  2> $err || {
+        echo "KO"
+        exit 1
+    }
+    ssh ${server} "cd ${remote_folder} && git fetch && git pull --rebase" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
+    ssh ${server} "cd ${remote_folder} && php bin/console cache:clear --env=prod" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
+    ssh ${server} "cd ${remote_folder} && php bin/console assetic:dump --env=prod --no-debug" > $out 2> $err || {
+        echo "KO"
+        exit 1
+    }
+    echo "OK"
+}
+
+case "$target" in
+    pre)
+        deploy $target "www/pre"
+        ;;
+    pro)
+        deploy $target "www"
+        ;;
+esac

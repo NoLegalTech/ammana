@@ -161,6 +161,7 @@ File: Layout CSS
 #topbar{font-size:.8rem; text-transform:uppercase;}
 
 #topbar .fl_left{margin-top:8px;}
+#topbar .fl_right{margin-top:8px;}
 #topbar .inline > li i{margin:0 5px 0 0; line-height:normal;}
 
 #topbar form{display:block; position:relative; width:100%;}

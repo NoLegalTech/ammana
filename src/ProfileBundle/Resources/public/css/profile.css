@@ -1,0 +1,17 @@
+.row {
+    white-space:nowrap;
+    float: left;
+    width: 100%;
+}
+.row label {
+    float: left;
+    width: 40%;
+}
+.row input, .row select {
+    float: right;
+    width: 40%;
+}
+.small-sheet {
+    width: 100%;
+    padding: 0 25%;
+}

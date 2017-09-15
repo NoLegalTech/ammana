@@ -1,0 +1,3 @@
+profile_homepage:
+    path:     /profile
+    defaults: { _controller: ProfileBundle:Default:index }

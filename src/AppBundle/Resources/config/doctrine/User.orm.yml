@@ -1,0 +1,38 @@
+AppBundle\Entity\User:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        email:
+            type: string
+            length: '64'
+            unique: true
+        password:
+            type: string
+            length: '32'
+        companyName:
+            type: string
+            length: '75'
+            column: company_name
+            nullable: true
+        cif:
+            type: string
+            length: '9'
+            unique: true
+            nullable: true
+        address:
+            type: string
+            length: '116'
+            nullable: true
+        contactPerson:
+            type: string
+            length: '100'
+            nullable: true
+            column: contact_person
+    lifecycleCallbacks: {  }

@@ -12,20 +12,20 @@ use AppBundle\Entity\User;
 class DefaultController extends Controller
 {
     public function indexAction() {
-        $id = 1; // TODO get from session when there's login
+        $email= 'ammana@sample.com'; // TODO get from session when there's login
 
         $user = $this->getDoctrine()
             ->getRepository(User::class)
-            ->find($id);
+            ->findByEmail($email);
 
         if (!$user) {
             throw $this->createNotFoundException(
-                'No user found for id '.$id
+                'No user found for email '.$email
             );
         }
 
         return $this->render('user/profile.html.twig', array(
-            'user' => $user,
+            'user' => $user[0],
         ));
     }
 }

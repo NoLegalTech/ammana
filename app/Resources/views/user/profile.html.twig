@@ -6,36 +6,10 @@
         <main class="hoc container clear"> 
             <div class="btmspace-50 small-sheet">
                 <h2 class="heading">Tu perfil</h2>
-                <div class="row">
-                    <label>Nombre de la empresa:</label>
-                    <input type="text" name="company_name" value="{{ user.companyName }}" />
-                </div>
-                <div class="row">
-                    <label>CIF:</label>
-                    <input type="text" name="cif" value="{{ user.cif }}" />
-                </div>
-                <div class="row">
-                    <label>Domicilio social:</label>
-                    <input type="text" name="address" value="{{ user.address }}" />
-                </div>
-                <div class="row">
-                    <label>Persona de contacto:</label>
-                    <input type="text" name="contact_person" value="{{ user.contactPerson }}" />
-                </div>
-                <div class="row">
-                    <label>Sector:</label>
-                    <select name="sector">
-                        <option>Hostelería, comida y bebida</option>
-                        <option>Salud, belleza y bienestar</option>
-                        <option>Venta al por menor</option>
-                        <option>Servicios</option>
-                        <option>Ocio y entretenimiento</option>
-                        <option>Otro</option>
-                    </select>
-                </div>
-            </div>
-            <div class="btmspace-50 small-sheet">
-                <p class="center nospace"><a class="btn" href="#">Actualizar</a></p>
+                {{ form_start(edit_form) }}
+                    {{ form_widget(edit_form) }}
+                    <input class="btn" type="submit" value="Actualizar" />
+                {{ form_end(edit_form) }}
             </div>
             <div class="clear"></div>
         </main>

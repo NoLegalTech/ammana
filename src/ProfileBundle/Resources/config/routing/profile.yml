@@ -1,5 +1,5 @@
 profile_homepage:
     path:     /
     defaults: { _controller: "ProfileBundle:Default:index" }
-    methods:  GET
+    methods:  [GET, POST]
 

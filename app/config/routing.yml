@@ -1,7 +1,12 @@
+app:
+    path:     /
+    defaults: { _controller: "AppBundle:Default:index" }
+    methods:  GET
+
+user:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /user
+
 profile:
     resource: "@ProfileBundle/Resources/config/routing.yml"
-    prefix:   /
-
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    prefix:   /profile

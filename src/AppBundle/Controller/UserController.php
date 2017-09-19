@@ -148,7 +148,7 @@ class UserController extends Controller
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
             'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-            '.', '-', '_', '$', '#', '!'
+            '.', '-', '_', '$', '!'
         );
         for ($i = 0; $i < 100; $i++) {
             $random_index = rand(0, count($allowed_chars) - 1);
@@ -163,6 +163,39 @@ class UserController extends Controller
     public function welcomeAction(Request $request)
     {
         return $this->render('user/welcome.html.twig');
+    }
+
+    /**
+     * Activates a user.
+     */
+    public function activateAction(User $user)
+    {
+        $user->setEnabled(true);
+        $this->getDoctrine()->getManager()->flush();
+        return $this->render('user/activated.html.twig', array(
+            'user' => $user
+        ));
+    }
+
+    /**
+     * Login.
+     */
+    public function loginAction(Request $request, LoggerInterface $logger)
+    {
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\Login', $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Aún no implementado, pero casi.'
+            ));
+        }
+
+        return $this->render('user/login.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
     }
 
 }

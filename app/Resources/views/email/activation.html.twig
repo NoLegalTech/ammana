@@ -2,10 +2,10 @@
 
 <p>
 Por favor, confirma tu cuenta de correo haciendo click en el siguiente enlace:<br/>
-<a href="{{ url('app') }}/activate/{{ hash }}">Activa tu cuenta</a>
+<a href="{{ path('activate_user', {'hash': hash}) }}">Activa tu cuenta</a>
 </p>
 
 <p>
 Si el enlace no funciona, copia y pega esto en tu navegador:<br/>
-<a href="{{ url('app') }}/activate/{{ hash }}">{{ url('app') }}/activate/{{ hash }}</a>
+<a href="{{ path('activate_user', {'hash': hash}) }}">{{ path('activate_user', {'hash': hash}) }}</a>
 </p>

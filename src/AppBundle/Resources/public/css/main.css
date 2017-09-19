@@ -374,21 +374,31 @@ table a, #comments a{background-color:inherit;}
     padding: 0 25%;
 }
 
-#register_form > div {
+#register_form > div, #user_form > div {
     white-space:nowrap;
     float: left;
     width: 100%;
 }
-#register_form > div label {
+#register_form > div label, #user_form > div label {
     float: left;
     width: 40%;
 }
-#register_form > div input, #register_form > div select {
+#register_form > div input, #register_form > div select,
+#user_form > div input, #user_form > div select {
     float: right;
     width: 40%;
 }
 form > input.btn {
-    margin: 30px auto;
+    margin: 30px 0px 30px 20px;
     text-align: left;
     float: right;
+}
+ul.actions > li {
+    list-style: none;
+}
+ul.actions {
+    padding: 10px;
+}
+.btn-danger {
+    background-color: #ee4444;
 }

@@ -1,49 +1,54 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Users list</h1>
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+                <h2 class="heading">Lista de usuarios</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Companyname</th>
-                <th>Cif</th>
-                <th>Address</th>
-                <th>Contactperson</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.companyName }}</td>
-                <td>{{ user.cif }}</td>
-                <td>{{ user.address }}</td>
-                <td>{{ user.contactPerson }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Activo</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Nombre de compañía</th>
+                            <th>CIF</th>
+                            <th>Domicilio social</th>
+                            <th>Persona de contacto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td><a href="{{ path('user_edit', { 'id': user.id }) }}">{{ user.id }}</a></td>
+                            <td>
+                                {% if user.enabled %}
+                                    Sí
+                                {% else %}
+                                    No
+                                {% endif %}
+                            </td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.password }}</td>
+                            <td>{{ user.companyName }}</td>
+                            <td>{{ user.cif }}</td>
+                            <td>{{ user.address }}</td>
+                            <td>{{ user.contactPerson }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new user</a>
-        </li>
-    </ul>
+                <ul>
+                    <li>
+                        <a href="{{ path('register_user') }}">Nuevo usuario</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
 {% endblock %}

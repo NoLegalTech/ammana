@@ -141,8 +141,8 @@ class UserController extends Controller
                 $em->persist($user);
                 $em->flush();
 
-                $message = (new \Swift_Message('Bienvenido'))
-                    ->setFrom('ammana_pre@ammana.es')
+                $message = (new \Swift_Message('Bienvenido a ammana.es'))
+                    ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(

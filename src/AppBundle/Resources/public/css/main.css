@@ -365,3 +365,30 @@ table a, #comments a{background-color:inherit;}
 	.font-x2{font-size:1.4rem;}
 	.font-x3{font-size:1.6rem;}
 }
+
+
+/* Forms
+--------------------------------------------------------------------------------------------------------------- */
+.small-sheet {
+    width: 100%;
+    padding: 0 25%;
+}
+
+#register_form > div {
+    white-space:nowrap;
+    float: left;
+    width: 100%;
+}
+#register_form > div label {
+    float: left;
+    width: 40%;
+}
+#register_form > div input, #register_form > div select {
+    float: right;
+    width: 40%;
+}
+form > input.btn {
+    margin: 30px auto;
+    text-align: left;
+    float: right;
+}

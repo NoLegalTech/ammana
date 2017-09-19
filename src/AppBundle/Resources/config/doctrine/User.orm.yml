@@ -21,6 +21,10 @@ AppBundle\Entity\User:
             length: '75'
             column: company_name
             nullable: true
+        enabled:
+            type: boolean
+            column: enabled
+            nullable: false
         cif:
             type: string
             length: '9'
@@ -35,4 +39,9 @@ AppBundle\Entity\User:
             length: '100'
             nullable: true
             column: contact_person
+        activationHash:
+            type: string
+            length: '100'
+            nullable: true
+            column: activation_hash
     lifecycleCallbacks: {  }

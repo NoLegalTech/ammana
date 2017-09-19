@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class UserType extends AbstractType {
+class Register extends AbstractType {
 
     /**
      * {@inheritdoc}
@@ -23,21 +23,6 @@ class UserType extends AbstractType {
             ))
             ->add('password', PasswordType::class, array(
                 'label' => 'Contraseña:'
-            ))
-            ->add('companyName', TextType::class, array(
-                'label' => 'Nombre de la compañía:'
-            ))
-            ->add('cif', TextType::class, array(
-                'label' => 'CIF:'
-            ))
-            ->add('address', TextType::class, array(
-                'label' => 'Domicilio social:'
-            ))
-            ->add('contactPerson', TextType::class, array(
-                'label' => 'Persona de contacto:'
-            ))
-            ->add('activationHash', TextType::class, array(
-                'label' => 'Link de activación:'
             ));
     }
     
@@ -56,7 +41,8 @@ class UserType extends AbstractType {
      */
     public function getBlockPrefix()
     {
-        return 'user_form';
+        return 'register_form';
     }
 
 }
+

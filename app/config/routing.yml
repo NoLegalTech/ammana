@@ -5,8 +5,13 @@ app:
 
 user:
     resource: "@AppBundle/Resources/config/routing.yml"
-    prefix:   /user
+    prefix:   /
 
 profile:
     resource: "@ProfileBundle/Resources/config/routing.yml"
     prefix:   /profile
+
+error:
+    path:     /error
+    defaults: { _controller: "AppBundle:Default:error" }
+    methods:  GET

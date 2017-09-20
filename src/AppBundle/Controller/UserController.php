@@ -126,7 +126,6 @@ class UserController extends Controller
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){
-                throw $e; // TODO don't rethrow
                 $logger->error($e);
                 return $this->redirectToRoute('error', array(
                     'message' => 'Error registrando el usuario '.$user->getEmail()

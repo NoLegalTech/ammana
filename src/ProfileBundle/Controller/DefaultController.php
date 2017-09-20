@@ -7,12 +7,19 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Entity\User;
 
 class DefaultController extends Controller {
 
-    public function indexAction(Request $request) {
+    public function indexAction(Request $request, SessionInterface $session) {
+        if (!$session->get('user')) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $email= 'ammana@sample.com'; // TODO get from session when there's login
 
         $found = $this->getDoctrine()

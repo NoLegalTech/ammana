@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50 small-sheet">
+                <h2 class="heading">Identifícate</h2>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <input class="btn" type="submit" value="Identificarse" />
+                {{ form_end(form) }}
+            </div>
+            <div class="clear"></div>
+            <a href="{{ path('forgot_password') }}">Olvidé mi contraseña</a>
+        </main>
+    </div>
+
+{% endblock %}

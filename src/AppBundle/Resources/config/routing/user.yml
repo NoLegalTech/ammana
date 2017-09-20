@@ -8,6 +8,11 @@ thanks_for_registering:
     defaults: { _controller: "AppBundle:User:welcome" }
     methods:  GET
 
+activation_error:
+    path:     /activate/error
+    defaults: { _controller: "AppBundle:User:activateError" }
+    methods:  GET
+
 activate_user:
     path:     /activate/{activationHash}
     defaults: { _controller: "AppBundle:User:activate" }
@@ -17,6 +22,31 @@ user_login:
     path:     /login
     defaults: { _controller: "AppBundle:User:login" }
     methods:  [GET, POST]
+
+login_error:
+    path:     /login/error
+    defaults: { _controller: "AppBundle:User:loginError" }
+    methods:  GET
+
+user_logout:
+    path:     /logout
+    defaults: { _controller: "AppBundle:User:logout" }
+    methods:  GET
+
+forgot_password:
+    path:     /forgot_password
+    defaults: { _controller: "AppBundle:User:forgotPassword" }
+    methods:  [GET, POST]
+
+sent_password_email:
+    path:     /resetting_password
+    defaults: { _controller: "AppBundle:User:sentPasswordEmail" }
+    methods:  GET
+
+new_password:
+    path:     /newPassword/{activationHash}
+    defaults: { _controller: "AppBundle:User:newPassword" }
+    methods:  GET
 
 user_index:
     path:     /user/

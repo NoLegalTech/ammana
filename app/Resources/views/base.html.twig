@@ -17,17 +17,22 @@
 
         <div class="wrapper row0">
             <div id="topbar" class="hoc clear"> 
-                <div class="fl_left">
-                    <ul class="nospace inline pushright">
-                        <li><i class="fa fa-sign-in"></i> <a href="#">Login</a></li>
-                        <li><i class="fa fa-user"></i> <a href="/register">Register</a></li>
-                    </ul>
-                </div>
-                <div class="fl_right">
-                    <ul class="nospace inline pushright">
-                        <li><i class="fa fa-user"></i> <a href="/profile">Profile</a></li>
-                    </ul>
-                </div>
+                {% if not app.session.get('user') %}
+                    <div class="fl_left">
+                        <ul class="nospace inline pushright">
+                            <li><i class="fa fa-sign-in"></i> <a href="/login">Identificarse</a></li>
+                            <li><i class="fa fa-user-plus"></i> <a href="/register">Registrarse</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if app.session.get('user') %}
+                    <div class="fl_right">
+                        <ul class="nospace inline pushright">
+                            <li><i class="fa fa-user"></i> <a href="/profile">Mi perfil</a></li>
+                            <li><i class="fa fa-power-off"></i> <a href="/logout">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         </div>
 

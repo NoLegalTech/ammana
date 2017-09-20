@@ -23,4 +23,9 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function iconsAction(Request $request)
+    {
+        return $this->render('default/icons.html.twig');
+    }
+
 }

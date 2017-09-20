@@ -15,3 +15,8 @@ error:
     path:     /error
     defaults: { _controller: "AppBundle:Default:error" }
     methods:  GET
+
+icons:
+    path:     /icons
+    defaults: { _controller: "AppBundle:Default:icons" }
+    methods:  GET

@@ -7,6 +7,7 @@ use Psr\Log\LoggerInterface;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * User controller.
@@ -108,16 +109,15 @@ class UserController extends Controller
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
-                            // app/Resources/views/emails/activation.html.twig
                             'email/activation.html.twig',
-                            array('hash' => $user->getActivationHash())
+                            array('activationHash' => $user->getActivationHash())
                         ),
                         'text/html'
                     )
                     ->addPart(
                         $this->renderView(
                             'email/activation.txt.twig',
-                            array('hash' => $user->getActivationHash())
+                            array('activationHash' => $user->getActivationHash())
                         ),
                         'text/plain'
                     );
@@ -170,6 +170,9 @@ class UserController extends Controller
      */
     public function activateAction(User $user)
     {
+        if ($user->getEnabled()) {
+            return $this->redirectToRoute('activation_error');
+        }
         $user->setEnabled(true);
         $this->getDoctrine()->getManager()->flush();
         return $this->render('user/activated.html.twig', array(
@@ -178,24 +181,112 @@ class UserController extends Controller
     }
 
     /**
+     * Shown when activation does not succeed.
+     */
+    public function activateErrorAction()
+    {
+        return $this->render('user/activation_error.html.twig');
+    }
+
+    /**
      * Login.
      */
-    public function loginAction(Request $request, LoggerInterface $logger)
+    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\Login', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Aún no implementado, pero casi.'
-            ));
+            $found = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findByEmail($user->getEmail());
+            if (!$found || count($found) != 1 || $found[0]->getEnabled() == false || $found[0]->getPassword() != $user->getPassword()) {
+                return $this->redirectToRoute('login_error');
+            }
+
+            $session->set('user', $found[0]->getEmail());
+
+            return $this->redirectToRoute('profile_homepage');
         }
 
         return $this->render('user/login.html.twig', array(
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * Shown when login does not succeed.
+     */
+    public function loginErrorAction()
+    {
+        return $this->render('user/login_error.html.twig');
+    }
+
+    /**
+     * Logout.
+     */
+    public function logoutAction(Request $request, LoggerInterface $logger, SessionInterface $session)
+    {
+        $session->invalidate();
+        return $this->redirectToRoute('app');
+    }
+
+    /**
+     * Page to recover password.
+     */
+    public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer)
+    {
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\Email', $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $found = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findByEmail($user->getEmail());
+            if (!$found || count($found) != 1 && $found[0]->getEnabled() == false || $found[0]->getPassword() != $user->getPassword()) {
+                return $this->redirectToRoute('sent_password_email');
+            }
+            $found->setActivationHash($this->generateActivationHash());
+            $this->getDoctrine()->getManager()->flush();
+
+            $message = (new \Swift_Message('Establecer contraseña'))
+                ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
+                ->setTo($found->getEmail())
+                ->setBody(
+                    $this->renderView(
+                        'email/set_password.html.twig',
+                        array('activationHash' => $found->getActivationHash())
+                    ),
+                    'text/html'
+                )
+                ->addPart(
+                    $this->renderView(
+                        'email/set_password.txt.twig',
+                        array('activationHash' => $found->getActivationHash())
+                    ),
+                    'text/plain'
+                );
+
+            $mailer->send($message);
+
+            return $this->redirectToRoute('sent_password_email');
+        }
+
+        return $this->render('user/forgot_password.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Password to set password was sent.
+     */
+    public function sentPasswordEmailAction(Request $request)
+    {
+        return $this->render('user/resetting_password.html.twig');
     }
 
 }

@@ -20,16 +20,14 @@ class DefaultController extends Controller {
             ));
         }
 
-        $email= 'ammana@sample.com'; // TODO get from session when there's login
-
         $found = $this->getDoctrine()
             ->getRepository(User::class)
-            ->findByEmail($email);
+            ->findByEmail($session->get('user'));
 
         if (!$found) {
-            throw $this->createNotFoundException(
-                'No user found for email '.$email
-            );
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
         }
 
         $user = $found[0];

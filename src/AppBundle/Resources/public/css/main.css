@@ -374,23 +374,20 @@ table a, #comments a{background-color:inherit;}
     padding: 0 25%;
 }
 
-#register_form > div,
-#login_form > div,
+#credentials_form > div,
 #email_form > div,
 #user_form > div {
     white-space:nowrap;
     float: left;
     width: 100%;
 }
-#register_form > div label,
-#login_form > div label,
+#credentials_form > div label,
 #email_form > div label,
 #user_form > div label {
     float: left;
     width: 40%;
 }
-#register_form > div input, #register_form > div select,
-#login_form > div input, #login_form > div select,
+#credentials_form > div input, #credentials_form > div select,
 #email_form > div input, #email_form > div select,
 #user_form > div input, #user_form > div select {
     float: right;

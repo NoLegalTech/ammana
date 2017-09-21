@@ -6,9 +6,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
-class Login extends AbstractType {
+class OnlyEmailType extends AbstractType {
 
     /**
      * {@inheritdoc}
@@ -19,9 +18,6 @@ class Login extends AbstractType {
             ->add('email', EmailType::class, array(
                 'label' => 'Email:',
                 'required' => true
-            ))
-            ->add('password', PasswordType::class, array(
-                'label' => 'Contraseña:'
             ));
     }
     
@@ -40,7 +36,7 @@ class Login extends AbstractType {
      */
     public function getBlockPrefix()
     {
-        return 'login_form';
+        return 'email_form';
     }
 
 }

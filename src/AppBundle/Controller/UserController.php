@@ -93,7 +93,7 @@ class UserController extends Controller
     public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\Register', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -193,7 +193,7 @@ class UserController extends Controller
     public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\Login', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -238,7 +238,7 @@ class UserController extends Controller
     public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\Email', $user);
+        $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

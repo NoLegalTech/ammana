@@ -21,23 +21,21 @@ class UserType extends AbstractType {
                 'label' => 'Email:',
                 'required' => true
             ))
-            ->add('password', PasswordType::class, array(
-                'label' => 'Contraseña:'
-            ))
             ->add('companyName', TextType::class, array(
-                'label' => 'Nombre de la compañía:'
+                'label' => 'Nombre de la compañía:',
+                'required' => false
             ))
             ->add('cif', TextType::class, array(
-                'label' => 'CIF:'
+                'label' => 'CIF:',
+                'required' => false
             ))
             ->add('address', TextType::class, array(
-                'label' => 'Domicilio social:'
+                'label' => 'Domicilio social:',
+                'required' => false
             ))
             ->add('contactPerson', TextType::class, array(
-                'label' => 'Persona de contacto:'
-            ))
-            ->add('activationHash', TextType::class, array(
-                'label' => 'Link de activación:'
+                'label' => 'Persona de contacto:',
+                'required' => false
             ));
     }
     

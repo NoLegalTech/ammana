@@ -245,26 +245,29 @@ class UserController extends Controller
             $found = $this->getDoctrine()
                 ->getRepository(User::class)
                 ->findByEmail($user->getEmail());
-            if (!$found || count($found) != 1 && $found[0]->getEnabled() == false || $found[0]->getPassword() != $user->getPassword()) {
+            if (!$found || count($found) != 1 || $found[0]->getEnabled() == false) {
+                $logger->error("Error trying to reset password for user ".$user->getEmail());
+                $logger->error("Found user: ".print_r($found, true));
                 return $this->redirectToRoute('sent_password_email');
             }
-            $found->setActivationHash($this->generateActivationHash());
+            $found_user = $found[0];
+            $found_user->setActivationHash($this->generateActivationHash());
             $this->getDoctrine()->getManager()->flush();
 
             $message = (new \Swift_Message('Establecer contraseña'))
                 ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
-                ->setTo($found->getEmail())
+                ->setTo($found_user->getEmail())
                 ->setBody(
                     $this->renderView(
                         'email/set_password.html.twig',
-                        array('activationHash' => $found->getActivationHash())
+                        array('activationHash' => $found_user->getActivationHash())
                     ),
                     'text/html'
                 )
                 ->addPart(
                     $this->renderView(
                         'email/set_password.txt.twig',
-                        array('activationHash' => $found->getActivationHash())
+                        array('activationHash' => $found_user->getActivationHash())
                     ),
                     'text/plain'
                 );
@@ -286,6 +289,27 @@ class UserController extends Controller
     public function sentPasswordEmailAction(Request $request)
     {
         return $this->render('user/resetting_password.html.twig');
+    }
+
+    /**
+     * Page to set new password.
+     */
+    public function newPasswordAction(Request $request, LoggerInterface $logger, User $user)
+    {
+        $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user);
+        $form->handleRequest($request);
+
+        $logger->info("RECEIVED USER: ".print_r($user, true));
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->render('user/password_set.html.twig');
+        }
+
+        return $this->render('user/new_password.html.twig', array(
+            'user' => $user,
+            'form' => $form->createView(),
+        ));
     }
 
 }

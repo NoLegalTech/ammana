@@ -26,6 +26,7 @@ File: Layout CSS
 #topbar{font-size:.8rem; text-transform:uppercase;}
 
 #topbar .fl_left{margin-top:8px;}
+#topbar .fl_right{margin-top:8px;}
 #topbar .inline > li i{margin:0 5px 0 0; line-height:normal;}
 
 #topbar form{display:block; position:relative; width:100%;}
@@ -363,4 +364,46 @@ table a, #comments a{background-color:inherit;}
 
 	.font-x2{font-size:1.4rem;}
 	.font-x3{font-size:1.6rem;}
+}
+
+
+/* Forms
+--------------------------------------------------------------------------------------------------------------- */
+.small-sheet {
+    width: 100%;
+    padding: 0 25%;
+}
+
+#credentials_form > div,
+#email_form > div,
+#user_form > div {
+    white-space:nowrap;
+    float: left;
+    width: 100%;
+}
+#credentials_form > div label,
+#email_form > div label,
+#user_form > div label {
+    float: left;
+    width: 40%;
+}
+#credentials_form > div input, #credentials_form > div select,
+#email_form > div input, #email_form > div select,
+#user_form > div input, #user_form > div select {
+    float: right;
+    width: 40%;
+}
+form > input.btn {
+    margin: 30px 0px 30px 20px;
+    text-align: left;
+    float: right;
+}
+ul.actions > li {
+    list-style: none;
+}
+ul.actions {
+    padding: 10px;
+}
+.btn-danger {
+    background-color: #ee4444;
 }

@@ -1,0 +1,11 @@
+<h1>Bienvenido a ammana.es</h1>
+
+<p>
+Por favor, confirma tu cuenta de correo haciendo click en el siguiente enlace:<br/>
+<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">Activa tu cuenta</a>
+</p>
+
+<p>
+Si el enlace no funciona, copia y pega esto en tu navegador:<br/>
+<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">{{ url('activate_user', {'activationHash': activationHash}) }}</a>
+</p>

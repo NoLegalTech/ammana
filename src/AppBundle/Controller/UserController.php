@@ -302,6 +302,7 @@ class UserController extends Controller
         $logger->info("RECEIVED USER: ".print_r($user, true));
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setActivationHash($this->generateActivationHash());
             $this->getDoctrine()->getManager()->flush();
             return $this->render('user/password_set.html.twig');
         }

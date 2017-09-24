@@ -1,0 +1,4 @@
+invoice_index:
+    path:     /invoice/
+    defaults: { _controller: "AppBundle:Invoice:index" }
+    methods:  GET

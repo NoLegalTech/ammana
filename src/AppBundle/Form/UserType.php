@@ -41,12 +41,17 @@ class UserType extends AbstractType {
                 'label' => 'Sector:',
                 'required' => false,
                 'choices' => array(
-                    'Hostelería, comida y bebida' => 'Hostelería, comida y bebida',
-                    'Salud, belleza y bienestar' => 'Salud, belleza y bienestar',
-                    'Venta al por menor' => 'Venta al por menor',
-                    'Servicios' => 'Servicios',
-                    'Ocio y entretenimiento' => 'Ocio y entretenimiento',
-                    'Otro' => 'Otro'
+                    'Agricultura, silvicultura, ganadería y pesca' => 'AGRICULTURA, SILVICULTURA, GANADERÍA Y PESCA',
+                    'Construcción' => 'CONSTRUCCIÓN',
+                    'Detallistas' => 'DETALLISTAS',
+                    'Fabricantes' => 'FABRICANTES',
+                    'Finanzas, seguros y bienes raíces' => 'FINANZAS, SEGUROS Y BIENES RAÍCES',
+                    'Mayoristas' => 'MAYORISTAS',
+                    'Minería' => 'MINERÍA',
+                    'Organismos oficiales' => 'ORGANISMOS OFICIALES',
+                    'Servicios' => 'SERVICIOS',
+                    'Transportes, comunicaciones y servicios públicos' => 'TRANSPORTES, COMUNICACIONES Y SERVICIOS PÚBLICOS',
+                    'Otros' => 'OTROS'
                 )
             ));
     }

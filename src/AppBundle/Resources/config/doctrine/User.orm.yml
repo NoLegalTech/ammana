@@ -44,4 +44,9 @@ AppBundle\Entity\User:
             length: '100'
             nullable: true
             column: activation_hash
+        sector:
+            type: string
+            length: '100'
+            nullable: true
+            column: sector
     lifecycleCallbacks: {  }

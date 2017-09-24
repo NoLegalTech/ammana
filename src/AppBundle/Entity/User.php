@@ -52,6 +52,11 @@ class User
      */
     private $activationHash;
 
+    /**
+     * @var string
+     */
+    private $sector;
+
 
     /**
      * Get id
@@ -253,6 +258,30 @@ class User
     public function getActivationHash()
     {
         return $this->activationHash;
+    }
+
+    /**
+     * Set sector
+     *
+     * @param string $sector
+     *
+     * @return User
+     */
+    public function setSector($sector)
+    {
+        $this->sector = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Get sector
+     *
+     * @return string
+     */
+    public function getSector()
+    {
+        return $this->sector;
     }
 }
 

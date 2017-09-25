@@ -18,7 +18,7 @@
                     <tbody>
                     {% for invoice in invoices %}
                         <tr>
-                            <td><a href="{{ path('invoice_edit', { 'id': invoice.id }) }}">{{ invoice.id }}</a></td>
+                            <td><a href="{{ path('invoice_download', { 'id': invoice.id }) }}">{{ invoice.id }}</a></td>
                             <td>{{ invoice.user }}</td>
                             <td>{{ invoice.number }}</td>
                             <td>{{ invoice.path }}</td>

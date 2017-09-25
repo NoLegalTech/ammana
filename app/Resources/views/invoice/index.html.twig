@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+                <h2 class="heading">Lista de facturas</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Número</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for invoice in invoices %}
+                        <tr>
+                            <td>{{ invoice.emittedAt | date('d/m/Y') }}</td>
+                            <td>{{ invoice.number }}</td>
+                            <td><a href="{{ path('invoice_download', { 'id': invoice.id }) }}">Descargar</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

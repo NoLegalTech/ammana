@@ -14,23 +14,12 @@ use AppBundle\Entity\User;
 class DefaultController extends Controller {
 
     public function indexAction(Request $request, SessionInterface $session) {
-        if (!$session->get('user')) {
+        $user = $this->getUserFromSession($session);
+        if ($user == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
-
-        $found = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findByEmail($session->get('user'));
-
-        if (!$found) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
-            ));
-        }
-
-        $user = $found[0];
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -45,6 +34,22 @@ class DefaultController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));
+    }
+
+    private function getUserFromSession($session) {
+        if (!$session->get('user')) {
+            return null;
+        }
+
+        $found = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findByEmail($session->get('user'));
+
+        if (!$found) {
+            return null;
+        }
+
+        return $found[0];
     }
 
 }

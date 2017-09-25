@@ -128,8 +128,15 @@ class InvoiceController extends Controller
         $pdf = new \FPDF();
 
         $pdf->AddPage();
-        $pdf->SetFont('Arial','B',16);
-        $pdf->Cell(40,10,'Hello World!');
+        $pdf->Image($basePath.'/template_invoice.png', 0, 0);
+        $pdf->SetFont('Helvetica','',16);
+        $pdf->SetTextColor(86,89,100);
+        $pdf->SetFillColor(241,244,255);
+        $pdf->SetXY(20,31);
+        $pdf->Cell(0,0,$user->getEmail(),0,0,'',false);
+        $pdf->SetFont('Helvetica','',10);
+        $pdf->SetXY(150,65);
+        $pdf->Cell(0,0,$invoice->getNumber(),0,0,'',false);
 
         return new Response($pdf->Output(), 200, array('Content-Type' => 'application/pdf'));
     }

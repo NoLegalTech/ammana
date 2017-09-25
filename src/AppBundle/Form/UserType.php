@@ -53,6 +53,17 @@ class UserType extends AbstractType {
                     'Transportes, comunicaciones y servicios públicos' => 'TRANSPORTES, COMUNICACIONES Y SERVICIOS PÚBLICOS',
                     'Otros' => 'OTROS'
                 )
+            ))
+            ->add('numberEmployees', ChoiceType::class, array(
+                'label' => 'Número de empleados:',
+                'required' => false,
+                'choices' => array(
+                    'Hasta 10 empleados' => '1-10',
+                    'Hasta 30 empleados' => '11-30',
+                    'Hasta 50 empleados' => '31-50',
+                    'Hasta 100 empleados' => '51-100',
+                    'Más de 100 empleados' => '>100'
+                )
             ));
     }
     

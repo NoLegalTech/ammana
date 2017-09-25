@@ -55,6 +55,11 @@ class User
     /**
      * @var string
      */
+    private $numberEmployees;
+
+    /**
+     * @var string
+     */
     private $sector;
 
 
@@ -258,6 +263,30 @@ class User
     public function getActivationHash()
     {
         return $this->activationHash;
+    }
+
+    /**
+     * Set numberEmployees
+     *
+     * @param string $numberEmployees
+     *
+     * @return User
+     */
+    public function setNumberEmployees($numberEmployees)
+    {
+        $this->numberEmployees = $numberEmployees;
+
+        return $this;
+    }
+
+    /**
+     * Get numberEmployees
+     *
+     * @return string
+     */
+    public function getNumberEmployees()
+    {
+        return $this->numberEmployees;
     }
 
     /**

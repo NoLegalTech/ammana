@@ -8,6 +8,7 @@ use AppBundle\Entity\Invoice;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -33,8 +34,6 @@ class InvoiceController extends Controller
             ->getRepository(Invoice::class)
             ->findByUser($user->getId());
 
-        $logger->info('INVOICES ARE: '.print_r($invoices, true));
-
         if (!$invoices || count($invoices) == 0) {
             $logger->info('Invoices is an empty set => creating 3 fake ones');
             $this->addThreeFakeInvoices($user);
@@ -53,19 +52,19 @@ class InvoiceController extends Controller
         $invoice_1->setUser($user->getId());
         $invoice_1->setNumber('F00001');
         $invoice_1->setEmittedAt(new \DateTime('2017-09-14'));
-        $invoice_1->setPath('');
+        $invoice_1->setPath('F00001.pdf');
 
         $invoice_2 = new Invoice();
         $invoice_2->setUser($user->getId());
         $invoice_2->setNumber('F00002');
         $invoice_2->setEmittedAt(new \DateTime('2017-09-17'));
-        $invoice_2->setPath('');
+        $invoice_2->setPath('F00002.pdf');
 
         $invoice_3 = new Invoice();
         $invoice_3->setUser($user->getId());
         $invoice_3->setNumber('F00003');
         $invoice_3->setEmittedAt(new \DateTime('2017-09-24'));
-        $invoice_3->setPath('');
+        $invoice_3->setPath('F00003.pdf');
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($invoice_1);
@@ -110,8 +109,20 @@ class InvoiceController extends Controller
             ));
         }
 
-        return $this->redirectToRoute('error', array(
-            'message' => 'Todavía no implementada la descarga, pero hasta aquí correcto.'
-        ));
+        $basePath = $this->get('kernel')->getRootDir(). "/../web/downloads/";
+        $path = $basePath.$invoice->getPath();
+        if (!file_exists($path) || !is_file($path)) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+        $content = file_get_contents($path);
+
+        $response = new Response();
+        $response->headers->set('Content-Type', 'mime/type');
+        $response->headers->set('Content-Disposition', 'attachment;filename="'.$invoice->getNumber().".pdf");
+
+        $response->setContent($content);
+        return $response;
     }
 }

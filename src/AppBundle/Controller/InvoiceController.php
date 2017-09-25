@@ -123,6 +123,14 @@ class InvoiceController extends Controller
         $response->headers->set('Content-Disposition', 'attachment;filename="'.$invoice->getNumber().".pdf");
 
         $response->setContent($content);
-        return $response;
+        //return $response;
+
+        $pdf = new \FPDF();
+
+        $pdf->AddPage();
+        $pdf->SetFont('Arial','B',16);
+        $pdf->Cell(40,10,'Hello World!');
+
+        return new Response($pdf->Output(), 200, array('Content-Type' => 'application/pdf'));
     }
 }

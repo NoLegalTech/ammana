@@ -52,16 +52,19 @@ class InvoiceController extends Controller
         $invoice_1 = new Invoice();
         $invoice_1->setUser($user->getId());
         $invoice_1->setNumber('F00001');
+        $invoice_1->setEmittedAt(new \DateTime('2017-09-14'));
         $invoice_1->setPath('');
 
         $invoice_2 = new Invoice();
         $invoice_2->setUser($user->getId());
         $invoice_2->setNumber('F00002');
+        $invoice_2->setEmittedAt(new \DateTime('2017-09-17'));
         $invoice_2->setPath('');
 
         $invoice_3 = new Invoice();
         $invoice_3->setUser($user->getId());
         $invoice_3->setNumber('F00003');
+        $invoice_3->setEmittedAt(new \DateTime('2017-09-24'));
         $invoice_3->setPath('');
 
         $em = $this->getDoctrine()->getManager();

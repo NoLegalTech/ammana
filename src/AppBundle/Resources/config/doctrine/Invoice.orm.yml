@@ -11,6 +11,9 @@ AppBundle\Entity\Invoice:
     fields:
         user:
             type: integer
+        emittedAt:
+            type: date
+            column: emitted_at
         number:
             type: string
             length: '32'

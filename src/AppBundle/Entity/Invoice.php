@@ -18,9 +18,15 @@ class Invoice
     private $user;
 
     /**
+     * @var date
+     */
+    private $emittedAt;
+
+    /**
      * @var string
      */
     private $number;
+
     /**
      * @var string
      */
@@ -59,6 +65,30 @@ class Invoice
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set emittedAt
+     *
+     * @param date $emittedAt
+     *
+     * @return Invoice
+     */
+    public function setEmittedAt($emittedAt)
+    {
+        $this->emittedAt = $emittedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get emittedAt
+     *
+     * @return date
+     */
+    public function getEmittedAt()
+    {
+        return $this->emittedAt;
     }
 
     /**

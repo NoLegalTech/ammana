@@ -104,6 +104,14 @@ class UserController extends Controller
                 $em->persist($user);
                 $em->flush();
 
+                $plain_text = $this->renderView(
+                    'email/activation.txt.twig',
+                    array('activationHash' => $user->getActivationHash())
+                );
+
+                $logger->info('Sending welcome mail to '.$user->getEmail().' with content:');
+                $logger->info($plain_text);
+
                 $message = (new \Swift_Message('Bienvenido a ammana.es'))
                     ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
                     ->setTo($user->getEmail())
@@ -114,13 +122,7 @@ class UserController extends Controller
                         ),
                         'text/html'
                     )
-                    ->addPart(
-                        $this->renderView(
-                            'email/activation.txt.twig',
-                            array('activationHash' => $user->getActivationHash())
-                        ),
-                        'text/plain'
-                    );
+                    ->addPart($plain_text, 'text/plain');
 
                 $mailer->send($message);
 
@@ -254,6 +256,14 @@ class UserController extends Controller
             $found_user->setActivationHash($this->generateActivationHash());
             $this->getDoctrine()->getManager()->flush();
 
+            $plain_text = $this->renderView(
+                'email/set_password.txt.twig',
+                array('activationHash' => $found_user->getActivationHash())
+            );
+
+            $logger->info('Sending "reset password" mail to '.$user->getEmail().' with content:');
+            $logger->info($plain_text);
+
             $message = (new \Swift_Message('Establecer contraseña'))
                 ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
                 ->setTo($found_user->getEmail())
@@ -264,13 +274,7 @@ class UserController extends Controller
                     ),
                     'text/html'
                 )
-                ->addPart(
-                    $this->renderView(
-                        'email/set_password.txt.twig',
-                        array('activationHash' => $found_user->getActivationHash())
-                    ),
-                    'text/plain'
-                );
+                ->addPart($plain_text, 'text/plain');
 
             $mailer->send($message);
 
@@ -298,8 +302,6 @@ class UserController extends Controller
     {
         $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user);
         $form->handleRequest($request);
-
-        $logger->info("RECEIVED USER: ".print_r($user, true));
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setActivationHash($this->generateActivationHash());

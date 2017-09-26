@@ -37,6 +37,10 @@ deploy() {
         echo "KO"
         exit 1
     }
+    scp ${script_dir}/parameters_${target}.yml ${server}:${remote_folder}/app/config/parameters.yml > $out  2> $err || {
+        echo "KO"
+        exit 1
+    }
     ssh ${server} "cd ${remote_folder} && php bin/console cache:clear --env=prod" > $out 2> $err || {
         echo "KO"
         exit 1

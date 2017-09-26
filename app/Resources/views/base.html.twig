@@ -20,17 +20,17 @@
                 {% if not app.session.get('user') %}
                     <div class="fl_left">
                         <ul class="nospace inline pushright">
-                            <li><i class="fa fa-sign-in"></i> <a href="/login">Identificarse</a></li>
-                            <li><i class="fa fa-user-plus"></i> <a href="/register">Registrarse</a></li>
+                            <li><i class="fa fa-sign-in"></i> <a href="{{ web_base_url }}/login">Identificarse</a></li>
+                            <li><i class="fa fa-user-plus"></i> <a href="{{ web_base_url }}/register">Registrarse</a></li>
                         </ul>
                     </div>
                 {% endif %}
                 {% if app.session.get('user') %}
                     <div class="fl_right">
                         <ul class="nospace inline pushright">
-                            <li><i class="fa fa-user"></i> <a href="/profile">Mi perfil</a></li>
-                            <li><i class="fa fa-files-o"></i> <a href="/invoice">Mis facturas</a></li>
-                            <li><i class="fa fa-sign-out"></i> <a href="/logout">Cerrar sesión</a></li>
+                            <li><i class="fa fa-user"></i> <a href="{{ web_base_url }}/profile">Mi perfil</a></li>
+                            <li><i class="fa fa-files-o"></i> <a href="{{ web_base_url }}/invoice">Mis facturas</a></li>
+                            <li><i class="fa fa-sign-out"></i> <a href="{{ web_base_url }}/logout">Cerrar sesión</a></li>
                         </ul>
                     </div>
                 {% endif %}
@@ -40,7 +40,7 @@
         <div class="wrapper row1">
             <header id="header" class="hoc clear"> 
                 <div id="logo" class="fl_left">
-                    <h1><a href="/">ammana</a></h1>
+                    <h1><a href="{{ web_base_url }}">ammana</a></h1>
                     <p>Seal the deal!</p>
                 </div>
                 <nav id="mainav" class="fl_right">

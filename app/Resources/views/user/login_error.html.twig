@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50 small-sheet">
+                <h2 class="heading">Error de identificación</h2>
+                <p>
+                    No ha podido autenticarse el usuario.<br/>
+                    Por favor, inténtalo de nuevo o contacta con nosotros para solucionar el problema.
+                </p>
+                <p>
+                    ¿Has olvidado tu contraseña?<br/>
+                    Pincha <a href="{{ path('forgot_password') }}">aquí</a> para recuperarla.
+                </p>
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+
+{% endblock %}
+

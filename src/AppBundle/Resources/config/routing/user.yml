@@ -1,0 +1,64 @@
+register_user:
+    path:     /register
+    defaults: { _controller: "AppBundle:User:register" }
+    methods:  [GET, POST]
+
+thanks_for_registering:
+    path:     /welcome
+    defaults: { _controller: "AppBundle:User:welcome" }
+    methods:  GET
+
+activation_error:
+    path:     /activate/error
+    defaults: { _controller: "AppBundle:User:activateError" }
+    methods:  GET
+
+activate_user:
+    path:     /activate/{activationHash}
+    defaults: { _controller: "AppBundle:User:activate" }
+    methods:  GET
+
+user_login:
+    path:     /login
+    defaults: { _controller: "AppBundle:User:login" }
+    methods:  [GET, POST]
+
+login_error:
+    path:     /login/error
+    defaults: { _controller: "AppBundle:User:loginError" }
+    methods:  GET
+
+user_logout:
+    path:     /logout
+    defaults: { _controller: "AppBundle:User:logout" }
+    methods:  GET
+
+forgot_password:
+    path:     /forgot_password
+    defaults: { _controller: "AppBundle:User:forgotPassword" }
+    methods:  [GET, POST]
+
+sent_password_email:
+    path:     /resetting_password
+    defaults: { _controller: "AppBundle:User:sentPasswordEmail" }
+    methods:  GET
+
+new_password:
+    path:     /newPassword/{activationHash}
+    defaults: { _controller: "AppBundle:User:newPassword" }
+    methods:  [GET, POST]
+
+user_index:
+    path:     /user/
+    defaults: { _controller: "AppBundle:User:index" }
+    methods:  GET
+
+user_edit:
+    path:     /user/{id}/edit
+    defaults: { _controller: "AppBundle:User:edit" }
+    methods:  [GET, POST]
+
+user_delete:
+    path:     /user/{id}/delete
+    defaults: { _controller: "AppBundle:User:delete" }
+    methods:  DELETE

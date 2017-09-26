@@ -30,6 +30,11 @@ class User
     /**
      * @var string
      */
+    private $enabled;
+
+    /**
+     * @var string
+     */
     private $cif;
 
     /**
@@ -41,6 +46,21 @@ class User
      * @var string
      */
     private $contactPerson;
+
+    /**
+     * @var string
+     */
+    private $activationHash;
+
+    /**
+     * @var string
+     */
+    private $numberEmployees;
+
+    /**
+     * @var string
+     */
+    private $sector;
 
 
     /**
@@ -126,6 +146,30 @@ class User
     }
 
     /**
+     * Set enabled
+     *
+     * @param string $enabled
+     *
+     * @return User
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return string
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
      * Set cif
      *
      * @param string $cif
@@ -195,6 +239,78 @@ class User
     public function getContactPerson()
     {
         return $this->contactPerson;
+    }
+
+    /**
+     * Set activationHash
+     *
+     * @param string $activationHash
+     *
+     * @return User
+     */
+    public function setActivationHash($activationHash)
+    {
+        $this->activationHash = $activationHash;
+
+        return $this;
+    }
+
+    /**
+     * Get activationHash
+     *
+     * @return string
+     */
+    public function getActivationHash()
+    {
+        return $this->activationHash;
+    }
+
+    /**
+     * Set numberEmployees
+     *
+     * @param string $numberEmployees
+     *
+     * @return User
+     */
+    public function setNumberEmployees($numberEmployees)
+    {
+        $this->numberEmployees = $numberEmployees;
+
+        return $this;
+    }
+
+    /**
+     * Get numberEmployees
+     *
+     * @return string
+     */
+    public function getNumberEmployees()
+    {
+        return $this->numberEmployees;
+    }
+
+    /**
+     * Set sector
+     *
+     * @param string $sector
+     *
+     * @return User
+     */
+    public function setSector($sector)
+    {
+        $this->sector = $sector;
+
+        return $this;
+    }
+
+    /**
+     * Get sector
+     *
+     * @return string
+     */
+    public function getSector()
+    {
+        return $this->sector;
     }
 }
 

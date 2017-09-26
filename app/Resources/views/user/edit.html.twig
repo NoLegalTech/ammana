@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50 small-sheet">
+                <h2 class="heading">Editando usuario</h2>
+
+                {{ form_start(edit_form) }}
+                    {{ form_widget(edit_form) }}
+                    <input class="btn" type="submit" value="Actualizar" />
+                {{ form_end(edit_form) }}
+
+                {{ form_start(delete_form) }}
+                    <input class="btn btn-danger" type="submit" value="Borrar usuario">
+                {{ form_end(delete_form) }}
+            </div>
+            <div class="clear"></div>
+            <a href="{{ path('user_index') }}">Volver a la lista</a>
+        </main>
+    </div>
+
+{% endblock %}

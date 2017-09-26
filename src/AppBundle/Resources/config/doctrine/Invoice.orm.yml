@@ -1,0 +1,23 @@
+AppBundle\Entity\Invoice:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\InvoiceRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        user:
+            type: integer
+        emittedAt:
+            type: date
+            column: emitted_at
+        number:
+            type: string
+            length: '32'
+        path:
+            type: string
+            length: '200'
+    lifecycleCallbacks: {  }

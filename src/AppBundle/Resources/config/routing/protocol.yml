@@ -1,0 +1,15 @@
+protocol_index:
+    path:     /protocol/
+    defaults: { _controller: "AppBundle:Protocol:index" }
+    methods:  GET
+
+protocol_buy:
+    path:     /protocol/buy/{id}/{type}
+    defaults: { _controller: "AppBundle:Protocol:buy" }
+    methods:  GET
+
+protocol_download:
+    path:     /protocol/{id}
+    defaults: { _controller: "AppBundle:Protocol:download" }
+    methods:  GET
+

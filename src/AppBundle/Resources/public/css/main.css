@@ -374,6 +374,11 @@ table a, #comments a{background-color:inherit;}
     padding: 0 25%;
 }
 
+.small-table {
+    width: 50%;
+    margin: 0 25%;
+}
+
 #credentials_form > div,
 #email_form > div,
 #user_form > div {

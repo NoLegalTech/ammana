@@ -1,0 +1,27 @@
+AppBundle\Entity\Protocol:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ProtocolRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        user:
+            type: integer
+        enabled:
+            type: boolean
+            column: enabled
+            nullable: false
+        expiresAt:
+            type: date
+            column: expires_at
+        name:
+            type: string
+            length: '100'
+        path:
+            type: string
+            length: '200'
+    lifecycleCallbacks: {  }

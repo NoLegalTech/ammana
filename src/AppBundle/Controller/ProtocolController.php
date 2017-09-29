@@ -60,6 +60,17 @@ class ProtocolController extends Controller
         return $found[0];
     }
 
+    private function userHasCompletedProfile($user) {
+        return ( $user->getEmail() != null )
+            && ( $user->getPassword() != null )
+            && ( $user->getCompanyName() != null )
+            && ( $user->getCif() != null )
+            && ( $user->getAddress() != null )
+            && ( $user->getContactPerson() != null )
+            && ( $user->getNumberEmployees() != null )
+            && ( $user->getSector() != null );
+    }
+
     /**
      * Buys a protocol.
      *
@@ -73,26 +84,30 @@ class ProtocolController extends Controller
             ));
         }
 
-        $name = "Modelo Autocobertura Redes Sociales";
+        $profile_completed = $this->userHasCompletedProfile($user);
+
+        $protocol_name = "Modelo Autocobertura Redes Sociales";
         $path = "M_redes.pdf";
         switch($id) {
             case 1:
-                $name = "Modelo Autocobertura Redes Sociales";
+                $protocol_name = "Modelo Autocobertura Redes Sociales";
                 $path = "M_redes.pdf";
                 break;
             case 2:
-                $name = "Modelo Autocobertura Telemática";
+                $protocol_name = "Modelo Autocobertura Telemática";
                 $path = "M_telematica.pdf";
                 break;
             case 3:
-                $name = "Modelo Autocobertura Mensajerías";
+                $protocol_name = "Modelo Autocobertura Mensajerías";
                 $path = "M_mensajerias.pdf";
                 break;
         }
 
         return $this->render('protocol/questions.html.twig', array(
-            //'questions' => $questions,
-            'name' => $name,
+            'user' => $user,
+            'profile_completed' => $profile_completed,
+            'disabled' => $profile_completed ? "" : "disabled",
+            'protocol_name' => $protocol_name,
             'protocols' => $this->container->getParameter('protocols')
         ));
     }

@@ -4,13 +4,19 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Comprar {{ name }}</h2>
+                <h2 class="heading">Comprar {{ protocol_name }}</h2>
+                {% if not profile_completed %}
+                    <p style="color: red">
+                        Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.<br/>
+                        Por favor, ve a <a href="{{ path('profile_homepage') }}">tu página de perfil</a> y rellena los datos que faltan.
+                    </p>
+                {% endif %}
                 {% for question in protocols.uso_redes.questions %}
                     <div id="question_{{ question.id }}">
                         <p>{{ question.question }}</p>
                         <p>
                             {% for answer in question.answers %}
-                                <input type="radio" name="answer_{{ question.id }}" value="{{ answer }}"> {{ answer }}</input><br/>
+                                <input type="radio" name="answer_{{ question.id }}" value="{{ answer }}" {{ disabled }}> {{ answer }}</input><br/>
                             {% endfor %}
                         </p>
                     </div>

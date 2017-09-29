@@ -208,7 +208,7 @@ class UserController extends Controller
 
             $session->set('user', $found[0]->getEmail());
 
-            return $this->redirectToRoute('profile_homepage');
+            return $this->redirectToRoute('protocol_index');
         }
 
         return $this->render('user/login.html.twig', array(

@@ -11,16 +11,20 @@
                         Por favor, ve a <a href="{{ path('profile_homepage') }}">tu página de perfil</a> y rellena los datos que faltan.
                     </p>
                 {% endif %}
-                {% for question in protocols.uso_redes.questions %}
-                    <div id="question_{{ question.id }}">
-                        <p>{{ question.question }}</p>
-                        <p>
-                            {% for answer in question.answers %}
-                                <input type="radio" name="answer_{{ question.id }}" value="{{ answer }}" {{ disabled }}> {{ answer }}</input><br/>
-                            {% endfor %}
-                        </p>
+                <form name="questions_form" method="post" _lpchecked="1">
+                    <div id="questions_form">
+                        {% for question in protocols.uso_redes.questions %}
+                            <div>
+                                <label class="required">{{ question.question }}</label>
+                                {% for answer in question.answers %}
+                                    <input type="radio" name="answer_{{ question.id }}" value="{{ answer }}" {{ disabled }} required="required"> {{ answer }}</input><br/>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                        <input type="hidden" id="credentials_form__token" name="questions_form[_token]" value="870PjMsPxEhnv0oNeA-34QVwvijMcFQjXVsHD6p5WHQ">
                     </div>
-                {% endfor %}
+                    <input class="btn" type="submit" value="Generar protocolo">
+                </form>
             </div>
             <div class="clear"></div>
         </main>

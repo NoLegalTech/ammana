@@ -64,7 +64,7 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, $type, LoggerInterface $logger, SessionInterface $session)
+    public function buyAction($id, LoggerInterface $logger, SessionInterface $session)
     {
         $user = $this->getUserFromSession($session);
         if ($user == null) {
@@ -90,18 +90,11 @@ class ProtocolController extends Controller
                 break;
         }
 
-        $protocol = new Protocol();
-        $protocol->setUser($user->getId());
-        $protocol->setEnabled($type == "paypal");
-        $protocol->setName($name);
-        $protocol->setExpiresAt(new \DateTime('2018-01-31'));
-        $protocol->setPath($path);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($protocol);
-        $em->flush();
-
-        return $this->redirectToRoute('protocol_index');
+        return $this->render('protocol/questions.html.twig', array(
+            //'questions' => $questions,
+            'name' => $name,
+            'protocols' => $this->container->getParameter('protocols')
+        ));
     }
 
     /**

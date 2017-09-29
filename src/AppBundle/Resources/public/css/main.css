@@ -412,3 +412,6 @@ ul.actions {
 .btn-danger {
     background-color: #ee4444;
 }
+input[type="radio"] {
+    display: inline;
+}

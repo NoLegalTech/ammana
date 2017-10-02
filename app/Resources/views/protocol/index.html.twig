@@ -19,9 +19,9 @@
                         {% for protocol in protocols %}
                             <tr>
                                 <td>{{ protocol.expiresAt | date('d/m/Y') }}</td>
-                                <td>{{ protocol.name }}</td>
+                                <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
-                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}" download="{{ protocol.path }}">Descargar</a></td>
+                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>
                                 {% else %}
                                     <td>No disponible (paga!)</td>
                                 {% endif %}

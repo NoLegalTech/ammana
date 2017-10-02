@@ -412,6 +412,10 @@ ul.actions {
 .btn-danger {
     background-color: #ee4444;
 }
-input[type="radio"] {
+input[type="radio"], input[type="radio"] + label {
     display: inline;
+}
+input[type="radio"] + label:after {
+    content: "\a ";
+    white-space: pre;
 }

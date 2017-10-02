@@ -6,6 +6,11 @@ protocol_index:
 protocol_buy:
     path:     /protocol/buy/{id}
     defaults: { _controller: "AppBundle:Protocol:buy" }
+    methods:  [GET, POST]
+
+protocol_pay:
+    path:     /protocol/pay/{id}/{type}
+    defaults: { _controller: "AppBundle:Protocol:pay" }
     methods:  GET
 
 protocol_download:

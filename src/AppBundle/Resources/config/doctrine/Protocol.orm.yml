@@ -18,10 +18,10 @@ AppBundle\Entity\Protocol:
         expiresAt:
             type: date
             column: expires_at
-        name:
-            type: string
-            length: '100'
-        path:
+        answers:
             type: string
             length: '200'
+        identifier:
+            type: string
+            length: '100'
     lifecycleCallbacks: {  }

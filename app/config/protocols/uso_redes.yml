@@ -1,0 +1,96 @@
+parameters:
+    protocols:
+        uso_redes:
+            name: Modelo Autocobertura Redes Sociales
+            questions:
+                - id: uso_durante_jornada_laboral
+                  question: "Uso de redes sociales durante la jornada de trabajo:"
+                  answers:
+                      - "Se prohíbe al trabajador usar sus redes sociales durante la jornada laboral asignada."
+                      - "Se prohíbe al trabajador usar sus redes sociales durante la jornada laboral asignada, salvo que existan circunstancias personales o familiares de especial gravedad que lo justifiquen."
+                      - "Se permite al trabajador usar esporádicamente sus redes sociales durante la jornada laboral asignada, siempre que no retrasen el desempeño de las tareas encomendadas, ni la cantidad y calidad del trabajo a desarrollar."
+                - id: advertir_comentarios_injuriosos
+                  question: "Si un trabajador se identifica en redes sociales como integrante de la plantilla de la empresa y realiza comentarios injuriosos o calumniosos, ¿Considera útil advertirle de los perjuicios que puede causar a la compañía y las consecuencias que esto puede provocar?"
+                  answers:
+                      - Sí
+                      - No
+                - id: informar_de_comentarios_injuriosos
+                  question: "¿Los trabajadores deberán informar a la empresa de los comentarios injuriosos, calumniosos o de odio que se dirijan entre compañeros de trabajo en redes sociales?"
+                  answers:
+                      - Sí
+                      - No
+                - id: representantes_legales_o_sindicales
+                  question: "¿La empresa cuenta con representantes legales o sindicales de los trabajadores?"
+                  answers:
+                      - Sí
+                      - No
+                - id: autorizacion_imagenes_y_videos_del_trabajo
+                  question: "¿La empresa autoriza a los trabajadores la captación y difusión en redes sociales de imágenes y videos que hayan podido realizar en el centro o lugar de trabajo?"
+                  answers:
+                      - Sí
+                      - No
+                - id: divulgacion_informacion_confidencial
+                  question: "¿Los trabajadores deben abstenerse de comentar o divulgar en redes sociales información confidencial de la empresa?"
+                  answers:
+                      - Sí
+                      - No
+                - id: vigilancia_reuperacion_baja_laboral
+                  question: "¿La empresa podrá vigilar las redes sociales de sus trabajadores para verificar que no realizan actividades incompatibles con la recuperación de su salud durante una baja laboral? "
+                  answers:
+                      - Sí
+                      - No
+            document:
+                styles:
+                    default:
+                        line-height: 6
+                        font-family: Cambria
+                        font-size: 13
+                        font-weight: normal
+                        text-align: justify
+                        text-style: none
+                    h1:
+                        font-weight: bold
+                        text-align: center
+                        margin-bottom: 20
+                    h2:
+                        font-weight: bold
+                        text-style: underline
+                        text-align: left
+                        margin-bottom: 10
+                lines:
+                    - h1:
+                        - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
+                        - "EN [companyName]"
+                    - h2: "1. Introducción:"
+                    - p:
+                        - "Las redes sociales en internet son aplicaciones web cuya función es"
+                        - "favorecer el contacto entre individuos, así como también entre estos y"
+                        - "empresas, instituciones u organismos, ya sean públicos o privados. "
+                    - p:
+                        - "Desde su puesta en marcha a comienzos del siglo XXI, la relevancia de las"
+                        - "redes sociales en internet no ha dejado de incrementarse, extendiendo su"
+                        - "influencia no solo a las interacciones exclusivamente personales, sino"
+                        - "también a las culturales, políticas, económicas y, como resulta evidente, a las"
+                        - "relaciones laborales."
+                    - p:
+                        - "Nuestra sociedad avanza hacia una mayor “interconectividad digital” donde"
+                        - "las redes sociales en internet cobran cada vez mayor importancia en la"
+                        - "gestión y ordenación de los recursos humanos. "
+                    - p:
+                        - "Por todos estos motivos resulta necesario para esta empresa implantar un"
+                        - "protocolo destinado a regular el correcto uso de las redes sociales en"
+                        - "internet durante el tiempo de trabajo, y fuera de el. También resulta preciso"
+                        - "aclarar los límites en el ejercicio de la libertad de expresión cuando esta"
+                        - "afecta al honor, a la intimidad personal y familiar, y a la propia imagen de"
+                        - "cualquiera de los empleados de la empresa y de sus órganos de dirección y"
+                        - "administración, adoptando las medidas que resulten precisas frente al acoso"
+                        - "en redes sociales. Asimismo, se abordarán medidas destinadas a evitar la"
+                        - "difusión de datos confidenciales o de carácter personal a través de las redes"
+                        - "sociales de internet."
+
+
+        uso_telematica:
+            name: Modelo Autocobertura Telemática
+
+        uso_mensajerias:
+            name: Modelo Autocobertura Mensajerías

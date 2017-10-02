@@ -30,12 +30,12 @@ class Protocol
     /**
      * @var string
      */
-    private $name;
+    private $answers;
 
     /**
      * @var string
      */
-    private $path;
+    private $identifier;
 
 
     /**
@@ -121,51 +121,51 @@ class Protocol
     }
 
     /**
-     * Set name
+     * Set answers
      *
-     * @param string $name
+     * @param string $answers
      *
      * @return Protocol
      */
-    public function setName($name)
+    public function setAnswers($answers)
     {
-        $this->name = $name;
+        $this->answers = $answers;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get answers
      *
      * @return string
      */
-    public function getName()
+    public function getAnswers()
     {
-        return $this->name;
+        return $this->answers;
     }
 
     /**
-     * Set path
+     * Set identifier
      *
-     * @param string $path
+     * @param string $identifier
      *
      * @return Protocol
      */
-    public function setPath($path)
+    public function setIdentifier($identifier)
     {
-        $this->path = $path;
+        $this->identifier = $identifier;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get identifier
      *
      * @return string
      */
-    public function getPath()
+    public function getIdentifier()
     {
-        return $this->path;
+        return $this->identifier;
     }
 
 }

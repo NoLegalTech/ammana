@@ -300,8 +300,6 @@ class ProtocolController extends Controller
         $pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
         $pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
 
-        //$pdf->SetXY(20,31);
-
         if (!isset($protocol_spec['document'])) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
@@ -311,7 +309,16 @@ class ProtocolController extends Controller
         $document = $protocol_spec['document'];
 
         $pdf->SetTextColor(0,0,0);
-        $pdf->SetMargins(30, 20);
+        $pdf->SetMargins(30, 0);
+
+        $pdf->Image(
+            $this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png',
+            130,
+            10,
+            50
+        );
+        $pdf->SetXY(30,50);
+
         //$pdf->Cell(0, 6, utf8_decode('Prueba del copón'), 0, 1, 'L');
         //$pdf->Cell(0, 6, iconv('UTF-8', 'windows-1252', 'Otra también'), 0, 1, 'L');
         foreach ($document['lines'] as $line) {

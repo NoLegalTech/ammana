@@ -51,7 +51,7 @@ parameters:
                     h1:
                         font-weight: bold
                         text-align: center
-                        margin-bottom: 20
+                        margin-bottom: 10
                     h2:
                         font-weight: bold
                         text-style: underline

@@ -42,7 +42,7 @@ parameters:
             document:
                 styles:
                     default:
-                        line-height: 6
+                        line-height: 7
                         font-family: Cambria
                         font-size: 13
                         font-weight: normal

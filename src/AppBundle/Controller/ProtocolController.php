@@ -226,7 +226,7 @@ class ProtocolController extends Controller
             $purchasedProtocol->setExpiresAt(new \DateTime(date('Y-m-d', strtotime('+1 year'))));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
-                $answers []= $value;
+                $answers []= $key . '=' . $value;
             }
             $purchasedProtocol->setAnswers(implode(',', $answers));
             $em = $this->getDoctrine()->getManager();
@@ -309,7 +309,7 @@ class ProtocolController extends Controller
         $document = $protocol_spec['document'];
 
         $pdf->SetTextColor(0,0,0);
-        $pdf->SetMargins(30, 0);
+        $pdf->SetMargins(30, 30);
 
         $pdf->Image(
             $this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png',
@@ -322,7 +322,7 @@ class ProtocolController extends Controller
         //$pdf->Cell(0, 6, utf8_decode('Prueba del copón'), 0, 1, 'L');
         //$pdf->Cell(0, 6, iconv('UTF-8', 'windows-1252', 'Otra también'), 0, 1, 'L');
         foreach ($document['lines'] as $line) {
-            $currentStyle = $this->extractStyle($line);
+            list($currentStyle, $condition, $currentLine) = $this->parse($line);
             $style = $this->applyStyles($document['styles'], $currentStyle);
             $fontStyle = '';
             if ($style['font-weight'] == 'bold') {
@@ -339,10 +339,19 @@ class ProtocolController extends Controller
                 $alignment = 'FJ';
             }
             $pdf->SetFont('Cambria', $fontStyle, 13);
-            if (is_array($line)) {
-                $total = count($line);
+            if (isset($style['margin-top'])) {
+                $pdf->Cell(0, $style['margin-top'], '', 0, 1, $alignment);
+            }
+            if ($condition != null) {
+                list($variable, $value) = explode('=', $condition);
+                if ($value != $this->getAnswer($protocol, $variable)) {
+                    continue;
+                }
+            }
+            if (is_array($currentLine)) {
+                $total = count($currentLine);
                 $current = 0;
-                foreach ($line as $l) {
+                foreach ($currentLine as $l) {
                     $current++;
                     if ($current == $total && $alignment == 'FJ') {
                         $alignment = 'L';
@@ -351,7 +360,7 @@ class ProtocolController extends Controller
                 }
                 $pdf->Cell(0, $style['line-height'], '', 0, 1, $alignment);
             } else {
-                $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $line), 0, 1, $alignment);
+                $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $currentLine), 0, 1, $alignment);
             }
             if (isset($style['margin-bottom'])) {
                 $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, $alignment);
@@ -362,11 +371,29 @@ class ProtocolController extends Controller
         return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
     }
 
-    private function extractStyle(&$line) {
-        foreach ($line as $style => $text) {
-            $line = $text;
-            return $style;
+    private function getAnswer($protocol, $variable) {
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            if ($var == $variable) {
+                return $val;
+            }
         }
+        return null;
+    }
+
+    private function parse($line) {
+        $condition = null;
+        $style = null;
+        foreach ($line as $key => $value) {
+            if ($key == "condition") {
+                $condition = $value;
+            } else {
+                $style = $key;
+                $line = $value;
+            }
+        }
+        return [$style, $condition, $line];
     }
 
     private function applyStyles($styles, $selected) {

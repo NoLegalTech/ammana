@@ -56,7 +56,8 @@ parameters:
                         font-weight: bold
                         text-style: underline
                         text-align: left
-                        margin-bottom: 10
+                        margin-top: 4
+                        margin-bottom: 8
                 lines:
                     - h1:
                         - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
@@ -87,6 +88,57 @@ parameters:
                         - "en redes sociales. Asimismo, se abordarán medidas destinadas a evitar la"
                         - "difusión de datos confidenciales o de carácter personal a través de las redes"
                         - "sociales de internet."
+                    - h2:
+                        - "2. Concepto de redes sociales en internet a los efectos del presente"
+                        - "protocolo:"
+                    - p:
+                        - "A los efectos del presente protocolo se considerarán “redes sociales” los"
+                        - "sitios o aplicaciones web formados por comunidades de individuos"
+                        - "interrelacionados que permiten el intercambio de información entre los"
+                        - "mismos. A título meramente ilustrativo, pero no limitativo, podemos"
+                        - "clasificar e incluir dentro del presente protocolo las siguientes redes"
+                        - "sociales:"
+                    - p:
+                        - "1.- Redes sociales genéricas. Son las más numerosas y conocidas, pudiendo"
+                        - "destacar entre las mismas Facebook, Instagram, Google+ y Twitter, entre"
+                        - "otras."
+                    - p:
+                        - "2.- Redes sociales profesionales. Son aquellas en las que sus miembros"
+                        - "suelen estar relacionados laboralmente, pudiendo servir para conectar"
+                        - "compañeros o para la búsqueda de empleo. Las más conocidas son LinkedIn,"
+                        - "Xing y Viadeo, entre otras."
+                    - p:
+                        - "3.- Redes sociales verticales o temáticas. Su finalidad suele estar centrada en"
+                        - "conectar usuarios con un mismo hobbie, actividad o interés. Dentro de este"
+                        - "grupo podrían incluirse Flickr, Pinterest o YouTube, entre otras."
+                    - h2: "3. Uso de servicios de redes sociales durante la jornada de trabajo"
+                    - p:
+                        - "La jornada laboral, independientemente del horario que cada trabajador"
+                        - "tenga asignado, está destinada al desempeño eficiente de las tareas"
+                        - "encomendadas por la dirección de la empresa, conforme al principio de"
+                        - "buena fe que debe regir las relaciones laborales. El trabajador deberá evitar"
+                        - "aquellas actividades y acciones que impliquen pérdidas de tiempo o"
+                        - "interrupciones innecesarias en el desempeño de su actividad laboral."
+                    - p:
+                        - "En concreto, se prohíbe al trabajador acceder a cualquiera de sus cuentas en"
+                        - "redes sociales durante la jornada laboral que tenga asignada, la cual se debe"
+                        - "destinar exclusivamente a la realización de las tareas encomendadas por la"
+                        - "dirección de la empresa."
+                      condition: "uso_durante_jornada_laboral=0"
+                    - p:
+                        - "En concreto, se prohíbe al trabajador acceder a cualquiera de sus cuentas en"
+                        - "redes sociales durante la jornada laboral que tenga asignada, salvo que"
+                        - "existan circunstancias personales y familiares del trabajador de"
+                        - "extraordinaria gravedad que hagan imprescindible su uso. "
+                      condition: "uso_durante_jornada_laboral=1"
+                    - p:
+                        - "Se permite al trabajador el uso ocasional y esporádico de sus cuentas en"
+                        - "redes sociales durante la jornada laboral que tenga asignada, siempre y"
+                        - "cuando esto no suponga un retraso en el desempeño de las tareas"
+                        - "encomendadas por la empresa, ni en la cantidad y calidad del trabajo que se"
+                        - "le haya asignado. "
+                      condition: "uso_durante_jornada_laboral=2"
+
 
 
         uso_telematica:

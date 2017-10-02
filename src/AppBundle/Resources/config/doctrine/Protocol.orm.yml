@@ -20,7 +20,7 @@ AppBundle\Entity\Protocol:
             column: expires_at
         answers:
             type: string
-            length: '200'
+            length: '400'
         identifier:
             type: string
             length: '100'

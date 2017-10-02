@@ -114,6 +114,13 @@ class PDF extends \FPDF {
         }
     }
 
+    function Footer()
+    {
+        $this->SetY(-15);
+        $this->SetFont('Calibri','',11);
+        $this->Cell(0,10,$this->PageNo(),0,0,'C');
+    }
+
 }
 
 /**
@@ -296,9 +303,11 @@ class ProtocolController extends Controller
         $protocol_spec = $protocols[$protocol->getIdentifier()];
 
         $pdf = new PDF();
+        $pdf->AliasNbPages();
         $pdf->AddPage();
         $pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
         $pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
+        $pdf->AddFont('Calibri','', 'Calibri.php');
 
         if (!isset($protocol_spec['document'])) {
             return $this->redirectToRoute('error', array(

@@ -277,7 +277,7 @@ class ProtocolController extends Controller
      * Downloads a protocol.
      *
      */
-    public function downloadAction(Protocol $protocol, LoggerInterface $logger, SessionInterface $session)
+    public function downloadAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session)
     {
         $user = $this->getUserFromSession($session);
         if ($user == null) {
@@ -320,12 +320,14 @@ class ProtocolController extends Controller
         $pdf->SetTextColor(0,0,0);
         $pdf->SetMargins(30, 30);
 
-        $pdf->Image(
-            $this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png',
-            130,
-            10,
-            50
-        );
+        if ($request->query->get('logo') == 'yes') {
+            $pdf->Image(
+                $this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png',
+                130,
+                20,
+                50
+            );
+        }
         $pdf->SetXY(30,50);
 
         //$pdf->Cell(0, 6, utf8_decode('Prueba del copón'), 0, 1, 'L');
@@ -376,8 +378,8 @@ class ProtocolController extends Controller
             }
         }
 
-        //return new Response($pdf->Output('D', $protocol_spec['name']), 200);
-        return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
+        return new Response($pdf->Output('D', $protocol_spec['name']), 200);
+        //return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
     }
 
     private function getAnswer($protocol, $variable) {

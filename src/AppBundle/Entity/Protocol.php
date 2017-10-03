@@ -23,11 +23,6 @@ class Protocol
     private $user;
 
     /**
-     * @var date
-     */
-    private $expiresAt;
-
-    /**
      * @var string
      */
     private $answers;
@@ -94,30 +89,6 @@ class Protocol
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set expiresAt
-     *
-     * @param date $expiresAt
-     *
-     * @return Protocol
-     */
-    public function setExpiresAt($expiresAt)
-    {
-        $this->expiresAt = $expiresAt;
-
-        return $this;
-    }
-
-    /**
-     * Get expiresAt
-     *
-     * @return date
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
     }
 
     /**

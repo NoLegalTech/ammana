@@ -10,7 +10,6 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Expira</th>
                                 <th>Nombre</th>
                                 <th></th>
                             </tr>
@@ -18,7 +17,6 @@
                         <tbody>
                         {% for protocol in protocols %}
                             <tr>
-                                <td>{{ protocol.expiresAt | date('d/m/Y') }}</td>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
                                     <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>

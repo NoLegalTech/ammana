@@ -15,9 +15,6 @@ AppBundle\Entity\Protocol:
             type: boolean
             column: enabled
             nullable: false
-        expiresAt:
-            type: date
-            column: expires_at
         answers:
             type: string
             length: '400'

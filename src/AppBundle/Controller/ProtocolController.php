@@ -230,7 +230,6 @@ class ProtocolController extends Controller
             $purchasedProtocol->setIdentifier($id);
             $purchasedProtocol->setUser($user->getId());
             $purchasedProtocol->setEnabled(false);
-            $purchasedProtocol->setExpiresAt(new \DateTime(date('Y-m-d', strtotime('+1 year'))));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;

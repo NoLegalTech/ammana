@@ -349,7 +349,7 @@ class ProtocolController extends Controller
             }
             $pdf->SetFont('Cambria', $fontStyle, 13);
             if (isset($style['margin-top'])) {
-                $pdf->Cell(0, $style['margin-top'], '', 0, 1, $alignment);
+                $pdf->Cell(0, $style['margin-top'], '', 0, 1, 'L');
             }
             if ($condition != null) {
                 list($variable, $value) = explode('=', $condition);
@@ -365,19 +365,32 @@ class ProtocolController extends Controller
                     if ($current == $total && $alignment == 'FJ') {
                         $alignment = 'L';
                     }
-                    $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $l), 0, 1, $alignment);
+                    $this->expandVariables($l, $user);
+                    $this->printLine($pdf, $style, $l, $alignment);
                 }
-                $pdf->Cell(0, $style['line-height'], '', 0, 1, $alignment);
+                $this->printLine($pdf, $style, '', 'L');
             } else {
-                $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $currentLine), 0, 1, $alignment);
+                $this->expandVariables($currentLine, $user);
+                $this->printLine($pdf, $style, $currentLine, $alignment);
             }
             if (isset($style['margin-bottom'])) {
-                $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, $alignment);
+                $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, 'L');
             }
         }
 
-        return new Response($pdf->Output('D', $protocol_spec['name']), 200);
-        //return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
+        //return new Response($pdf->Output('D', $protocol_spec['name']), 200);
+        return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
+    }
+
+    private function printLine($pdf, $style, $line, $alignment) {
+        if (strpos($line, ' ') === false) {
+            $alignment = 'L';
+        }
+        $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $line), 0, 1, $alignment);
+    }
+
+    private function expandVariables(&$line, $user) {
+        $line = str_replace('[companyName]', $user->getCompanyName(), $line);
     }
 
     private function getAnswer($protocol, $variable) {

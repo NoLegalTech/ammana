@@ -1,2 +1,10 @@
 imports:
     - { resource: protocols/uso_redes.yml }
+    - { resource: protocols/uso_telematica.yml }
+    - { resource: protocols/uso_mensajerias.yml }
+
+parameters:
+    protocols:
+        - uso_redes
+        - uso_telematica
+        - uso_mensajerias

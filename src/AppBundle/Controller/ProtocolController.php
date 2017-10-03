@@ -148,7 +148,9 @@ class ProtocolController extends Controller
             ->findByUser($user->getId());
 
         $names = [];
-        foreach ($this->container->getParameter('protocols') as $id => $protocol_spec) {
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
             $names[$id] = $protocol_spec['name'];
         }
 
@@ -198,14 +200,12 @@ class ProtocolController extends Controller
             ));
         }
 
-        $protocols = $this->container->getParameter('protocols');
-        if (!isset($protocols[$id])) {
+        $protocol = $this->container->getParameter('protocol.'.$id);
+        if ($protocol == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
-
-        $protocol = $protocols[$id];
         $protocol['id'] = $id;
 
         $profile_completed = $this->userHasCompletedProfile($user);
@@ -293,14 +293,12 @@ class ProtocolController extends Controller
             ));
         }
 
-        $protocols = $this->container->getParameter('protocols');
-        if (!isset($protocols[$protocol->getIdentifier()])) {
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
-
-        $protocol_spec = $protocols[$protocol->getIdentifier()];
 
         $pdf = new PDF();
         $pdf->AliasNbPages();
@@ -431,14 +429,12 @@ class ProtocolController extends Controller
             ));
         }
 
-        $protocols = $this->container->getParameter('protocols');
-        if (!isset($protocols[$id])) {
+        $protocol = $this->container->getParameter('protocol.'.$id);
+        if ($protocol == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
-
-        $protocol = $protocols[$id];
         $protocol['id'] = $id;
 
         $found = $this->getDoctrine()

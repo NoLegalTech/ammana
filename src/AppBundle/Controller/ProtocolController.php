@@ -378,8 +378,8 @@ class ProtocolController extends Controller
             }
         }
 
-        //return new Response($pdf->Output('D', $protocol_spec['name']), 200);
-        return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
+        return new Response($pdf->Output('D', $protocol_spec['name']), 200);
+        //return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
     }
 
     private function printLine($pdf, $style, $line, $alignment) {

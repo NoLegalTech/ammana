@@ -57,7 +57,7 @@ parameters:
                     text-align: left
                     margin-top: 4
                     margin-bottom: 8
-            lines:
+            content:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
                     - "EN [companyName]"

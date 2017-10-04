@@ -88,7 +88,7 @@ parameters:
                     text-align: left
                     margin-top: 4
                     margin-bottom: 8
-            lines:
+            content:
                 - h1: "PROTOCOLO TELEMÁTICO DE [companyName]."
                 - h2: "1. Condiciones generales:"
                 - p:

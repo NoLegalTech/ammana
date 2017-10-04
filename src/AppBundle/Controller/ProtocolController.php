@@ -123,6 +123,159 @@ class PDF extends \FPDF {
 
 }
 
+class PDFPrinter {
+
+    private $content = null;
+    private $styles = null;
+    private $variables = null;
+    private $logo = null;
+    private $fileName = null;
+
+    public function __construct() {
+    }
+
+    public function setContent($content) {
+        $this->content = $content;
+    }
+
+    public function setStyles($styles) {
+        $this->styles = $styles;
+    }
+
+    public function setVariables($variables) {
+        $this->variables = $variables;
+    }
+
+    public function setLogo($logo) {
+        $this->logo = $logo;
+    }
+
+    public function setFileName($fileName) {
+        $this->fileName = $fileName;
+    }
+
+    public function print() {
+        $pdf = new PDF();
+        $pdf->AliasNbPages();
+        $pdf->AddPage();
+        $pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
+        $pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
+        $pdf->AddFont('Calibri','', 'Calibri.php');
+        $pdf->SetTextColor(0,0,0);
+        $pdf->SetMargins(30, 30);
+        if ($this->logo != null) {
+            $pdf->Image($this->logo, 130, 20, 50);
+        }
+        $pdf->SetXY(30,50);
+        if ($this->content != null && $this->styles != null) {
+            foreach ($this->content as $line) {
+                list($currentStyle, $condition, $currentLine) = $this->parse($line);
+                $style = $this->applyStyles($this->styles, $currentStyle);
+                $fontStyle = '';
+                if ($style['font-weight'] == 'bold') {
+                    $fontStyle .= 'B';
+                }
+                if ($style['text-style'] == 'underline') {
+                    $fontStyle .= 'U';
+                }
+                $alignment = 'L';
+                if ($style['text-align'] == 'center') {
+                    $alignment = 'C';
+                }
+                if ($style['text-align'] == 'justify') {
+                    $alignment = 'FJ';
+                }
+                $pdf->SetFont('Cambria', $fontStyle, 13);
+                if (isset($style['margin-top'])) {
+                    $pdf->Cell(0, $style['margin-top'], '', 0, 1, 'L');
+                }
+                if ($condition != null) {
+                    list($variable, $value) = explode('=', $condition);
+                    if ($value != $this->getVariable($variable)) {
+                        continue;
+                    }
+                }
+                if (is_array($currentLine)) {
+                    $total = count($currentLine);
+                    $current = 0;
+                    foreach ($currentLine as $l) {
+                        $current++;
+                        if ($current == $total && $alignment == 'FJ') {
+                            $alignment = 'L';
+                        }
+                        $this->expandVariables($l);
+                        $this->printLine($pdf, $style, $l, $alignment);
+                    }
+                    $this->printLine($pdf, $style, '', 'L');
+                } else {
+                    $this->expandVariables($currentLine);
+                    $this->printLine($pdf, $style, $currentLine, $alignment);
+                }
+                if (isset($style['margin-bottom'])) {
+                    $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, 'L');
+                }
+            }
+        }
+        //return $pdf->Output('D', $protocol_spec['name'] . '.pdf');
+        return $pdf->Output('S', $this->fileName);
+    }
+
+    private function parse($line) {
+        $condition = null;
+        $style = null;
+        foreach ($line as $key => $value) {
+            if ($key == "condition") {
+                $condition = $value;
+            } else {
+                $style = $key;
+                $line = $value;
+            }
+        }
+        return [$style, $condition, $line];
+    }
+
+    private function getVariable($name) {
+        if ($this->variables == null) {
+            return null;
+        }
+        return $this->variables[$name];
+    }
+
+    private function applyStyles($styles, $selected) {
+        if ($selected == 'default' || !isset($styles[$selected])) {
+            return $styles['default'];
+        }
+        $style = $styles['default'];
+        foreach ($styles[$selected] as $key => $value) {
+            $style[$key] = $value;
+        }
+        return $style;
+    }
+
+    private function printLine($pdf, $style, $line, $alignment) {
+        if (strpos($line, ' ') === false) {
+            $alignment = 'L';
+        }
+        $pdf->Cell(0, $style['line-height'], $this->fixSpecialCharacters($line), 0, 1, $alignment);
+    }
+
+    private function fixSpecialCharacters($text) {
+        return iconv('UTF-8', 'windows-1252', $text);
+        // if iconv extension  not loaded we can do instead:
+        // return utf8_decode($text);
+    }
+
+    private function expandVariables(&$line) {
+        if ($this->variables == null) {
+            return;
+        }
+        foreach ($this->variables as $name => $value) {
+            $line = str_replace('[' . $name . ']', $value, $line);
+        }
+    }
+
+}
+
 /**
  * Protocol controller.
  *
@@ -299,133 +452,34 @@ class ProtocolController extends Controller
             ));
         }
 
-        $pdf = new PDF();
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        $pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
-        $pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
-        $pdf->AddFont('Calibri','', 'Calibri.php');
-
         if (!isset($protocol_spec['document'])) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
 
+        $printer = new PDFPrinter();
         $document = $protocol_spec['document'];
-
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetMargins(30, 30);
+        $printer->setFileName($protocol_spec['name'].'.pdf');
 
         if ($request->query->get('logo') == 'yes') {
-            $pdf->Image(
-                $this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png',
-                130,
-                20,
-                50
-            );
-        }
-        $pdf->SetXY(30,50);
-
-        //$pdf->Cell(0, 6, utf8_decode('Prueba del copón'), 0, 1, 'L');
-        //$pdf->Cell(0, 6, iconv('UTF-8', 'windows-1252', 'Otra también'), 0, 1, 'L');
-        foreach ($document['lines'] as $line) {
-            list($currentStyle, $condition, $currentLine) = $this->parse($line);
-            $style = $this->applyStyles($document['styles'], $currentStyle);
-            $fontStyle = '';
-            if ($style['font-weight'] == 'bold') {
-                $fontStyle .= 'B';
-            }
-            if ($style['text-style'] == 'underline') {
-                $fontStyle .= 'U';
-            }
-            $alignment = 'L';
-            if ($style['text-align'] == 'center') {
-                $alignment = 'C';
-            }
-            if ($style['text-align'] == 'justify') {
-                $alignment = 'FJ';
-            }
-            $pdf->SetFont('Cambria', $fontStyle, 13);
-            if (isset($style['margin-top'])) {
-                $pdf->Cell(0, $style['margin-top'], '', 0, 1, 'L');
-            }
-            if ($condition != null) {
-                list($variable, $value) = explode('=', $condition);
-                if ($value != $this->getAnswer($protocol, $variable)) {
-                    continue;
-                }
-            }
-            if (is_array($currentLine)) {
-                $total = count($currentLine);
-                $current = 0;
-                foreach ($currentLine as $l) {
-                    $current++;
-                    if ($current == $total && $alignment == 'FJ') {
-                        $alignment = 'L';
-                    }
-                    $this->expandVariables($l, $user);
-                    $this->printLine($pdf, $style, $l, $alignment);
-                }
-                $this->printLine($pdf, $style, '', 'L');
-            } else {
-                $this->expandVariables($currentLine, $user);
-                $this->printLine($pdf, $style, $currentLine, $alignment);
-            }
-            if (isset($style['margin-bottom'])) {
-                $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, 'L');
-            }
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png');
         }
 
-        return new Response($pdf->Output('D', $protocol_spec['name']), 200);
-        //return new Response($pdf->Output('S', $protocol_spec['name'].'.pdf'), 200, array( 'Content-Type' => 'application/pdf'));
-    }
-
-    private function printLine($pdf, $style, $line, $alignment) {
-        if (strpos($line, ' ') === false) {
-            $alignment = 'L';
-        }
-        $pdf->Cell(0, $style['line-height'], iconv('UTF-8', 'windows-1252', $line), 0, 1, $alignment);
-    }
-
-    private function expandVariables(&$line, $user) {
-        $line = str_replace('[companyName]', $user->getCompanyName(), $line);
-    }
-
-    private function getAnswer($protocol, $variable) {
+        $variables = [];
         $asignments = explode(',', $protocol->getAnswers());
         foreach ($asignments as $asignment) {
             list($var, $val) = explode('=', $asignment);
-            if ($var == $variable) {
-                return $val;
-            }
+            $variables[$var] = $val;
         }
-        return null;
-    }
+        $variables['company_name'] = $user->getCompanyName();
+        $printer->setVariables($variables);
 
-    private function parse($line) {
-        $condition = null;
-        $style = null;
-        foreach ($line as $key => $value) {
-            if ($key == "condition") {
-                $condition = $value;
-            } else {
-                $style = $key;
-                $line = $value;
-            }
-        }
-        return [$style, $condition, $line];
-    }
+        $printer->setStyles($document['styles']);
+        $printer->setContent($document['content']);
 
-    private function applyStyles($styles, $selected) {
-        if ($selected == 'default' || !isset($styles[$selected])) {
-            return $styles['default'];
-        }
-        $style = $styles['default'];
-        foreach ($styles[$selected] as $key => $value) {
-            $style[$key] = $value;
-        }
-        return $style;
+        //return new Response($printer->print(), 200);
+        return new Response($printer->print(), 200, array( 'Content-Type' => 'application/pdf'));
     }
 
     /**

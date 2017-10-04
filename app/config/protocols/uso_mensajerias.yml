@@ -52,7 +52,7 @@ parameters:
                     text-align: left
                     margin-top: 4
                     margin-bottom: 8
-            lines:
+            content:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE SISTEMAS DE MENSAJERÍA"
                     - "INSTANTANEA EN [companyName]"
@@ -126,32 +126,28 @@ parameters:
                     - "trabajadores emplear estos sistemas de mensajería instantánea, ya sean"
                     - "individuales o grupales, para:"
                   condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "1. Remitir contenidos virales, cadenas de mensajes, rumores,"
-                    - "publicidad o cualquier otro que pueda considerarse spam."
-                  condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "2. Remitir cadenas de chistes, bromas o similares."
-                  condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "3. Remitir cualquier tipo de contenido ilegal, sexista, abusivo,"
-                    - "difamatorio, discriminatorio, ofensivo, racista, pornográfico o de"
-                    - "cualquier otro tipo no autorizado por la legislación vigente."
-                  condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "4. Remitir cualquier tipo de contenido relativo a circunstancias"
-                    - "personales o sociales de los compañeros de trabajo, gerentes o"
-                    - "directivos, así como cualquier otro tipo de contenido que pueda"
-                    - "afectar al honor o intimidad de estas personas."
-                  condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "5. Remitir cualquier tipo de contenido que incite a la violencia, al"
-                    - "terrorismo, al odio, al suicidio o la autolesión."
-                  condition: "mensajeria_solo_para_trabajo=1"
-                - p:
-                    - "6. Remitir cualquier tipo de enlace que permita la descarga ilegal de"
-                    - "programas y contenidos, así como también el acceso a plataformas"
-                    - "de juego o apuestas online."
+                - ul:
+                    - li:
+                        - "Remitir contenidos virales, cadenas de mensajes, rumores,"
+                        - "publicidad o cualquier otro que pueda considerarse spam."
+                    - li:
+                        - "Remitir cadenas de chistes, bromas o similares."
+                    - li:
+                        - "Remitir cualquier tipo de contenido ilegal, sexista, abusivo,"
+                        - "difamatorio, discriminatorio, ofensivo, racista, pornográfico o de"
+                        - "cualquier otro tipo no autorizado por la legislación vigente."
+                    - li:
+                        - "Remitir cualquier tipo de contenido relativo a circunstancias"
+                        - "personales o sociales de los compañeros de trabajo, gerentes o"
+                        - "directivos, así como cualquier otro tipo de contenido que pueda"
+                        - "afectar al honor o intimidad de estas personas."
+                    - li:
+                        - "Remitir cualquier tipo de contenido que incite a la violencia, al"
+                        - "terrorismo, al odio, al suicidio o la autolesión."
+                    - li:
+                        - "Remitir cualquier tipo de enlace que permita la descarga ilegal de"
+                        - "programas y contenidos, así como también el acceso a plataformas"
+                        - "de juego o apuestas online."
                   condition: "mensajeria_solo_para_trabajo=1"
                 - p:
                     - "La empresa podrá comunicar instrucciones y asignar tareas durante la"

@@ -14,12 +14,14 @@ parameters:
                   - "No"
             - id: uso_personal_correo
               question: "El uso de la cuenta de correo electrónico corporativo por parte del trabajador será:"
+              condition: "correo_de_empresa=0"
               answers:
                   - "Personal e intransferible"
                   - "Personal pero utilizable por otros compañeros de trabajo en caso de especial necesidad"
                   - "Transferible y utilizable por cualquier empleado de la empresa."
             - id: uso_privado_correo
               question: "¿El trabajador podrá usar la cuenta de correo electrónico corporativo para fines privados como, por ejemplo, realizar compras o recibir/responder correos de familiares?"
+              condition: "correo_de_empresa=0"
               answers:
                   - "Sí, y también podrá descargarse los documentos adjuntos del mensaje"
                   - "Sí, pero no podrá descargar ningún documento ni enlace adjunto para preservar la seguridad de los equipos."
@@ -48,17 +50,20 @@ parameters:
                   - "No"
             - id: uso_personal_movil
               question: "Los teléfonos móviles y Smartphones que la empresa haya puesto a disposición de sus trabajadores:"
+              condition: "smartphone_empresa=0"
               answers:
                   - "Se deberán emplear exclusivamente para cuestiones laborales."
                   - "Se deberán destinar a cuestiones laborales, si bien podrán emplearse para temas personales del trabajador en caso de extraordinaria y urgente necesidad"
                   - "Deberán emplearse fundamentalmente para cuestiones laborales, si bien el trabajador también podrá usarlo para cuestiones personales hasta el límite de facturación que fije la empresa. "
             - id: programas_movil
               question: "¿Los trabajadores podrán descargar o instalar programas en los teléfonos móviles y Smartphones titularidad de la empresa?"
+              condition: "smartphone_empresa=0"
               answers:
                   - "Sí, siempre y cuando su finalidad tenga carácter laboral y previa autorización de la dirección de la empresa."
                   - "No, será la dirección la que determine los programas y aplicaciones que se instalan en los teléfonos móviles y Smartphones titularidad de la empresa"
             - id: mensajeria_movil
               question: "La instalación de programas de mensajería instantánea tipo Whatsapp o Telegram en los teléfonos móviles y Smartphones titularidad de la empresa:"
+              condition: "smartphone_empresa=0"
               answers:
                   - "Se prohíbe expresamente y en todo caso"
                   - "Se autoriza, si bien su uso estará reservado para la trasmisión de instrucciones de trabajo."

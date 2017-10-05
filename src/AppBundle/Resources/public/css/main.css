@@ -419,3 +419,7 @@ input[type="radio"] + label:after {
     content: "\a ";
     white-space: pre;
 }
+
+.has-condition {
+    display: none;
+}

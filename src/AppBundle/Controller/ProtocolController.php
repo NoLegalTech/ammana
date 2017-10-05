@@ -10,7 +10,6 @@ use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -157,12 +156,23 @@ class ProtocolController extends Controller
             foreach ($question['answers'] as $answer) {
                 $choices[$answer] = $count++;
             }
-            $formBuilder->add($question['id'], ChoiceType::class, array(
+            $properties = array(
                 'label' => $question['question'],
                 'choices' => $choices,
                 'expanded' => !$isConfirmation,
                 'multiple' => false
-            ));
+            );
+            if (isset($question['condition'])) {
+                $properties['attr'] = array(
+                    'class' => 'has-condition',
+                    'data-condition' => $question['condition']
+                );
+                $properties['label_attr'] = array(
+                    'class' => 'has-condition',
+                    'data-condition' => $question['condition']
+                );
+            }
+            $formBuilder->add($question['id'], ChoiceType::class, $properties);
         }
 
         return $formBuilder ->getForm();

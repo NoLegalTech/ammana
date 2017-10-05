@@ -52,6 +52,8 @@ parameters:
                     text-align: left
                     margin-top: 4
                     margin-bottom: 8
+                li:
+                    list-margin-left: 10
             content:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE SISTEMAS DE MENSAJERÍA"
@@ -282,8 +284,8 @@ parameters:
                     - "grupos de mensajería instantánea, ni por ningún otro medio, los que a"
                     - "continuación se detallan:"
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "1. Información y datos relativos a la ideología, afiliación sindical, religión o"
+                - li:
+                    - "Información y datos relativos a la ideología, afiliación sindical, religión o"
                     - "creencias de los clientes, proveedores, empleados o equipo directivo, salvo"
                     - "que los clientes o proveedores tengan la condición de partidos políticos,"
                     - "sindicatos, iglesias, confesiones o comunidades religiosas y asociaciones,"
@@ -291,32 +293,32 @@ parameters:
                     - "filosófica, religiosa o sindical, respetando en todo caso la confidencialidad de"
                     - "los datos relativos a sus asociados, afiliados o miembros."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "2. Información y datos que hagan referencia al estado de salud de los"
+                  start_at: 1
+                - li:
+                    - "y datos que hagan referencia al estado de salud de los"
                     - "clientes, proveedores, empleados o equipo directivo."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "3. Información y datos relativos a las características sociales de los clientes,"
+                - li:
+                    - "Información y datos relativos a las características sociales de los clientes,"
                     - "proveedores, empleados o equipo directivo, como por ejemplo su domicilio,"
                     - "vivienda, propiedades y posesiones, estilo de vida, etc."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "4. Información y datos financieros, contables, económicos o sobre solvencia"
+                - li:
+                    - "Información y datos financieros, contables, económicos o sobre solvencia"
                     - "de nuestra empresa, clientes, proveedores, empleados o equipo directivo."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "5. Información y datos industriales, mercantiles, hipotecarios, crediticios,"
+                - li:
+                    - "Información y datos industriales, mercantiles, hipotecarios, crediticios,"
                     - "comerciales o de naturaleza semejante de nuestra empresa, clientes,"
                     - "proveedores, empleados o equipo directivo."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "6. Información y datos relativos a cualquier tipo de encargo, trabajo,"
+                - li:
+                    - "Información y datos relativos a cualquier tipo de encargo, trabajo,"
                     - "campaña, proyecto o evento de nuestra empresa, clientes o proveedores"
                     - "hasta que este no se haya hecho público."
                   condition: "informacion_confidencial=0"
-                - p:
-                    - "7. Información y datos relativos a proyectos de innovación, investigación,"
+                - li:
+                    - "Información y datos relativos a proyectos de innovación, investigación,"
                     - "científicos, patentes, licencias o de naturaleza semejante de nuestra"
                     - "empresa, clientes o proveedores."
-                  condition: "informacion_confidencial=0"
 

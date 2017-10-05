@@ -118,8 +118,12 @@ class Condition {
     }
 
     public function matches($variables) {
-        return ($variables == null)
+        return ($variables != null)
             && $variables[$this->variableName] == $this->expectedValue;
+    }
+
+    public function __toString() {
+        return '(' . $this->variableName . ' == ' . $this->expectedValue . ')';
     }
 
 }
@@ -140,20 +144,30 @@ class PDFElement {
     private $element, $type;
     private $pdf, $style, $alignment;
     private $variables;
-    private $condition;
+    private $condition, $properties;
 
-    public function __construct($element, $type, $pdf, $style, $variables, $condition) {
+    private static $list_counter = 1;
+    private static $list_style = '.';
+
+    public function __construct($element, $type, $pdf, $style, $variables, $condition, $properties) {
         $this->element = $element;
         $this->type = $type;
         $this->pdf = $pdf;
         $this->style = $style;
         $this->variables = $variables;
         $this->condition = $condition;
+        $this->properties = $properties;
         $this->alignment = 'L';
     }
 
     public function getCondition() {
         return $this->condition;
+    }
+
+    public function getProperty($property) {
+        return ($this->properties != null && isset($this->properties[$property]))
+            ? $this->properties[$property]
+            : null;
     }
 
     public function print() {
@@ -162,16 +176,39 @@ class PDFElement {
         $this->applyStyleAfter();
     }
 
+    public function log($text) {
+        $this->pdf->Cell(0, $this->style['line-height'], $text, 0, 1, 'L');
+    }
+
     private function printElement() {
+        if ($this->type == 'li') {
+            if ($this->getProperty('start_at') != null) {
+                self::$list_counter = $this->getProperty('start_at');
+            }
+            if ($this->getProperty('list_style') != null) {
+                self::$list_style = $this->getProperty('list_style');
+            }
+            $this->pdf->Cell($this->style['list-margin-left'], $this->style['line-height'], self::$list_counter . self::$list_style, 0, 0, 'L');
+            self::$list_counter++;
+        }
         if (is_array($this->element)) {
             $total = count($this->element);
             $current = 0;
+            $isFirst = true;
             foreach ($this->element as $l) {
                 $current++;
                 if ($current == $total && $this->alignment == 'FJ') {
                     $this->alignment = 'L';
                 }
-                $this->printLine($l);
+                if ($isFirst) {
+                    $this->printLine($l);
+                } else {
+                    if ($this->type == 'li') {
+                        $this->pdf->Cell($this->style['list-margin-left'], $this->style['line-height'], ' ', 0, 0, 'L');
+                    }
+                    $this->printLine($l);
+                }
+                $isFirst = false;
             }
             $this->alignment = 'L';
             $this->printLine('');
@@ -255,9 +292,11 @@ class PDFPrinter {
     private $logo = null;
     private $fileName = null;
     private $pdf;
+    private $allowed_tags;
 
     public function __construct() {
         $this->pdf = new PDF();
+        $this->allowed_tags = [ 'p', 'h1', 'h2', 'li' ];
     }
 
     public function setContent($content) {
@@ -311,12 +350,15 @@ class PDFPrinter {
     private function parse($element) {
         $condition = null;
         $elementType = null;
+        $properties = [];
         foreach ($element as $key => $value) {
-            if ($key == "condition") {
-                $condition = $value;
-            } else {
+            if (in_array($key, $this->allowed_tags)) {
                 $elementType = $key;
                 $element = $value;
+            } elseif ($key == "condition") {
+                $condition = $value;
+            } else {
+                $properties[$key] = $value;
             }
         }
         $this->style = $this->applyStyles($this->styles, $elementType);
@@ -326,7 +368,8 @@ class PDFPrinter {
             $this->pdf,
             $this->style,
             $this->variables,
-            $this->parseCondition($condition)
+            $this->parseCondition($condition),
+            $properties
         );
     }
 

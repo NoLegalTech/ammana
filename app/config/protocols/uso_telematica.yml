@@ -88,6 +88,8 @@ parameters:
                     text-align: left
                     margin-top: 4
                     margin-bottom: 8
+                li:
+                    list-margin-left: 10
             content:
                 - h1: "PROTOCOLO TELEMÁTICO DE [company_name]."
                 - h2: "1. Condiciones generales:"
@@ -194,15 +196,17 @@ parameters:
                   - "Asimismo, los trabajadores de la empresa se deberán abstener de realizar"
                   - "cualquiera de las siguientes acciones con la cuenta de correo corporativo:"
                   condition: "correo_de_empresa=0"
-                - p:
-                  - "a) Responder al correo no solicitado (spam)."
+                - li:
+                  - "Responder al correo no solicitado (spam)."
                   condition: "correo_de_empresa=0"
-                - p:
-                  - "b) Participar en cadenas de mensajes masivos innecesarios"
+                  start_at: a
+                  list_style: )
+                - li:
+                  - "Participar en cadenas de mensajes masivos innecesarios"
                   - "(felicitaciones, chistes, etc.)"
                   condition: "correo_de_empresa=0"
-                - p:
-                  - "c) Participar en el reenvío de correo no solicitado (cadenas de mensajes,"
+                - li:
+                  - "Participar en el reenvío de correo no solicitado (cadenas de mensajes,"
                   - "rumores, publicidad, etc.)"
                   condition: "correo_de_empresa=0"
                 - p:
@@ -391,35 +395,37 @@ parameters:
                   - "de otras que puedan valorarse en su momento y se pongan en conocimiento"
                   - "de los trabajadores, las siguientes:"
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Proteger documentación e información confidencial, relevante o de"
+                - li:
+                  - "Proteger documentación e información confidencial, relevante o de"
                   - "carácter personal de la empresa, sus empleados, clientes o"
                   - "proveedores, evitando la fuga de la misma."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Velar por el correcto mantenimiento de los equipos y aplicaciones"
+                  start_at: ' '
+                  list_style: -
+                - li:
+                  - "Velar por el correcto mantenimiento de los equipos y aplicaciones"
                   - "telemáticas de la empresa, evitando la navegación en redes o sistemas"
                   - "que pongan en riesgo su seguridad."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Vigilar el cumplimiento de las obligaciones laborales y el desempeño"
+                - li:
+                  - "Vigilar el cumplimiento de las obligaciones laborales y el desempeño"
                   - "del trabajo conforme a las instrucciones recibidas."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Frenar la descarga por parte de los trabajadores de contenidos"
+                - li:
+                  - "Frenar la descarga por parte de los trabajadores de contenidos"
                   - "ilegales, irregulares o prohibidos por la empresa."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Evitar la sobrecarga de los equipos y servidores con documentos o"
+                - li:
+                  - "Evitar la sobrecarga de los equipos y servidores con documentos o"
                   - "archivos temporales innecesarios y prohibidos."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Proteger a los trabajadores de la empresa frente a intromisiones"
+                - li:
+                  - "Proteger a los trabajadores de la empresa frente a intromisiones"
                   - "ilegítimas en su honor, intimidad personal y familiar, propia imagen o"
                   - "que puedan ser constitutivas de acoso."
                   condition: "monitorizar_equipos=0"
-                - p:
-                  - "- Evitar incurrir en costes innecesarios como consecuencia de la"
+                - li:
+                  - "Evitar incurrir en costes innecesarios como consecuencia de la"
                   - "renovación anticipada de equipos derivada de un incorrecto"
                   - "mantenimiento de los mismos por parte de los trabajadores."
                   condition: "monitorizar_equipos=0"
@@ -433,23 +439,25 @@ parameters:
                   - "Queda expresamente prohibido que los trabajadores hagan uso de"
                   - "cualquiera de los medios telemáticos, informáticos o electrónicos puestos a"
                   - "su disposición por la empresa para divulgar o transmitir:"
-                - p:
-                  - "a) Información, imágenes o documentos de contenido ilegal, sexista,"
+                - li:
+                  - "Información, imágenes o documentos de contenido ilegal, sexista,"
                   - "abusivo, difamatorio, discriminatorio, ofensivo, racista, pornográfico o"
                   - "de cualquier otro tipo no autorizada por la legislación vigente."
-                - p:
-                  - "b) Información, imágenes o documentos sobre clientes, proveedores,"
+                  start_at: a
+                  list_style: )
+                - li:
+                  - "Información, imágenes o documentos sobre clientes, proveedores,"
                   - "circunstancias personales o sociales de los compañeros de trabajo, o"
                   - "cualquier otra que pueda causar perjuicios a la compañía."
-                - p:
-                  - "c) Información, imágenes o documentos confidenciales de la compañía,"
+                - li:
+                  - "Información, imágenes o documentos confidenciales de la compañía,"
                   - "de sus clientes, de sus ingresos, facturación, situación financiera, o"
                   - "cualquier otra que pueda causar un perjuicio a la misma."
-                - p:
-                  - "d) Información, imágenes o documentos que inciten a la violencia, al"
+                - li:
+                  - "Información, imágenes o documentos que inciten a la violencia, al"
                   - "terrorismo, al odio, al suicidio o la autolesión."
-                - p:
-                  - "e) Del mismo modo se prohíbe al trabajador el uso de los medios"
+                - li:
+                  - "Del mismo modo se prohíbe al trabajador el uso de los medios"
                   - "telemáticos, informáticos o electrónicos puestos a su disposición para"
                   - "la descarga ilegal de programas y contenidos, así como también para el"
                   - "acceso a plataformas de juego o apuestas online."

@@ -19,26 +19,27 @@ jQuery(document).ready(function () {
     });
     $('.has-condition').each(function() {
         var $element = $(this);
-        var parts = $element.data('condition').split('=');
-        var key = parts[0], value = parts[1];
-        var showElements = function(toUpdate) {
-            toUpdate.show();
-            toUpdate.prop("required", true);
+        var showElement = function(element) {
+            element.show();
+            element.prop("required", true);
         };
-        var hideElements = function(toUpdate) {
-            toUpdate.hide();
-            toUpdate.removeAttr('required');
-            toUpdate.find('input[type="radio"]:first').each(function() {
+        var hideElement = function(element) {
+            element.hide();
+            element.removeAttr('required');
+            element.find('input[type="radio"]:first').each(function() {
                 $(this).attr("checked", "checked")
             });
         };
+
+        var parts = $element.data('condition').split('=');
+        var key = parts[0], value = parts[1];
         $('#form_' + key + ' input[name="form[' + key + ']"]').on('change', function() {
             if ($(this).val() == value) {
-                showElements($element);
+                showElement($element);
             } else {
-                hideElements($element);
+                hideElement($element);
             }
         });
-        hideElements($element);
+        hideElement($element);
     });
 });

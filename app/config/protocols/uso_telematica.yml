@@ -89,7 +89,7 @@ parameters:
                     margin-top: 4
                     margin-bottom: 8
             content:
-                - h1: "PROTOCOLO TELEMÁTICO DE [companyName]."
+                - h1: "PROTOCOLO TELEMÁTICO DE [company_name]."
                 - h2: "1. Condiciones generales:"
                 - p:
                   - "El presente protocolo se elabora con el objeto de establecer una política"
@@ -102,7 +102,7 @@ parameters:
                 - p:
                   - "Los equipos, utilidades, aplicaciones o programas que la compañía pone a"
                   - "disposición de sus empleados, cualquiera que sea su naturaleza, son"
-                  - "propiedad de [companyName]. Su utilización por parte de"
+                  - "propiedad de [company_name]. Su utilización por parte de"
                   - "los trabajadores deberá respetar los límites, cláusulas y condiciones fijadas"
                   - "en el presente protocolo. En consecuencia, se comunica a los empleados de"
                   - "esta empresa que no pueden albergar más expectativa de privacidad en el"

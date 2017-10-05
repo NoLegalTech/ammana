@@ -220,7 +220,6 @@ class ProtocolController extends Controller
         $printer->setStyles($document['styles']);
         $printer->setContent($document['content']);
 
-        //return new Response($printer->print(), 200);
         return new Response($printer->print(), 200, array( 'Content-Type' => 'application/pdf'));
     }
 

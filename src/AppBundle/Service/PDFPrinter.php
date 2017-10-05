@@ -108,15 +108,156 @@ class PDF extends \FPDF {
 
 }
 
+class Condition {
+
+    private $variableName, $expectedValue;
+
+    public function __construct($variableName, $expectedValue) {
+        $this->variableName = $variableName;
+        $this->expectedValue = $expectedValue;
+    }
+
+    public function matches($variables) {
+        return ($variables == null)
+            && $variables[$this->variableName] == $this->expectedValue;
+    }
+
+}
+
+class TrueCondition extends Condition {
+
+    public function __construct() {
+    }
+
+    public function matches($variables) {
+        return true;
+    }
+
+}
+
+class PDFElement {
+
+    private $element, $type;
+    private $pdf, $style, $alignment;
+    private $variables;
+    private $condition;
+
+    public function __construct($element, $type, $pdf, $style, $variables, $condition) {
+        $this->element = $element;
+        $this->type = $type;
+        $this->pdf = $pdf;
+        $this->style = $style;
+        $this->variables = $variables;
+        $this->condition = $condition;
+        $this->alignment = 'L';
+    }
+
+    public function getCondition() {
+        return $this->condition;
+    }
+
+    public function print() {
+        $this->applyStyleBefore();
+        $this->printElement();
+        $this->applyStyleAfter();
+    }
+
+    private function printElement() {
+        if (is_array($this->element)) {
+            $total = count($this->element);
+            $current = 0;
+            foreach ($this->element as $l) {
+                $current++;
+                if ($current == $total && $this->alignment == 'FJ') {
+                    $this->alignment = 'L';
+                }
+                $this->printLine($l);
+            }
+            $this->alignment = 'L';
+            $this->printLine('');
+        } else {
+            $this->printLine($this->element);
+        }
+    }
+
+    private function printLine($line) {
+        if (strpos($line, ' ') === false) {
+            $this->alignment = 'L';
+        }
+        $line = $this->expandVariables($line);
+        $line = $this->fixSpecialCharacters($line);
+        $this->pdf->Cell(0, $this->style['line-height'], $line, 0, 1, $this->alignment);
+    }
+
+    private function fixSpecialCharacters($text) {
+        return iconv('UTF-8', 'windows-1252', $text);
+        // if iconv extension  not loaded we can do instead:
+        // return utf8_decode($text);
+    }
+
+    private function expandVariables($line) {
+        if ($this->variables == null) {
+            return $line;
+        }
+        foreach ($this->variables as $name => $value) {
+            $line = str_replace('[' . $name . ']', $value, $line);
+        }
+        return $line;
+    }
+
+    private function applyStyleBefore() {
+        $this->applyFont();
+        $this->applyAlignment();
+        $this->applyMarginTop();
+    }
+
+    private function applyFont() {
+        $fontStyle = '';
+        if ($this->style['font-weight'] == 'bold') {
+            $fontStyle .= 'B';
+        }
+        if ($this->style['text-style'] == 'underline') {
+            $fontStyle .= 'U';
+        }
+        $this->pdf->SetFont($this->style['font-family'], $fontStyle, $this->style['font-size']);
+    }
+
+    private function applyAlignment() {
+        $this->alignment = 'L';
+        if ($this->style['text-align'] == 'center') {
+            $this->alignment = 'C';
+        }
+        if ($this->style['text-align'] == 'justify') {
+            $this->alignment = 'FJ';
+        }
+    }
+
+    private function applyMarginTop() {
+        if (isset($this->style['margin-top'])) {
+            $this->pdf->Cell(0, $this->style['margin-top'], '', 0, 1, 'L');
+        }
+    }
+
+    private function applyStyleAfter() {
+        if (isset($this->style['margin-bottom'])) {
+            $this->pdf->Cell(0, $this->style['margin-bottom'], '', 0, 1, 'L');
+        }
+    }
+
+}
+
 class PDFPrinter {
 
     private $content = null;
     private $styles = null;
+    private $style = null;
     private $variables = null;
     private $logo = null;
     private $fileName = null;
+    private $pdf;
 
     public function __construct() {
+        $this->pdf = new PDF();
     }
 
     public function setContent($content) {
@@ -140,90 +281,61 @@ class PDFPrinter {
     }
 
     public function print() {
-        $pdf = new PDF();
-        $pdf->AliasNbPages();
-        $pdf->AddPage();
-        $pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
-        $pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
-        $pdf->AddFont('Calibri','', 'Calibri.php');
-        $pdf->SetTextColor(0,0,0);
-        $pdf->SetMargins(30, 30);
+        $this->pdf->AliasNbPages();
+        $this->pdf->AddPage();
+        $this->pdf->AddFont('Cambria','B','cambria-bold-59d2276a6a486.php');
+        $this->pdf->AddFont('Cambria','', 'cambria-59d2585e5b777.php');
+        $this->pdf->AddFont('Calibri','', 'Calibri.php');
+        $this->pdf->SetTextColor(0,0,0);
+        $this->pdf->SetMargins(30, 30);
         if ($this->logo != null) {
-            $pdf->Image($this->logo, 130, 20, 50);
+            $this->pdf->Image($this->logo, 130, 20, 50);
         }
-        $pdf->SetXY(30,50);
-        if ($this->content != null && $this->styles != null) {
-            foreach ($this->content as $line) {
-                list($currentStyle, $condition, $currentLine) = $this->parse($line);
-                $style = $this->applyStyles($this->styles, $currentStyle);
-                $fontStyle = '';
-                if ($style['font-weight'] == 'bold') {
-                    $fontStyle .= 'B';
-                }
-                if ($style['text-style'] == 'underline') {
-                    $fontStyle .= 'U';
-                }
-                $alignment = 'L';
-                if ($style['text-align'] == 'center') {
-                    $alignment = 'C';
-                }
-                if ($style['text-align'] == 'justify') {
-                    $alignment = 'FJ';
-                }
-                $pdf->SetFont('Cambria', $fontStyle, 13);
-                if (isset($style['margin-top'])) {
-                    $pdf->Cell(0, $style['margin-top'], '', 0, 1, 'L');
-                }
-                if ($condition != null) {
-                    list($variable, $value) = explode('=', $condition);
-                    if ($value != $this->getVariable($variable)) {
-                        continue;
-                    }
-                }
-                if (is_array($currentLine)) {
-                    $total = count($currentLine);
-                    $current = 0;
-                    foreach ($currentLine as $l) {
-                        $current++;
-                        if ($current == $total && $alignment == 'FJ') {
-                            $alignment = 'L';
-                        }
-                        $this->expandVariables($l);
-                        $this->printLine($pdf, $style, $l, $alignment);
-                    }
-                    $this->printLine($pdf, $style, '', 'L');
-                } else {
-                    $this->expandVariables($currentLine);
-                    $this->printLine($pdf, $style, $currentLine, $alignment);
-                }
-                if (isset($style['margin-bottom'])) {
-                    $pdf->Cell(0, $style['margin-bottom'], '', 0, 1, 'L');
-                }
-            }
-        }
-        //return $pdf->Output('D', $protocol_spec['name'] . '.pdf');
-        return $pdf->Output('S', $this->fileName);
+        $this->pdf->SetXY(30,50);
+        $this->printContent();
+        return $this->pdf->Output('S', $this->fileName);
     }
 
-    private function parse($line) {
+    private function printContent() {
+        if ($this->content == null || $this->styles == null) {
+            return;
+        }
+        foreach ($this->content as $item) {
+            $pdfElement = $this->parse($item);
+            if ($pdfElement->getCondition()->matches($this->variables)) {
+                $pdfElement->print();
+            }
+        }
+    }
+
+    private function parse($element) {
         $condition = null;
-        $style = null;
-        foreach ($line as $key => $value) {
+        $elementType = null;
+        foreach ($element as $key => $value) {
             if ($key == "condition") {
                 $condition = $value;
             } else {
-                $style = $key;
-                $line = $value;
+                $elementType = $key;
+                $element = $value;
             }
         }
-        return [$style, $condition, $line];
+        $this->style = $this->applyStyles($this->styles, $elementType);
+        return new PDFElement(
+            $element,
+            $elementType,
+            $this->pdf,
+            $this->style,
+            $this->variables,
+            $this->parseCondition($condition)
+        );
     }
 
-    private function getVariable($name) {
-        if ($this->variables == null) {
-            return null;
+    private function parseCondition($condition) {
+        if ($condition == null) {
+            return new TrueCondition();
         }
-        return $this->variables[$name];
+        list($variable, $theValue) = explode('=', $condition);
+        return new Condition($variable, $theValue);
     }
 
     private function applyStyles($styles, $selected) {
@@ -235,28 +347,6 @@ class PDFPrinter {
             $style[$key] = $value;
         }
         return $style;
-    }
-
-    private function printLine($pdf, $style, $line, $alignment) {
-        if (strpos($line, ' ') === false) {
-            $alignment = 'L';
-        }
-        $pdf->Cell(0, $style['line-height'], $this->fixSpecialCharacters($line), 0, 1, $alignment);
-    }
-
-    private function fixSpecialCharacters($text) {
-        return iconv('UTF-8', 'windows-1252', $text);
-        // if iconv extension  not loaded we can do instead:
-        // return utf8_decode($text);
-    }
-
-    private function expandVariables(&$line) {
-        if ($this->variables == null) {
-            return;
-        }
-        foreach ($this->variables as $name => $value) {
-            $line = str_replace('[' . $name . ']', $value, $line);
-        }
     }
 
 }

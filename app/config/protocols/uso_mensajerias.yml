@@ -55,7 +55,7 @@ parameters:
             content:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE SISTEMAS DE MENSAJERÍA"
-                    - "INSTANTANEA EN [companyName]"
+                    - "INSTANTANEA EN [company_name]"
                 - h2: "1. Introducción:"
                 - p:
                     - "Los cambios tecnológicos producidos en los últimos años han provocado la"
@@ -89,7 +89,7 @@ parameters:
                 - p:
                     - "A efectos meramente ilustrativos y no limitativos se considerará sistema de"
                     - "“mensajería instantánea” cualquier intranet creada o establecida por"
-                    - "[companyName] como sistema de comunicación entre"
+                    - "[company_name] como sistema de comunicación entre"
                     - "sus empleados, así como cualquier otra aplicación o sistema que cumpla una"
                     - "función similar, como por ejemplo Whatsapp, Facebook, Messenger,"
                     - "Telegram, etc. "
@@ -126,28 +126,28 @@ parameters:
                     - "trabajadores emplear estos sistemas de mensajería instantánea, ya sean"
                     - "individuales o grupales, para:"
                   condition: "mensajeria_solo_para_trabajo=1"
-                - ul:
-                    - li:
-                        - "Remitir contenidos virales, cadenas de mensajes, rumores,"
-                        - "publicidad o cualquier otro que pueda considerarse spam."
-                    - li:
-                        - "Remitir cadenas de chistes, bromas o similares."
-                    - li:
-                        - "Remitir cualquier tipo de contenido ilegal, sexista, abusivo,"
-                        - "difamatorio, discriminatorio, ofensivo, racista, pornográfico o de"
-                        - "cualquier otro tipo no autorizado por la legislación vigente."
-                    - li:
-                        - "Remitir cualquier tipo de contenido relativo a circunstancias"
-                        - "personales o sociales de los compañeros de trabajo, gerentes o"
-                        - "directivos, así como cualquier otro tipo de contenido que pueda"
-                        - "afectar al honor o intimidad de estas personas."
-                    - li:
-                        - "Remitir cualquier tipo de contenido que incite a la violencia, al"
-                        - "terrorismo, al odio, al suicidio o la autolesión."
-                    - li:
-                        - "Remitir cualquier tipo de enlace que permita la descarga ilegal de"
-                        - "programas y contenidos, así como también el acceso a plataformas"
-                        - "de juego o apuestas online."
+                - li:
+                    - "Remitir contenidos virales, cadenas de mensajes, rumores,"
+                    - "publicidad o cualquier otro que pueda considerarse spam."
+                  start_at: 1
+                - li:
+                    - "Remitir cadenas de chistes, bromas o similares."
+                - li:
+                    - "Remitir cualquier tipo de contenido ilegal, sexista, abusivo,"
+                    - "difamatorio, discriminatorio, ofensivo, racista, pornográfico o de"
+                    - "cualquier otro tipo no autorizado por la legislación vigente."
+                - li:
+                    - "Remitir cualquier tipo de contenido relativo a circunstancias"
+                    - "personales o sociales de los compañeros de trabajo, gerentes o"
+                    - "directivos, así como cualquier otro tipo de contenido que pueda"
+                    - "afectar al honor o intimidad de estas personas."
+                - li:
+                    - "Remitir cualquier tipo de contenido que incite a la violencia, al"
+                    - "terrorismo, al odio, al suicidio o la autolesión."
+                - li:
+                    - "Remitir cualquier tipo de enlace que permita la descarga ilegal de"
+                    - "programas y contenidos, así como también el acceso a plataformas"
+                    - "de juego o apuestas online."
                   condition: "mensajeria_solo_para_trabajo=1"
                 - p:
                     - "La empresa podrá comunicar instrucciones y asignar tareas durante la"

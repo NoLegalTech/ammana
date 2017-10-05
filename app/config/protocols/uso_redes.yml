@@ -60,7 +60,7 @@ parameters:
             content:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
-                    - "EN [companyName]"
+                    - "EN [company_name]"
                 - h2: "1. Introducción:"
                 - p:
                     - "Las redes sociales en internet son aplicaciones web cuya función es"

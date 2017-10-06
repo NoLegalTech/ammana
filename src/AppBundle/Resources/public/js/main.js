@@ -33,13 +33,26 @@ jQuery(document).ready(function () {
 
         var parts = $element.data('condition').split('=');
         var key = parts[0], value = parts[1];
-        $('#form_' + key + ' input[name="form[' + key + ']"]').on('change', function() {
+        var $trigger = $('#form_' + key);
+        if ($trigger.is('div')) {
+            // if it's a div it's because it contains inputs of type radio
+            $trigger = $trigger.find('input[name="form[' + key + ']"]');
+        }
+        $trigger.on('change', function() {
             if ($(this).val() == value) {
                 showElement($element);
             } else {
                 hideElement($element);
             }
         });
-        hideElement($element);
+        if ($trigger.is('select')) {
+            if ($trigger.val() == value) {
+                showElement($element);
+            } else {
+                hideElement($element);
+            }
+        } else {
+            hideElement($element);
+        }
     });
 });

@@ -369,9 +369,14 @@ table a, #comments a{background-color:inherit;}
 
 /* Forms
 --------------------------------------------------------------------------------------------------------------- */
-.small-sheet {
+.small-sheet, .sheet50 {
     width: 100%;
     padding: 0 25%;
+}
+
+.sheet80 {
+    width: 100%;
+    padding: 0 10%;
 }
 
 .small-table {
@@ -422,4 +427,14 @@ input[type="radio"] + label:after {
 
 .has-condition {
     display: none;
+}
+
+#form > div {
+    margin-bottom: 30px;
+}
+#form > div > div {
+    padding-left: 30px;
+}
+#form label {
+    text-align: justify;
 }

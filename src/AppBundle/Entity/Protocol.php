@@ -23,19 +23,14 @@ class Protocol
     private $user;
 
     /**
-     * @var date
+     * @var string
      */
-    private $expiresAt;
+    private $answers;
 
     /**
      * @var string
      */
-    private $name;
-
-    /**
-     * @var string
-     */
-    private $path;
+    private $identifier;
 
 
     /**
@@ -97,75 +92,51 @@ class Protocol
     }
 
     /**
-     * Set expiresAt
+     * Set answers
      *
-     * @param date $expiresAt
+     * @param string $answers
      *
      * @return Protocol
      */
-    public function setExpiresAt($expiresAt)
+    public function setAnswers($answers)
     {
-        $this->expiresAt = $expiresAt;
+        $this->answers = $answers;
 
         return $this;
     }
 
     /**
-     * Get expiresAt
-     *
-     * @return date
-     */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Protocol
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
+     * Get answers
      *
      * @return string
      */
-    public function getName()
+    public function getAnswers()
     {
-        return $this->name;
+        return $this->answers;
     }
 
     /**
-     * Set path
+     * Set identifier
      *
-     * @param string $path
+     * @param string $identifier
      *
      * @return Protocol
      */
-    public function setPath($path)
+    public function setIdentifier($identifier)
     {
-        $this->path = $path;
+        $this->identifier = $identifier;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get identifier
      *
      * @return string
      */
-    public function getPath()
+    public function getIdentifier()
     {
-        return $this->path;
+        return $this->identifier;
     }
 
 }

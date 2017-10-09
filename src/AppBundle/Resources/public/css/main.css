@@ -369,9 +369,14 @@ table a, #comments a{background-color:inherit;}
 
 /* Forms
 --------------------------------------------------------------------------------------------------------------- */
-.small-sheet {
+.small-sheet, .sheet50 {
     width: 100%;
     padding: 0 25%;
+}
+
+.sheet80 {
+    width: 100%;
+    padding: 0 10%;
 }
 
 .small-table {
@@ -411,4 +416,25 @@ ul.actions {
 }
 .btn-danger {
     background-color: #ee4444;
+}
+input[type="radio"], input[type="radio"] + label {
+    display: inline;
+}
+input[type="radio"] + label:after {
+    content: "\a ";
+    white-space: pre;
+}
+
+.has-condition {
+    display: none;
+}
+
+#form > div {
+    margin-bottom: 30px;
+}
+#form > div > div {
+    padding-left: 30px;
+}
+#form label {
+    text-align: justify;
 }

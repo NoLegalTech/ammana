@@ -10,7 +10,6 @@
                     <table>
                         <thead>
                             <tr>
-                                <th>Expira</th>
                                 <th>Nombre</th>
                                 <th></th>
                             </tr>
@@ -18,10 +17,9 @@
                         <tbody>
                         {% for protocol in protocols %}
                             <tr>
-                                <td>{{ protocol.expiresAt | date('d/m/Y') }}</td>
-                                <td>{{ protocol.name }}</td>
+                                <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
-                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}" download="{{ protocol.path }}">Descargar</a></td>
+                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>
                                 {% else %}
                                     <td>No disponible (paga!)</td>
                                 {% endif %}
@@ -39,18 +37,15 @@
                     <tbody>
                         <tr>
                             <td>Modelo Autocobertura Redes Sociales</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 1, type: 'paypal' }) }}">Comprar (Fake Paypal)</a></td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 1, type: 'transferencia' }) }}">Comprar (Fake transferencia)</a></td>
+                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_redes' }) }}">Comprar</a></td>
                         </tr>
                         <tr>
                             <td>Modelo Autocobertura Telemática</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 2, type: 'paypal' }) }}">Comprar (Fake Paypal)</a></td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 2, type: 'transferencia' }) }}">Comprar (Fake transferencia)</a></td>
+                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_telematica' }) }}">Comprar</a></td>
                         </tr>
                         <tr>
                             <td>Modelo Autocobertura Mensajerías</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 3, type: 'paypal' }) }}">Comprar (Fake Paypal)</a></td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 3, type: 'transferencia' }) }}">Comprar (Fake transferencia)</a></td>
+                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_mensajerias' }) }}">Comprar</a></td>
                         </tr>
                     </tbody>
                 </table>

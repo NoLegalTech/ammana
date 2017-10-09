@@ -1,0 +1,324 @@
+parameters:
+    protocol.uso_mensajerias:
+        name: Modelo Autocobertura Mensajerías
+        questions:
+            - id: ordenes_por_mensajeria
+              question: "¿La empresa emplea o tiene pensado emplear sistemas de mensajería instantánea (intranet corporativa, WhatsApp, Facebook, Messenger o cualquier otro) para trasmitir ordenes o instrucciones de trabajo a sus empleados?"
+              answers:
+                  - "Sí"
+                  - "No"
+            - id: mensajeria_solo_para_trabajo
+              question: "Por lo que respecta al contenido de las contestaciones o mensajes remitidos por los trabajadores a través de estas aplicaciones de mensajería instantánea empleados por la empresa:"
+              answers:
+                  - "Se prohíbe a los trabajadores remitir cualquier tipo de mensaje o contenido que no tenga naturaleza estrictamente laboral."
+                  - "Los servicios de mensajería instantánea empleados por la empresa tienen una finalidad preferente pero no exclusivamente laboral. En todo caso se prohíbe a los trabajadores responder o remitir contenidos abusivos, perjudiciales, discriminatorios, ilegales o de similar o idéntica naturaleza."
+            - id: cuando_se_remiten_ordenes
+              question: "¿En qué momento se podrán remitir a los trabajadores mensajes con órdenes e instrucciones laborales a través de los sistemas de mensajería instantánea?"
+              answers:
+                  - "Exclusivamente durante la jornada laboral que cada trabajador tenga asignada."
+                  - "Básicamente durante la jornada laboral que cada trabajador tenga asignada, salvo que circunstancias extraordinarias o de fuerza mayor hagan necesario comunicarse con el trabajador fuera del horario laboral."
+            - id: proteccion_frente_al_acoso
+              question: "¿Quiere incluir en este documento el protocolo de protección frente al acoso en los sistemas de mensajería instantánea utilizados en el ámbito laboral? (Recomendamos optar por la opción a) pues la empresa puede incurrir en responsabilidades, incluso penales, en caso de no hacerlo)"
+              answers:
+                  - "Sí"
+                  - "No"
+            - id: fines_particulares
+              question: "El uso de aplicaciones de mensajería instantánea para fines particulares y privados del trabajador durante la jornada de trabajo."
+              answers:
+                  - "Se prohíbe el uso de aplicaciones de mensajería instantánea durante el tiempo de trabajo para fines particulares del empleado, tanto para la recepción como para el envío de comunicaciones."
+                  - "Se prohíbe el uso de aplicaciones de mensajería instantánea durante el tiempo de trabajo para fines particulares del empleado, salvo que existan circunstancias personales y familiares del trabajador de especial gravedad que hagan necesario su uso."
+                  - "Se permite el uso de aplicaciones de mensajería instantánea durante el tiempo de trabajo para fines particulares del empleado ocasionalmente, siempre y cuando esto no suponga un retraso en el desempeño de las tareas encomendadas, ni en la cantidad y calidad del trabajo a desarrollar."
+            - id: informacion_confidencial
+              question: "¿Los trabajadores deben abstenerse de comentar o divulgar en las aplicaciones o grupos de mensajería instantánea información confidencial de la empresa?"
+              answers:
+                  - "Sí"
+                  - "No"
+        document:
+            styles:
+                default:
+                    line-height: 7
+                    font-family: Cambria
+                    font-size: 13
+                    font-weight: normal
+                    text-align: justify
+                    text-style: none
+                h1:
+                    font-weight: bold
+                    text-align: center
+                    margin-bottom: 10
+                h2:
+                    font-weight: bold
+                    text-style: underline
+                    text-align: left
+                    margin-top: 4
+                    margin-bottom: 8
+                li:
+                    list-margin-left: 10
+            content:
+                - h1:
+                    - "PROTOCOLO SOBRE USO Y EMPLEO DE SISTEMAS DE MENSAJERÍA"
+                    - "INSTANTANEA EN [company_name]"
+                - h2: "1. Introducción:"
+                - p:
+                    - "Los cambios tecnológicos producidos en los últimos años han provocado la"
+                    - "irrupción, en el ámbito de las relaciones laborales, de novedosos y"
+                    - "alternativos sistemas de comunicación y organización del trabajo. Nuestra"
+                    - "sociedad avanza hacia una mayor “interconectividad digital” donde los"
+                    - "sistemas de mensajería instantánea cobran cada vez mayor relevancia para"
+                    - "la gestión de los recursos humanos."
+                - p:
+                    - "Asistimos a un proceso de creciente descentralización productiva y de"
+                    - "flexibilidad organizativa (trabajo a domicilio, trabajo a distancia, jornadas"
+                    - "flexibles, etc.), que hacen necesario implantar un protocolo destinado a"
+                    - "regular el uso de los servicios de mensajería instantánea durante el tiempo"
+                    - "de trabajo, la eventual transmisión de instrucciones laborales a través de"
+                    - "estos sistemas, la debida protección del honor y la intimidad de todos los"
+                    - "empleados de la empresa evitando un uso indebido de estos instrumentos,"
+                    - "así como también la protección de datos de carácter personal y confidencial"
+                    - "que puedan ser divulgados a través de estos sistemas de mensajería."
+                - h2:
+                    - "2. Concepto de sistemas de mensajería instantánea a los efectos del"
+                    - "presente protocolo:"
+                - p:
+                    - "A los efectos del presente protocolo se  considerará “mensajería instantánea”"
+                    - "la comunicación entre dos o más personas, basada en textos, imágenes,"
+                    - "documentos o mensajes de voz remitidos a través de dispositivos conectados"
+                    - "a Internet con independencia del modo de conexión, ya sea a través de redes"
+                    - "wifi o de datos móviles (3G, 4G, 4G LTE, etc.), tanto si se realizan a través de"
+                    - "dispositivos titularidad directa de la empresa como propiedad de los"
+                    - "trabajadores, cuando estos sean empleados para la comunicación, gestión y"
+                    - "organización de la actividad laboral y profesional."
+                - p:
+                    - "A efectos meramente ilustrativos y no limitativos se considerará sistema de"
+                    - "“mensajería instantánea” cualquier intranet creada o establecida por"
+                    - "[company_name] como sistema de comunicación entre"
+                    - "sus empleados, así como cualquier otra aplicación o sistema que cumpla una"
+                    - "función similar, como por ejemplo Whatsapp, Facebook, Messenger,"
+                    - "Telegram, etc. "
+                - h2:
+                    - "3. Utilización de sistemas de mensajería instantánea para la"
+                    - "ordenación y organización de la actividad laboral."
+                  condition: "ordenes_por_mensajeria=0"
+                - p:
+                    - "La dirección y el control de la actividad laboral corresponde a la empresa y a"
+                    - "las personas en las que ésta delegue dicha función, de conformidad con lo"
+                    - "dispuesto en el art. 20.1 del Estatuto de los Trabajadores. Las órdenes e"
+                    - "instrucciones adoptadas por la empresa en el ejercicio regular de sus"
+                    - "funciones deberán desempeñarse por la plantilla con la debida diligencia y"
+                    - "buena fe, en los términos establecidos en los artículos 5.c) y 20 del Estatuto"
+                    - "de los Trabajadores. La empresa podrá notificar a sus empleados las órdenes"
+                    - "e instrucciones de trabajo por cualquier medio admitido en derecho,"
+                    - "incluidos los sistemas de mensajería instantánea que la empresa considere"
+                    - "pertinentes."
+                  condition: "ordenes_por_mensajeria=0"
+                - p:
+                    - "Los mensajes que la empresa dirija a sus empleados a través de estos"
+                    - "sistemas de mensajería instantánea, ya sea de forma individual o a través de"
+                    - "grupos creados para esta función, se ceñirán a cuestiones estrictamente"
+                    - "laborales. En consecuencia, las respuestas y los comentarios de los"
+                    - "trabajadores frente a estas comunicaciones empresariales individuales o en"
+                    - "grupo también deben ceñirse a cuestiones laborales, quedando prohibida la"
+                    - "remisión de cualquier contenido ajeno a esta naturaleza."
+                  condition: "mensajeria_solo_para_trabajo=0"
+                - p:
+                    - "La función preferente de los servicios de mensajería instantánea utilizados o"
+                    - "creados por la empresa es la trasmisión y recepción de órdenes e"
+                    - "instrucciones vinculadas con el desarrollo de la actividad laboral. En"
+                    - "particular, y por los motivos señalados anteriormente, se prohíbe a los"
+                    - "trabajadores emplear estos sistemas de mensajería instantánea, ya sean"
+                    - "individuales o grupales, para:"
+                  condition: "mensajeria_solo_para_trabajo=1"
+                - li:
+                    - "Remitir contenidos virales, cadenas de mensajes, rumores,"
+                    - "publicidad o cualquier otro que pueda considerarse spam."
+                  start_at: 1
+                - li:
+                    - "Remitir cadenas de chistes, bromas o similares."
+                - li:
+                    - "Remitir cualquier tipo de contenido ilegal, sexista, abusivo,"
+                    - "difamatorio, discriminatorio, ofensivo, racista, pornográfico o de"
+                    - "cualquier otro tipo no autorizado por la legislación vigente."
+                - li:
+                    - "Remitir cualquier tipo de contenido relativo a circunstancias"
+                    - "personales o sociales de los compañeros de trabajo, gerentes o"
+                    - "directivos, así como cualquier otro tipo de contenido que pueda"
+                    - "afectar al honor o intimidad de estas personas."
+                - li:
+                    - "Remitir cualquier tipo de contenido que incite a la violencia, al"
+                    - "terrorismo, al odio, al suicidio o la autolesión."
+                - li:
+                    - "Remitir cualquier tipo de enlace que permita la descarga ilegal de"
+                    - "programas y contenidos, así como también el acceso a plataformas"
+                    - "de juego o apuestas online."
+                  condition: "mensajeria_solo_para_trabajo=1"
+                - p:
+                    - "La empresa podrá comunicar instrucciones y asignar tareas durante la"
+                    - "totalidad de la jornada de trabajo diaria que el empleado tenga asignada,"
+                    - "utilizando para ello los servicios o grupos de mensajería instantánea que se"
+                    - "hayan previsto."
+                  condition: "cuando_se_remiten_ordenes=0"
+                - p:
+                    - "La empresa podrá comunicar instrucciones y asignar tareas durante la"
+                    - "totalidad de la jornada de trabajo diaria que el empleado tenga asignada,"
+                    - "utilizando para ello las aplicaciones o grupos de mensajería instantánea que"
+                    - "se hayan previsto. Excepcionalmente, por causas de fuerza mayor o"
+                    - "concurrencia de circunstancias extraordinarias, la empresa podrá emplear"
+                    - "los servicios de mensajería instantánea para comunicar incidencias de"
+                    - "carácter laboral fuera del horario que el empleado tenga asignado como"
+                    - "jornada de trabajo."
+                  condition: "cuando_se_remiten_ordenes=1"
+                - h2:
+                    - "4. Protección frente al acoso en el uso y manejo de los sistemas de mensajería instantánea."
+                  condition: "proteccion_frente_al_acoso=0"
+                - p:
+                    - "La Constitución Española reconoce como derechos fundamentales de las"
+                    - "personas la igualdad y la no discriminación por razón de nacimiento, raza,"
+                    - "sexo, religión, opinión o cualquier otra condición o circunstancia personal o"
+                    - "social (artículo 14), el derecho a la vida y a la integridad física y moral, así"
+                    - "como a no ser sometidos a tratos degradantes (artículo 15), el derecho a la"
+                    - "libertad personal (artículo 17) y el derecho al honor, a la intimidad personal"
+                    - "y familiar y a la propia imagen (artículo 18). El acoso sexual, el acoso por"
+                    - "razón de sexo, el acoso discriminatorio y el acoso y la violencia vulneran"
+                    - "todos o la mayoría de esos derechos fundamentales."
+                  condition: "proteccion_frente_al_acoso=0"
+                - p:
+                    - "Además, el acoso sexual, el acoso por razón de sexo, el acoso discriminatorio"
+                    - "y el acoso y la violencia cuando se producen en el ámbito de una relación de"
+                    - "empleo, vulneran el derecho al trabajo, que asimismo se encuentra"
+                    - "consagrado en el artículo 35 de la Constitución Española. Todas estas formas"
+                    - "de violencia en el trabajo o entre compañeros de trabajo resultan"
+                    - "inadmisibles para esta empresa, en cualquier contexto, incluso si se"
+                    - "producen a través de sistemas de mensajería instantánea."
+                  condition: "proteccion_frente_al_acoso=0"
+                - p:
+                    - "Los sistemas o grupos de mensajería instantánea gestionados directamente"
+                    - "por la empresa y sus representantes no tolerarán expresiones, mensajes,"
+                    - "fotografías, videos o cualquier tipo de contenido que suponga acoso sexual,"
+                    - "acoso por razón de sexo, acoso discriminatorio y acoso o violencia de todo"
+                    - "tipo en el ámbito laboral. Cualquiera de estas acciones conllevará el ejercicio"
+                    - "del poder disciplinario por parte de la empresa sobre los autores de estos"
+                    - "actos, conforme al Convenio Colectivo de aplicación y los procedimientos o"
+                    - "protocolos internos que se hayan establecido por la empresa para estos"
+                    - "supuestos."
+                  condition: "proteccion_frente_al_acoso=0"
+                - p:
+                    - "Asimismo, si la empresa fuera informada de la presunta comisión de actos de"
+                    - "acoso sexual, acoso por razón de sexo, acoso discriminatorio o acoso y"
+                    - "violencia sobre cualquiera de los empleados de la empresa, efectuado por"
+                    - "parte de otros compañeros de trabajo a través de aplicaciones o grupos de"
+                    - "mensajería instantánea de los que la empresa no forma parte, procederá a"
+                    - "investigar los hechos denunciados y tras verificar la certeza de los mismos"
+                    - "adoptar las medidas disciplinarias que resulten oportunas."
+                  condition: "proteccion_frente_al_acoso=0"
+                - h2:
+                    - "5. Uso de servicios de mensajería instantánea para cuestiones privadas"
+                    - "del trabajador durante la jornada de trabajo"
+                - p:
+                    - "La jornada laboral, independientemente del horario que cada trabajador"
+                    - "tenga asignado, está destinada al desempeño de las tareas encomendadas"
+                    - "por la dirección de la empresa de un modo eficiente, conforme al principio"
+                    - "de buena fe que debe regir las relaciones laborales. "
+                - p:
+                    - "El trabajador deberá evitar aquellas actividades y acciones que impliquen"
+                    - "pérdidas de tiempo o interrupciones innecesarias en el desempeño de su"
+                    - "actividad laboral, entre las que se encontrarían un uso irregular de las"
+                    - "aplicaciones de mensajería para cuestiones estrictamente privadas del"
+                    - "trabajador."
+                - p:
+                    - "En particular, se prohíbe el uso de aplicaciones y grupos de mensajería"
+                    - "instantánea durante el tiempo de trabajo para fines particulares del"
+                    - "empleado, tanto para la recepción como para el envío de comunicaciones."
+                    - "Durante el tiempo de trabajo solo podrán emplearse las aplicaciones o"
+                    - "grupos de mensajería instantánea que la empresa haya puesto en marcha"
+                    - "como mecanismo para la organización del trabajo."
+                  condition: "fines_particulares=0"
+                - p:
+                    - "En particular, se prohíbe el uso de aplicaciones y grupos de mensajería"
+                    - "instantánea durante el tiempo de trabajo para fines particulares del"
+                    - "empleado, tanto para la recepción como para el envío de comunicaciones,"
+                    - "salvo que existan circunstancias personales y familiares del trabajador de"
+                    - "especial gravedad que hagan necesario su uso. Con la excepción señalada"
+                    - "anteriormente, durante el tiempo de trabajo solo deberán emplearse las"
+                    - "aplicaciones o grupos de mensajería instantánea que la empresa haya"
+                    - "establecido puesto en marcha para la organización del trabajo."
+                  condition: "fines_particulares=1"
+                - p:
+                    - "Se permite el uso ocasional de aplicaciones y grupos de mensajería"
+                    - "instantánea durante el tiempo de trabajo para fines particulares del"
+                    - "empleado, siempre y cuando esto no suponga un retraso en el desempeño de"
+                    - "las tareas encomendadas ni en la cantidad y calidad del trabajo que se le"
+                    - "haya asignado por la empresa."
+                  condition: "fines_particulares=2"
+                - p:
+                    - "El incumplimiento del presente protocolo o el uso abusivo de estas"
+                    - "aplicaciones y grupos de mensajería instantánea durante la jornada de"
+                    - "trabajo dará lugar a la aplicación del régimen disciplinario."
+                - h2:
+                    - "6. Deber de confidencialidad en la transmisión de información a través"
+                    - "de aplicaciones de mensajería instantánea."
+                  condition: "informacion_confidencial=0"
+                - p:
+                    - "La confidencialidad y el deber de secreto son exigencias derivadas de los"
+                    - "principios de lealtad y buena fe que deben regir las relaciones laborales. Los"
+                    - "trabajadores de la empresa deberán seguir las indicaciones de este"
+                    - "protocolo de cara a salvaguardar los datos de carácter confidencial de los"
+                    - "clientes, proveedores, compañeros de trabajo y equipo directivo de la"
+                    - "empresa en su utilización de las aplicaciones y grupos de mensajería"
+                    - "instantánea. El deber de confidencialidad y secreto no se extingue con la"
+                    - "finalización del contrato de trabajo, sino que se mantiene vigente aunque la"
+                    - "relación laboral haya finalizado."
+                  condition: "informacion_confidencial=0"
+                - p:
+                    - "A los efectos del presente protocolo, el término confidencialidad comprende"
+                    - "cualquier clase de información relativa a datos de los clientes, de los"
+                    - "proveedores, de la empresa, de los empleados o del equipo directivo. El"
+                    - "término información debe entenderse en sentido amplio, y por tanto"
+                    - "comprende los datos personales, corporativos, económicos, financieros o"
+                    - "judiciales de los grupos anteriormente señalados. Dicha información será"
+                    - "mantenida en reserva por quien la recibe y no será revelada de ninguna"
+                    - "forma, en todo o en parte, a ninguna persona física o jurídica."
+                  condition: "informacion_confidencial=0"
+                - p:
+                    - "Tendrán la consideración de datos de carácter personal y confidencial, y en"
+                    - "consecuencia no podrán ser divulgados ni publicados en aplicaciones y"
+                    - "grupos de mensajería instantánea, ni por ningún otro medio, los que a"
+                    - "continuación se detallan:"
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a la ideología, afiliación sindical, religión o"
+                    - "creencias de los clientes, proveedores, empleados o equipo directivo, salvo"
+                    - "que los clientes o proveedores tengan la condición de partidos políticos,"
+                    - "sindicatos, iglesias, confesiones o comunidades religiosas y asociaciones,"
+                    - "fundaciones y otras entidades sin ánimo de lucro, cuya finalidad sea política,"
+                    - "filosófica, religiosa o sindical, respetando en todo caso la confidencialidad de"
+                    - "los datos relativos a sus asociados, afiliados o miembros."
+                  condition: "informacion_confidencial=0"
+                  start_at: 1
+                - li:
+                    - "y datos que hagan referencia al estado de salud de los"
+                    - "clientes, proveedores, empleados o equipo directivo."
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a las características sociales de los clientes,"
+                    - "proveedores, empleados o equipo directivo, como por ejemplo su domicilio,"
+                    - "vivienda, propiedades y posesiones, estilo de vida, etc."
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos financieros, contables, económicos o sobre solvencia"
+                    - "de nuestra empresa, clientes, proveedores, empleados o equipo directivo."
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos industriales, mercantiles, hipotecarios, crediticios,"
+                    - "comerciales o de naturaleza semejante de nuestra empresa, clientes,"
+                    - "proveedores, empleados o equipo directivo."
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a cualquier tipo de encargo, trabajo,"
+                    - "campaña, proyecto o evento de nuestra empresa, clientes o proveedores"
+                    - "hasta que este no se haya hecho público."
+                  condition: "informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a proyectos de innovación, investigación,"
+                    - "científicos, patentes, licencias o de naturaleza semejante de nuestra"
+                    - "empresa, clientes o proveedores."
+

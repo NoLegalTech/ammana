@@ -1,0 +1,468 @@
+parameters:
+    protocol.uso_telematica:
+        name: Modelo Autocobertura Telemática
+        questions:
+            - id: desidia_o_negligencia
+              question: "¿La desidia o negligencia del empleado a la hora de informar a la empresa de la pérdida, robo o deterioro de los medios telemáticos puestos a su disposición conllevará la aplicación del régimen disciplinario?"
+              answers:
+                  - "Sí"
+                  - "No"
+            - id: correo_de_empresa
+              question: "¿Los trabajadores disponen de cuenta de correo electrónico de la empresa? "
+              answers:
+                  - "Sí"
+                  - "No"
+            - id: uso_personal_correo
+              question: "El uso de la cuenta de correo electrónico corporativo por parte del trabajador será:"
+              condition: "correo_de_empresa=0"
+              answers:
+                  - "Personal e intransferible"
+                  - "Personal pero utilizable por otros compañeros de trabajo en caso de especial necesidad"
+                  - "Transferible y utilizable por cualquier empleado de la empresa."
+            - id: uso_privado_correo
+              question: "¿El trabajador podrá usar la cuenta de correo electrónico corporativo para fines privados como, por ejemplo, realizar compras o recibir/responder correos de familiares?"
+              condition: "correo_de_empresa=0"
+              answers:
+                  - "Sí, y también podrá descargarse los documentos adjuntos del mensaje"
+                  - "Sí, pero no podrá descargar ningún documento ni enlace adjunto para preservar la seguridad de los equipos."
+                  - "No, su uso será exclusivamente laboral."
+            - id: uso_otras_cuentas_correo
+              question: "¿Los trabajadores podrán acceder desde los equipos telemáticos titularidad de la empresa (ordenadores, móviles, tablets, etc.) a sus cuentas de correo electrónico particulares?"
+              answers:
+                  - "Sí, siempre y cuando no afecte al desarrollo de las funciones encomendadas por la empresa ni a la calidad y cantidad de trabajo asignado."
+                  - "Sí, siempre y cuando existan razones personales o familiares del trabajador de especial gravedad que lo hagan necesario."
+                  - "No, en ninguna circunstancia"
+            - id: descargar_e_instalar_programas
+              question: "¿Los trabajadores podrán descargar o instalar programas en los equipos telemáticos titularidad de la empresa?"
+              answers:
+                  - "Sí, siempre y cuando su finalidad esté destinada al desempeño de la actividad laboral y previa autorización de la dirección de la empresa."
+                  - "No, será la dirección la que determine los programas y aplicaciones que se instalan en los equipos telemáticos titularidad de la empresa"
+            - id: navegacion_internet
+              question: "La navegación por internet del empleado durante la jornada de trabajo:"
+              answers:
+                  - "Queda totalmente prohibida."
+                  - "Queda prohibida salvo cuando esta resulte  necesaria para el desarrollo de la actividad laboral y los trabajos encomendados por la Dirección."
+                  - "Se permite, siempre y cuando no afecte al desempeño de las tareas encomendadas y no se acceda a páginas web de contenido ofensivo, inapropiado, pornográfico, discriminatorio, de juego online o para la descarga ilegal de contenidos."
+            - id: smartphone_empresa
+              question: "¿Algún trabajador dispone de teléfono móvil o Smartphone propiedad de la empresa? "
+              answers:
+                  - "Sí"
+                  - "No"
+            - id: uso_personal_movil
+              question: "Los teléfonos móviles y Smartphones que la empresa haya puesto a disposición de sus trabajadores:"
+              condition: "smartphone_empresa=0"
+              answers:
+                  - "Se deberán emplear exclusivamente para cuestiones laborales."
+                  - "Se deberán destinar a cuestiones laborales, si bien podrán emplearse para temas personales del trabajador en caso de extraordinaria y urgente necesidad"
+                  - "Deberán emplearse fundamentalmente para cuestiones laborales, si bien el trabajador también podrá usarlo para cuestiones personales hasta el límite de facturación que fije la empresa. "
+            - id: programas_movil
+              question: "¿Los trabajadores podrán descargar o instalar programas en los teléfonos móviles y Smartphones titularidad de la empresa?"
+              condition: "smartphone_empresa=0"
+              answers:
+                  - "Sí, siempre y cuando su finalidad tenga carácter laboral y previa autorización de la dirección de la empresa."
+                  - "No, será la dirección la que determine los programas y aplicaciones que se instalan en los teléfonos móviles y Smartphones titularidad de la empresa"
+            - id: mensajeria_movil
+              question: "La instalación de programas de mensajería instantánea tipo Whatsapp o Telegram en los teléfonos móviles y Smartphones titularidad de la empresa:"
+              condition: "smartphone_empresa=0"
+              answers:
+                  - "Se prohíbe expresamente y en todo caso"
+                  - "Se autoriza, si bien su uso estará reservado para la trasmisión de instrucciones de trabajo."
+                  - "Se autoriza, si bien su uso para cuestiones privadas del trabajador solo será posible si concurren circunstancias personales o familiares de especial gravedad."
+                  - "Se autoriza, si bien su uso por el trabajador para cuestiones privadas no podrá perjudicar su rendimiento, su productividad, ni la calidad del trabajo encomendado."
+            - id: monitorizar_equipos
+              question: "¿La empresa podrá monitorizar y vigilar el uso que el trabajador haga de los equipos y aplicaciones informáticas puestos a su disposición? (recomendamos optar por la opción a)"
+              answers:
+                  - "Sí"
+                  - "No"
+        document:
+            styles:
+                default:
+                    line-height: 7
+                    font-family: Cambria
+                    font-size: 13
+                    font-weight: normal
+                    text-align: justify
+                    text-style: none
+                h1:
+                    font-weight: bold
+                    text-align: center
+                    margin-bottom: 10
+                h2:
+                    font-weight: bold
+                    text-style: underline
+                    text-align: left
+                    margin-top: 4
+                    margin-bottom: 8
+                li:
+                    list-margin-left: 10
+            content:
+                - h1: "PROTOCOLO TELEMÁTICO DE [company_name]."
+                - h2: "1. Condiciones generales:"
+                - p:
+                  - "El presente protocolo se elabora con el objeto de establecer una política"
+                  - "interna sobre el uso y manejo de los equipos, utilidades, aplicaciones y"
+                  - "programas telemáticos que la empresa pone a disposición de sus"
+                  - "trabajadores, informando de los límites y prohibiciones existentes, así como"
+                  - "de las medidas de vigilancia y control que la empresa puede adoptar en el"
+                  - "ejercicio de su poder de dirección conforme al artículo 20.3 del Estatuto de"
+                  - "los Trabajadores."
+                - p:
+                  - "Los equipos, utilidades, aplicaciones o programas que la compañía pone a"
+                  - "disposición de sus empleados, cualquiera que sea su naturaleza, son"
+                  - "propiedad de [company_name]. Su utilización por parte de"
+                  - "los trabajadores deberá respetar los límites, cláusulas y condiciones fijadas"
+                  - "en el presente protocolo. En consecuencia, se comunica a los empleados de"
+                  - "esta empresa que no pueden albergar más expectativa de privacidad en el"
+                  - "manejo de los equipos o programas puestos a su disposición que la"
+                  - "expresamente reconocida en este protocolo."
+                - p:
+                  - "La confidencialidad en las relaciones con nuestros clientes y proveedores y"
+                  - "la protección de datos de carácter personal son valores centrales de nuestra"
+                  - "empresa. Los empleados son responsables de la correcta utilización,"
+                  - "custodia y conservación de los equipos, utilidades, aplicaciones o programas"
+                  - "puestos a su disposición, con respeto a la ley y a las normas contenidas en el"
+                  - "presente protocolo. Los empleados evitarán cualquier acción que"
+                  - "comprometa la seguridad de los equipos, utilidades, aplicaciones o"
+                  - "programas que la compañía ha puesto a su disposición. En caso de pérdida,"
+                  - "extravío, robo, deterioro o funcionamiento incorrecto de los mismos, el"
+                  - "empleado informará inmediatamente a la compañía para que esta pueda"
+                  - "adoptar las medidas necesarias de cara a la protección de los datos"
+                  - "confidenciales y personales."
+                - p:
+                  - "La desidia o falta de diligencia del empleado a la hora de comunicar estas"
+                  - "incidencias a la empresa conllevará la aplicación del régimen sancionador"
+                  - "previsto en el convenio colectivo de aplicación."
+                  condition: "desidia_o_negligencia=0"
+                - h2: "2. Uso de las cuentas de correo electrónico corporativo"
+                  condition: "correo_de_empresa=0"
+                - p:
+                  - "El correo electrónico corporativo constituye una herramienta de trabajo"
+                  - "facilitada por la dirección de la empresa a sus empleados para el desempeño"
+                  - "eficiente de sus funciones laborales. Para ello, se dotará de una cuenta"
+                  - "individual de correo corporativo a cuantos puestos de trabajo se considere"
+                  - "que requieran de su utilización."
+                  condition: "correo_de_empresa=0"
+                - p:
+                  - "Cada empleado es responsable del correcto uso de la cuenta de correo"
+                  - "electrónico corporativo que la empresa pone a su disposición, así como que"
+                  - "la misma se utilice con arreglo a las normas previstas en el presente"
+                  - "protocolo. Concretamente, los empleados emplearán la máxima diligencia en"
+                  - "evitar la intrusión de virus informáticos en los equipos de la compañía y la"
+                  - "fuga de cualquier información de carácter personal o confidencial de los"
+                  - "mismos. En caso de infección de los equipos o fuga de datos esta situación se"
+                  - "deberá comunicar de forma inmediata a la dirección de la empresa para que"
+                  - "adopte las medidas de protección que resulten necesarias."
+                  condition: "correo_de_empresa=0"
+                - p:
+                  - "La cuenta de correo electrónico corporativo que la empresa pone a"
+                  - "disposición del trabajador es para el uso personal e intransferible por la"
+                  - "persona a la que le ha sido asignada. El incumplimiento de esta premisa"
+                  - "puede conllevar el ejercicio del poder disciplinario por parte de la empresa."
+                  condition: "uso_personal_correo=0"
+                - p:
+                  - "La cuenta de correo electrónico corporativo que la empresa pone a"
+                  - "disposición del trabajador es para el uso personal por parte de la persona a"
+                  - "la que le ha sido asignada. En caso de especial necesidad para el desarrollo"
+                  - "de la actividad productiva podrá ser empleada temporalmente por otros"
+                  - "trabajadores de la empresa."
+                  condition: "uso_personal_correo=1"
+                - p:
+                  - "La cuenta de correo electrónico corporativo que la empresa pone a"
+                  - "disposición del trabajador está destinada al desarrollo de la actividad"
+                  - "productiva y, en consecuencia, podrá ser empleada de forma indistinta por"
+                  - "cualquier trabajador de la esta."
+                  condition: "uso_personal_correo=2"
+                - p:
+                  - "La empresa autoriza al trabajador a emplear la cuenta de correo corporativo"
+                  - "para realizar gestiones personales, pudiendo descargar documentos"
+                  - "adjuntos si ello resulta imprescindible. El trabajador deberá adoptar las"
+                  - "máximas precauciones y cautelas a fin de evitar cualquier riesgo de infección"
+                  - "de los equipos y programas informáticos. Los correos de contenido privado"
+                  - "remitidos a la cuenta corporativa de la empresa deber ser eliminados"
+                  - "inmediatamente después de su lectura, en aras a proteger la privacidad de su"
+                  - "contenido."
+                  condition: "uso_privado_correo=0"
+                - p:
+                  - "La empresa autoriza al trabajador a emplear la cuenta de correo corporativo"
+                  - "para realizar gestiones personales, pero en ningún caso podrá descargar"
+                  - "documentos adjuntos incorporados a estos con la finalidad de evitar riesgos"
+                  - "de infección de los equipos y programas informáticos. Los correos de"
+                  - "contenido privado remitidos a la cuenta corporativa de la empresa deber ser"
+                  - "eliminados inmediatamente después de su lectura, en aras a proteger la"
+                  - "privacidad de su contenido."
+                  condition: "uso_privado_correo=1"
+                - p:
+                  - "La cuenta de correo electrónico que la empresa pone a disposición del"
+                  - "trabajador se destinará exclusivamente al desarrollo de la actividad laboral y"
+                  - "productiva de la empresa. Queda expresamente prohibido el uso de esta"
+                  - "cuenta de correo electrónico para fines privados y particulares."
+                  condition: "uso_privado_correo=2"
+                - p:
+                  - "Asimismo, los trabajadores de la empresa se deberán abstener de realizar"
+                  - "cualquiera de las siguientes acciones con la cuenta de correo corporativo:"
+                  condition: "correo_de_empresa=0"
+                - li:
+                  - "Responder al correo no solicitado (spam)."
+                  condition: "correo_de_empresa=0"
+                  start_at: a
+                  list_style: )
+                - li:
+                  - "Participar en cadenas de mensajes masivos innecesarios"
+                  - "(felicitaciones, chistes, etc.)"
+                  condition: "correo_de_empresa=0"
+                - li:
+                  - "Participar en el reenvío de correo no solicitado (cadenas de mensajes,"
+                  - "rumores, publicidad, etc.)"
+                  condition: "correo_de_empresa=0"
+                - p:
+                  - "En todo caso, cuando el trabajador use el correo corporativo de la empresa"
+                  - "deberá respetar la normativa de Protección de Datos, la de la Sociedad de la"
+                  - "Información y la de Propiedad Intelectual, sin perjuicio de las"
+                  - "responsabilidades penales, civiles o laborales en que pueda incurrir por uso"
+                  - "ilegal del correo electrónico titularidad de la empresa."
+                  condition: "correo_de_empresa=0"
+                - h2:
+                  - "3. Acceso del trabajador a cuentas de correo electrónico privadas desde"
+                  - "equipos titularidad de la empresa"
+                - p:
+                  - "El trabajador podrá acceder desde los equipos telemáticos que la empresa"
+                  - "ha puesto a su disposición a sus cuentas de correo electrónico particular,"
+                  - "siempre y cuando esto no afecte al correcto desempeño de su actividad"
+                  - "laboral ni a la cantidad y calidad del trabajo encomendado. El trabajador"
+                  - "deberá verificar que su clave y contraseña de acceso no quedan guardados"
+                  - "en los dispositivos titularidad de la empresa. El uso abusivo de los equipos"
+                  - "telemáticos titularidad de la empresa para fines privados conllevará la"
+                  - "aplicación del régimen disciplinario previsto en el Convenio Colectivo."
+                  condition: "uso_otras_cuentas_correo=0"
+                - p:
+                  - "El trabajador, siempre y cuando concurren circunstancias personales o"
+                  - "familiares de especial gravedad que lo hagan necesario, podrá acceder desde"
+                  - "los equipos telemáticos que la empresa ha puesto a su disposición a sus"
+                  - "cuentas de correo electrónico particular. El trabajador deberá verificar que"
+                  - "su clave y contraseña de acceso no quedan guardados en los dispositivos"
+                  - "titularidad de la empresa. El incumplimiento de la normativa interna de la"
+                  - "empresa relativa al uso de los equipos telemáticos para fines privados"
+                  - "conllevará la aplicación del régimen disciplinario previsto en el Convenio"
+                  - "Colectivo."
+                  condition: "uso_otras_cuentas_correo=1"
+                - p:
+                  - "El trabajador no podrá acceder a su cuenta de correo electrónico particular"
+                  - "desde los equipos telemáticos que la empresa haya puesto a su disposición."
+                  - "El incumplimiento de esta normativa interna conllevará la aplicación del"
+                  - "régimen disciplinario previsto en el Convenio Colectivo."
+                  condition: "uso_otras_cuentas_correo=2"
+                - h2:
+                  - "4. Descarga de programas/aplicaciones en los equipos telemáticos"
+                  - "titularidad de la empresa."
+                - p:
+                  - "El trabajador, previa autorización por parte de la dirección, podrá instalar en"
+                  - "los equipos telemáticos titularidad de la empresa programas o aplicaciones"
+                  - "destinadas al desempeño de la actividad laboral.  Para ello contará con el"
+                  - "soporte técnico que se considere necesario por parte de la dirección de la"
+                  - "empresa."
+                  condition: "descargar_e_instalar_programas=0"
+                - p:
+                  - "Corresponde a la dirección de la empresa escoger los programas y"
+                  - "aplicaciones que se instalarán en los equipos telemáticos de su titularidad"
+                  - "para el desempeño de la actividad laboral, así como también las personas"
+                  - "encargadas de proceder a la instalación de los mismos."
+                  condition: "descargar_e_instalar_programas=1"
+                - h2: "5. Uso de internet durante el tiempo de trabajo"
+                - p:
+                  - "La jornada laboral, independientemente del horario que cada trabajador"
+                  - "tenga asignado, está destinada al desempeño eficaz y eficiente de las tareas y"
+                  - "funciones encomendadas por la empresa. El trabajador evitará aquellas"
+                  - "actividades que impliquen pérdidas de tiempo o interrupciones innecesarias"
+                  - "en el desempeño de su actividad laboral."
+                - p:
+                  - "Se prohíbe al trabajador acceder a internet durante la jornada de trabajo con"
+                  - "independencia del equipo telemático que se pueda emplear para este fin."
+                  condition: "navegacion_internet=0"
+                - p:
+                  - "El acceso del trabajador a internet durante la jornada de trabajo queda"
+                  - "limitado a la realización de las consultas que resulten estrictamente"
+                  - "necesarias para el desarrollo de las tareas encomendadas por la Dirección."
+                  condition: "navegacion_internet=1"
+                - p:
+                  - "El trabajador podrá acceder a internet durante la jornada de trabajo siempre"
+                  - "y cuando ello no implique una disminución de su rendimiento, de su"
+                  - "productividad o de la calidad del trabajo encomendado. En todo caso queda"
+                  - "terminantemente prohibido el acceso a páginas web de contenido ofensivo,"
+                  - "inapropiado, pornográfico, discriminatorio por razones de género, etnia,"
+                  - "opción sexual, discapacidad o cualquier otra circunstancia personal o social."
+                  - "Queda igualmente prohibido el acceso a páginas web con contenidos de"
+                  - "juego online de todo tipo. Queda igualmente prohibida la descarga ilegal de"
+                  - "contenidos."
+                  condition: "navegacion_internet=2"
+                - p:
+                  - "El incumplimiento de las condiciones de uso de internet contenidas en la"
+                  - "presente cláusula podrá dar lugar a la aplicación del régimen disciplinario"
+                  - "vigente en la empresa."
+                - h2:
+                  - "6. Uso de teléfonos móviles y Smartphones titularidad de la empresa"
+                  - "por parte de los trabajadores"
+                  condition: "smartphone_empresa=0"
+                - p:
+                  - "Los trabajadores que dispongan de un teléfono móvil o Smartphone"
+                  - "facilitado por la empresa deberán emplearlo exclusivamente para el"
+                  - "desarrollo de su actividad laboral. Queda expresamente prohibido su uso"
+                  - "para cuestiones personales."
+                  condition: "uso_personal_movil=0"
+                - p:
+                  - "Los trabajadores que dispongan de teléfono móvil o Smartphone facilitado"
+                  - "por la empresa deberán emplearlo para el desarrollo de su actividad laboral."
+                  - "En caso de producirse una urgencia o necesidad de carácter personal o"
+                  - "familiar del trabajador, se autoriza el uso de estos dispositivos para estas"
+                  - "gestiones particulares."
+                  condition: "uso_personal_movil=1"
+                - p:
+                  - "Los trabajadores que dispongan de teléfono móvil o Smartphone facilitado"
+                  - "por la empresa deberán emplearlo básicamente para el desarrollo de su"
+                  - "actividad laboral, si bien podrán usarlo también para cuestiones de carácter"
+                  - "personal hasta el límite económico que se fije por la empresa."
+                  condition: "uso_personal_movil=2"
+                - p:
+                  - "El trabajador, previa autorización por parte de la dirección, podrá instalar en"
+                  - "el teléfono móvil o Smartphone que la empresa ha puesto a su disposición"
+                  - "programas y aplicaciones destinadas al desempeño de la actividad laboral."
+                  - "Para ello contará con la ayuda y soporte técnico que la empresa considere"
+                  - "necesario."
+                  condition: "programas_movil=0"
+                - p:
+                  - "La dirección de la empresa es la única competente para determinar los"
+                  - "programas y aplicaciones que se instalarán en los teléfonos móviles o"
+                  - "Smartphones de su titularidad, sin perjuicio de las herramientas cuya"
+                  - "implantación pueda recomendar el trabajador para facilitar el desempeño de"
+                  - "la actividad laboral. La instalación de estos programas y aplicaciones se"
+                  - "efectuará por la persona o equipo técnico que designe la dirección de la"
+                  - "empresa."
+                  condition: "programas_movil=1"
+                - p:
+                  - "Se prohíbe de forma expresa, y en todo caso, que los trabajadores instalen y"
+                  - "usen en los teléfonos móviles o Smartphone titularidad de la empresa"
+                  - "aplicaciones de mensajería instantánea tipo WhatsApp, Messenger,"
+                  - "Telegram, o cualquier otra semejante a las indicadas."
+                  condition: "mensajeria_movil=0"
+                - p:
+                  - "Los trabajadores podrán usar las aplicaciones de mensajería instantánea"
+                  - "tipo Whatsapp, Messenger o Telegram instaladas en los teléfonos móviles o"
+                  - "Smartphones titularidad de la empresa únicamente para la recepción y"
+                  - "transmisión de órdenes o instrucciones vinculadas con el desarrollo de la"
+                  - "actividad laboral."
+                  condition: "mensajeria_movil=1"
+                - p:
+                  - "Los trabajadores podrán usar las aplicaciones de mensajería instantánea"
+                  - "tipo Whatsapp, Messenger o Telegram instaladas en los teléfonos móviles o"
+                  - "Smartphones titularidad de la empresa para la recepción y transmisión de"
+                  - "órdenes o instrucciones vinculadas con el desarrollo de la actividad laboral."
+                  - "Excepcionalmente, en caso de extraordinaria o urgente necesidad personal o"
+                  - "familiar del trabajador, podrá emplear estas aplicaciones de mensajería"
+                  - "instantánea instaladas en los dispositivos propiedad de la empresa para"
+                  - "cuestiones de carácter privado."
+                  condition: "mensajeria_movil=2"
+                - p:
+                  - "Los trabajadores podrán usar las aplicaciones de mensajería instantánea"
+                  - "tipo Whatsapp, Messenger o Telegram instaladas en los teléfonos móviles o"
+                  - "Smartphones titularidad de la empresa, tanto para fines laborales como"
+                  - "personales o familiares. El uso de estas aplicaciones de mensajería no podrá"
+                  - "perjudicar el rendimiento del trabajador, su productividad, ni la calidad en la"
+                  - "ejecución de los trabajos que se le hayan encomendado."
+                  condition: "mensajeria_movil=3"
+                - p:
+                  - "El incumplimiento de los términos del presente protocolo, así como el uso"
+                  - "inadecuado o irregular de estas aplicaciones de mensajería instantánea,"
+                  - "podrá dar lugar a la adopción por parte de la empresa de las medidas"
+                  - "disciplinarias que correspondan  en cada caso."
+                  condition: "smartphone_empresa=0"
+                - h2:
+                  - "7. Vigilancia de los equipos y aplicaciones telemáticas titularidad de la"
+                  - "empresa usados por los trabajadores."
+                  condition: "monitorizar_equipos=0"
+                - p:
+                  - "El art. 20.3 del Estatuto de los Trabajadores confiere a la empresa la facultad"
+                  - "de adoptar medidas de vigilancia y control con el fin de verificar que el"
+                  - "trabajador cumple con sus obligaciones y deberes laborales."
+                  condition: "monitorizar_equipos=0"
+                - p:
+                  - "Los empleados deberán actuar con buena fe y respetar las instrucciones del"
+                  - "presente protocolo, no pudiendo albergar más expectativa de intimidad en el"
+                  - "manejo de los equipos y aplicaciones telemáticas titularidad de la empresa"
+                  - "que la que se desprenda del presente protocolo."
+                  condition: "monitorizar_equipos=0"
+                - p:
+                  - "La empresa podrá monitorizar los equipos informáticos y telemáticos de su"
+                  - "titularidad así como las aplicaciones y herramientas instaladas en los"
+                  - "mismos, incluidas las cuentas de correo corporativo y los sistemas de"
+                  - "mensajería instantánea empleados por los trabajadores."
+                  condition: "monitorizar_equipos=0"
+                - p:
+                  - "Son causas justificadas para llevar a cabo esta monitorización, sin perjuicio"
+                  - "de otras que puedan valorarse en su momento y se pongan en conocimiento"
+                  - "de los trabajadores, las siguientes:"
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Proteger documentación e información confidencial, relevante o de"
+                  - "carácter personal de la empresa, sus empleados, clientes o"
+                  - "proveedores, evitando la fuga de la misma."
+                  condition: "monitorizar_equipos=0"
+                  start_at: ' '
+                  list_style: -
+                - li:
+                  - "Velar por el correcto mantenimiento de los equipos y aplicaciones"
+                  - "telemáticas de la empresa, evitando la navegación en redes o sistemas"
+                  - "que pongan en riesgo su seguridad."
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Vigilar el cumplimiento de las obligaciones laborales y el desempeño"
+                  - "del trabajo conforme a las instrucciones recibidas."
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Frenar la descarga por parte de los trabajadores de contenidos"
+                  - "ilegales, irregulares o prohibidos por la empresa."
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Evitar la sobrecarga de los equipos y servidores con documentos o"
+                  - "archivos temporales innecesarios y prohibidos."
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Proteger a los trabajadores de la empresa frente a intromisiones"
+                  - "ilegítimas en su honor, intimidad personal y familiar, propia imagen o"
+                  - "que puedan ser constitutivas de acoso."
+                  condition: "monitorizar_equipos=0"
+                - li:
+                  - "Evitar incurrir en costes innecesarios como consecuencia de la"
+                  - "renovación anticipada de equipos derivada de un incorrecto"
+                  - "mantenimiento de los mismos por parte de los trabajadores."
+                  condition: "monitorizar_equipos=0"
+                - p:
+                  - "Para la monitorización y revisión de sus equipos y aplicaciones la empresa"
+                  - "empleará mecanismos proporcionales y acordes a la finalidad perseguida,"
+                  - "los cuales se determinarán en el momento de proceder a la monitorización."
+                  condition: "monitorizar_equipos=0"
+                - h2: "8. Prohibiciones expresas."
+                - p:
+                  - "Queda expresamente prohibido que los trabajadores hagan uso de"
+                  - "cualquiera de los medios telemáticos, informáticos o electrónicos puestos a"
+                  - "su disposición por la empresa para divulgar o transmitir:"
+                - li:
+                  - "Información, imágenes o documentos de contenido ilegal, sexista,"
+                  - "abusivo, difamatorio, discriminatorio, ofensivo, racista, pornográfico o"
+                  - "de cualquier otro tipo no autorizada por la legislación vigente."
+                  start_at: a
+                  list_style: )
+                - li:
+                  - "Información, imágenes o documentos sobre clientes, proveedores,"
+                  - "circunstancias personales o sociales de los compañeros de trabajo, o"
+                  - "cualquier otra que pueda causar perjuicios a la compañía."
+                - li:
+                  - "Información, imágenes o documentos confidenciales de la compañía,"
+                  - "de sus clientes, de sus ingresos, facturación, situación financiera, o"
+                  - "cualquier otra que pueda causar un perjuicio a la misma."
+                - li:
+                  - "Información, imágenes o documentos que inciten a la violencia, al"
+                  - "terrorismo, al odio, al suicidio o la autolesión."
+                - li:
+                  - "Del mismo modo se prohíbe al trabajador el uso de los medios"
+                  - "telemáticos, informáticos o electrónicos puestos a su disposición para"
+                  - "la descarga ilegal de programas y contenidos, así como también para el"
+                  - "acceso a plataformas de juego o apuestas online."

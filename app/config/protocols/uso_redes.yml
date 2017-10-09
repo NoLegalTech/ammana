@@ -47,6 +47,10 @@ parameters:
                     font-weight: normal
                     text-align: justify
                     text-style: none
+                    logo-max-width: 50
+                    logo-max-height: 25
+                    logo-x: 178
+                    logo-y: 20
                 h1:
                     font-weight: bold
                     text-align: center

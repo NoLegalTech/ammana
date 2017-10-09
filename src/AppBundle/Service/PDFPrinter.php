@@ -336,11 +336,55 @@ class PDFPrinter {
         $this->pdf->SetTextColor(0,0,0);
         $this->pdf->SetMargins(30, 30);
         if ($this->logo != null) {
-            $this->pdf->Image($this->logo, 130, 20, 50);
+            $this->printLogo();
         }
         $this->pdf->SetXY(30,50);
         $this->printContent();
         return $this->pdf->Output('S', $this->fileName);
+    }
+
+    private function printLogo() {
+        $boundaries = $this->getLogoBoundaries();
+
+        $this->pdf->Image(
+            $this->logo,
+            $boundaries['x'] - $boundaries['width'],
+            $boundaries['y'],
+            $boundaries['width'],
+            $boundaries['height']
+        );
+    }
+
+    private function getLogoBoundaries() {
+        $boundaries = array(
+            "width"  => 50,
+            "height" => 25,
+            "x"      => 178,
+            "y"      => 20
+        );
+        if ($this->styles != null) {
+            if (isset($this->styles['default']['logo-max-width'])) {
+                $boundaries['width'] = $this->styles['default']['logo-max-width'];
+            }
+            if (isset($this->styles['default']['logo-max-height'])) {
+                $boundaries['height'] = $this->styles['default']['logo-max-height'];
+            }
+            if (isset($this->styles['default']['logo-x'])) {
+                $boundaries['x'] = $this->styles['default']['logo-x'];
+            }
+            if (isset($this->styles['default']['logo-y'])) {
+                $boundaries['y'] = $this->styles['default']['logo-y'];
+            }
+        }
+
+        list($w, $h) = getimagesize($this->logo);
+        if ($h / $w > $boundaries['height'] / $boundaries['width']) {
+            $boundaries['width'] = $boundaries['height'] * $w / $h;
+        } else {
+            $boundaries['height'] = $boundaries['width'] * $h / $w;
+        }
+
+        return $boundaries;
     }
 
     private function printContent() {

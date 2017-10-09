@@ -214,8 +214,8 @@ class ProtocolController extends Controller
         $document = $protocol_spec['document'];
         $printer->setFileName($protocol_spec['name'].'.pdf');
 
-        if ($request->query->get('logo') == 'yes') {
-            $printer->setLogo($this->get('kernel')->getRootDir() . '/../src/AppBundle/Resources/public/img/logo_agilaz.png');
+        if ($user->getLogo() != null) {
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $user->getLogo());
         }
 
         $variables = [];

@@ -15,7 +15,7 @@ class PermissionsService {
         $this->em = $em;
     }
 
-    public function getUserFromSession() {
+    public function getCurrentUser() {
         if (!$this->session->get('user')) {
             return null;
         }
@@ -36,7 +36,7 @@ class PermissionsService {
     }
 
     public function currentRolesInclude($role) {
-        $user = $this->getUserFromSession();
+        $user = $this->getCurrentUser();
 
         if ($user == null) {
             return false;

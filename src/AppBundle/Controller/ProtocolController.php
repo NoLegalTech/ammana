@@ -38,7 +38,7 @@ class ProtocolController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession();
+        $user = $permissions->getCurrentUser();
 
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
@@ -80,7 +80,7 @@ class ProtocolController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession();
+        $user = $permissions->getCurrentUser();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {
@@ -177,7 +177,7 @@ class ProtocolController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession();
+        $user = $permissions->getCurrentUser();
 
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
@@ -233,7 +233,7 @@ class ProtocolController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession();
+        $user = $permissions->getCurrentUser();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {

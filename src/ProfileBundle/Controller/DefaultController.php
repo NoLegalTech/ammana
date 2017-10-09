@@ -22,7 +22,7 @@ class DefaultController extends Controller {
             ));
         }
 
-        $user = $permissions->getUserFromSession($session);
+        $user = $permissions->getCurrentUser($session);
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);

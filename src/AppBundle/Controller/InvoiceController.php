@@ -31,7 +31,7 @@ class InvoiceController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession($session);
+        $user = $permissions->getCurrentUser($session);
 
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
@@ -88,7 +88,7 @@ class InvoiceController extends Controller
             ));
         }
 
-        $user = $permissions->getUserFromSession($session);
+        $user = $permissions->getCurrentUser($session);
 
         if ($invoice->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(

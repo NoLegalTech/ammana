@@ -213,7 +213,7 @@ class UserController extends Controller
     /**
      * Login.
      */
-    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
@@ -228,7 +228,11 @@ class UserController extends Controller
             }
 
             $session->set('user', $found[0]->getEmail());
+            $session->set('menu', $this->getMenuForRoles($found[0]->getRoles()));
 
+            if ($permissions->currentRolesInclude("admin")) {
+                return $this->redirectToRoute('user_index');
+            }
             return $this->redirectToRoute('protocol_index');
         }
 
@@ -236,6 +240,62 @@ class UserController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }
+
+    private function getMenuForRoles($roles)
+    {
+        $menu = [];
+        foreach (explode(',', $roles) as $role) {
+            $menu = array_merge($menu, $this->getMenuOptionsForRole($role));
+        }
+        return $menu;
+    }
+
+    private function getMenuOptionsForRole($role) {
+        $options = array(
+            'customer' => array(
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/profile',
+                    'text' => 'Mi perfil'
+                ),
+                array(
+                    'icon' => 'fa-files-o',
+                    'url' => '/protocol',
+                    'text' => 'Mis protocolos'
+                ),
+                array(
+                    'icon' => 'fa-eur',
+                    'url' => '/invoice',
+                    'text' => 'Mis facturas'
+                ),
+                array(
+                    'icon' => 'fa-sign-out',
+                    'url' => '/logout',
+                    'text' => 'Cerrar sesión'
+                )
+            ),
+            "admin" => array(
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/profile',
+                    'text' => 'Mi perfil'
+                ),
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/user',
+                    'text' => 'Clientes'
+                ),
+                array(
+                    'icon' => 'fa-sign-out',
+                    'url' => '/logout',
+                    'text' => 'Cerrar sesión'
+                )
+            )
+        );
+        return isset($options[$role])
+            ? $options[$role]
+            : [];
     }
 
     /**

@@ -16,12 +16,13 @@ class DefaultController extends Controller {
 
     public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getUserFromSession($session);
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);

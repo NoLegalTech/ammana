@@ -25,12 +25,13 @@ class InvoiceController extends Controller
      */
     public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getUserFromSession($session);
 
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
@@ -81,13 +82,13 @@ class InvoiceController extends Controller
      */
     public function downloadAction(Invoice $invoice, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
 
+        $user = $permissions->getUserFromSession($session);
 
         if ($invoice->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(

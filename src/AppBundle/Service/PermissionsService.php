@@ -35,4 +35,14 @@ class PermissionsService {
         return $found[0];
     }
 
+    public function currentRolesInclude($role) {
+        $user = $this->getUserFromSession();
+
+        if ($user == null) {
+            return false;
+        }
+
+        return in_array($role, explode(',', $user->getRoles()));
+    }
+
 }

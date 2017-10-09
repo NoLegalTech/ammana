@@ -32,12 +32,13 @@ class ProtocolController extends Controller
      */
     public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession();
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getUserFromSession();
 
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
@@ -73,12 +74,13 @@ class ProtocolController extends Controller
      */
     public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession();
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getUserFromSession();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {
@@ -169,13 +171,13 @@ class ProtocolController extends Controller
      */
     public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession();
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
 
+        $user = $permissions->getUserFromSession();
 
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
@@ -225,12 +227,13 @@ class ProtocolController extends Controller
      */
     public function payAction($id, $type, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $permissions->getUserFromSession();
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getUserFromSession();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {

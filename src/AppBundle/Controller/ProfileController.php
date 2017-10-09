@@ -16,7 +16,7 @@ class ProfileController extends Controller {
 
     public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
     {
-        if (!$permissions->currentRolesInclude("customer")) {
+        if (!$permissions->currentRolesInclude("customer") && !$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));

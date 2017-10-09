@@ -67,6 +67,11 @@ class User
      */
     private $logo;
 
+    /**
+     * @var string
+     */
+    private $roles;
+
 
     /**
      * Get id
@@ -341,5 +346,30 @@ class User
     {
         return $this->logo;
     }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
 }
 

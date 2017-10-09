@@ -11,6 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use AppBundle\Service\PermissionsService;
+
 /**
  * Invoice controller.
  *
@@ -21,9 +23,9 @@ class InvoiceController extends Controller
      * Lists all invoice entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
+        $user = $permissions->getUserFromSession($session);
         if ($user == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
@@ -73,29 +75,13 @@ class InvoiceController extends Controller
         $em->flush();
     }
 
-    private function getUserFromSession($session) {
-        if (!$session->get('user')) {
-            return null;
-        }
-
-        $found = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findByEmail($session->get('user'));
-
-        if (!$found) {
-            return null;
-        }
-
-        return $found[0];
-    }
-
     /**
      * Downloads an invoice.
      *
      */
-    public function downloadAction(Invoice $invoice, LoggerInterface $logger, SessionInterface $session)
+    public function downloadAction(Invoice $invoice, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
+        $user = $permissions->getUserFromSession($session);
         if ($user == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'

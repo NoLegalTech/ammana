@@ -10,11 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Entity\User;
+use AppBundle\Service\PermissionsService;
 
 class DefaultController extends Controller {
 
-    public function indexAction(Request $request, SessionInterface $session) {
-        $user = $this->getUserFromSession($session);
+    public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
+    {
+        $user = $permissions->getUserFromSession($session);
         if ($user == null) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
@@ -39,22 +41,6 @@ class DefaultController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));
-    }
-
-    private function getUserFromSession($session) {
-        if (!$session->get('user')) {
-            return null;
-        }
-
-        $found = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findByEmail($session->get('user'));
-
-        if (!$found) {
-            return null;
-        }
-
-        return $found[0];
     }
 
 }

@@ -48,7 +48,7 @@ class Protocol
      *
      * @param boolean $enabled
      *
-     * @return User
+     * @return Protocol
      */
     public function setEnabled($enabled)
     {

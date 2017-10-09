@@ -99,6 +99,7 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $user->setEnabled(false);
+                $user->setRoles('customer');
                 $user->setActivationHash($this->generateActivationHash());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);

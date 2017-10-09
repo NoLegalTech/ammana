@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use AppBundle\Service\PermissionsService;
+
 /**
  * User controller.
  *
@@ -19,8 +21,14 @@ class UserController extends Controller
      * Lists all user entities.
      *
      */
-    public function indexAction()
+    public function indexAction(PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
@@ -34,8 +42,14 @@ class UserController extends Controller
      * Displays a form to edit an existing user entity.
      *
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(Request $request, User $user, PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -57,8 +71,14 @@ class UserController extends Controller
      * Deletes a user entity.
      *
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(Request $request, User $user, PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 

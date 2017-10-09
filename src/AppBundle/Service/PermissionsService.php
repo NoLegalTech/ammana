@@ -28,6 +28,10 @@ class PermissionsService {
             return null;
         }
 
+        if (!$found[0]->getEnabled()) {
+            return null;
+        }
+
         return $found[0];
     }
 

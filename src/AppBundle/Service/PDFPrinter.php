@@ -340,7 +340,7 @@ class PDFPrinter {
         }
         $this->pdf->SetXY(30,50);
         $this->printContent();
-        return $this->pdf->Output('S', $this->fileName);
+        return $this->pdf->Output('D', $this->fileName);
     }
 
     private function printLogo() {

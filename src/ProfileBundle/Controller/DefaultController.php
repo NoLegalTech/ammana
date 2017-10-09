@@ -25,6 +25,11 @@ class DefaultController extends Controller {
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $file = $user->getLogo();
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+            $user->setLogo($fileName);
+            
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('profile_homepage');

@@ -2,11 +2,14 @@
 
 namespace AppBundle\Form;
 
+
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class UserType extends AbstractType {
@@ -64,6 +67,19 @@ class UserType extends AbstractType {
                     'Hasta 100 empleados' => '51-100',
                     'Más de 100 empleados' => '>100'
                 )
+            ))
+            ->add('logo', FileType::class, array(
+                'label' => 'Logo:',
+                'required' => false
+            ));
+        $builder->get('logo')
+            ->addModelTransformer(new CallBackTransformer(
+                function($imageUrl) {
+                    return null;
+                },
+                function($imageUrl) {
+                    return $imageUrl;
+                }
             ));
     }
     

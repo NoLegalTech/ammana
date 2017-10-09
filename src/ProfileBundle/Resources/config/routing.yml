@@ -1,3 +1,0 @@
-profile:
-    resource: "@ProfileBundle/Resources/config/routing/profile.yml"
-    prefix:   /

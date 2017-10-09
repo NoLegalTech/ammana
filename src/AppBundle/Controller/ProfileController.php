@@ -1,6 +1,6 @@
 <?php
 
-namespace ProfileBundle\Controller;
+namespace AppBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use AppBundle\Entity\User;
 use AppBundle\Service\PermissionsService;
 
-class DefaultController extends Controller {
+class ProfileController extends Controller {
 
     public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
     {

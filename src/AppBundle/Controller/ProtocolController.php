@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use AppBundle\Service\PDFPrinter;
+use AppBundle\Service\PermissionsService;
 
 /**
  * Protocol controller.
@@ -29,14 +30,15 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getCurrentUser();
 
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
@@ -55,22 +57,6 @@ class ProtocolController extends Controller
         ));
     }
 
-    private function getUserFromSession($session) {
-        if (!$session->get('user')) {
-            return null;
-        }
-
-        $found = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findByEmail($session->get('user'));
-
-        if (!$found) {
-            return null;
-        }
-
-        return $found[0];
-    }
-
     private function userHasCompletedProfile($user) {
         return ( $user->getEmail() != null )
             && ( $user->getPassword() != null )
@@ -86,14 +72,15 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getCurrentUser();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {
@@ -182,15 +169,15 @@ class ProtocolController extends Controller
      * Downloads a protocol.
      *
      */
-    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
 
+        $user = $permissions->getCurrentUser();
 
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
@@ -238,14 +225,15 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction($id, $type, Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function payAction($id, $type, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        $user = $this->getUserFromSession($session);
-        if ($user == null) {
+        if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getCurrentUser();
 
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {

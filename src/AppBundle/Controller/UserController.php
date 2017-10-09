@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+use AppBundle\Service\PermissionsService;
+
 /**
  * User controller.
  *
@@ -19,8 +21,14 @@ class UserController extends Controller
      * Lists all user entities.
      *
      */
-    public function indexAction()
+    public function indexAction(PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
@@ -34,8 +42,14 @@ class UserController extends Controller
      * Displays a form to edit an existing user entity.
      *
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(Request $request, User $user, PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -57,8 +71,14 @@ class UserController extends Controller
      * Deletes a user entity.
      *
      */
-    public function deleteAction(Request $request, User $user)
+    public function deleteAction(Request $request, User $user, PermissionsService $permissions)
     {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $form = $this->createDeleteForm($user);
         $form->handleRequest($request);
 
@@ -99,6 +119,7 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $user->setEnabled(false);
+                $user->setRoles('customer');
                 $user->setActivationHash($this->generateActivationHash());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
@@ -192,7 +213,7 @@ class UserController extends Controller
     /**
      * Login.
      */
-    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
@@ -207,7 +228,11 @@ class UserController extends Controller
             }
 
             $session->set('user', $found[0]->getEmail());
+            $session->set('menu', $this->getMenuForRoles($found[0]->getRoles()));
 
+            if ($permissions->currentRolesInclude("admin")) {
+                return $this->redirectToRoute('user_index');
+            }
             return $this->redirectToRoute('protocol_index');
         }
 
@@ -215,6 +240,62 @@ class UserController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }
+
+    private function getMenuForRoles($roles)
+    {
+        $menu = [];
+        foreach (explode(',', $roles) as $role) {
+            $menu = array_merge($menu, $this->getMenuOptionsForRole($role));
+        }
+        return $menu;
+    }
+
+    private function getMenuOptionsForRole($role) {
+        $options = array(
+            'customer' => array(
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/profile',
+                    'text' => 'Mi perfil'
+                ),
+                array(
+                    'icon' => 'fa-files-o',
+                    'url' => '/protocol',
+                    'text' => 'Mis protocolos'
+                ),
+                array(
+                    'icon' => 'fa-eur',
+                    'url' => '/invoice',
+                    'text' => 'Mis facturas'
+                ),
+                array(
+                    'icon' => 'fa-sign-out',
+                    'url' => '/logout',
+                    'text' => 'Cerrar sesión'
+                )
+            ),
+            "admin" => array(
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/profile',
+                    'text' => 'Mi perfil'
+                ),
+                array(
+                    'icon' => 'fa-user',
+                    'url' => '/user',
+                    'text' => 'Clientes'
+                ),
+                array(
+                    'icon' => 'fa-sign-out',
+                    'url' => '/logout',
+                    'text' => 'Cerrar sesión'
+                )
+            )
+        );
+        return isset($options[$role])
+            ? $options[$role]
+            : [];
     }
 
     /**

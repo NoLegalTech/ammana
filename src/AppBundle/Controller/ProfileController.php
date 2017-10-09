@@ -1,6 +1,6 @@
 <?php
 
-namespace ProfileBundle\Controller;
+namespace AppBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 
@@ -10,16 +10,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Entity\User;
+use AppBundle\Service\PermissionsService;
 
-class DefaultController extends Controller {
+class ProfileController extends Controller {
 
-    public function indexAction(Request $request, SessionInterface $session) {
-        $user = $this->getUserFromSession($session);
-        if ($user == null) {
+    public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("customer") && !$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
+
+        $user = $permissions->getCurrentUser($session);
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -39,22 +42,6 @@ class DefaultController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));
-    }
-
-    private function getUserFromSession($session) {
-        if (!$session->get('user')) {
-            return null;
-        }
-
-        $found = $this->getDoctrine()
-            ->getRepository(User::class)
-            ->findByEmail($session->get('user'));
-
-        if (!$found) {
-            return null;
-        }
-
-        return $found[0];
     }
 
 }

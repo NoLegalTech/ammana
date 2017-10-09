@@ -23,7 +23,7 @@
 {% block stylesheets %}
     {{ parent() }}
 
-    {% stylesheets '@ProfileBundle/Resources/public/css/*' filter='cssrewrite' %}
+    {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 

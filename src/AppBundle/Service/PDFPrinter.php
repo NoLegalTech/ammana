@@ -111,15 +111,18 @@ class PDF extends \FPDF {
 class Condition {
 
     private $variableName, $expectedValue;
+    private $dependsOn = null;
 
-    public function __construct($variableName, $expectedValue) {
+    public function __construct($variableName, $expectedValue, $dependsOn = null) {
         $this->variableName = $variableName;
         $this->expectedValue = $expectedValue;
+        $this->dependsOn = $dependsOn;
     }
 
     public function matches($variables) {
         return ($variables != null)
-            && $variables[$this->variableName] == $this->expectedValue;
+            && $variables[$this->variableName] == $this->expectedValue
+            && ($this->dependsOn == null || $this->dependsOn->matches($variables));
     }
 
     public function __toString() {
@@ -293,6 +296,7 @@ class PDFPrinter {
     private $fileName = null;
     private $pdf;
     private $allowed_tags;
+    private $questions;
 
     public function __construct() {
         $this->pdf = new PDF();
@@ -309,6 +313,10 @@ class PDFPrinter {
 
     public function setVariables($variables) {
         $this->variables = $variables;
+    }
+
+    public function setQuestions($questions) {
+        $this->questions = $questions;
     }
 
     public function setLogo($logo) {
@@ -378,6 +386,13 @@ class PDFPrinter {
             return new TrueCondition();
         }
         list($variable, $theValue) = explode('=', $condition);
+        if ($this->questions != null && isset($this->questions[$variable]) && isset($this->questions[$variable][$condition])) {
+            return new Condition(
+                $variable,
+                $theValue,
+                $this->parseCondition($this->questions[$variable][$condition])
+            );
+        }
         return new Condition($variable, $theValue);
     }
 
@@ -393,4 +408,3 @@ class PDFPrinter {
     }
 
 }
-

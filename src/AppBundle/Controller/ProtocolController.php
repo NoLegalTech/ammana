@@ -226,6 +226,7 @@ class ProtocolController extends Controller
         }
         $variables['company_name'] = $user->getCompanyName();
         $printer->setVariables($variables);
+        $printer->setQuestions($protocol_spec['questions']);
 
         $printer->setStyles($document['styles']);
         $printer->setContent($document['content']);

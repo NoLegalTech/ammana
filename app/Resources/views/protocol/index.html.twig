@@ -21,7 +21,7 @@
                                 {% if protocol.enabled %}
                                     <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>
                                 {% else %}
-                                    <td>No disponible (paga!)</td>
+                                    <td>No disponible (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">paga!</a>)</td>
                                 {% endif %}
                             </tr>
                         {% endfor %}

@@ -9,9 +9,9 @@ protocol_buy:
     methods:  [GET, POST]
 
 protocol_pay:
-    path:     /protocol/pay/{id}/{type}
+    path:     /protocol/pay/{id}
     defaults: { _controller: "AppBundle:Protocol:pay" }
-    methods:  GET
+    methods:  [GET, POST]
 
 protocol_download:
     path:     /protocol/{id}

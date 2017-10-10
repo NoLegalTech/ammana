@@ -256,39 +256,39 @@ class UserController extends Controller
             'customer' => array(
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/profile',
+                    'path' => 'profile_homepage',
                     'text' => 'Mi perfil'
                 ),
                 array(
                     'icon' => 'fa-files-o',
-                    'url' => '/protocol',
+                    'path' => 'protocol_index',
                     'text' => 'Mis protocolos'
                 ),
                 array(
                     'icon' => 'fa-eur',
-                    'url' => '/invoice',
+                    'path' => 'invoice_index',
                     'text' => 'Mis facturas'
                 ),
                 array(
                     'icon' => 'fa-sign-out',
-                    'url' => '/logout',
+                    'path' => 'user_logout',
                     'text' => 'Cerrar sesión'
                 )
             ),
             "admin" => array(
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/profile',
+                    'path' => 'profile_homepage',
                     'text' => 'Mi perfil'
                 ),
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/user',
+                    'path' => 'user_index',
                     'text' => 'Clientes'
                 ),
                 array(
                     'icon' => 'fa-sign-out',
-                    'url' => '/logout',
+                    'path' => 'user_logout',
                     'text' => 'Cerrar sesión'
                 )
             )

@@ -20,8 +20,8 @@
                 {% if not app.session.get('user') %}
                     <div class="fl_left">
                         <ul class="nospace inline pushright">
-                            <li><i class="fa fa-sign-in"></i> <a href="{{ web_base_url }}/login">Identificarse</a></li>
-                            <li><i class="fa fa-user-plus"></i> <a href="{{ web_base_url }}/register">Registrarse</a></li>
+                            <li><i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">Identificarse</a></li>
+                            <li><i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">Registrarse</a></li>
                         </ul>
                     </div>
                 {% endif %}
@@ -29,7 +29,7 @@
                     <div class="fl_right">
                         <ul class="nospace inline pushright">
                             {% for option in app.session.get('menu') %}
-                                <li><i class="fa {{ option.icon }}"></i> <a href="{{ web_base_url }}{{ option.url }}">{{ option.text }}</a></li>
+                                <li><i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -40,7 +40,7 @@
         <div class="wrapper row1">
             <header id="header" class="hoc clear"> 
                 <div id="logo" class="fl_left">
-                    <h1><a href="{{ web_base_url }}">ammana</a></h1>
+                    <h1><a href="{{ path('app') }}">ammana</a></h1>
                     <p>Seal the deal!</p>
                 </div>
                 <nav id="mainav" class="fl_right">

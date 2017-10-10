@@ -38,8 +38,6 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:
-        web_base_url: '%router.request_context.scheme%://%router.request_context.host%%router.request_context.base_url%'
 
 # Doctrine Configuration
 doctrine:

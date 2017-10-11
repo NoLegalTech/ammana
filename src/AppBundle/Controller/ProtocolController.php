@@ -287,7 +287,7 @@ class ProtocolController extends Controller
         $key = "sk_test_VfHLuScwssnCCBo7Jw65";
         $token = array(
             "iat" => time(),
-            "amount" => 590,
+            "amount" => $amount,
             "currency" => "EUR",
             "description" => $protocol_spec['name'],
             "item_number" => $protocol->getId(),
@@ -298,8 +298,18 @@ class ProtocolController extends Controller
         return $this->render('protocol/payment.html.twig', array(
             'user' => $user,
             'protocol_spec' => $protocol_spec,
-            'charge' => $jwt
+            'charge' => $jwt,
+            'payment_data' => array(
+                'order_hash' => 'sample_hash',
+                'bank_account' => $this->container->getParameter('account_number'),
+                'amount' => $this->formatEuro($amount)
+            )
         ));
+    }
+
+    private function formatEuro($amount) {
+        $amount = "$amount";
+        return substr($amount, 0, strlen($amount) - 2) . '.' . substr($amount, -2);
     }
 
 }

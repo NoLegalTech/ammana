@@ -36,9 +36,9 @@
                 <p>
                     O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:
                     <blockquote>
-                        Concepto: <strong>XXXXXXXXXX</strong><br/>
-                        Número de cuenta: <strong>ESXX XXXX XXXX XXXX XXXX</strong><br/>
-                        Importe: <strong>XX €</strong>
+                        Concepto: <strong>{{ payment_data.order_hash }}</strong><br/>
+                        Número de cuenta: <strong>{{ payment_data.bank_account }}</strong><br/>
+                        Importe: <strong>{{ payment_data.amount }} €</strong>
                     </blockquote>
                     No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
                 </p>

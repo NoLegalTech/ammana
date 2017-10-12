@@ -16,12 +16,14 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use \Firebase\JWT\JWT;
 use QuadernoBase;
+use QuadernoInvoice;
 
 use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
 use AppBundle\Service\HashGenerator;
+use AppBundle\Service\OrderNumberFormatter;
 
 /**
  * Protocol controller.
@@ -34,7 +36,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -60,10 +62,22 @@ class ProtocolController extends Controller
             $this->container->getParameter('quaderno_api_url')
         );
 
+        $invoices = array();
+        foreach ($protocols as $protocol) {
+            $orderNumber = $formatter->format($protocol->getId());
+            $found = QuadernoInvoice::find(array('q' => $orderNumber));
+            if (count($found) > 0) {
+                $invoice = $found[0];
+                $invoices[$protocol->getId()]= $invoice->__get('pdf');
+            } else {
+                $invoices[$protocol->getId()]= null;
+            }
+        }
+
         return $this->render('protocol/index.html.twig', array(
             'protocols' => $protocols,
-            'names' => $names,
-            'ping' => QuadernoBase::ping() ? "true" : "false"
+            'invoices' => $invoices,
+            'names' => $names
         ));
     }
 
@@ -234,7 +248,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -297,16 +311,15 @@ class ProtocolController extends Controller
         }
 
         $amount = 590;
-        $key = "sk_test_VfHLuScwssnCCBo7Jw65";
         $token = array(
             "iat" => time(),
             "amount" => $amount,
             "currency" => "EUR",
             "description" => $protocol_spec['name'],
-            "item_number" => $protocol->getId(),
+            "item_number" => $formatter->format($protocol->getId()),
             "quantity" => 1
         );
-        $jwt = JWT::encode($token, $key);
+        $jwt = JWT::encode($token, $this->container->getParameter('quaderno_api_key'));
 
         return $this->render('protocol/payment.html.twig', array(
             'user' => $user,

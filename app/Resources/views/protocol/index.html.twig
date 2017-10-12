@@ -12,6 +12,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -23,6 +24,11 @@
                                 {% else %}
                                     <td>No disponible (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">paga!</a>)</td>
                                 {% endif %}
+                                {% if invoices[protocol.id] %}
+                                    <td><a href="{{ invoices[protocol.id] }}" target="_blank">Descargar factura</a></td>
+                                {% else %}
+                                    <td>Factura no disponible</td>
+                                {% endif %}
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -32,8 +38,8 @@
                         No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
                     </p>
                 {% endif %}
+
                 <h3 class="heading">Comprar protocolos</h2>
-                Ping: {{ ping }}
                 <table>
                     <tbody>
                         <tr>

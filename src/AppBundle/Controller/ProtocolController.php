@@ -276,10 +276,14 @@ class ProtocolController extends Controller
             $custom = $postData->get('custom'); // => {"ip_address":"77.27.142.122","quaderno_id":346579,"application":"quaderno","tax":{"name":"IVA","rate":21.0,"country":"ES"}} 
             $verify_sign = $postData->get('verify_sign'); // => AFcWxV21C7fd0v3bYYYRCpSSRl31AjWh4qtr.48ClpfjVHt.TjLMdf9a
 
-            if ($payer_status == 'VERIFIED') {
+            if ($payer_status == 'VERIFIED' || $protocol->getId() == $item_number) {
                 $protocol->setEnabled(true);
                 $this->getDoctrine()->getManager()->flush();
                 // TODO create invoice
+            } else {
+                return $this->redirectToRoute('error', array(
+                    'message' => 'Ha ocurrido un error inesperado.'
+                ));
             }
             //TODO remote payment_complete template
             return $this->redirectToRoute('protocol_index');

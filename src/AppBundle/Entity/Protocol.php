@@ -32,6 +32,11 @@ class Protocol
      */
     private $identifier;
 
+    /**
+     * @var string
+     */
+    private $orderHash;
+
 
     /**
      * Get id
@@ -137,6 +142,30 @@ class Protocol
     public function getIdentifier()
     {
         return $this->identifier;
+    }
+
+    /**
+     * Set orderHash
+     *
+     * @param string $orderHash
+     *
+     * @return Protocol
+     */
+    public function setOrderHash($orderHash)
+    {
+        $this->orderHash = $orderHash;
+
+        return $this;
+    }
+
+    /**
+     * Get orderHash
+     *
+     * @return string
+     */
+    public function getOrderHash()
+    {
+        return $this->orderHash;
     }
 
 }

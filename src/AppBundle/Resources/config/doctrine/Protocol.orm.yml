@@ -21,4 +21,9 @@ AppBundle\Entity\Protocol:
         identifier:
             type: string
             length: '100'
+        orderHash:
+            type: string
+            length: '8'
+            nullable: true
+            column: order_hash
     lifecycleCallbacks: {  }

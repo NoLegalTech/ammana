@@ -6,8 +6,6 @@ use Psr\Log\LoggerInterface;
 
 use Symfony\Component\Filesystem\Filesystem;
 
-use AppBundle\Entity\Protocol;
-use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,10 +14,13 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+use \Firebase\JWT\JWT;
+
+use AppBundle\Entity\Protocol;
+use AppBundle\Entity\User;
 use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
-
-use \Firebase\JWT\JWT;
+use AppBundle\Service\HashGenerator;
 
 /**
  * Protocol controller.
@@ -74,7 +75,7 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, HashGenerator $hasher)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -114,6 +115,7 @@ class ProtocolController extends Controller
             $purchasedProtocol->setIdentifier($id);
             $purchasedProtocol->setUser($user->getId());
             $purchasedProtocol->setEnabled(false);
+            $purchasedProtocol->setOrderHash($hasher->generate(8));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;

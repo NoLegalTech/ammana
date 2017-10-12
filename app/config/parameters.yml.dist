@@ -18,4 +18,9 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
+    # Specific settings for Ammana
     account_number: ESXX XXXX XXXX XXXX XXXX
+
+    # Quaderno
+    quaderno_api_key: ThisIsTheQuadernoPrivateKey
+    quaderno_api_url: TheQuadernoApiUrlAsProvidedByQuaderno

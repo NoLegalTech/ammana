@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use \Firebase\JWT\JWT;
+use QuadernoBase;
 
 use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
@@ -54,9 +55,15 @@ class ProtocolController extends Controller
             $names[$id] = $protocol_spec['name'];
         }
 
+        QuadernoBase::init(
+            $this->container->getParameter('quaderno_api_key'),
+            $this->container->getParameter('quaderno_api_url')
+        );
+
         return $this->render('protocol/index.html.twig', array(
             'protocols' => $protocols,
-            'names' => $names
+            'names' => $names,
+            'ping' => QuadernoBase::ping() ? "true" : "false"
         ));
     }
 

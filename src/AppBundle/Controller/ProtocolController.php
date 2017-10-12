@@ -302,7 +302,7 @@ class ProtocolController extends Controller
             'protocol_spec' => $protocol_spec,
             'charge' => $jwt,
             'payment_data' => array(
-                'order_hash' => 'sample_hash',
+                'order_hash' => $protocol->getOrderHash(),
                 'bank_account' => $this->container->getParameter('account_number'),
                 'amount' => $this->formatEuro($amount)
             )

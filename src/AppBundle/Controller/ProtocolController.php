@@ -126,7 +126,7 @@ class ProtocolController extends Controller
             $em->flush();
 
             return $this->redirectToRoute('protocol_pay', array(
-                'id' => $protocol['id']
+                'id' => $purchasedProtocol->getId()
             ));
         }
 

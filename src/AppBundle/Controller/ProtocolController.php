@@ -18,11 +18,11 @@ use \Firebase\JWT\JWT;
 
 use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
+use AppBundle\Service\HashGenerator;
+use AppBundle\Service\Invoices;
 use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
-use AppBundle\Service\HashGenerator;
 use AppBundle\Service\OrderNumberFormatter;
-use AppBundle\Service\Quaderno;
 
 /**
  * Protocol controller.
@@ -35,7 +35,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Quaderno $quaderno)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -56,15 +56,9 @@ class ProtocolController extends Controller
             $names[$id] = $protocol_spec['name'];
         }
 
-        $invoices = array();
-        foreach ($protocols as $protocol) {
-            $orderNumber = $formatter->format($protocol->getId());
-            $invoices[$protocol->getId()] = $quaderno->getInvoiceUrl($orderNumber);
-        }
-
         return $this->render('protocol/index.html.twig', array(
             'protocols' => $protocols,
-            'invoices' => $invoices,
+            'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names
         ));
     }

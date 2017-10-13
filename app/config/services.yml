@@ -35,3 +35,7 @@ services:
     #         $someArgument: 'some_value'
     AppBundle\Service\PermissionsService:
         arguments: [ "@doctrine.orm.entity_manager" ]
+    AppBundle\Service\Quaderno:
+        arguments:
+            $api_key: '%quaderno_api_key%'
+            $api_url: '%quaderno_api_url%'

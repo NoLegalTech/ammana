@@ -15,8 +15,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use \Firebase\JWT\JWT;
-use QuadernoBase;
-use QuadernoInvoice;
 
 use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
@@ -24,6 +22,7 @@ use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
 use AppBundle\Service\HashGenerator;
 use AppBundle\Service\OrderNumberFormatter;
+use AppBundle\Service\Quaderno;
 
 /**
  * Protocol controller.
@@ -36,7 +35,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Quaderno $quaderno)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -57,21 +56,10 @@ class ProtocolController extends Controller
             $names[$id] = $protocol_spec['name'];
         }
 
-        QuadernoBase::init(
-            $this->container->getParameter('quaderno_api_key'),
-            $this->container->getParameter('quaderno_api_url')
-        );
-
         $invoices = array();
         foreach ($protocols as $protocol) {
             $orderNumber = $formatter->format($protocol->getId());
-            $found = QuadernoInvoice::find(array('q' => $orderNumber));
-            if (count($found) > 0) {
-                $invoice = $found[0];
-                $invoices[$protocol->getId()]= $invoice->__get('pdf');
-            } else {
-                $invoices[$protocol->getId()]= null;
-            }
+            $invoices[$protocol->getId()] = $quaderno->getInvoiceUrl($orderNumber);
         }
 
         return $this->render('protocol/index.html.twig', array(

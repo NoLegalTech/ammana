@@ -30,7 +30,7 @@ class Invoice
     /**
      * @var string
      */
-    private $path;
+    private $url;
 
 
     /**
@@ -116,27 +116,27 @@ class Invoice
     }
 
     /**
-     * Set path
+     * Set url
      *
-     * @param string $path
+     * @param string $url
      *
      * @return Invoice
      */
-    public function setPath($path)
+    public function setUrl($url)
     {
-        $this->path = $path;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get url
      *
      * @return string
      */
-    public function getPath()
+    public function getUrl()
     {
-        return $this->path;
+        return $this->url;
     }
 
 }

@@ -17,7 +17,7 @@ AppBundle\Entity\Invoice:
         number:
             type: string
             length: '32'
-        path:
+        url:
             type: string
             length: '200'
     lifecycleCallbacks: {  }

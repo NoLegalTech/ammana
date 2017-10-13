@@ -310,7 +310,7 @@ class ProtocolController extends Controller
             return $this->redirectToRoute('protocol_index');
         }
 
-        $amount = 590;
+        $amount = $this->container->getParameter('protocol_prize');
         $token = array(
             "iat" => time(),
             "amount" => $amount,
@@ -323,6 +323,7 @@ class ProtocolController extends Controller
 
         return $this->render('protocol/payment.html.twig', array(
             'user' => $user,
+            'amount' => $amount,
             'protocol_spec' => $protocol_spec,
             'charge' => $jwt,
             'payment_data' => array(

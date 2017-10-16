@@ -20,7 +20,7 @@ parameters:
 
     # Specific settings for Ammana
     account_number: ESXX XXXX XXXX XXXX XXXX
-    protocol_prize: 250
+    protocol_price: 250
 
     # Quaderno
     quaderno_api_key: ThisIsTheQuadernoPrivateKey

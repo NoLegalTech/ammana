@@ -292,7 +292,7 @@ class ProtocolController extends Controller
             return $this->redirectToRoute('protocol_index');
         }
 
-        $amount = $this->container->getParameter('protocol_prize');
+        $amount = $this->container->getParameter('protocol_price');
         $token = array(
             "iat" => time(),
             "amount" => $amount,

@@ -230,7 +230,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter)
+    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -254,42 +254,20 @@ class ProtocolController extends Controller
 
         if ($request->isMethod('POST')) {
             $postData = $request->request;
-            $payer_email = $postData->get('payer_email'); // => pepellou-buyer@gmail.com 
-            $payer_id = $postData->get('payer_id'); // => 3LTGLV3ZK2MYA 
-            $payer_status = $postData->get('payer_status'); // => VERIFIED 
-            $first_name = $postData->get('first_name'); // => test 
-            $last_name = $postData->get('last_name'); // => buyer 
-            $txn_id = $postData->get('txn_id'); // => 58021743YV823525V 
-            $mc_currency = $postData->get('mc_currency'); // => EUR 
-            $mc_fee = $postData->get('mc_fee'); // => 0.55 
-            $mc_gross = $postData->get('mc_gross'); // => 5.90 
-            $protection_eligibility = $postData->get('protection_eligibility'); // => INELIGIBLE 
-            $payment_fee = $postData->get('payment_fee'); // => 0.55 
-            $payment_gross = $postData->get('payment_gross'); // => 5.90 
-            $payment_status = $postData->get('payment_status'); // => Completed 
-            $payment_type = $postData->get('payment_type'); // => instant 
-            $item_name = $postData->get('item_name'); // => Modelo Autocobertura Redes Sociales 
-            $item_number = $postData->get('item_number'); // => 12 
-            $quantity = $postData->get('quantity'); // => 1 
-            $txn_type = $postData->get('txn_type'); // => web_accept 
-            $payment_date = $postData->get('payment_date'); // => 2017-10-11T08:45:12Z 
-            $business = $postData->get('business'); // => pepellou-facilitator@gmail.com 
-            $receiver_id = $postData->get('receiver_id'); // => GAT2BUMPBCM3G 
-            $notify_version = $postData->get('notify_version'); // => UNVERSIONED 
-            $custom = $postData->get('custom'); // => {"ip_address":"77.27.142.122","quaderno_id":346579,"application":"quaderno","tax":{"name":"IVA","rate":21.0,"country":"ES"}} 
-            $verify_sign = $postData->get('verify_sign'); // => AFcWxV21C7fd0v3bYYYRCpSSRl31AjWh4qtr.48ClpfjVHt.TjLMdf9a
+            $payer_status = $postData->get('payer_status');
+            $item_number = $postData->get('item_number');
 
-            if ($payer_status == 'VERIFIED' || $protocol->getId() == $item_number) {
-                $protocol->setEnabled(true);
-                $this->getDoctrine()->getManager()->flush();
-                // TODO create invoice
-            } else {
+            if ($payer_status != 'VERIFIED' || $formatter->format($protocol->getId()) != $item_number) {
+                $logger->error("Error returning from Paypal payment of protocol #".$protocol->getId());
+                $logger->error("    payer_status = ".$payer_status);
+                $logger->error("    item_number  = ".$item_number);
                 return $this->redirectToRoute('error', array(
                     'message' => 'Ha ocurrido un error inesperado.'
                 ));
             }
-            //TODO remote payment_complete template
-            return $this->redirectToRoute('protocol_index');
+            $protocol->setEnabled(true);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('protocol_paid');
         }
 
         $amount = $this->container->getParameter('protocol_price');
@@ -319,6 +297,15 @@ class ProtocolController extends Controller
     private function formatEuro($amount) {
         $amount = "$amount";
         return substr($amount, 0, strlen($amount) - 2) . '.' . substr($amount, -2);
+    }
+
+    /**
+     * Shows a payment completion status page.
+     *
+     */
+    public function paymentCompleteAction()
+    {
+        return $this->render('protocol/payment_complete.html.twig');
     }
 
 }

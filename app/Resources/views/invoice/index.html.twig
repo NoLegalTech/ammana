@@ -19,7 +19,11 @@
                         <tr>
                             <td>{{ invoice.emittedAt | date('d/m/Y') }}</td>
                             <td>{{ invoice.number }}</td>
-                            <td><a href="{{ path('invoice_download', { 'id': invoice.id }) }}">Descargar</a></td>
+                            {% if invoice.url %}
+                                <td><a href="{{ invoice.url }}" target="_blank">Descargar factura</a></td>
+                            {% else %}
+                                <td>Factura no disponible</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

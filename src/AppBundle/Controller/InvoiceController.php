@@ -42,40 +42,4 @@ class InvoiceController extends Controller
         ));
     }
 
-    /**
-     * Downloads an invoice.
-     *
-     */
-    public function downloadAction(Invoice $invoice, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
-    {
-        if (!$permissions->currentRolesInclude("customer")) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
-            ));
-        }
-
-        $user = $permissions->getCurrentUser($session);
-
-        if ($invoice->getUser() != $user->getId()) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
-            ));
-        }
-
-        $basePath = $this->get('kernel')->getRootDir(). "/../web/downloads/";
-        $path = $basePath.$invoice->getPath();
-        if (!file_exists($path) || !is_file($path)) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
-            ));
-        }
-        $content = file_get_contents($path);
-
-        $response = new Response();
-        $response->headers->set('Content-Type', 'mime/type');
-        $response->headers->set('Content-Disposition', 'attachment;filename="'.$invoice->getNumber().".pdf");
-
-        $response->setContent($content);
-        return $response;
-    }
 }

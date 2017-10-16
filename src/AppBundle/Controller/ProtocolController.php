@@ -149,6 +149,7 @@ class ProtocolController extends Controller
             $purchasedProtocol->setUser($user->getId());
             $purchasedProtocol->setEnabled(false);
             $purchasedProtocol->setOrderHash($hasher->generate(8, false));
+            $purchasedProtocol->setOrderDate(new \DateTime(date('Y-m-d')));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;

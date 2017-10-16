@@ -21,7 +21,7 @@
                             <tr>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 <td>{{ users[protocol.user].companyName }} ({{ users[protocol.user].email }})</td>
-                                <td></td>
+                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
                                 <td><a href="">Marcar como cobrado</a></td>
                             </tr>
                         {% endfor %}

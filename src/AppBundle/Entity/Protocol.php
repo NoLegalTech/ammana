@@ -42,6 +42,11 @@ class Protocol
      */
     private $orderHash;
 
+    /**
+     * @var date
+     */
+    private $orderDate;
+
 
     /**
      * Get id
@@ -195,6 +200,30 @@ class Protocol
     public function getOrderHash()
     {
         return $this->orderHash;
+    }
+
+    /**
+     * Set orderDate
+     *
+     * @param date $orderDate
+     *
+     * @return Protocol
+     */
+    public function setOrderDate($orderDate)
+    {
+        $this->orderDate = $orderDate;
+
+        return $this;
+    }
+
+    /**
+     * Get orderDate
+     *
+     * @return date
+     */
+    public function getOrderDate()
+    {
+        return $this->orderDate;
     }
 
 }

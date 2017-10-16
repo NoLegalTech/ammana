@@ -29,4 +29,7 @@ AppBundle\Entity\Protocol:
             length: '8'
             nullable: true
             column: order_hash
+        orderDate:
+            type: date
+            column: order_date
     lifecycleCallbacks: {  }

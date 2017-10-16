@@ -118,7 +118,7 @@ class ProtocolController extends Controller
             $purchasedProtocol->setIdentifier($id);
             $purchasedProtocol->setUser($user->getId());
             $purchasedProtocol->setEnabled(false);
-            $purchasedProtocol->setOrderHash($hasher->generate(8));
+            $purchasedProtocol->setOrderHash($hasher->generate(8, false));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;

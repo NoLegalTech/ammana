@@ -23,6 +23,11 @@ class Protocol
     private $user;
 
     /**
+     * @var int
+     */
+    private $invoice;
+
+    /**
      * @var string
      */
     private $answers;
@@ -94,6 +99,30 @@ class Protocol
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set invoice
+     *
+     * @param int $invoice
+     *
+     * @return Protocol
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * Get invoice
+     *
+     * @return int
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
     }
 
     /**

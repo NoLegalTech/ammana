@@ -11,6 +11,9 @@ AppBundle\Entity\Protocol:
     fields:
         user:
             type: integer
+        invoice:
+            type: integer
+            nullable: true
         enabled:
             type: boolean
             column: enabled

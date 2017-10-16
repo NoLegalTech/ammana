@@ -25,7 +25,7 @@
                                     <td>No disponible (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">paga!</a>)</td>
                                 {% endif %}
                                 {% if invoices[protocol.id] %}
-                                    <td><a href="{{ invoices[protocol.id] }}" target="_blank">Descargar factura</a></td>
+                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank">Descargar factura</a></td>
                                 {% else %}
                                     <td>Factura no disponible</td>
                                 {% endif %}

@@ -271,6 +271,11 @@ class UserController extends Controller
                     'text' => 'Clientes'
                 ),
                 array(
+                    'icon' => 'fa-eur',
+                    'path' => 'invoice_index',
+                    'text' => 'Facturas'
+                ),
+                array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
                     'text' => 'Cerrar sesión'

@@ -25,20 +25,45 @@ class InvoiceController extends Controller
      */
     public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
-        if (!$permissions->currentRolesInclude("customer")) {
-            return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
-            ));
+        if ($permissions->currentRolesInclude("customer")) {
+            $user = $permissions->getCurrentUser($session);
+            return $this->showUserInvoices($user);
         }
 
-        $user = $permissions->getCurrentUser($session);
+        if ($permissions->currentRolesInclude("admin")) {
+            return $this->showAllInvoices();
+        }
 
+        return $this->redirectToRoute('error', array(
+            'message' => 'Ha ocurrido un error inesperado.'
+        ));
+    }
+
+    private function showUserInvoices($user) {
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
             ->findByUser($user->getId());
 
         return $this->render('invoice/index.html.twig', array(
             'invoices' => $invoices,
+        ));
+    }
+
+    private function showAllInvoices() {
+        $invoices = $this->getDoctrine()
+            ->getRepository(Invoice::class)
+            ->findAll();
+
+        $users = [];
+        foreach ($invoices as $invoice) {
+            $users[$invoice->getUser()] = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($invoice->getUser());
+        }
+
+        return $this->render('invoice/full_list.html.twig', array(
+            'invoices' => $invoices,
+            'users' => $users
         ));
     }
 

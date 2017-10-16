@@ -37,6 +37,10 @@ class ProtocolController extends Controller
      */
     public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, Invoices $invoices)
     {
+        if ($permissions->currentRolesInclude("admin")) {
+            return $this->showAllOrders();
+        }
+
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
@@ -60,6 +64,32 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names
+        ));
+    }
+
+    private function showAllOrders() {
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByEnabled(false);
+
+        $names = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+        }
+
+        $users = [];
+        foreach ($protocols as $protocol) {
+            $users[$protocol->getUser()] = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->find($protocol->getUser());
+        }
+
+        return $this->render('protocol/full_list.html.twig', array(
+            'protocols' => $protocols,
+            'names' => $names,
+            'users' => $users
         ));
     }
 

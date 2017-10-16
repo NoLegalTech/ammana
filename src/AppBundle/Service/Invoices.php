@@ -69,6 +69,7 @@ class Invoices {
         $this->em->flush();
 
         $protocol->setInvoice($invoice->getId());
+        $protocol->setEnabled(true);
         $this->em->flush();
     }
 

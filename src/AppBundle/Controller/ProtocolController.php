@@ -23,6 +23,8 @@ use AppBundle\Service\Invoices;
 use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
 use AppBundle\Service\OrderNumberFormatter;
+use AppBundle\Service\Quaderno;
+use AppBundle\Service\Protocols;
 
 /**
  * Protocol controller.
@@ -150,6 +152,7 @@ class ProtocolController extends Controller
             $purchasedProtocol->setEnabled(false);
             $purchasedProtocol->setOrderHash($hasher->generate(8, false));
             $purchasedProtocol->setOrderDate(new \DateTime(date('Y-m-d')));
+            $purchasedProtocol->setPrice($this->container->getParameter('protocol_price'));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;
@@ -301,7 +304,7 @@ class ProtocolController extends Controller
             return $this->redirectToRoute('protocol_paid');
         }
 
-        $amount = $this->container->getParameter('protocol_price');
+        $amount = $protocol->getPrice();
         $token = array(
             "iat" => time(),
             "amount" => $amount,
@@ -337,6 +340,38 @@ class ProtocolController extends Controller
     public function paymentCompleteAction()
     {
         return $this->render('protocol/payment_complete.html.twig');
+    }
+
+    /**
+     * Marks a protocol as paid by transfer.
+     *
+     */
+    public function payTransferAction(Protocol $protocol, LoggerInterface $logger, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        $theUser = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($protocol->getUser());
+
+        $theInvoice = $quaderno->createInvoice($theUser, $protocol);
+
+        if ($theInvoice == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        $this->getDoctrine()->getManager()->persist($theInvoice);
+        $protocol->setEnabled(true);
+        $protocol->setInvoice($theInvoice->getId());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('protocol_index');
     }
 
 }

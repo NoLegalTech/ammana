@@ -32,4 +32,6 @@ AppBundle\Entity\Protocol:
         orderDate:
             type: date
             column: order_date
+        price:
+            type: integer
     lifecycleCallbacks: {  }

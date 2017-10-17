@@ -39,3 +39,7 @@ services:
         arguments:
             $api_key: '%quaderno_api_key%'
             $api_url: '%quaderno_api_url%'
+    AppBundle\Service\Protocols:
+        arguments:
+            $ids: '%protocols%'
+            $specs: [ '%protocol.uso_redes%', '%protocol.uso_telematica%', '%protocol.uso_mensajerias%' ]

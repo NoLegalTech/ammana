@@ -72,6 +72,11 @@ class User
      */
     private $roles;
 
+    /**
+     * @var string
+     */
+    private $quadernoId;
+
 
     /**
      * Get id
@@ -369,6 +374,30 @@ class User
     public function getRoles()
     {
         return $this->roles;
+    }
+
+    /**
+     * Set quadernoId
+     *
+     * @param string $quadernoId
+     *
+     * @return User
+     */
+    public function setQuadernoId($quadernoId)
+    {
+        $this->quadernoId = $quadernoId;
+
+        return $this;
+    }
+
+    /**
+     * Get quadernoId
+     *
+     * @return string
+     */
+    public function getQuadernoId()
+    {
+        return $this->quadernoId;
     }
 
 }

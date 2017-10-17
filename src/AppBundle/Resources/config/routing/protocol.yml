@@ -13,6 +13,11 @@ protocol_pay:
     defaults: { _controller: "AppBundle:Protocol:pay" }
     methods:  [GET, POST]
 
+protocol_pay_transfer:
+    path:     /protocol/pay_transfer/{id}
+    defaults: { _controller: "AppBundle:Protocol:payTransfer" }
+    methods:  GET
+
 protocol_paid:
     path:     /protocol/payment_complete
     defaults: { _controller: "AppBundle:Protocol:paymentComplete" }

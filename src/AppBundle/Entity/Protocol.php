@@ -47,6 +47,11 @@ class Protocol
      */
     private $orderDate;
 
+    /**
+     * @var int
+     */
+    private $price;
+
 
     /**
      * Get id
@@ -224,6 +229,30 @@ class Protocol
     public function getOrderDate()
     {
         return $this->orderDate;
+    }
+
+    /**
+     * Set price
+     *
+     * @param int $price
+     *
+     * @return Protocol
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
 }

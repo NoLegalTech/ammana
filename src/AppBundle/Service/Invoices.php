@@ -71,6 +71,8 @@ class Invoices {
         $protocol->setInvoice($invoice->getId());
         $protocol->setEnabled(true);
         $this->em->flush();
+
+        $this->quaderno->sendToClient($invoice);
     }
 
 }

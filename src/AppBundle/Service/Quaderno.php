@@ -35,6 +35,7 @@ class Quaderno {
         $invoice->setEmittedAt(new \DateTime($found[0]->__get('issue_date')));
         $invoice->setNumber($found[0]->__get('number'));
         $invoice->setUrl($found[0]->__get('pdf'));
+        $invoice->setQuadernoId($found[0]->__get('id'));
         return $invoice;
     }
 
@@ -86,6 +87,7 @@ class Quaderno {
         $invoice->setEmittedAt(new \DateTime($qInvoice->__get('issue_date')));
         $invoice->setNumber($qInvoice->__get('number'));
         $invoice->setUrl($qInvoice->__get('pdf'));
+        $invoice->setQuadernoId($qInvoice[0]->__get('id'));
         return $invoice;
     }
 

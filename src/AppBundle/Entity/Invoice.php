@@ -32,6 +32,11 @@ class Invoice
      */
     private $url;
 
+    /**
+     * @var string
+     */
+    private $quadernoId;
+
 
     /**
      * Get id
@@ -137,6 +142,30 @@ class Invoice
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * Set quadernoId
+     *
+     * @param string $quadernoId
+     *
+     * @return User
+     */
+    public function setQuadernoId($quadernoId)
+    {
+        $this->quadernoId = $quadernoId;
+
+        return $this;
+    }
+
+    /**
+     * Get quadernoId
+     *
+     * @return string
+     */
+    public function getQuadernoId()
+    {
+        return $this->quadernoId;
     }
 
 }

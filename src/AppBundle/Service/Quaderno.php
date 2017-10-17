@@ -87,7 +87,7 @@ class Quaderno {
         $invoice->setEmittedAt(new \DateTime($qInvoice->__get('issue_date')));
         $invoice->setNumber($qInvoice->__get('number'));
         $invoice->setUrl($qInvoice->__get('pdf'));
-        $invoice->setQuadernoId($qInvoice[0]->__get('id'));
+        $invoice->setQuadernoId($qInvoice->__get('id'));
         return $invoice;
     }
 
@@ -127,6 +127,13 @@ class Quaderno {
             foreach ($field_errors as $error) {
                 $this->logger->error("     - " . $error);
             }
+        }
+    }
+
+    public function sendToClient($invoice) {
+        $qInvoice = QuadernoInvoice::find($invoice->getQuadernoId());
+        if ($qInvoice != null) {
+            $qInvoice->deliver();
         }
     }
 

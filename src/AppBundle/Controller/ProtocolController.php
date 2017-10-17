@@ -414,6 +414,8 @@ class ProtocolController extends Controller
         $protocol->setInvoice($theInvoice->getId());
         $this->getDoctrine()->getManager()->flush();
 
+        $quaderno->sendToClient($theInvoice);
+
         return $this->redirectToRoute('protocol_index');
     }
 

@@ -42,18 +42,12 @@
                 <h3 class="heading">Comprar protocolos</h2>
                 <table>
                     <tbody>
-                        <tr>
-                            <td>Modelo Autocobertura Redes Sociales</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_redes' }) }}">Comprar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Modelo Autocobertura Telemática</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_telematica' }) }}">Comprar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Modelo Autocobertura Mensajerías</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_mensajerias' }) }}">Comprar</a></td>
-                        </tr>
+                        {% for protocol in to_buy %}
+                            <tr>
+                                <td>{{ protocol.name }}</td>
+                                <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Comprar</a></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
 

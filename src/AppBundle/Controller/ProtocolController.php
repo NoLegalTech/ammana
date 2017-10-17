@@ -56,16 +56,22 @@ class ProtocolController extends Controller
             ->findByUser($user->getId());
 
         $names = [];
+        $to_buy = [];
         $protocols_specs = $this->container->getParameter('protocols');
         foreach ($protocols_specs as $id) {
             $protocol_spec = $this->container->getParameter('protocol.'.$id);
             $names[$id] = $protocol_spec['name'];
+            $to_buy []= array(
+                'id' => $id,
+                'name' => $protocol_spec['name']
+            );
         }
 
         return $this->render('protocol/index.html.twig', array(
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
-            'names' => $names
+            'names' => $names,
+            'to_buy' => $to_buy
         ));
     }
 

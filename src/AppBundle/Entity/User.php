@@ -400,5 +400,24 @@ class User
         return $this->quadernoId;
     }
 
+    /**
+     * String representation fo this object
+     *
+     * @return string
+     */
+    public function __toString() {
+        return "User {"
+                . "    id: " . $this->getId()
+                . "    email: " . $this->getEmail()
+                . "    companyName: " . $this->getCompanyName()
+                . "    enabled: " . $this->getEnabled()
+                . "    cif: " . $this->getCif()
+                . "    address: " . $this->getAddress()
+                . "    contactPerson: " . $this->getContactPerson()
+                . "    roles: " . $this->getRoles()
+                . "    quadernoId: " . $this->getQuadernoId()
+                . "}";
+    }
+
 }
 

@@ -277,7 +277,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices)
+    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -298,6 +298,19 @@ class ProtocolController extends Controller
             ));
         }
 
+        if ($request->query->get('quaderno_error_message') != null) {
+            $this->logSevereError(
+                $logger,
+                $mailer,
+                'ERROR en botón de Paypal de quaderno',
+                $request->query->get('quaderno_error_message'),
+                $permissions->getCurrentUser()
+            );
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
@@ -311,9 +324,14 @@ class ProtocolController extends Controller
             $item_number = $postData->get('item_number');
 
             if ($payer_status != 'VERIFIED' || $formatter->format($protocol->getId()) != $item_number) {
-                $logger->error("Error returning from Paypal payment of protocol #".$protocol->getId());
-                $logger->error("    payer_status = ".$payer_status);
-                $logger->error("    item_number  = ".$item_number);
+                $this->logSevereError(
+                    $logger,
+                    $mailer,
+                    'ERROR al completar el pago con el botón de Paypal de quaderno',
+                    $request->query->get('quaderno_error_message'),
+                    "Info técnica: payer_status = " . $payer_status . ", item_number  = " . $item_number,
+                    $permissions->getCurrentUser()
+                );
                 return $this->redirectToRoute('error', array(
                     'message' => 'Ha ocurrido un error inesperado.'
                 ));
@@ -397,6 +415,46 @@ class ProtocolController extends Controller
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('protocol_index');
+    }
+
+    private function logSevereError($logger, $mailer, $title, $message, $user) {
+        $logger->error($title . ':');
+        $logger->error('    ' . $message);
+
+        if ($user != null) {
+            $user = $user->__toString();
+        }
+
+        $plain_text = $this->renderView(
+            'email/error.txt.twig',
+            array(
+                'title' => $title,
+                'message' => $message,
+                'user' => $user
+            )
+        );
+
+        $sender_email = $this->container->getParameter('emails_sender_email');
+        $sender_name = $this->container->getParameter('emails_sender_name');
+        $email_to_report_errors = $this->container->getParameter('email_to_report_errors');
+
+        $message = (new \Swift_Message('ammana.es - Se ha producido un error'))
+            ->setFrom(array($sender_email => $sender_name))
+            ->setTo($email_to_report_errors)
+            ->setBody(
+                $this->renderView(
+                    'email/error.html.twig',
+                    array(
+                        'title' => $title,
+                        'message' => $message,
+                        'user' => $user
+                    )
+                ),
+                'text/html'
+            )
+            ->addPart($plain_text, 'text/plain');
+
+        $mailer->send($message);
     }
 
 }

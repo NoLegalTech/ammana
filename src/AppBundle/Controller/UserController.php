@@ -134,8 +134,11 @@ class UserController extends Controller
                 $logger->info('Sending welcome mail to '.$user->getEmail().' with content:');
                 $logger->info($plain_text);
 
+                $sender_email = $this->container->getParameter('emails_sender_email');
+                $sender_name = $this->container->getParameter('emails_sender_name');
+
                 $message = (new \Swift_Message('Bienvenido a ammana.es'))
-                    ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
+                    ->setFrom(array($sender_email => $sender_name))
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
@@ -339,8 +342,11 @@ class UserController extends Controller
             $logger->info('Sending "reset password" mail to '.$user->getEmail().' with content:');
             $logger->info($plain_text);
 
+            $sender_email = $this->container->getParameter('emails_sender_email');
+            $sender_name = $this->container->getParameter('emails_sender_name');
+
             $message = (new \Swift_Message('Establecer contraseña'))
-                ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
+                ->setFrom(array($sender_email => $sender_name))
                 ->setTo($found_user->getEmail())
                 ->setBody(
                     $this->renderView(

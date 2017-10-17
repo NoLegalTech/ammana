@@ -20,6 +20,9 @@ class Quaderno {
         QuadernoBase::init($api_key, $api_url);
         $this->logger = $logger;
         $this->protocols = $protocols;
+        if (!QuadernoBase::ping()) {
+            $this->logger->error('Quaderno does not respond to ping!');
+        }
     }
 
     public function getInvoice($orderNumber) {

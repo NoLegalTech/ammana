@@ -23,6 +23,11 @@ class Protocol
     private $user;
 
     /**
+     * @var int
+     */
+    private $invoice;
+
+    /**
      * @var string
      */
     private $answers;
@@ -31,6 +36,21 @@ class Protocol
      * @var string
      */
     private $identifier;
+
+    /**
+     * @var string
+     */
+    private $orderHash;
+
+    /**
+     * @var date
+     */
+    private $orderDate;
+
+    /**
+     * @var int
+     */
+    private $price;
 
 
     /**
@@ -92,6 +112,30 @@ class Protocol
     }
 
     /**
+     * Set invoice
+     *
+     * @param int $invoice
+     *
+     * @return Protocol
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+
+        return $this;
+    }
+
+    /**
+     * Get invoice
+     *
+     * @return int
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
      * Set answers
      *
      * @param string $answers
@@ -137,6 +181,78 @@ class Protocol
     public function getIdentifier()
     {
         return $this->identifier;
+    }
+
+    /**
+     * Set orderHash
+     *
+     * @param string $orderHash
+     *
+     * @return Protocol
+     */
+    public function setOrderHash($orderHash)
+    {
+        $this->orderHash = $orderHash;
+
+        return $this;
+    }
+
+    /**
+     * Get orderHash
+     *
+     * @return string
+     */
+    public function getOrderHash()
+    {
+        return $this->orderHash;
+    }
+
+    /**
+     * Set orderDate
+     *
+     * @param date $orderDate
+     *
+     * @return Protocol
+     */
+    public function setOrderDate($orderDate)
+    {
+        $this->orderDate = $orderDate;
+
+        return $this;
+    }
+
+    /**
+     * Get orderDate
+     *
+     * @return date
+     */
+    public function getOrderDate()
+    {
+        return $this->orderDate;
+    }
+
+    /**
+     * Set price
+     *
+     * @param int $price
+     *
+     * @return Protocol
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return int
+     */
+    public function getPrice()
+    {
+        return $this->price;
     }
 
 }

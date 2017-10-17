@@ -6,8 +6,6 @@ use Psr\Log\LoggerInterface;
 
 use Symfony\Component\Filesystem\Filesystem;
 
-use AppBundle\Entity\Protocol;
-use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,8 +14,17 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
+use \Firebase\JWT\JWT;
+
+use AppBundle\Entity\Protocol;
+use AppBundle\Entity\User;
+use AppBundle\Service\HashGenerator;
+use AppBundle\Service\Invoices;
 use AppBundle\Service\PDFPrinter;
 use AppBundle\Service\PermissionsService;
+use AppBundle\Service\OrderNumberFormatter;
+use AppBundle\Service\Quaderno;
+use AppBundle\Service\Protocols;
 
 /**
  * Protocol controller.
@@ -30,8 +37,12 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, Invoices $invoices)
     {
+        if ($permissions->currentRolesInclude("admin")) {
+            return $this->showAllOrders();
+        }
+
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
@@ -44,6 +55,38 @@ class ProtocolController extends Controller
             ->getRepository(Protocol::class)
             ->findByUser($user->getId());
 
+        $already_ordered_ids = [];
+        foreach ($protocols as $protocol) {
+            $already_ordered_ids []= $protocol->getIdentifier();
+        }
+
+        $names = [];
+        $to_buy = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+            if (!in_array($id, $already_ordered_ids)) {
+                $to_buy []= array(
+                    'id' => $id,
+                    'name' => $protocol_spec['name']
+                );
+            }
+        }
+
+        return $this->render('protocol/index.html.twig', array(
+            'protocols' => $protocols,
+            'invoices' => $invoices->getInvoicesForProtocols($protocols),
+            'names' => $names,
+            'to_buy' => $to_buy
+        ));
+    }
+
+    private function showAllOrders() {
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByEnabled(false);
+
         $names = [];
         $protocols_specs = $this->container->getParameter('protocols');
         foreach ($protocols_specs as $id) {
@@ -51,9 +94,17 @@ class ProtocolController extends Controller
             $names[$id] = $protocol_spec['name'];
         }
 
-        return $this->render('protocol/index.html.twig', array(
+        $users = [];
+        foreach ($protocols as $protocol) {
+            $users[$protocol->getUser()] = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->find($protocol->getUser());
+        }
+
+        return $this->render('protocol/full_list.html.twig', array(
             'protocols' => $protocols,
-            'names' => $names
+            'names' => $names,
+            'users' => $users
         ));
     }
 
@@ -72,7 +123,7 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, HashGenerator $hasher)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -112,6 +163,9 @@ class ProtocolController extends Controller
             $purchasedProtocol->setIdentifier($id);
             $purchasedProtocol->setUser($user->getId());
             $purchasedProtocol->setEnabled(false);
+            $purchasedProtocol->setOrderHash($hasher->generate(8, false));
+            $purchasedProtocol->setOrderDate(new \DateTime(date('Y-m-d')));
+            $purchasedProtocol->setPrice($this->container->getParameter('protocol_price'));
             $answers = [];
             foreach ($questionsForm->getData() as $key => $value) {
                 $answers []= $key . '=' . $value;
@@ -121,10 +175,8 @@ class ProtocolController extends Controller
             $em->persist($purchasedProtocol);
             $em->flush();
 
-            return $this->render('protocol/payment.html.twig', array(
-                'profile_completed' => $profile_completed,
-                'form' => $questionsForm->createView(),
-                'protocol' => $protocol
+            return $this->redirectToRoute('protocol_pay', array(
+                'id' => $purchasedProtocol->getId()
             ));
         }
 
@@ -225,7 +277,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction($id, $type, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -234,28 +286,177 @@ class ProtocolController extends Controller
         }
 
         $user = $permissions->getCurrentUser();
-
-        $protocol = $this->container->getParameter('protocol.'.$id);
-        if ($protocol == null) {
+        if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));
         }
-        $protocol['id'] = $id;
 
-        $found = $this->getDoctrine()
-            ->getRepository(Protocol::class)
-            ->findOneBy(array(
-                'user' => $user->getId(),
-                'identifier' => $id
+        if ($protocol->getEnabled()) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
             ));
-
-        if ($type == 'paypal') {
-            $found->setEnabled(true);
-            $this->getDoctrine()->getManager()->flush();
         }
 
+        if ($request->query->get('quaderno_error_message') != null) {
+            $this->logSevereError(
+                $logger,
+                $mailer,
+                'ERROR en botón de Paypal de quaderno',
+                $request->query->get('quaderno_error_message'),
+                $permissions->getCurrentUser()
+            );
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        if ($request->isMethod('POST')) {
+            $postData = $request->request;
+            $payer_status = $postData->get('payer_status');
+            $item_number = $postData->get('item_number');
+
+            if ($payer_status != 'VERIFIED' || $formatter->format($protocol->getId()) != $item_number) {
+                $this->logSevereError(
+                    $logger,
+                    $mailer,
+                    'ERROR al completar el pago con el botón de Paypal de quaderno',
+                    $request->query->get('quaderno_error_message'),
+                    "Info técnica: payer_status = " . $payer_status . ", item_number  = " . $item_number,
+                    $permissions->getCurrentUser()
+                );
+                return $this->redirectToRoute('error', array(
+                    'message' => 'Ha ocurrido un error inesperado.'
+                ));
+            }
+            $protocol->setEnabled(true);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('protocol_paid');
+        }
+
+        $amount = $protocol->getPrice();
+        $token = array(
+            "iat" => time(),
+            "amount" => $amount,
+            "currency" => "EUR",
+            "description" => $protocol_spec['name'],
+            "item_number" => $formatter->format($protocol->getId()),
+            "quantity" => 1
+        );
+        $jwt = JWT::encode($token, $this->container->getParameter('quaderno_api_key'));
+
+        return $this->render('protocol/payment.html.twig', array(
+            'user' => $user,
+            'amount' => $amount,
+            'protocol_spec' => $protocol_spec,
+            'charge' => $jwt,
+            'payment_data' => array(
+                'order_hash' => $protocol->getOrderHash(),
+                'bank_account' => $this->container->getParameter('account_number'),
+                'amount' => $this->formatEuro($amount)
+            )
+        ));
+    }
+
+    private function formatEuro($amount) {
+        $amount = "$amount";
+        return substr($amount, 0, strlen($amount) - 2) . '.' . substr($amount, -2);
+    }
+
+    /**
+     * Shows a payment completion status page.
+     *
+     */
+    public function paymentCompleteAction()
+    {
+        return $this->render('protocol/payment_complete.html.twig');
+    }
+
+    /**
+     * Marks a protocol as paid by transfer.
+     *
+     */
+    public function payTransferAction(Protocol $protocol, LoggerInterface $logger, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        if ($protocol->getEnabled()) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        $theUser = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($protocol->getUser());
+
+        $theInvoice = $quaderno->createInvoice($theUser, $protocol);
+
+        if ($theInvoice == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        $this->getDoctrine()->getManager()->persist($theInvoice);
+        $protocol->setEnabled(true);
+        $protocol->setInvoice($theInvoice->getId());
+        $this->getDoctrine()->getManager()->flush();
+
+        $quaderno->sendToClient($theInvoice);
+
         return $this->redirectToRoute('protocol_index');
+    }
+
+    private function logSevereError($logger, $mailer, $title, $message, $user) {
+        $logger->error($title . ':');
+        $logger->error('    ' . $message);
+
+        if ($user != null) {
+            $user = $user->__toString();
+        }
+
+        $plain_text = $this->renderView(
+            'email/error.txt.twig',
+            array(
+                'title' => $title,
+                'message' => $message,
+                'user' => $user
+            )
+        );
+
+        $sender_email = $this->container->getParameter('emails_sender_email');
+        $sender_name = $this->container->getParameter('emails_sender_name');
+        $email_to_report_errors = $this->container->getParameter('email_to_report_errors');
+
+        $message = (new \Swift_Message('ammana.es - Se ha producido un error'))
+            ->setFrom(array($sender_email => $sender_name))
+            ->setTo($email_to_report_errors)
+            ->setBody(
+                $this->renderView(
+                    'email/error.html.twig',
+                    array(
+                        'title' => $title,
+                        'message' => $message,
+                        'user' => $user
+                    )
+                ),
+                'text/html'
+            )
+            ->addPart($plain_text, 'text/plain');
+
+        $mailer->send($message);
     }
 
 }

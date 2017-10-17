@@ -11,6 +11,9 @@ AppBundle\Entity\Protocol:
     fields:
         user:
             type: integer
+        invoice:
+            type: integer
+            nullable: true
         enabled:
             type: boolean
             column: enabled
@@ -21,4 +24,14 @@ AppBundle\Entity\Protocol:
         identifier:
             type: string
             length: '100'
+        orderHash:
+            type: string
+            length: '8'
+            nullable: true
+            column: order_hash
+        orderDate:
+            type: date
+            column: order_date
+        price:
+            type: integer
     lifecycleCallbacks: {  }

@@ -12,6 +12,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -21,7 +22,12 @@
                                 {% if protocol.enabled %}
                                     <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>
                                 {% else %}
-                                    <td>No disponible (paga!)</td>
+                                    <td>No disponible (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">paga!</a>)</td>
+                                {% endif %}
+                                {% if invoices[protocol.id] %}
+                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank">Descargar factura</a></td>
+                                {% else %}
+                                    <td>Factura no disponible</td>
                                 {% endif %}
                             </tr>
                         {% endfor %}
@@ -32,23 +38,20 @@
                         No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
                     </p>
                 {% endif %}
-                <h3 class="heading">Comprar protocolos</h2>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Modelo Autocobertura Redes Sociales</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_redes' }) }}">Comprar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Modelo Autocobertura Telemática</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_telematica' }) }}">Comprar</a></td>
-                        </tr>
-                        <tr>
-                            <td>Modelo Autocobertura Mensajerías</td>
-                            <td><a href="{{ path('protocol_buy', { 'id': 'uso_mensajerias' }) }}">Comprar</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                {% if to_buy %}
+                    <h3 class="heading">Comprar protocolos</h2>
+                    <table>
+                        <tbody>
+                            {% for protocol in to_buy %}
+                                <tr>
+                                    <td>{{ protocol.name }}</td>
+                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Comprar</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
 
             </div>
             <div class="clear"></div>

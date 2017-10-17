@@ -438,3 +438,7 @@ input[type="radio"] + label:after {
 #form label {
     text-align: justify;
 }
+
+.paypal-button img {
+    padding: 7px 3px;
+}

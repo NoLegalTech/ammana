@@ -29,9 +29,11 @@ class ProfileController extends Controller {
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $file = $user->getLogo();
-            $fileName = md5(uniqid()).'.'.$file->guessExtension();
-            $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
-            $user->setLogo($fileName);
+            if ($file != null) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+                $user->setLogo($fileName);
+            }
             
             $this->getDoctrine()->getManager()->flush();
 

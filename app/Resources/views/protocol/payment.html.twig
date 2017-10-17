@@ -4,16 +4,80 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Pagar {{ protocol.name }}</h2>
+                <h2 class="heading">Pagar {{ protocol_spec.name }}</h2>
                 <p>
                     Tu protocolo está listo, pero antes paga!
                 </p>
                 <p>
-                    <a href="{{ path('protocol_pay', { 'id': protocol.id, 'type': 'paypal' }) }}">Paypal</a>
-                    <a href="{{ path('protocol_pay', { 'id': protocol.id, 'type': 'transfer' }) }}">Transferencia</a>
+                    <form id="payment-form" action="" method="POST"
+                            data-gateway="paypal"
+                            data-charge="{{ charge }}"
+                            data-amount="{{ amount }}"
+                            data-taxes="included"
+                            data-key="pk_test_xH_ZFPoxFkqyRxx9Wq3z">
+                        <input type="hidden" value="1" data-quaderno="quantity">
+                        <span class="payment-errors"></span>
+                        <input type="hidden" data-quaderno="first-name" value="{{ user.companyName }}" />
+                        <input type="hidden" data-quaderno="last-name"/>
+                        <input type="hidden" data-quaderno="company-name"/>
+                        <input type="hidden" data-quaderno="email"/>
+                        <input type="hidden" data-quaderno="street-line-1"/>
+                        <input type="hidden" data-quaderno="street-line-2"/>
+                        <input type="hidden" data-quaderno="city"/>
+                        <input type="hidden" data-quaderno="postal-code"/>
+                        <input type="hidden" data-quaderno="region"/>
+                        <input type="hidden" data-quaderno="country" value="ES" />
+                        <input type="hidden" data-quaderno="vat-number"/>
+                        <button class="paypal-button" type="submit">
+                            Pagar con <img src="/images/paypal.png">
+                        </button>
+                    </form> 
+                </p>
+                <p>
+                    O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:
+                    <blockquote>
+                        Concepto: <strong>{{ payment_data.order_hash }}</strong><br/>
+                        Número de cuenta: <strong>{{ payment_data.bank_account }}</strong><br/>
+                        Importe: <strong>{{ payment_data.amount }} €</strong>
+                    </blockquote>
+                    No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
                 </p>
             </div>
             <div class="clear"></div>
         </main>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://js.quaderno.io/v2/"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#payment-form').submit(function(e) {
+                var $form = $(this);
+
+                // Disable the submit button to prevent repeated clicks
+                $form.find('button').prop('disabled', true);
+                Quaderno.createCharge({
+                    success: function(status, response) {
+                        console.log('success');
+                        console.log('status: ' + status + ', response:');
+                        console.log(response);
+                    },
+                    error: function(status, response) {
+                        console.error('Error: quaderno replied with ' + status);
+                        var errorDetails = response.message;
+                        if (response.details) {
+                            errorDetails += ' (' + response.details + ')';
+                        }
+                        console.error('Error details: ' + response.message);
+                        $form.find('button').prop('disabled', false);
+                    }
+                });
+                // Prevent the form from submitting with the default action
+                return false;
+            });
+        });
+    </script>
 {% endblock %}

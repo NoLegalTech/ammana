@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Service\PermissionsService;
+use AppBundle\Service\HashGenerator;
 
 /**
  * User controller.
@@ -110,7 +111,7 @@ class UserController extends Controller
     /**
      * Registers a new user.
      */
-    public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer)
+    public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
@@ -120,7 +121,7 @@ class UserController extends Controller
             try {
                 $user->setEnabled(false);
                 $user->setRoles('customer');
-                $user->setActivationHash($this->generateActivationHash());
+                $user->setActivationHash($hasher->generate());
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
@@ -133,8 +134,11 @@ class UserController extends Controller
                 $logger->info('Sending welcome mail to '.$user->getEmail().' with content:');
                 $logger->info($plain_text);
 
+                $sender_email = $this->container->getParameter('emails_sender_email');
+                $sender_name = $this->container->getParameter('emails_sender_name');
+
                 $message = (new \Swift_Message('Bienvenido a ammana.es'))
-                    ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
+                    ->setFrom(array($sender_email => $sender_name))
                     ->setTo($user->getEmail())
                     ->setBody(
                         $this->renderView(
@@ -160,23 +164,6 @@ class UserController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
-    }
-
-    public function generateActivationHash() {
-        $result = "";
-        $allowed_chars = array(
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-            '.', '-', '_', '$', '!'
-        );
-        for ($i = 0; $i < 100; $i++) {
-            $random_index = rand(0, count($allowed_chars) - 1);
-            $result .= $allowed_chars[$random_index];
-        }
-        return $result;
     }
 
     /**
@@ -256,39 +243,49 @@ class UserController extends Controller
             'customer' => array(
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/profile',
+                    'path' => 'profile_homepage',
                     'text' => 'Mi perfil'
                 ),
                 array(
                     'icon' => 'fa-files-o',
-                    'url' => '/protocol',
+                    'path' => 'protocol_index',
                     'text' => 'Mis protocolos'
                 ),
                 array(
                     'icon' => 'fa-eur',
-                    'url' => '/invoice',
+                    'path' => 'invoice_index',
                     'text' => 'Mis facturas'
                 ),
                 array(
                     'icon' => 'fa-sign-out',
-                    'url' => '/logout',
+                    'path' => 'user_logout',
                     'text' => 'Cerrar sesión'
                 )
             ),
             "admin" => array(
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/profile',
+                    'path' => 'profile_homepage',
                     'text' => 'Mi perfil'
                 ),
                 array(
                     'icon' => 'fa-user',
-                    'url' => '/user',
+                    'path' => 'user_index',
                     'text' => 'Clientes'
                 ),
                 array(
+                    'icon' => 'fa-eur',
+                    'path' => 'invoice_index',
+                    'text' => 'Facturas'
+                ),
+                array(
+                    'icon' => 'fa-files-o',
+                    'path' => 'protocol_index',
+                    'text' => 'Pedidos'
+                ),
+                array(
                     'icon' => 'fa-sign-out',
-                    'url' => '/logout',
+                    'path' => 'user_logout',
                     'text' => 'Cerrar sesión'
                 )
             )
@@ -318,7 +315,7 @@ class UserController extends Controller
     /**
      * Page to recover password.
      */
-    public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer)
+    public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user);
@@ -334,7 +331,7 @@ class UserController extends Controller
                 return $this->redirectToRoute('sent_password_email');
             }
             $found_user = $found[0];
-            $found_user->setActivationHash($this->generateActivationHash());
+            $found_user->setActivationHash($hasher->generate());
             $this->getDoctrine()->getManager()->flush();
 
             $plain_text = $this->renderView(
@@ -345,8 +342,11 @@ class UserController extends Controller
             $logger->info('Sending "reset password" mail to '.$user->getEmail().' with content:');
             $logger->info($plain_text);
 
+            $sender_email = $this->container->getParameter('emails_sender_email');
+            $sender_name = $this->container->getParameter('emails_sender_name');
+
             $message = (new \Swift_Message('Establecer contraseña'))
-                ->setFrom(array('ammana_pre@ammana.es' => 'Ammana'))
+                ->setFrom(array($sender_email => $sender_name))
                 ->setTo($found_user->getEmail())
                 ->setBody(
                     $this->renderView(
@@ -379,13 +379,13 @@ class UserController extends Controller
     /**
      * Page to set new password.
      */
-    public function newPasswordAction(Request $request, LoggerInterface $logger, User $user)
+    public function newPasswordAction(Request $request, LoggerInterface $logger, User $user, HashGenerator $hasher)
     {
         $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setActivationHash($this->generateActivationHash());
+            $user->setActivationHash($hasher->generate());
             $this->getDoctrine()->getManager()->flush();
             return $this->render('user/password_set.html.twig');
         }

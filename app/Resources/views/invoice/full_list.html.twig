@@ -11,6 +11,7 @@
                         <tr>
                             <th>Fecha</th>
                             <th>Número</th>
+                            <th>Cliente</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -19,6 +20,7 @@
                         <tr>
                             <td>{{ invoice.emittedAt | date('d/m/Y') }}</td>
                             <td>{{ invoice.number }}</td>
+                            <td>{{ users[invoice.user].companyName }} ({{ users[invoice.user].email }})</td>
                             {% if invoice.url %}
                                 <td><a href="{{ invoice.url }}" target="_blank">Descargar factura</a></td>
                             {% else %}

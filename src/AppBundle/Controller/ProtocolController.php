@@ -55,16 +55,23 @@ class ProtocolController extends Controller
             ->getRepository(Protocol::class)
             ->findByUser($user->getId());
 
+        $already_ordered_ids = [];
+        foreach ($protocols as $protocol) {
+            $already_ordered_ids []= $protocol->getIdentifier();
+        }
+
         $names = [];
         $to_buy = [];
         $protocols_specs = $this->container->getParameter('protocols');
         foreach ($protocols_specs as $id) {
             $protocol_spec = $this->container->getParameter('protocol.'.$id);
             $names[$id] = $protocol_spec['name'];
-            $to_buy []= array(
-                'id' => $id,
-                'name' => $protocol_spec['name']
-            );
+            if (!in_array($id, $already_ordered_ids)) {
+                $to_buy []= array(
+                    'id' => $id,
+                    'name' => $protocol_spec['name']
+                );
+            }
         }
 
         return $this->render('protocol/index.html.twig', array(

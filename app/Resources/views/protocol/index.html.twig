@@ -39,17 +39,19 @@
                     </p>
                 {% endif %}
 
-                <h3 class="heading">Comprar protocolos</h2>
-                <table>
-                    <tbody>
-                        {% for protocol in to_buy %}
-                            <tr>
-                                <td>{{ protocol.name }}</td>
-                                <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Comprar</a></td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                {% if to_buy %}
+                    <h3 class="heading">Comprar protocolos</h2>
+                    <table>
+                        <tbody>
+                            {% for protocol in to_buy %}
+                                <tr>
+                                    <td>{{ protocol.name }}</td>
+                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Comprar</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
 
             </div>
             <div class="clear"></div>

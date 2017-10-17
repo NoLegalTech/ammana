@@ -279,6 +279,12 @@ class ProtocolController extends Controller
             ));
         }
 
+        if ($protocol->getEnabled()) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
@@ -349,6 +355,12 @@ class ProtocolController extends Controller
     public function payTransferAction(Protocol $protocol, LoggerInterface $logger, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
     {
         if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => 'Ha ocurrido un error inesperado.'
+            ));
+        }
+
+        if ($protocol->getEnabled()) {
             return $this->redirectToRoute('error', array(
                 'message' => 'Ha ocurrido un error inesperado.'
             ));

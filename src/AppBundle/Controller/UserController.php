@@ -33,9 +33,15 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
+        $customers = [];
+        foreach ($users as $user) {
+            if (in_array('customer', explode(',', $user->getRoles()))) {
+                $customers[]= $user;
+            }
+        }
 
         return $this->render('user/index.html.twig', array(
-            'users' => $users,
+            'users' => $customers,
         ));
     }
 

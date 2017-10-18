@@ -4,14 +4,14 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Lista de facturas</h2>
+                <h2 class="heading">{{ i18n.es.invoices_page.title }}</h2>
 
                 <table>
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Número</th>
-                            <th>Cliente</th>
+                            <th>{{ i18n.es.invoices_page.headers.date }}</th>
+                            <th>{{ i18n.es.invoices_page.headers.number }}</th>
+                            <th>{{ i18n.es.invoices_page.headers.customer }}</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -22,9 +22,9 @@
                             <td>{{ invoice.number }}</td>
                             <td>{{ users[invoice.user].companyName }} ({{ users[invoice.user].email }})</td>
                             {% if invoice.url %}
-                                <td><a href="{{ invoice.url }}" target="_blank">Descargar factura</a></td>
+                                <td><a href="{{ invoice.url }}" target="_blank">{{ i18n.es.invoices_page.download }}</a></td>
                             {% else %}
-                                <td>Factura no disponible</td>
+                                <td>{{ i18n.es.invoices_page.no_invoice }}</td>
                             {% endif %}
                         </tr>
                     {% endfor %}

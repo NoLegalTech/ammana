@@ -62,6 +62,15 @@ twig:
                     additional_section:
                         title:   Otro apartado
                         intro:   Quizás más textos comerciales sobre ammana
+
+                invoices_page:
+                    title: Lista de facturas
+                    download: Descargar factura
+                    no_invoice: Factura no disponible
+                    headers:
+                        date:     Fecha
+                        number:   Número
+                        customer: Cliente
                 # =================================================================================
  
 

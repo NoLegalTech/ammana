@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Psr\Log\LoggerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,18 +31,28 @@ class ProfileController extends Controller {
             'data' => $user->getLogo(),
             'mapped' => false
         ));
+        $editForm->add('delete_logo', CheckboxType::class, array(
+            'label' => 'Marque para borrar logo',
+            'required' => false,
+            'mapped' => false
+        ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $previous_logo = $editForm->get('previous_logo')->getData();
+            $delete_logo = $editForm->get('delete_logo')->getData();
 
-            $file = $user->getLogo();
-            if ($file != null) {
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
-                $user->setLogo($fileName);
+            if ($delete_logo) {
+                $user->setLogo(null);
             } else {
-                $user->setLogo($previous_logo);
+                $file = $user->getLogo();
+                if ($file != null) {
+                    $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+                    $user->setLogo($fileName);
+                } else {
+                    $user->setLogo($previous_logo);
+                }
             }
             
             $this->getDoctrine()->getManager()->flush();

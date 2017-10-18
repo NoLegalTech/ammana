@@ -62,7 +62,7 @@ parameters:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE SISTEMAS DE MENSAJERÍA"
                     - "INSTANTANEA EN [company_name]"
-                - h2: "1. Introducción:"
+                - h2: "Introducción:"
                 - p:
                     - "Los cambios tecnológicos producidos en los últimos años han provocado la"
                     - "irrupción, en el ámbito de las relaciones laborales, de novedosos y"
@@ -81,7 +81,7 @@ parameters:
                     - "así como también la protección de datos de carácter personal y confidencial"
                     - "que puedan ser divulgados a través de estos sistemas de mensajería."
                 - h2:
-                    - "2. Concepto de sistemas de mensajería instantánea a los efectos del"
+                    - "Concepto de sistemas de mensajería instantánea a los efectos del"
                     - "presente protocolo:"
                 - p:
                     - "A los efectos del presente protocolo se  considerará “mensajería instantánea”"
@@ -100,7 +100,7 @@ parameters:
                     - "función similar, como por ejemplo Whatsapp, Facebook, Messenger,"
                     - "Telegram, etc. "
                 - h2:
-                    - "3. Utilización de sistemas de mensajería instantánea para la"
+                    - "Utilización de sistemas de mensajería instantánea para la"
                     - "ordenación y organización de la actividad laboral."
                   condition: "ordenes_por_mensajeria=0"
                 - p:
@@ -172,7 +172,7 @@ parameters:
                     - "jornada de trabajo."
                   condition: "cuando_se_remiten_ordenes=1"
                 - h2:
-                    - "4. Protección frente al acoso en el uso y manejo de los sistemas de mensajería instantánea."
+                    - "Protección frente al acoso en el uso y manejo de los sistemas de mensajería instantánea."
                   condition: "proteccion_frente_al_acoso=0"
                 - p:
                     - "La Constitución Española reconoce como derechos fundamentales de las"
@@ -215,7 +215,7 @@ parameters:
                     - "adoptar las medidas disciplinarias que resulten oportunas."
                   condition: "proteccion_frente_al_acoso=0"
                 - h2:
-                    - "5. Uso de servicios de mensajería instantánea para cuestiones privadas"
+                    - "Uso de servicios de mensajería instantánea para cuestiones privadas"
                     - "del trabajador durante la jornada de trabajo"
                 - p:
                     - "La jornada laboral, independientemente del horario que cada trabajador"
@@ -258,7 +258,7 @@ parameters:
                     - "aplicaciones y grupos de mensajería instantánea durante la jornada de"
                     - "trabajo dará lugar a la aplicación del régimen disciplinario."
                 - h2:
-                    - "6. Deber de confidencialidad en la transmisión de información a través"
+                    - "Deber de confidencialidad en la transmisión de información a través"
                     - "de aplicaciones de mensajería instantánea."
                   condition: "informacion_confidencial=0"
                 - p:

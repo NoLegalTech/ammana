@@ -1,0 +1,22 @@
+twig:
+    globals:
+        i18n:
+            es:
+                metadata:
+                    page_title: ammana - seal the deal!
+                    name:       ammana
+                    slogan:     Seal the deal!
+
+                menus:
+                    new_user:
+                        login:     Identificarse
+                        register:  Registrarse
+                        home:      Inicio
+                        protocols: Protocolos
+                        protocol_uso_redes:      Modelo Autocobertura Redes Sociales
+                        protocol_uso_mensajeria: Modelo Autocobertura Mensajerías
+                        protocol_uso_telematica: Modelo Autocobertura Telemática
+
+                footer:
+                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados (o no) - <a href="#">ammana.es</a>
+                    developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>

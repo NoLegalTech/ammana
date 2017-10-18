@@ -74,4 +74,6 @@ twig:
                         link:     "Activa tu cuenta"
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
+                    error:
+                        client_data: "Datos del cliente:"
                 # =================================================================================

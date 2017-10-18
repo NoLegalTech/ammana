@@ -151,6 +151,7 @@ class PDFElement {
 
     private static $list_counter = 1;
     private static $list_style = '.';
+    private static $h2_counter = 1;
 
     public function __construct($element, $type, $pdf, $style, $variables, $condition, $properties) {
         $this->element = $element;
@@ -193,6 +194,14 @@ class PDFElement {
             }
             $this->pdf->Cell($this->style['list-margin-left'], $this->style['line-height'], self::$list_counter . self::$list_style, 0, 0, 'L');
             self::$list_counter++;
+        }
+        if ($this->type == 'h2') {
+            if (is_array($this->element)) {
+                $this->element[0] = self::$h2_counter . '. ' . $this->element[0];
+            } else {
+                $this->element = self::$h2_counter . '. ' . $this->element;
+            }
+            self::$h2_counter++;
         }
         if (is_array($this->element)) {
             $total = count($this->element);

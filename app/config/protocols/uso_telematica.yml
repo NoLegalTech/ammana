@@ -101,7 +101,7 @@ parameters:
                     list-margin-left: 10
             content:
                 - h1: "PROTOCOLO TELEMÁTICO DE [company_name]."
-                - h2: "1. Condiciones generales:"
+                - h2: "Condiciones generales:"
                 - p:
                   - "El presente protocolo se elabora con el objeto de establecer una política"
                   - "interna sobre el uso y manejo de los equipos, utilidades, aplicaciones y"
@@ -137,7 +137,7 @@ parameters:
                   - "incidencias a la empresa conllevará la aplicación del régimen sancionador"
                   - "previsto en el convenio colectivo de aplicación."
                   condition: "desidia_o_negligencia=0"
-                - h2: "2. Uso de las cuentas de correo electrónico corporativo"
+                - h2: "Uso de las cuentas de correo electrónico corporativo"
                   condition: "correo_de_empresa=0"
                 - p:
                   - "El correo electrónico corporativo constituye una herramienta de trabajo"
@@ -226,7 +226,7 @@ parameters:
                   - "ilegal del correo electrónico titularidad de la empresa."
                   condition: "correo_de_empresa=0"
                 - h2:
-                  - "3. Acceso del trabajador a cuentas de correo electrónico privadas desde"
+                  - "Acceso del trabajador a cuentas de correo electrónico privadas desde"
                   - "equipos titularidad de la empresa"
                 - p:
                   - "El trabajador podrá acceder desde los equipos telemáticos que la empresa"
@@ -256,7 +256,7 @@ parameters:
                   - "régimen disciplinario previsto en el Convenio Colectivo."
                   condition: "uso_otras_cuentas_correo=2"
                 - h2:
-                  - "4. Descarga de programas/aplicaciones en los equipos telemáticos"
+                  - "Descarga de programas/aplicaciones en los equipos telemáticos"
                   - "titularidad de la empresa."
                 - p:
                   - "El trabajador, previa autorización por parte de la dirección, podrá instalar en"
@@ -271,7 +271,7 @@ parameters:
                   - "para el desempeño de la actividad laboral, así como también las personas"
                   - "encargadas de proceder a la instalación de los mismos."
                   condition: "descargar_e_instalar_programas=1"
-                - h2: "5. Uso de internet durante el tiempo de trabajo"
+                - h2: "Uso de internet durante el tiempo de trabajo"
                 - p:
                   - "La jornada laboral, independientemente del horario que cada trabajador"
                   - "tenga asignado, está destinada al desempeño eficaz y eficiente de las tareas y"
@@ -303,7 +303,7 @@ parameters:
                   - "presente cláusula podrá dar lugar a la aplicación del régimen disciplinario"
                   - "vigente en la empresa."
                 - h2:
-                  - "6. Uso de teléfonos móviles y Smartphones titularidad de la empresa"
+                  - "Uso de teléfonos móviles y Smartphones titularidad de la empresa"
                   - "por parte de los trabajadores"
                   condition: "smartphone_empresa=0"
                 - p:
@@ -379,7 +379,7 @@ parameters:
                   - "disciplinarias que correspondan  en cada caso."
                   condition: "smartphone_empresa=0"
                 - h2:
-                  - "7. Vigilancia de los equipos y aplicaciones telemáticas titularidad de la"
+                  - "Vigilancia de los equipos y aplicaciones telemáticas titularidad de la"
                   - "empresa usados por los trabajadores."
                   condition: "monitorizar_equipos=0"
                 - p:
@@ -443,7 +443,7 @@ parameters:
                   - "empleará mecanismos proporcionales y acordes a la finalidad perseguida,"
                   - "los cuales se determinarán en el momento de proceder a la monitorización."
                   condition: "monitorizar_equipos=0"
-                - h2: "8. Prohibiciones expresas."
+                - h2: "Prohibiciones expresas."
                 - p:
                   - "Queda expresamente prohibido que los trabajadores hagan uso de"
                   - "cualquiera de los medios telemáticos, informáticos o electrónicos puestos a"

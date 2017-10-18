@@ -67,7 +67,7 @@ parameters:
                 - h1:
                     - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
                     - "EN [company_name]"
-                - h2: "1. Introducción:"
+                - h2: "Introducción:"
                 - p:
                     - "Las redes sociales en internet son aplicaciones web cuya función es"
                     - "favorecer el contacto entre individuos, así como también entre estos y"
@@ -94,7 +94,7 @@ parameters:
                     - "difusión de datos confidenciales o de carácter personal a través de las redes"
                     - "sociales de internet."
                 - h2:
-                    - "2. Concepto de redes sociales en internet a los efectos del presente"
+                    - "Concepto de redes sociales en internet a los efectos del presente"
                     - "protocolo:"
                 - p:
                     - "A los efectos del presente protocolo se considerarán “redes sociales” los"
@@ -116,7 +116,7 @@ parameters:
                     - "3.- Redes sociales verticales o temáticas. Su finalidad suele estar centrada en"
                     - "conectar usuarios con un mismo hobbie, actividad o interés. Dentro de este"
                     - "grupo podrían incluirse Flickr, Pinterest o YouTube, entre otras."
-                - h2: "3. Uso de servicios de redes sociales durante la jornada de trabajo"
+                - h2: "Uso de servicios de redes sociales durante la jornada de trabajo"
                 - p:
                     - "La jornada laboral, independientemente del horario que cada trabajador"
                     - "tenga asignado, está destinada al desempeño eficiente de las tareas"
@@ -150,7 +150,7 @@ parameters:
                     - "reserva el derecho de adoptar las medidas disciplinarias que correspondan"
                     - "en función de la gravedad del incumplimiento."
                 - h2:
-                    - "4. Contenido de los comentarios realizados por los trabajadores en"
+                    - "Contenido de los comentarios realizados por los trabajadores en"
                     - "redes sociales."
                 - p:
                     - "Con carácter general, las redes sociales en internet constituyen una"
@@ -189,7 +189,7 @@ parameters:
                     - "La empresa podrá verificar el cumplimiento de estas directrices por"
                     - "cualquier medio admitido en derecho."
                 - h2:
-                    - "5. Comentarios realizados por los trabajadores en redes sociales sobre"
+                    - "Comentarios realizados por los trabajadores en redes sociales sobre"
                     - "compañeros de trabajo."
                 - p:
                     - "La armonía, la tolerancia y el respeto mutuo entre todos los trabajadores,"
@@ -225,7 +225,7 @@ parameters:
                     - "indebidas e irregulares."
                   condition: "informar_de_comentarios_injuriosos=0"
                 - h2:
-                    - "6. Comentarios realizados por los trabajadores en redes sociales sobre"
+                    - "Comentarios realizados por los trabajadores en redes sociales sobre"
                     - "directivos de la empresa."
                 - p:
                     - "La dirección y organización técnica del trabajo corresponde a la empresa y a"
@@ -255,7 +255,7 @@ parameters:
                     - "básicas de convivencia y respeto conllevará la aplicación del régimen"
                     - "disciplinario en los términos que corresponda."
                 - h2:
-                    - "7. Comentarios sobre la empresa efectuados por los trabajadores en"
+                    - "Comentarios sobre la empresa efectuados por los trabajadores en"
                     - "redes sociales."
                 - p:
                     - "La reputación y la buena imagen social de esta empresa constituyen"
@@ -281,7 +281,7 @@ parameters:
                     - "básicas de convivencia y respeto conllevará la aplicación del régimen"
                     - "disciplinario en los términos que corresponda."
                 - h2:
-                    - "8. Comentarios en redes sociales efectuados por representantes legales"
+                    - "Comentarios en redes sociales efectuados por representantes legales"
                     - "o sindicales de los trabajadores."
                   condition: "representantes_legales_o_sindicales=0"
                 - p:
@@ -318,7 +318,7 @@ parameters:
                     - "disciplinario en los términos que corresponda."
                   condition: "representantes_legales_o_sindicales=0"
                 - h2:
-                    - "9. Captación y difusión de imágenes del centro o lugar de trabajo en"
+                    - "Captación y difusión de imágenes del centro o lugar de trabajo en"
                     - "redes sociales por parte de los trabajadores."
                   condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
                 - p:
@@ -341,7 +341,7 @@ parameters:
                     - "cualquier medio admitido en derecho."
                   condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
                 - h2:
-                    - "10. Difusión de información confidencial de la empresa en redes"
+                    - "Difusión de información confidencial de la empresa en redes"
                     - "sociales por parte de los trabajadores."
                   condition: "divulgacion_informacion_confidencial=0"
                 - p:
@@ -405,7 +405,7 @@ parameters:
                     - "cualquier medio admitido en derecho."
                   condition: "divulgacion_informacion_confidencial=0"
                 - h2:
-                    - "11. Verificación del estado de salud durante los procesos de"
+                    - "Verificación del estado de salud durante los procesos de"
                     - "incapacidad temporal."
                   condition: "vigilancia_reuperacion_baja_laboral=0"
                 - p:

@@ -2,11 +2,17 @@ twig:
     globals:
         i18n:
             es:
+                # General info
+                # =================================================================================
                 metadata:
                     page_title: ammana - seal the deal!
                     name:       ammana
                     slogan:     Seal the deal!
+                # =================================================================================
 
+
+                # Menús
+                # =================================================================================
                 menus:
                     new_user:
                         login:     Identificarse
@@ -16,15 +22,27 @@ twig:
                         protocol_uso_redes:      Modelo Autocobertura Redes Sociales
                         protocol_uso_mensajeria: Modelo Autocobertura Mensajerías
                         protocol_uso_telematica: Modelo Autocobertura Telemática
+                # =================================================================================
 
+
+                # Footer
+                # =================================================================================
                 footer:
                     copyright_note: Copyright &copy; 2017 - Todos los derechos reservados (o no) - <a href="#">ammana.es</a>
                     developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>
+                # =================================================================================
 
+
+                # Errors
+                # =================================================================================
                 error_page:
                     error_label: "Error:"
                     contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"
+                # =================================================================================
 
+
+                # Pages
+                # =================================================================================
                 home_page:
                     claim:
                         title:   ammana es todo lo que necesitas
@@ -44,3 +62,16 @@ twig:
                     additional_section:
                         title:   Otro apartado
                         intro:   Quizás más textos comerciales sobre ammana
+                # =================================================================================
+ 
+
+                # Emails
+                # =================================================================================
+                emails:
+                    welcome:
+                        title:    Bienvenido a ammana.es
+                        text:     "Por favor, confirma tu cuenta de correo haciendo click en el siguiente enlace:"
+                        link:     "Activa tu cuenta"
+                        fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
+                        alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
+                # =================================================================================

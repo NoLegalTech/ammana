@@ -24,3 +24,23 @@ twig:
                 error_page:
                     error_label: "Error:"
                     contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"
+
+                home_page:
+                    claim:
+                        title:   ammana es todo lo que necesitas
+                        message: Copy super comercial que explica lo mucho que necesitas este software. Esto es catchy, ya verás como seguro que compras.
+                        button:  Probar ahora
+                    protocols_section:
+                        title:   Protocolos
+                        intro:   Estos protocolos te van a salvar la vida.
+                        buy:     Contratar
+                        protocols:
+                            - title: Modelo Autocobertura Redes Sociales
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                            - title: Modelo Autocobertura Mensajerías
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                            - title: Modelo Autocobertura Telemática
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                    additional_section:
+                        title:   Otro apartado
+                        intro:   Quizás más textos comerciales sobre ammana

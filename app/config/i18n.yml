@@ -20,3 +20,7 @@ twig:
                 footer:
                     copyright_note: Copyright &copy; 2017 - Todos los derechos reservados (o no) - <a href="#">ammana.es</a>
                     developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>
+
+                error_page:
+                    error_label: "Error:"
+                    contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"

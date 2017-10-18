@@ -76,4 +76,10 @@ twig:
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
                     error:
                         client_data: "Datos del cliente:"
+                    new_password:
+                        title:    Estableciendo nueva contraseña
+                        text:     "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
+                        link:     "Establecer nueva contraseña"
+                        fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
+                        alt_text: "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
                 # =================================================================================

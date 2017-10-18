@@ -12,7 +12,7 @@
                 {{ form_end(edit_form) }}
 
                 {{ form_start(delete_form) }}
-                    <input class="btn btn-danger" type="submit" value="Borrar usuario">
+                    <input class="btn btn-danger" type="submit" onclick="return confirm('Esta operación es irreversible. ¿Seguro que deseas borrar este usuario?')" value="Borrar usuario">
                 {{ form_end(delete_form) }}
             </div>
             <div class="clear"></div>

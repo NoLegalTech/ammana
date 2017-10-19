@@ -71,6 +71,12 @@ twig:
                         date:     Fecha
                         number:   Número
                         customer: Cliente
+
+                order_confirmation_page:
+                    please_review: Por favor, revisa tus respuestas y confirma que son correctas.
+                    to_buy:  Comprar
+                    confirm: Confirmar
+                    cancel:  Cancelar
                 # =================================================================================
  
 

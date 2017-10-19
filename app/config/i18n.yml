@@ -86,6 +86,20 @@ twig:
                         date:     Fecha pedido
                     mark_paid: Marcar como cobrado
                     no_orders: No hay ningún pedido pendiente de cobro.
+
+                protocols_page:
+                    title: Lista de protocolos
+                    headers:
+                        name: Nombre
+                    download: Descargar
+                    not_available: No disponible
+                    pay: paga!
+                    download_invoice: Descargar factura
+                    invoice_not_available: Factura no disponible
+                    no_protocols: No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
+                    buy:
+                        title: Comprar protocolos
+                        button: Comprar
                 # =================================================================================
  
 

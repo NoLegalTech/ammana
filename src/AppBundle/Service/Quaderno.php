@@ -27,7 +27,7 @@ class Quaderno {
 
     public function getInvoice($orderNumber) {
         $found = QuadernoInvoice::find(array('q' => $orderNumber));
-        if (count($found) < 1) {
+        if (!$found || count($found) < 1) {
             return null;
         }
         $invoice = new Invoice();

@@ -100,6 +100,17 @@ twig:
                     buy:
                         title: Comprar protocolos
                         button: Comprar
+
+                payment_page:
+                    title: Pagar
+                    info:  Tu protocolo está listo, pero antes paga!
+                    pay_with_paypal: Pagar con <img src="/images/paypal.png">
+                    transfer:
+                        info: "O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:"
+                        contact: Concepto
+                        account_number: Número de cuenta
+                        amount: Importe
+                    note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
                 # =================================================================================
  
 

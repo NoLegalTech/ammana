@@ -77,6 +77,15 @@ twig:
                     to_buy:  Comprar
                     confirm: Confirmar
                     cancel:  Cancelar
+
+                orders_page:
+                    title: Protocolos pendientes de cobro
+                    headers:
+                        protocol: Protocolo
+                        customer: Cliente
+                        date:     Fecha pedido
+                    mark_paid: Marcar como cobrado
+                    no_orders: No hay ningún pedido pendiente de cobro.
                 # =================================================================================
  
 

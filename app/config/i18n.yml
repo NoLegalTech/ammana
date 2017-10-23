@@ -1,3 +1,37 @@
+parameters:
+    # user urls
+    # ---------
+    urls.register_user: /register
+    urls.user_login:    /login
+    urls.login_error:   /login/error
+    urls.user_logout:   /logout
+    urls.thanks_for_registering: /welcome
+    urls.activate_user:    /activate/{activationHash}
+    urls.activation_error: /activate/error
+    urls.forgot_password:  /forgot_password
+    urls.sent_password_email: /resetting_password
+    urls.new_password:        /newPassword/{activationHash}
+    urls.user_index:  /user/
+    urls.user_edit:   /user/{id}/edit
+    urls.user_delete: /user/{id}/delete
+
+    # invoice urls
+    # ------------
+    urls.invoice_index: /invoice/
+
+    # profile urls
+    # ------------
+    urls.profile_homepage: /profile/
+
+    # protocol urls
+    # -------------
+    urls.protocol_index:    /protocol/
+    urls.protocol_buy:      /protocol/buy/{id}
+    urls.protocol_pay:      /protocol/pay/{id}
+    urls.protocol_paid:     /protocol/payment_complete
+    urls.protocol_download: /protocol/{id}
+    urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
+
 twig:
     globals:
         i18n:
@@ -9,7 +43,6 @@ twig:
                     name:       ammana
                     slogan:     Seal the deal!
                 # =================================================================================
-
 
                 # Menus
                 # =================================================================================

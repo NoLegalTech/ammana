@@ -188,6 +188,10 @@ twig:
                 profile_page:
                     title:  Tu perfil
                     button: Actualizar
+
+                register_page:
+                    title:  Registro gratuito
+                    button: Registrarse
                 # =================================================================================
  
 

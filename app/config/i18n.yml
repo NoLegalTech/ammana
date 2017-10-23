@@ -125,6 +125,11 @@ twig:
                     profile_page: tu página de perfil
                     fill_the_data: y rellena los datos que faltan.
                     generate_protocol: Generar protocolo
+
+                activation_page:
+                    title: Cuenta activada
+                    message: Gracias por registrarte con nosotros. Puedes empezar a usar ammana.es dirigiéndote a la
+                    login_page: página de login
                 # =================================================================================
  
 

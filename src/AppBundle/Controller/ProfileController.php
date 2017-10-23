@@ -34,7 +34,7 @@ class ProfileController extends Controller {
             'mapped' => false
         ));
         $editForm->add('delete_logo', CheckboxType::class, array(
-            'label' => 'Marque para borrar logo',
+            'label' => $this->getI18n()['forms']['profile_form']['delete_logo'],
             'required' => false,
             'mapped' => false
         ));

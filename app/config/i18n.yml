@@ -249,3 +249,4 @@ twig:
                         sector:         Sector
                         num_employees:  Número de empleados
                         logo:           Logo
+                        delete_logo:    Marque para borrar logo

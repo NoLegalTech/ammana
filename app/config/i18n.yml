@@ -117,6 +117,14 @@ twig:
                     message: El pago ha sido completado con éxito, con lo que en breves instantes tendrás tu protocolo disponible para ver o descargar en la lista de protocolos.
                     check_it_now: Compruébalo yendo ahora a
                     protocols_list: la lista de protocolos
+
+                questions_page:
+                    to_buy: Comprar
+                    profile_not_complete: Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.
+                    please_go_to: Por favor, ve a
+                    profile_page: tu página de perfil
+                    fill_the_data: y rellena los datos que faltan.
+                    generate_protocol: Generar protocolo
                 # =================================================================================
  
 

@@ -38,6 +38,8 @@ twig:
                 error_page:
                     error_label: "Error:"
                     contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"
+                errors:
+                    restricted_access: No tienes permiso para ver esta página.
                 # =================================================================================
 
 

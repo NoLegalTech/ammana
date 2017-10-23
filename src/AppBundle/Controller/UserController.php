@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 

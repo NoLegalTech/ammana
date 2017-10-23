@@ -45,7 +45,7 @@ class ProtocolController extends Controller
 
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -127,7 +127,7 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -225,7 +225,7 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -233,7 +233,7 @@ class ProtocolController extends Controller
 
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -281,14 +281,14 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
         $user = $permissions->getCurrentUser();
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 
@@ -387,7 +387,7 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']
             ));
         }
 

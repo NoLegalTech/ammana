@@ -35,7 +35,7 @@ class InvoiceController extends Controller
         }
 
         return $this->redirectToRoute('error', array(
-            'message' => 'Ha ocurrido un error inesperado.'
+            'message' => $this->getI18n()['errors']['restricted_access']
         ));
     }
 

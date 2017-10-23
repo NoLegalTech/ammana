@@ -4,14 +4,12 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50 small-sheet">
-                <h2 class="heading">Error de identificación</h2>
+                <h2 class="heading">{{ i18n.es.login_error_page.title }}</h2>
                 <p>
-                    No ha podido autenticarse el usuario.<br/>
-                    Por favor, inténtalo de nuevo o contacta con nosotros para solucionar el problema.
+                    {{ i18n.es.login_error_page.message | raw }}
                 </p>
                 <p>
-                    ¿Has olvidado tu contraseña?<br/>
-                    Pincha <a href="{{ path('forgot_password') }}">aquí</a> para recuperarla.
+                    {{ i18n.es.login_error_page.did_you_forget_password | raw }} <a href="{{ path('forgot_password') }}">{{ i18n.es.login_error_page.here }}</a> {{ i18n.es.login_error_page.to_recover }}
                 </p>
             </div>
             <div class="clear"></div>

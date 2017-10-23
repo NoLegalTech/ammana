@@ -167,6 +167,13 @@ twig:
                     title: Identifícate
                     button: Identificarse
                     forgot_password: Olvidé mi contraseña
+
+                login_error_page:
+                    title: Error de identificación
+                    message: No ha podido autenticarse el usuario.<br/> Por favor, inténtalo de nuevo o contacta con nosotros para solucionar el problema.
+                    did_you_forget_password: ¿Has olvidado tu contraseña?<br/> Pincha
+                    here: aquí
+                    to_recover: para recuperarla.
                 # =================================================================================
  
 

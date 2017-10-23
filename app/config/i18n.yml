@@ -22,6 +22,13 @@ twig:
                         protocol_uso_redes:      Modelo Autocobertura Redes Sociales
                         protocol_uso_mensajeria: Modelo Autocobertura Mensajerías
                         protocol_uso_telematica: Modelo Autocobertura Telemática
+                    registered_user:
+                        profile:   Mi perfil
+                        protocols: Mis protocolos
+                        invoices:  Mis facturas
+                        logout:    Cerrar sesión
+                        customers: Clientes
+                        orders:    Pedidos
                 # =================================================================================
 
 

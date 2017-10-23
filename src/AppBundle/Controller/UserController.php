@@ -256,49 +256,49 @@ class UserController extends Controller
                 array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => 'Mi perfil'
+                    'text' => $this->getI18n()['menus']['registered_user']['profile']
                 ),
                 array(
                     'icon' => 'fa-files-o',
                     'path' => 'protocol_index',
-                    'text' => 'Mis protocolos'
+                    'text' => $this->getI18n()['menus']['registered_user']['protocols']
                 ),
                 array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
-                    'text' => 'Mis facturas'
+                    'text' => $this->getI18n()['menus']['registered_user']['invoices']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => 'Cerrar sesión'
+                    'text' => $this->getI18n()['menus']['registered_user']['logout']
                 )
             ),
             "admin" => array(
                 array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => 'Mi perfil'
+                    'text' => $this->getI18n()['menus']['registered_user']['profile']
                 ),
                 array(
                     'icon' => 'fa-user',
                     'path' => 'user_index',
-                    'text' => 'Clientes'
+                    'text' => $this->getI18n()['menus']['registered_user']['customers']
                 ),
                 array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
-                    'text' => 'Facturas'
+                    'text' => $this->getI18n()['menus']['registered_user']['invoices']
                 ),
                 array(
                     'icon' => 'fa-files-o',
                     'path' => 'protocol_index',
-                    'text' => 'Pedidos'
+                    'text' => $this->getI18n()['menus']['registered_user']['orders']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => 'Cerrar sesión'
+                    'text' => $this->getI18n()['menus']['registered_user']['logout']
                 )
             )
         );

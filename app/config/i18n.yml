@@ -130,6 +130,11 @@ twig:
                     title: Cuenta activada
                     message: Gracias por registrarte con nosotros. Puedes empezar a usar ammana.es dirigiéndote a la
                     login_page: página de login
+
+                activation_error_page:
+                    title: Error de activación
+                    error: No ha podido activarse el usuario.
+                    message: Por favor, comprueba que has usado el enlace de activación que te hemos enviado y que no lo hayas activado ya en el pasado, e inténtalo de nuevo.
                 # =================================================================================
  
 

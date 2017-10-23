@@ -302,7 +302,7 @@ class ProtocolController extends Controller
             $this->logSevereError(
                 $logger,
                 $mailer,
-                'ERROR en botón de Paypal de quaderno',
+                $this->getI18n()['errors']['quaderno_paypal_error']['log'],
                 $request->query->get('quaderno_error_message'),
                 $permissions->getCurrentUser()
             );
@@ -327,9 +327,8 @@ class ProtocolController extends Controller
                 $this->logSevereError(
                     $logger,
                     $mailer,
-                    'ERROR al completar el pago con el botón de Paypal de quaderno',
+                    $this->getI18n()['errors']['wrong_paypal_callback']['log'],
                     $request->query->get('quaderno_error_message'),
-                    "Info técnica: payer_status = " . $payer_status . ", item_number  = " . $item_number,
                     $permissions->getCurrentUser()
                 );
                 return $this->redirectToRoute('error', array(
@@ -440,7 +439,7 @@ class ProtocolController extends Controller
         $sender_name = $this->container->getParameter('emails_sender_name');
         $email_to_report_errors = $this->container->getParameter('email_to_report_errors');
 
-        $message = (new \Swift_Message('ammana.es - Se ha producido un error'))
+        $message = (new \Swift_Message($this->getI18n()['emails']['error']['title']))
             ->setFrom(array($sender_email => $sender_name))
             ->setTo($email_to_report_errors)
             ->setBody(

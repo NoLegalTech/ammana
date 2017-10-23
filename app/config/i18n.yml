@@ -49,24 +49,27 @@ twig:
                     restricted_access:
                         user: No tienes permiso para ver esta página.
                         log:  No tienes permiso para ver esta página.
+                    cannot_register_user:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Error registrando el usuario
                     missing_protocol_definition:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  Falta configuración del protocolo.
                     wrong_protocol_definition:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  Configuración errónea del protocolo.
                     already_paid_protocol:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  Se ha intentado pagar un protocolo ya pagado.
                     wrong_paypal_callback:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  ERROR al completar el pago con el botón de Paypal de quaderno
                     quaderno_paypal_error:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  ERROR en botón de Paypal de quaderno
                     quaderno_invoice_not_created:
                         user: Ha ocurrido un error inesperado.
-                        log:  Ha ocurrido un error inesperado.
+                        log:  No se ha podido crear la factura en Quaderno
                 # =================================================================================
 
 
@@ -242,6 +245,7 @@ twig:
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
                     error:
+                        title:       ammana.es - Se ha producido un error
                         client_data: "Datos del cliente:"
                     new_password:
                         title:    Estableciendo nueva contraseña

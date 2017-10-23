@@ -147,7 +147,7 @@ class UserController extends Controller
                 $sender_email = $this->container->getParameter('emails_sender_email');
                 $sender_name = $this->container->getParameter('emails_sender_name');
 
-                $message = (new \Swift_Message('Bienvenido a ammana.es'))
+                $message = (new \Swift_Message($this->getI18n()['emails']['welcome']['title']))
                     ->setFrom(array($sender_email => $sender_name))
                     ->setTo($user->getEmail())
                     ->setBody(
@@ -163,9 +163,10 @@ class UserController extends Controller
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){
+                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $user->getEmail());
                 $logger->error($e);
                 return $this->redirectToRoute('error', array(
-                    'message' => 'Error registrando el usuario '.$user->getEmail()
+                    'message' => $this->getI18n()['errors']['cannot_register_user']['user']
                 ));
             }
         }

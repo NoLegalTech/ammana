@@ -136,11 +136,6 @@ twig:
                     error: No ha podido activarse el usuario.
                     message: Por favor, comprueba que has usado el enlace de activación que te hemos enviado y que no lo hayas activado ya en el pasado, e inténtalo de nuevo.
 
-                forgot_password_page:
-                    title: Establecer nueva contraseña
-                    message: Introduce a continuación tu email y te enviaremos un correo para que puedas establecer una nueva contraseña.
-                    send: Enviar
-
                 edit_user_page:
                     title: Editando usuario
                     update: Actualizar
@@ -175,9 +170,18 @@ twig:
                     here: aquí
                     to_recover: para recuperarla.
 
+                forgot_password_page:
+                    title: Establecer nueva contraseña
+                    message: Introduce a continuación tu email y te enviaremos un correo para que puedas establecer una nueva contraseña.
+                    send: Enviar
+
                 new_password_page:
                     title:  Nueva contraseña
                     button: Establecer
+
+                new_password_requested_page:
+                    title:   Estableciendo nueva contraseña
+                    message: Por favor, revisa tu bandeja de correo, donde encontrarás un correo para establecer una contraseña nueva.
 
                 new_password_set_page:
                     title: Nueva contraseña establecida

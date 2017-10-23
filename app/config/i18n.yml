@@ -162,6 +162,11 @@ twig:
                         yes: Sí
                         no: No
                     new_user: Nuevo usuario
+
+                login_page:
+                    title: Identifícate
+                    button: Identificarse
+                    forgot_password: Olvidé mi contraseña
                 # =================================================================================
  
 

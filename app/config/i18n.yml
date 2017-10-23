@@ -142,6 +142,11 @@ twig:
                     delete_confirmation_message: Esta operación es irreversible. ¿Seguro que deseas borrar este usuario?
                     delete: Borrar usuario
                     back_to_list: Volver a la lista
+
+                forgot_password_page:
+                    title: Establecer nueva contraseña
+                    message: Introduce a continuación tu email y te enviaremos un correo para que puedas establecer una nueva contraseña.
+                    send: Enviar
                 # =================================================================================
  
 

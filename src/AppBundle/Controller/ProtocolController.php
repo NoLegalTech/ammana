@@ -136,7 +136,7 @@ class ProtocolController extends Controller
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']
             ));
         }
         $protocol['id'] = $id;
@@ -240,13 +240,13 @@ class ProtocolController extends Controller
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']
             ));
         }
 
         if (!isset($protocol_spec['document'])) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']
             ));
         }
 
@@ -294,7 +294,7 @@ class ProtocolController extends Controller
 
         if ($protocol->getEnabled()) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['already_paid_protocol']
             ));
         }
 
@@ -307,14 +307,14 @@ class ProtocolController extends Controller
                 $permissions->getCurrentUser()
             );
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['quaderno_paypal_error']
             ));
         }
 
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']
             ));
         }
 
@@ -333,7 +333,7 @@ class ProtocolController extends Controller
                     $permissions->getCurrentUser()
                 );
                 return $this->redirectToRoute('error', array(
-                    'message' => 'Ha ocurrido un error inesperado.'
+                    'message' => $this->getI18n()['errors']['wrong_paypal_callback']
                 ));
             }
             $protocol->setEnabled(true);
@@ -393,7 +393,7 @@ class ProtocolController extends Controller
 
         if ($protocol->getEnabled()) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['already_paid_protocol']
             ));
         }
 
@@ -405,7 +405,7 @@ class ProtocolController extends Controller
 
         if ($theInvoice == null) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']
             ));
         }
 

@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -53,7 +53,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 

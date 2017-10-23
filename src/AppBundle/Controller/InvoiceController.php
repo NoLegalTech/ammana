@@ -35,7 +35,7 @@ class InvoiceController extends Controller
         }
 
         return $this->redirectToRoute('error', array(
-            'message' => $this->getI18n()['errors']['restricted_access']
+            'message' => $this->getI18n()['errors']['restricted_access']['user']
         ));
     }
 

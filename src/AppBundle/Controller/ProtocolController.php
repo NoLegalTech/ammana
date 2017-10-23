@@ -45,7 +45,7 @@ class ProtocolController extends Controller
 
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -127,7 +127,7 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -136,7 +136,7 @@ class ProtocolController extends Controller
         $protocol = $this->container->getParameter('protocol.'.$id);
         if ($protocol == null) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['missing_protocol_definition']
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
             ));
         }
         $protocol['id'] = $id;
@@ -225,7 +225,7 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -233,20 +233,20 @@ class ProtocolController extends Controller
 
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['missing_protocol_definition']
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
             ));
         }
 
         if (!isset($protocol_spec['document'])) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['wrong_protocol_definition']
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
             ));
         }
 
@@ -281,20 +281,20 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         $user = $permissions->getCurrentUser();
         if ($protocol->getUser() != $user->getId()) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         if ($protocol->getEnabled()) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['already_paid_protocol']
+                'message' => $this->getI18n()['errors']['already_paid_protocol']['user']
             ));
         }
 
@@ -307,14 +307,14 @@ class ProtocolController extends Controller
                 $permissions->getCurrentUser()
             );
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['quaderno_paypal_error']
+                'message' => $this->getI18n()['errors']['quaderno_paypal_error']['user']
             ));
         }
 
         $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
         if ($protocol_spec == null) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['missing_protocol_definition']
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
             ));
         }
 
@@ -333,7 +333,7 @@ class ProtocolController extends Controller
                     $permissions->getCurrentUser()
                 );
                 return $this->redirectToRoute('error', array(
-                    'message' => $this->getI18n()['errors']['wrong_paypal_callback']
+                    'message' => $this->getI18n()['errors']['wrong_paypal_callback']['user']
                 ));
             }
             $protocol->setEnabled(true);
@@ -387,13 +387,13 @@ class ProtocolController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['restricted_access']
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         if ($protocol->getEnabled()) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['already_paid_protocol']
+                'message' => $this->getI18n()['errors']['already_paid_protocol']['user']
             ));
         }
 
@@ -405,7 +405,7 @@ class ProtocolController extends Controller
 
         if ($theInvoice == null) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']
+                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']['user']
             ));
         }
 

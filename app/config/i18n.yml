@@ -196,6 +196,10 @@ twig:
                 register_page:
                     title:  Registro gratuito
                     button: Registrarse
+
+                welcome_page:
+                    title:   Bienvenido
+                    message: Por favor, revisa tu bandeja de correo, donde encontrarás un correo para activar tu cuenta.
                 # =================================================================================
  
 

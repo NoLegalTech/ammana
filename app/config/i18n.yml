@@ -184,6 +184,10 @@ twig:
                     success:    Tu contraseña se ha cambiado con éxito. Dirígete al
                     login_form: formulario de identificación
                     to_login:   para entrar en la plataforma.
+
+                profile_page:
+                    title:  Tu perfil
+                    button: Actualizar
                 # =================================================================================
  
 

@@ -4,12 +4,12 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Pago completado</h2>
+                <h2 class="heading">{{ i18n.es.payment_complete_page.title }}</h2>
                 <p>
-                    El pago ha sido completado con éxito, con lo que en breves instantes tendrás tu protocolo disponible para ver o descargar en la lista de protocolos.
+                    {{ i18n.es.payment_complete_page.message }}
                 </p>
                 <p>
-                    Compruébalo yendo ahora a <a href="{{ path('protocol_index') }}">la lista de protocolos</a>.
+                    {{ i18n.es.payment_complete_page.check_it_now }} <a href="{{ path('protocol_index') }}">{{ i18n.es.payment_complete_page.protocols_list }}</a>.
                 </p>
             </div>
             <div class="clear"></div>

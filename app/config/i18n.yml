@@ -111,6 +111,12 @@ twig:
                         account_number: Número de cuenta
                         amount: Importe
                     note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
+
+                payment_complete_page:
+                    title: Pago completado
+                    message: El pago ha sido completado con éxito, con lo que en breves instantes tendrás tu protocolo disponible para ver o descargar en la lista de protocolos.
+                    check_it_now: Compruébalo yendo ahora a
+                    protocols_list: la lista de protocolos
                 # =================================================================================
  
 

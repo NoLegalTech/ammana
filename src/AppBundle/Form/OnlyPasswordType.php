@@ -14,7 +14,7 @@ class OnlyPasswordType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $i18n = $options['i18n']['es'];
+        $i18n = $options['i18n'];
         $builder
             ->add('password', PasswordType::class, array(
                 'label' => $i18n['forms']['set_password_form']['password'] . ':',

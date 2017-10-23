@@ -67,4 +67,8 @@ class InvoiceController extends Controller
         ));
     }
 
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
 }

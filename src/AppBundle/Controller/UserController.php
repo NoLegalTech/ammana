@@ -59,7 +59,7 @@ class UserController extends Controller
 
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $editForm->handleRequest($request);
 
@@ -123,7 +123,7 @@ class UserController extends Controller
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $form->handleRequest($request);
 
@@ -214,7 +214,7 @@ class UserController extends Controller
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $form->handleRequest($request);
 
@@ -331,7 +331,7 @@ class UserController extends Controller
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $form->handleRequest($request);
 
@@ -396,7 +396,7 @@ class UserController extends Controller
     public function newPasswordAction(Request $request, LoggerInterface $logger, User $user, HashGenerator $hasher)
     {
         $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $form->handleRequest($request);
 
@@ -410,6 +410,10 @@ class UserController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }
+
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

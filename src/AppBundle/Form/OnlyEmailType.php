@@ -14,7 +14,7 @@ class OnlyEmailType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $i18n = $options['i18n']['es'];
+        $i18n = $options['i18n'];
         $builder
             ->add('email', EmailType::class, array(
                 'label' => $i18n['forms']['new_password_form']['email'] . ':',

@@ -27,7 +27,7 @@ class ProfileController extends Controller {
         $user = $permissions->getCurrentUser($session);
 
         $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
-            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+            'i18n' => $this->getI18n()
         ));
         $editForm->add('previous_logo', HiddenType::class, array(
             'data' => $user->getLogo(),
@@ -66,6 +66,10 @@ class ProfileController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));
+    }
+
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

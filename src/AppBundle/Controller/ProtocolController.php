@@ -459,4 +459,8 @@ class ProtocolController extends Controller
         $mailer->send($message);
     }
 
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
 }

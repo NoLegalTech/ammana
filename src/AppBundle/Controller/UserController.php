@@ -328,7 +328,9 @@ class UserController extends Controller
     public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user);
+        $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -391,7 +393,9 @@ class UserController extends Controller
      */
     public function newPasswordAction(Request $request, LoggerInterface $logger, User $user, HashGenerator $hasher)
     {
-        $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user);
+        $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

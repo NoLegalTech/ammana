@@ -228,3 +228,7 @@ twig:
                     register_form:
                         email:    Email
                         password: Contraseña
+                    new_password_form:
+                        email:    Email
+                    set_password_form:
+                        password: Contraseña

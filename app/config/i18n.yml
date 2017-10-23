@@ -11,7 +11,7 @@ twig:
                 # =================================================================================
 
 
-                # Menús
+                # Menus
                 # =================================================================================
                 menus:
                     new_user:
@@ -221,3 +221,10 @@ twig:
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
                 # =================================================================================
+ 
+                # Forms
+                # =================================================================================
+                forms:
+                    register_form:
+                        email:    Email
+                        password: Contraseña

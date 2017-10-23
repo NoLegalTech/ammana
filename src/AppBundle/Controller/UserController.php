@@ -120,7 +120,9 @@ class UserController extends Controller
     public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -209,7 +211,9 @@ class UserController extends Controller
     public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

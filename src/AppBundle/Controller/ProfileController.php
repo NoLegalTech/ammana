@@ -26,7 +26,9 @@ class ProfileController extends Controller {
 
         $user = $permissions->getCurrentUser($session);
 
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $editForm->add('previous_logo', HiddenType::class, array(
             'data' => $user->getLogo(),
             'mapped' => false

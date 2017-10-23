@@ -232,3 +232,12 @@ twig:
                         email:    Email
                     set_password_form:
                         password: Contraseña
+                    profile_form:
+                        email:          Email
+                        company_name:   Nombre de la compañía
+                        cif:            CIF
+                        address:        Domicilio social
+                        contact_person: Persona de contacto
+                        sector:         Sector
+                        num_employees:  Número de empleados
+                        logo:           Logo

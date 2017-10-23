@@ -58,7 +58,9 @@ class UserController extends Controller
         }
 
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
+            'i18n' => $this->container->get('twig')->getGlobals()['i18n']
+        ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

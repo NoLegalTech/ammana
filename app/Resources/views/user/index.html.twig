@@ -4,18 +4,18 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Lista de usuarios</h2>
+                <h2 class="heading">{{ i18n.es.user_list_page.title }}</h2>
 
                 <table>
                     <thead>
                         <tr>
-                            <th>Id</th>
-                            <th>Activo</th>
-                            <th>Email</th>
-                            <th>Nombre de compañía</th>
-                            <th>CIF</th>
-                            <th>Domicilio social</th>
-                            <th>Persona de contacto</th>
+                            <th>{{ i18n.es.user_list_page.headers.id }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.active }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.email }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.company_name }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.cif }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.address }}</th>
+                            <th>{{ i18n.es.user_list_page.headers.contact_person }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -24,9 +24,9 @@
                             <td><a href="{{ path('user_edit', { 'id': user.id }) }}">{{ user.id }}</a></td>
                             <td>
                                 {% if user.enabled %}
-                                    Sí
+                                    {{ i18n.es.user_list_page.is_active.yes }}
                                 {% else %}
-                                    No
+                                    {{ i18n.es.user_list_page.is_active.no }}
                                 {% endif %}
                             </td>
                             <td>{{ user.email }}</td>
@@ -41,7 +41,7 @@
 
                 <ul>
                     <li>
-                        <a href="{{ path('register_user') }}">Nuevo usuario</a>
+                        <a href="{{ path('register_user') }}">{{ i18n.es.user_list_page.new_user }}</a>
                     </li>
                 </ul>
 

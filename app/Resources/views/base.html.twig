@@ -11,31 +11,44 @@
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200,400,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     </head>
 
     <body id="top">
-
-        <div class="wrapper row0">
-            <div id="topbar" class="hoc clear"> 
-                {% if not app.session.get('user') %}
-                    <div class="fl_left">
-                        <ul class="nospace inline pushright">
-                            <li><i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a></li>
-                            <li><i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a></li>
-                        </ul>
-                    </div>
-                {% endif %}
-                {% if app.session.get('user') %}
-                    <div class="fl_right">
-                        <ul class="nospace inline pushright">
-                            {% for option in app.session.get('menu') %}
-                                <li><i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-            </div>
-        </div>
+        <header id="masthead" class="site-header zeres-header" role="banner">
+            <div class="navigation-top zeres-header">
+                <div class="wrap zeres-header">
+                    <nav id="site-navigation" class="main-navigation zeres-header" role="navigation" aria-label="Top Menu">
+                        <div class="wrap zeres-header">
+                            <a class="logo" href="{{ path('app') }}">
+                                <img src="/images/logo.png" width="160px" alt="ammana.es">
+                            </a>
+                            <div class="menu-principal-container">
+                                <ul id="top-menu" class="menu">
+                                {% if not app.session.get('user') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.session.get('user') %}
+                                    {% for option in app.session.get('menu') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
+                                    </li>
+                                    {% endfor %}
+                                {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav><!-- #site-navigation -->
+                </div><!-- .wrap -->
+            </div><!-- .navigation-top -->
+        </header>
 
         <div class="wrapper row1">
             <header id="header" class="hoc clear"> 

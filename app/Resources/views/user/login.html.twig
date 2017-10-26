@@ -4,14 +4,14 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50 small-sheet">
-                <h2 class="heading">Identifícate</h2>
+                <h2 class="heading">{{ i18n.es.login_page.title }}</h2>
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
-                    <input class="btn" type="submit" value="Identificarse" />
+                    <input class="btn" type="submit" value="{{ i18n.es.login_page.button }}" />
                 {{ form_end(form) }}
             </div>
             <div class="clear"></div>
-            <a href="{{ path('forgot_password') }}">Olvidé mi contraseña</a>
+            <a href="{{ path('forgot_password') }}">{{ i18n.es.login_page.forgot_password }}</a>
         </main>
     </div>
 

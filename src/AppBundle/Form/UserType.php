@@ -19,29 +19,30 @@ class UserType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $i18n = $options['i18n'];
         $builder
             ->add('email', EmailType::class, array(
-                'label' => 'Email:',
+                'label' => $i18n['forms']['profile_form']['email'] . ':',
                 'required' => true
             ))
             ->add('companyName', TextType::class, array(
-                'label' => 'Nombre de la compañía:',
+                'label' => $i18n['forms']['profile_form']['company_name'] . ':',
                 'required' => false
             ))
             ->add('cif', TextType::class, array(
-                'label' => 'CIF:',
+                'label' => $i18n['forms']['profile_form']['cif'] . ':',
                 'required' => false
             ))
             ->add('address', TextType::class, array(
-                'label' => 'Domicilio social:',
+                'label' => $i18n['forms']['profile_form']['address'] . ':',
                 'required' => false
             ))
             ->add('contactPerson', TextType::class, array(
-                'label' => 'Persona de contacto:',
+                'label' => $i18n['forms']['profile_form']['contact_person'] . ':',
                 'required' => false
             ))
             ->add('sector', ChoiceType::class, array(
-                'label' => 'Sector:',
+                'label' => $i18n['forms']['profile_form']['sector'] . ':',
                 'required' => false,
                 'choices' => array(
                     'Agricultura, silvicultura, ganadería y pesca' => 'AGRICULTURA, SILVICULTURA, GANADERÍA Y PESCA',
@@ -58,7 +59,7 @@ class UserType extends AbstractType {
                 )
             ))
             ->add('numberEmployees', ChoiceType::class, array(
-                'label' => 'Número de empleados:',
+                'label' => $i18n['forms']['profile_form']['num_employees'] . ':',
                 'required' => false,
                 'choices' => array(
                     'Hasta 10 empleados' => '1-10',
@@ -69,7 +70,7 @@ class UserType extends AbstractType {
                 )
             ))
             ->add('logo', FileType::class, array(
-                'label' => 'Logo:',
+                'label' => $i18n['forms']['profile_form']['logo'] . ':',
                 'required' => false
             ));
         $builder->get('logo')
@@ -88,6 +89,7 @@ class UserType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('i18n');
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User'
         ));

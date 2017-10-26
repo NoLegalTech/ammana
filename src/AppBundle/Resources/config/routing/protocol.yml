@@ -1,30 +1,30 @@
 protocol_index:
-    path:     /protocol/
+    path:     "%urls.protocol_index%"
     defaults: { _controller: "AppBundle:Protocol:index" }
     methods:  GET
 
 protocol_buy:
-    path:     /protocol/buy/{id}
+    path:     "%urls.protocol_buy%"
     defaults: { _controller: "AppBundle:Protocol:buy" }
     methods:  [GET, POST]
 
 protocol_pay:
-    path:     /protocol/pay/{id}
+    path:     "%urls.protocol_pay%"
     defaults: { _controller: "AppBundle:Protocol:pay" }
     methods:  [GET, POST]
 
 protocol_pay_transfer:
-    path:     /protocol/pay_transfer/{id}
+    path:     "%urls.protocol_pay_transfer%"
     defaults: { _controller: "AppBundle:Protocol:payTransfer" }
     methods:  GET
 
 protocol_paid:
-    path:     /protocol/payment_complete
+    path:     "%urls.protocol_paid%"
     defaults: { _controller: "AppBundle:Protocol:paymentComplete" }
     methods:  GET
 
 protocol_download:
-    path:     /protocol/{id}
+    path:     "%urls.protocol_download%"
     defaults: { _controller: "AppBundle:Protocol:download" }
     methods:  GET
 

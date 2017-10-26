@@ -35,7 +35,7 @@ class InvoiceController extends Controller
         }
 
         return $this->redirectToRoute('error', array(
-            'message' => 'Ha ocurrido un error inesperado.'
+            'message' => $this->getI18n()['errors']['restricted_access']['user']
         ));
     }
 
@@ -65,6 +65,10 @@ class InvoiceController extends Controller
             'invoices' => $invoices,
             'users' => $users
         ));
+    }
+
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

@@ -5,13 +5,13 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50 small-sheet">
-                <h2 class="heading">Tu perfil</h2>
+                <h2 class="heading">{{ i18n.es.profile_page.title }}</h2>
                 {{ form_start(edit_form) }}
                     {{ form_widget(edit_form) }}
                     {% if user.logo %}
                         <img style="height: 100px" src="/uploads/{{ user.logo }}"/>
                     {% endif %}
-                    <input class="btn" type="submit" value="Actualizar" />
+                    <input class="btn" type="submit" value="{{ i18n.es.profile_page.button }}" />
                 {{ form_end(edit_form) }}
             </div>
             <div class="clear"></div>

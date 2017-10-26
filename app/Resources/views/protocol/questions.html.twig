@@ -4,16 +4,16 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50 sheet80">
-                <h2 class="heading">Comprar {{ protocol.name }}</h2>
+                <h2 class="heading">{{ i18n.es.questions_page.to_buy }} {{ protocol.name }}</h2>
                 {% if not profile_completed %}
                     <p style="color: red">
-                        Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.<br/>
-                        Por favor, ve a <a href="{{ path('profile_homepage') }}">tu página de perfil</a> y rellena los datos que faltan.
+                        {{ i18n.es.questions_page.profile_not_complete }}<br/>
+                        {{ i18n.es.questions_page.please_go_to }} <a href="{{ path('profile_homepage') }}">{{ i18n.es.questions_page.profile_page }}</a> {{ i18n.es.questions_page.fill_the_data }}
                     </p>
                 {% else %}
                     {{ form_start(form) }}
                         {{ form_widget(form) }}
-                        <input class="btn" type="submit" value="Generar protocolo">
+                        <input class="btn" type="submit" value="{{ i18n.es.questions_page.generate_protocol }}">
                     {{ form_end(form) }}
                 {% endif %}
             </div>

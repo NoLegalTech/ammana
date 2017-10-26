@@ -4,9 +4,9 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Pagar {{ protocol_spec.name }}</h2>
+                <h2 class="heading">{{ i18n.es.payment_page.title }} {{ protocol_spec.name }}</h2>
                 <p>
-                    Tu protocolo está listo, pero antes paga!
+                    {{ i18n.es.payment_page.info }}
                 </p>
                 <p>
                     <form id="payment-form" action="" method="POST"
@@ -29,18 +29,18 @@
                         <input type="hidden" data-quaderno="country" value="ES" />
                         <input type="hidden" data-quaderno="vat-number"/>
                         <button class="paypal-button" type="submit">
-                            Pagar con <img src="/images/paypal.png">
+                            {{ i18n.es.payment_page.pay_with_paypal | raw }}
                         </button>
                     </form> 
                 </p>
                 <p>
-                    O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:
+                    {{ i18n.es.payment_page.transfer.info }}
                     <blockquote>
-                        Concepto: <strong>{{ payment_data.order_hash }}</strong><br/>
-                        Número de cuenta: <strong>{{ payment_data.bank_account }}</strong><br/>
-                        Importe: <strong>{{ payment_data.amount }} €</strong>
+                        {{ i18n.es.payment_page.transfer.contact }}: <strong>{{ payment_data.order_hash }}</strong><br/>
+                        {{ i18n.es.payment_page.transfer.account_number }}: <strong>{{ payment_data.bank_account }}</strong><br/>
+                        {{ i18n.es.payment_page.transfer.amount }}: <strong>{{ payment_data.amount }} €</strong>
                     </blockquote>
-                    No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
+                    {{ i18n.es.payment_page.note }}
                 </p>
             </div>
             <div class="clear"></div>

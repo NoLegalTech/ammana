@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>{% block title %}ammana - seal the deal!{% endblock %}</title>
+        <title>{% block title %}{{ i18n.es.metadata.page_title }}{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
@@ -20,8 +20,8 @@
                 {% if not app.session.get('user') %}
                     <div class="fl_left">
                         <ul class="nospace inline pushright">
-                            <li><i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">Identificarse</a></li>
-                            <li><i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">Registrarse</a></li>
+                            <li><i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a></li>
+                            <li><i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a></li>
                         </ul>
                     </div>
                 {% endif %}
@@ -40,34 +40,19 @@
         <div class="wrapper row1">
             <header id="header" class="hoc clear"> 
                 <div id="logo" class="fl_left">
-                    <h1><a href="{{ path('app') }}">ammana</a></h1>
-                    <p>Seal the deal!</p>
+                    <h1><a href="{{ path('app') }}">{{ i18n.es.metadata.name }}</a></h1>
+                    <p>{{ i18n.es.metadata.slogan }}</p>
                 </div>
                 <nav id="mainav" class="fl_right">
                     <ul class="clear">
-                        <li class="active"><a href="">Home</a></li>
-                        <li><a class="drop" href="#">Protocolos</a>
+                        <li class="active"><a href="">{{ i18n.es.menus.new_user.home }}</a></li>
+                        <li><a class="drop" href="#">{{ i18n.es.menus.new_user.protocols }}</a>
                             <ul>
-                                <li><a href="">Protocolo #1</a></li>
-                                <li><a href="">Protocolo #2</a></li>
-                                <li><a href="">Protocolo #3</a></li>
+                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_redes }}</a></li>
+                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_telematica }}</a></li>
+                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_mensajeria }}</a></li>
                             </ul>
                         </li>
-                        <li><a class="drop" href="#">Dropdown</a>
-                            <ul>
-                                <li><a href="#">Level 2</a></li>
-                                <li><a class="drop" href="#">Level 2 + Drop</a>
-                                    <ul>
-                                        <li><a href="#">Level 3</a></li>
-                                        <li><a href="#">Level 3</a></li>
-                                        <li><a href="#">Level 3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Level 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Link Text</a></li>
-                        <li><a href="#">Link Text</a></li>
                     </ul>
                 </nav>
             </header>
@@ -139,8 +124,8 @@
 
         <div class="wrapper row5">
             <div id="copyright" class="hoc clear"> 
-                <p class="fl_left">Copyright &copy; 2017 - All Rights Reserved (or not) - <a href="#">ammana.es</a></p>
-                <p class="fl_right">Developed by <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a></p>
+                <p class="fl_left">{{ i18n.es.footer.copyright_note | raw }}</p>
+                <p class="fl_right">{{ i18n.es.footer.developed_by | raw }}</p>
             </div>
         </div>
 

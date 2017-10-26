@@ -5,9 +5,9 @@
     <div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
         <div id="pageintro" class="hoc clear"> 
             <article>
-                <h2 class="heading">ammana es todo lo que necesitas</h2>
-                <p>Copy super comercial que explica lo mucho que necesitas este software. Esto es catchy, ya verás como seguro que compras.</p>
-                <footer><a class="btn" href="#">Probar ahora</a></footer>
+                <h2 class="heading">{{ i18n.es.home_page.claim.title }}</h2>
+                <p>{{ i18n.es.home_page.claim.message }}</p>
+                <footer><a class="btn" href="#">{{ i18n.es.home_page.claim.button }}</a></footer>
             </article>
         </div>
     </div>
@@ -15,45 +15,29 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="center btmspace-50">
-                <h2 class="heading">Protocolos</h2>
-                <p>Estos protocolos te van a salvar la vida.</p>
+                <h2 class="heading">{{ i18n.es.home_page.protocols_section.title }}</h2>
+                <p>{{ i18n.es.home_page.protocols_section.intro }}</p>
             </div>
             <ul class="nospace group btmspace-50">
-                <li class="one_third first">
-                    <article class="element">
-                        <figure><img src="images/demo/320x210.png" alt="">
-                            <figcaption><a class="btn small" href="#">More</a></figcaption>
-                        </figure>
-                        <div class="excerpt">
-                            <h6 class="heading"><a href="#">Protocolo #1</a></h6>
-                            <p>Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac&hellip;</p>
-                        </div>
-                    </article>
-                </li>
-                <li class="one_third">
-                    <article class="element">
-                        <figure><img src="images/demo/320x210.png" alt="">
-                            <figcaption><a class="btn small" href="#">More</a></figcaption>
-                        </figure>
-                        <div class="excerpt">
-                            <h6 class="heading"><a href="#">Protocolo #2</a></h6>
-                            <p>Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac&hellip;</p>
-                        </div>
-                    </article>
-                </li>
-                <li class="one_third">
-                    <article class="element">
-                        <figure><img src="images/demo/320x210.png" alt="">
-                            <figcaption><a class="btn small" href="#">More</a></figcaption>
-                        </figure>
-                        <div class="excerpt">
-                            <h6 class="heading"><a href="#">Protocolo #3</a></h6>
-                            <p>Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac&hellip;</p>
-                        </div>
-                    </article>
-                </li>
+                {% for protocol in i18n.es.home_page.protocols_section.protocols %}
+                    {% if loop.first %}
+                        <li class="one_third first">
+                    {% else %}
+                        <li class="one_third">
+                    {% endif %}
+                        <article class="element">
+                            <figure><img src="images/demo/320x210.png" alt="">
+                                <figcaption><a class="btn small" href="#">More</a></figcaption>
+                            </figure>
+                            <div class="excerpt">
+                                <h6 class="heading"><a href="#">{{ protocol.title }}</a></h6>
+                                <p>{{ protocol.description }}</p>
+                            </div>
+                        </article>
+                    </li>
+                {% endfor %}
             </ul>
-            <p class="center nospace"><a class="btn" href="#">Contratar</a></p>
+            <p class="center nospace"><a class="btn" href="#">{{ i18n.es.home_page.protocols_section.buy }}</a></p>
             <div class="clear"></div>
         </main>
     </div>
@@ -61,8 +45,8 @@
     <div class="wrapper bgded overlay coloured" style="background-image:url('images/demo/backgrounds/02.png');">
             <div class="hoc container clear"> 
                     <article class="center">
-                            <h2 class="font-x3 uppercase">Otro apartado</h2>
-                            <p class="btmspace-50 font-x2 capitalise">Quizás más textos comerciales sobre ammana</p>
+                            <h2 class="font-x3 uppercase">{{ i18n.es.home_page.additional_section.title }}</h2>
+                            <p class="btmspace-50 font-x2 capitalise">{{ i18n.es.home_page.additional_section.intro }}</p>
                             <footer>
                                     <ul class="nospace inline pushright">
                                             <li><a class="btn inverse" href="#">Un botón</a></li>

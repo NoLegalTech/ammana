@@ -14,9 +14,10 @@ class OnlyPasswordType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $i18n = $options['i18n'];
         $builder
             ->add('password', PasswordType::class, array(
-                'label' => 'Password:',
+                'label' => $i18n['forms']['set_password_form']['password'] . ':',
                 'required' => true
             ));
     }
@@ -26,6 +27,7 @@ class OnlyPasswordType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('i18n');
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User'
         ));

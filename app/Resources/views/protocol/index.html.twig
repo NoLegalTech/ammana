@@ -4,13 +4,13 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Lista de protocolos</h2>
+                <h2 class="heading">{{ i18n.es.protocols_page.title }}</h2>
 
                 {% if protocols %}
                     <table>
                         <thead>
                             <tr>
-                                <th>Nombre</th>
+                                <th>{{ i18n.es.protocols_page.headers.name }}</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -20,14 +20,14 @@
                             <tr>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
-                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">Descargar</a></td>
+                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.download }}</a></td>
                                 {% else %}
-                                    <td>No disponible (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">paga!</a>)</td>
+                                    <td>{{ i18n.es.protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.pay }}</a>)</td>
                                 {% endif %}
                                 {% if invoices[protocol.id] %}
-                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank">Descargar factura</a></td>
+                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank">{{ i18n.es.protocols_page.download_invoice }}</a></td>
                                 {% else %}
-                                    <td>Factura no disponible</td>
+                                    <td>{{ i18n.es.protocols_page.invoice_not_available }}</td>
                                 {% endif %}
                             </tr>
                         {% endfor %}
@@ -35,18 +35,18 @@
                     </table>
                 {% else %}
                     <p>
-                        No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
+                        {{ i18n.es.protocols_page.no_protocols }}
                     </p>
                 {% endif %}
 
                 {% if to_buy %}
-                    <h3 class="heading">Comprar protocolos</h2>
+                    <h3 class="heading">{{ i18n.es.protocols_page.buy.title }}</h2>
                     <table>
                         <tbody>
                             {% for protocol in to_buy %}
                                 <tr>
                                     <td>{{ protocol.name }}</td>
-                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Comprar</a></td>
+                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.buy.button }}</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

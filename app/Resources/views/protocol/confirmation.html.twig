@@ -4,15 +4,15 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Comprar {{ protocol.name }}</h2>
+                <h2 class="heading">{{ i18n.es.order_confirmation_page.to_buy }} {{ protocol.name }}</h2>
                 <p style="color: red">
-                    Por favor, revisa tus respuestas y confirma que son correctas.
+                    {{ i18n.es.order_confirmation_page.please_review }}
                 </p>
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
                     <input type="hidden" name="confirmed" value="true">
-                    <input class="btn" type="submit" value="Confirmar">
-                    <a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">Cancelar</a>
+                    <input class="btn" type="submit" value="{{ i18n.es.order_confirmation_page.confirm }}">
+                    <a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">{{ i18n.es.order_confirmation_page.cancel }}</a>
                 {{ form_end(form) }}
             </div>
             <div class="clear"></div>

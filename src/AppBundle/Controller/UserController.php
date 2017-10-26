@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -53,12 +53,14 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         $deleteForm = $this->createDeleteForm($user);
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -82,7 +84,7 @@ class UserController extends Controller
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
@@ -120,7 +122,9 @@ class UserController extends Controller
     public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -143,7 +147,7 @@ class UserController extends Controller
                 $sender_email = $this->container->getParameter('emails_sender_email');
                 $sender_name = $this->container->getParameter('emails_sender_name');
 
-                $message = (new \Swift_Message('Bienvenido a ammana.es'))
+                $message = (new \Swift_Message($this->getI18n()['emails']['welcome']['title']))
                     ->setFrom(array($sender_email => $sender_name))
                     ->setTo($user->getEmail())
                     ->setBody(
@@ -159,9 +163,10 @@ class UserController extends Controller
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){
+                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $user->getEmail());
                 $logger->error($e);
                 return $this->redirectToRoute('error', array(
-                    'message' => 'Error registrando el usuario '.$user->getEmail()
+                    'message' => $this->getI18n()['errors']['cannot_register_user']['user']
                 ));
             }
         }
@@ -209,7 +214,9 @@ class UserController extends Controller
     public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user);
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -250,49 +257,49 @@ class UserController extends Controller
                 array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => 'Mi perfil'
+                    'text' => $this->getI18n()['menus']['registered_user']['profile']
                 ),
                 array(
                     'icon' => 'fa-files-o',
                     'path' => 'protocol_index',
-                    'text' => 'Mis protocolos'
+                    'text' => $this->getI18n()['menus']['registered_user']['protocols']
                 ),
                 array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
-                    'text' => 'Mis facturas'
+                    'text' => $this->getI18n()['menus']['registered_user']['invoices']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => 'Cerrar sesión'
+                    'text' => $this->getI18n()['menus']['registered_user']['logout']
                 )
             ),
             "admin" => array(
                 array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => 'Mi perfil'
+                    'text' => $this->getI18n()['menus']['registered_user']['profile']
                 ),
                 array(
                     'icon' => 'fa-user',
                     'path' => 'user_index',
-                    'text' => 'Clientes'
+                    'text' => $this->getI18n()['menus']['registered_user']['customers']
                 ),
                 array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
-                    'text' => 'Facturas'
+                    'text' => $this->getI18n()['menus']['registered_user']['invoices']
                 ),
                 array(
                     'icon' => 'fa-files-o',
                     'path' => 'protocol_index',
-                    'text' => 'Pedidos'
+                    'text' => $this->getI18n()['menus']['registered_user']['orders']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => 'Cerrar sesión'
+                    'text' => $this->getI18n()['menus']['registered_user']['logout']
                 )
             )
         );
@@ -324,7 +331,9 @@ class UserController extends Controller
     public function forgotPasswordAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
     {
         $user = new User();
-        $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user);
+        $form = $this->createForm('AppBundle\Form\OnlyEmailType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -387,7 +396,9 @@ class UserController extends Controller
      */
     public function newPasswordAction(Request $request, LoggerInterface $logger, User $user, HashGenerator $hasher)
     {
-        $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user);
+        $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -400,6 +411,10 @@ class UserController extends Controller
             'user' => $user,
             'form' => $form->createView(),
         ));
+    }
+
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

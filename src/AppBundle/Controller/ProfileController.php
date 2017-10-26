@@ -20,19 +20,21 @@ class ProfileController extends Controller {
     {
         if (!$permissions->currentRolesInclude("customer") && !$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
-                'message' => 'Ha ocurrido un error inesperado.'
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));
         }
 
         $user = $permissions->getCurrentUser($session);
 
-        $editForm = $this->createForm('AppBundle\Form\UserType', $user);
+        $editForm = $this->createForm('AppBundle\Form\UserType', $user, array(
+            'i18n' => $this->getI18n()
+        ));
         $editForm->add('previous_logo', HiddenType::class, array(
             'data' => $user->getLogo(),
             'mapped' => false
         ));
         $editForm->add('delete_logo', CheckboxType::class, array(
-            'label' => 'Marque para borrar logo',
+            'label' => $this->getI18n()['forms']['profile_form']['delete_logo'],
             'required' => false,
             'mapped' => false
         ));
@@ -64,6 +66,10 @@ class ProfileController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));
+    }
+
+    private function getI18n() {
+        return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

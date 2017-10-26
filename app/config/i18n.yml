@@ -1,0 +1,310 @@
+parameters:
+    # user urls
+    # ---------
+    urls.register_user: /register
+    urls.user_login:    /login
+    urls.login_error:   /login/error
+    urls.user_logout:   /logout
+    urls.thanks_for_registering: /welcome
+    urls.activate_user:    /activate/{activationHash}
+    urls.activation_error: /activate/error
+    urls.forgot_password:  /forgot_password
+    urls.sent_password_email: /resetting_password
+    urls.new_password:        /newPassword/{activationHash}
+    urls.user_index:  /user/
+    urls.user_edit:   /user/{id}/edit
+    urls.user_delete: /user/{id}/delete
+
+    # invoice urls
+    # ------------
+    urls.invoice_index: /invoice/
+
+    # profile urls
+    # ------------
+    urls.profile_homepage: /profile/
+
+    # protocol urls
+    # -------------
+    urls.protocol_index:    /protocol/
+    urls.protocol_buy:      /protocol/buy/{id}
+    urls.protocol_pay:      /protocol/pay/{id}
+    urls.protocol_paid:     /protocol/payment_complete
+    urls.protocol_download: /protocol/{id}
+    urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
+
+twig:
+    globals:
+        i18n:
+            es:
+                # General info
+                # =================================================================================
+                metadata:
+                    page_title: ammana - seal the deal!
+                    name:       ammana
+                    slogan:     Seal the deal!
+                # =================================================================================
+
+                # Menus
+                # =================================================================================
+                menus:
+                    new_user:
+                        login:     Identificarse
+                        register:  Registrarse
+                        home:      Inicio
+                        protocols: Protocolos
+                        protocol_uso_redes:      Modelo Autocobertura Redes Sociales
+                        protocol_uso_mensajeria: Modelo Autocobertura Mensajerías
+                        protocol_uso_telematica: Modelo Autocobertura Telemática
+                    registered_user:
+                        profile:   Mi perfil
+                        protocols: Mis protocolos
+                        invoices:  Mis facturas
+                        logout:    Cerrar sesión
+                        customers: Clientes
+                        orders:    Pedidos
+                # =================================================================================
+
+
+                # Footer
+                # =================================================================================
+                footer:
+                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados (o no) - <a href="#">ammana.es</a>
+                    developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>
+                # =================================================================================
+
+
+                # Errors
+                # =================================================================================
+                error_page:
+                    error_label: "Error:"
+                    contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"
+                errors:
+                    restricted_access:
+                        user: No tienes permiso para ver esta página.
+                        log:  No tienes permiso para ver esta página.
+                    cannot_register_user:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Error registrando el usuario
+                    missing_protocol_definition:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Falta configuración del protocolo.
+                    wrong_protocol_definition:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Configuración errónea del protocolo.
+                    already_paid_protocol:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Se ha intentado pagar un protocolo ya pagado.
+                    wrong_paypal_callback:
+                        user: Ha ocurrido un error inesperado.
+                        log:  ERROR al completar el pago con el botón de Paypal de quaderno
+                    quaderno_paypal_error:
+                        user: Ha ocurrido un error inesperado.
+                        log:  ERROR en botón de Paypal de quaderno
+                    quaderno_invoice_not_created:
+                        user: Ha ocurrido un error inesperado.
+                        log:  No se ha podido crear la factura en Quaderno
+                # =================================================================================
+
+
+                # Pages
+                # =================================================================================
+                home_page:
+                    claim:
+                        title:   ammana es todo lo que necesitas
+                        message: Copy super comercial que explica lo mucho que necesitas este software. Esto es catchy, ya verás como seguro que compras.
+                        button:  Probar ahora
+                    protocols_section:
+                        title:   Protocolos
+                        intro:   Estos protocolos te van a salvar la vida.
+                        buy:     Contratar
+                        protocols:
+                            - title: Modelo Autocobertura Redes Sociales
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                            - title: Modelo Autocobertura Mensajerías
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                            - title: Modelo Autocobertura Telemática
+                              description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
+                    additional_section:
+                        title:   Otro apartado
+                        intro:   Quizás más textos comerciales sobre ammana
+
+                invoices_page:
+                    title: Lista de facturas
+                    download: Descargar factura
+                    no_invoice: Factura no disponible
+                    headers:
+                        date:     Fecha
+                        number:   Número
+                        customer: Cliente
+
+                order_confirmation_page:
+                    please_review: Por favor, revisa tus respuestas y confirma que son correctas.
+                    to_buy:  Comprar
+                    confirm: Confirmar
+                    cancel:  Cancelar
+
+                orders_page:
+                    title: Protocolos pendientes de cobro
+                    headers:
+                        protocol: Protocolo
+                        customer: Cliente
+                        date:     Fecha pedido
+                    mark_paid: Marcar como cobrado
+                    no_orders: No hay ningún pedido pendiente de cobro.
+
+                protocols_page:
+                    title: Lista de protocolos
+                    headers:
+                        name: Nombre
+                    download: Descargar
+                    not_available: No disponible
+                    pay: paga!
+                    download_invoice: Descargar factura
+                    invoice_not_available: Factura no disponible
+                    no_protocols: No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
+                    buy:
+                        title: Comprar protocolos
+                        button: Comprar
+
+                payment_page:
+                    title: Pagar
+                    info:  Tu protocolo está listo, pero antes paga!
+                    pay_with_paypal: Pagar con <img src="/images/paypal.png">
+                    transfer:
+                        info: "O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:"
+                        contact: Concepto
+                        account_number: Número de cuenta
+                        amount: Importe
+                    note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
+
+                payment_complete_page:
+                    title: Pago completado
+                    message: El pago ha sido completado con éxito, con lo que en breves instantes tendrás tu protocolo disponible para ver o descargar en la lista de protocolos.
+                    check_it_now: Compruébalo yendo ahora a
+                    protocols_list: la lista de protocolos
+
+                questions_page:
+                    to_buy: Comprar
+                    profile_not_complete: Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.
+                    please_go_to: Por favor, ve a
+                    profile_page: tu página de perfil
+                    fill_the_data: y rellena los datos que faltan.
+                    generate_protocol: Generar protocolo
+
+                activation_page:
+                    title: Cuenta activada
+                    message: Gracias por registrarte con nosotros. Puedes empezar a usar ammana.es dirigiéndote a la
+                    login_page: página de login
+
+                activation_error_page:
+                    title: Error de activación
+                    error: No ha podido activarse el usuario.
+                    message: Por favor, comprueba que has usado el enlace de activación que te hemos enviado y que no lo hayas activado ya en el pasado, e inténtalo de nuevo.
+
+                edit_user_page:
+                    title: Editando usuario
+                    update: Actualizar
+                    delete_confirmation_message: Esta operación es irreversible. ¿Seguro que deseas borrar este usuario?
+                    delete: Borrar usuario
+                    back_to_list: Volver a la lista
+
+                user_list_page:
+                    title: Lista de usuarios
+                    headers:
+                        id: Id
+                        active: Activo
+                        email: Email
+                        company_name: Nombre de compañía
+                        cif: CIF
+                        address: Domicilio social
+                        contact_person: Persona de contacto
+                    is_active:
+                        yes: Sí
+                        no: No
+                    new_user: Nuevo usuario
+
+                login_page:
+                    title: Identifícate
+                    button: Identificarse
+                    forgot_password: Olvidé mi contraseña
+
+                login_error_page:
+                    title: Error de identificación
+                    message: No ha podido autenticarse el usuario.<br/> Por favor, inténtalo de nuevo o contacta con nosotros para solucionar el problema.
+                    did_you_forget_password: ¿Has olvidado tu contraseña?<br/> Pincha
+                    here: aquí
+                    to_recover: para recuperarla.
+
+                forgot_password_page:
+                    title: Establecer nueva contraseña
+                    message: Introduce a continuación tu email y te enviaremos un correo para que puedas establecer una nueva contraseña.
+                    send: Enviar
+
+                new_password_page:
+                    title:  Nueva contraseña
+                    button: Establecer
+
+                new_password_requested_page:
+                    title:   Estableciendo nueva contraseña
+                    message: Por favor, revisa tu bandeja de correo, donde encontrarás un correo para establecer una contraseña nueva.
+
+                new_password_set_page:
+                    title: Nueva contraseña establecida
+                    success:    Tu contraseña se ha cambiado con éxito. Dirígete al
+                    login_form: formulario de identificación
+                    to_login:   para entrar en la plataforma.
+
+                profile_page:
+                    title:  Tu perfil
+                    button: Actualizar
+
+                register_page:
+                    title:  Registro gratuito
+                    button: Registrarse
+
+                welcome_page:
+                    title:   Bienvenido
+                    message: Por favor, revisa tu bandeja de correo, donde encontrarás un correo para activar tu cuenta.
+                # =================================================================================
+ 
+
+                # Emails
+                # =================================================================================
+                emails:
+                    welcome:
+                        title:    Bienvenido a ammana.es
+                        text:     "Por favor, confirma tu cuenta de correo haciendo click en el siguiente enlace:"
+                        link:     "Activa tu cuenta"
+                        fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
+                        alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
+                    error:
+                        title:       ammana.es - Se ha producido un error
+                        client_data: "Datos del cliente:"
+                    new_password:
+                        title:    Estableciendo nueva contraseña
+                        text:     "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
+                        link:     "Establecer nueva contraseña"
+                        fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
+                        alt_text: "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
+                # =================================================================================
+ 
+                # Forms
+                # =================================================================================
+                forms:
+                    register_form:
+                        email:    Email
+                        password: Contraseña
+                    new_password_form:
+                        email:    Email
+                    set_password_form:
+                        password: Contraseña
+                    profile_form:
+                        email:          Email
+                        company_name:   Nombre de la compañía
+                        cif:            CIF
+                        address:        Domicilio social
+                        contact_person: Persona de contacto
+                        sector:         Sector
+                        num_employees:  Número de empleados
+                        logo:           Logo
+                        delete_logo:    Marque para borrar logo

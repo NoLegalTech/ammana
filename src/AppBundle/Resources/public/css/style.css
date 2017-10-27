@@ -436,15 +436,6 @@ h6 {
     padding: 1.5em 0 0;
 }
 
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-    padding-top: 0;
-}
-
 h1 {
     font-size: 24px;
     font-size: 1.5rem;
@@ -1884,11 +1875,7 @@ body:not(.has-header-image):not(.has-header-video) .custom-header-media {
     width: 20px;
 }
 
-.page .panel-content .entry-title,
-.page-title,
-body.single.single-post h1.entry-title,
-body.hfeed.home.blog .entry-title,
-body.page:not(.zeres-front-page) .entry-title {
+.entry-title {
     letter-spacing: 0;
     font-family: 'Muli', sans-serif;
     font-weight: 200;
@@ -2009,9 +1996,7 @@ body.single.single-post .related-news h1.entry-title {
     text-align: right;
 }
 
-body.single.single-post .site-content > header.entry-header,
-body.hfeed.home.blog .site-content > header.entry-header,
-body.page:not(.zeres-front-page) header.entry-header {
+header.entry-header {
     width: 100%;
     height: 71px;
     background-color: #418ccb;

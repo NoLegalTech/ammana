@@ -50,25 +50,14 @@
             </div><!-- .navigation-top -->
         </header>
 
-        <div class="wrapper row1">
-            <header id="header" class="hoc clear"> 
-                <div id="logo" class="fl_left">
-                    <h1><a href="{{ path('app') }}">{{ i18n.es.metadata.name }}</a></h1>
-                    <p>{{ i18n.es.metadata.slogan }}</p>
-                </div>
-                <nav id="mainav" class="fl_right">
-                    <ul class="clear">
-                        <li class="active"><a href="">{{ i18n.es.menus.new_user.home }}</a></li>
-                        <li><a class="drop" href="#">{{ i18n.es.menus.new_user.protocols }}</a>
-                            <ul>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_redes }}</a></li>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_telematica }}</a></li>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_mensajeria }}</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
+        <div class="site-content-contain">
+            <div id="content" class="site-content">
+                <header class="entry-header">
+                    <div class="wrap">
+                        <h1 class="entry-title">{{ title }}</h1>
+                    </div>
+                </header>
+            </div>
         </div>
 
         {% block body %}

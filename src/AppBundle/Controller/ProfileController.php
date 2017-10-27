@@ -63,6 +63,7 @@ class ProfileController extends Controller {
         }
 
         return $this->render('user/profile.html.twig', array(
+            'title' => $this->getI18n()['profile_page']['title'],
             'user' => $user,
             'edit_form' => $editForm->createView()
         ));

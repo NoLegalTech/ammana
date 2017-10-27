@@ -41,6 +41,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/index.html.twig', array(
+            'title' => $this->getI18n()['user_list_page']['title'],
             'users' => $customers,
         ));
     }
@@ -70,6 +71,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/edit.html.twig', array(
+            'title' => $this->getI18n()['edit_user_page']['title'],
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -172,6 +174,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/register.html.twig', array(
+            'title' => $this->getI18n()['register_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
         ));
@@ -182,7 +185,9 @@ class UserController extends Controller
      */
     public function welcomeAction(Request $request)
     {
-        return $this->render('user/welcome.html.twig');
+        return $this->render('user/welcome.html.twig', array(
+            'title' => $this->getI18n()['welcome_page']['title']
+        ));
     }
 
     /**
@@ -196,6 +201,7 @@ class UserController extends Controller
         $user->setEnabled(true);
         $this->getDoctrine()->getManager()->flush();
         return $this->render('user/activated.html.twig', array(
+            'title' => $this->getI18n()['activation_page']['title'],
             'user' => $user
         ));
     }
@@ -205,7 +211,9 @@ class UserController extends Controller
      */
     public function activateErrorAction()
     {
-        return $this->render('user/activation_error.html.twig');
+        return $this->render('user/activation_error.html.twig', array(
+            'title' => $this->getI18n()['activation_error_page']['title']
+        ));
     }
 
     /**
@@ -237,6 +245,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/login.html.twig', array(
+            'title' => $this->getI18n()['login_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
         ));
@@ -313,7 +322,9 @@ class UserController extends Controller
      */
     public function loginErrorAction()
     {
-        return $this->render('user/login_error.html.twig');
+        return $this->render('user/login_error.html.twig', array(
+            'title' => $this->getI18n()['login_error_page']['title']
+        ));
     }
 
     /**
@@ -378,6 +389,7 @@ class UserController extends Controller
         }
 
         return $this->render('user/forgot_password.html.twig', array(
+            'title' => $this->getI18n()['forgot_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
         ));
@@ -388,7 +400,9 @@ class UserController extends Controller
      */
     public function sentPasswordEmailAction(Request $request)
     {
-        return $this->render('user/resetting_password.html.twig');
+        return $this->render('user/resetting_password.html.twig', array(
+            'title' => $this->getI18n()['new_password_requested_page']['title']
+        ));
     }
 
     /**
@@ -404,10 +418,13 @@ class UserController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setActivationHash($hasher->generate());
             $this->getDoctrine()->getManager()->flush();
-            return $this->render('user/password_set.html.twig');
+            return $this->render('user/password_set.html.twig', array(
+                'title' => $this->getI18n()['new_password_set_page']['title']
+            ));
         }
 
         return $this->render('user/new_password.html.twig', array(
+            'title' => $this->getI18n()['new_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
         ));

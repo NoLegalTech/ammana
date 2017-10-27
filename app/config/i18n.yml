@@ -110,7 +110,7 @@ twig:
                 # =================================================================================
                 home_page:
                     claim:
-                        title:   ammana es todo lo que necesitas
+                        title:   ""
                         message: Copy super comercial que explica lo mucho que necesitas este software. Esto es catchy, ya verás como seguro que compras.
                         button:  Probar ahora
                     protocols_section:
@@ -138,6 +138,7 @@ twig:
                         customer: Cliente
 
                 order_confirmation_page:
+                    title:   Confirmación de pedido
                     please_review: Por favor, revisa tus respuestas y confirma que son correctas.
                     to_buy:  Comprar
                     confirm: Confirmar
@@ -184,6 +185,7 @@ twig:
                     protocols_list: la lista de protocolos
 
                 questions_page:
+                    title:  Configura tu protocolo
                     to_buy: Comprar
                     profile_not_complete: Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.
                     please_go_to: Por favor, ve a

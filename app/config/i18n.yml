@@ -136,6 +136,7 @@ twig:
                         date:     Fecha
                         number:   Número
                         customer: Cliente
+                        download: Descarga
 
                 order_confirmation_page:
                     title:   Confirmación de pedido
@@ -156,7 +157,9 @@ twig:
                 protocols_page:
                     title: Lista de protocolos
                     headers:
-                        name: Nombre
+                        name:     Nombre
+                        download: Descarga
+                        invoice:  Factura
                     download: Descargar
                     not_available: No disponible
                     pay: paga!

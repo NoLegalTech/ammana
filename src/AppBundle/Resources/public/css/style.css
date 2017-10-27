@@ -1722,15 +1722,17 @@ body.single.single-post .related-news h1.entry-title {
 
 .related-posts {
     color: #2B313D;
-    height: 187px;
     width: 100%;
     background-color: #EFEFF0;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 .item_in_3col {
     float: left;
     width: 30%;
     margin-left: 0;
+    text-align: center;
 }
 
 .item_in_3col:not(:first-child) {
@@ -3152,6 +3154,10 @@ object {
         padding-left: 0;
         padding-right: 40px;
         display: inline-block;
+        color: #20252E;
+        font-family: 'Raleway', sans-serif;
+        font-size: 15px;
+        line-height: 18px;
     }
 
     #site-navigation .menu-principal-container > ul > li:last-child > a {

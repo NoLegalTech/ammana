@@ -45,6 +45,7 @@ class InvoiceController extends Controller
             ->findByUser($user->getId());
 
         return $this->render('invoice/index.html.twig', array(
+            'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
         ));
     }
@@ -62,6 +63,7 @@ class InvoiceController extends Controller
         }
 
         return $this->render('invoice/full_list.html.twig', array(
+            'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
             'users' => $users
         ));

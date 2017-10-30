@@ -75,6 +75,7 @@ class ProtocolController extends Controller
         }
 
         return $this->render('protocol/index.html.twig', array(
+            'title' => $this->getI18n()['protocols_page']['title'],
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
@@ -102,6 +103,7 @@ class ProtocolController extends Controller
         }
 
         return $this->render('protocol/full_list.html.twig', array(
+            'title' => $this->getI18n()['orders_page']['title'],
             'protocols' => $protocols,
             'names' => $names,
             'users' => $users
@@ -153,6 +155,7 @@ class ProtocolController extends Controller
         if ($questionsForm->isSubmitted() && $questionsForm->isValid()) {
             if ($request->get('confirmed') == null) {
                 return $this->render('protocol/confirmation.html.twig', array(
+                    'title' => $this->getI18n()['order_confirmation_page']['title'],
                     'profile_completed' => $profile_completed,
                     'form' => $questionsForm->createView(),
                     'protocol' => $protocol
@@ -181,6 +184,7 @@ class ProtocolController extends Controller
         }
 
         return $this->render('protocol/questions.html.twig', array(
+            'title' => $this->getI18n()['questions_page']['title'],
             'profile_completed' => $profile_completed,
             'form' => $questionsForm->createView(),
             'protocol' => $protocol
@@ -352,6 +356,7 @@ class ProtocolController extends Controller
         $jwt = JWT::encode($token, $this->container->getParameter('quaderno_api_key'));
 
         return $this->render('protocol/payment.html.twig', array(
+            'title' => $this->getI18n()['payment_page']['title'],
             'user' => $user,
             'amount' => $amount,
             'protocol_spec' => $protocol_spec,
@@ -375,7 +380,9 @@ class ProtocolController extends Controller
      */
     public function paymentCompleteAction()
     {
-        return $this->render('protocol/payment_complete.html.twig');
+        return $this->render('protocol/payment_complete.html.twig', array(
+            'title' => $this->getI18n()['payment_complete_page']['title']
+        ));
     }
 
     /**

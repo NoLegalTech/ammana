@@ -11,57 +11,57 @@
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200,400,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     </head>
 
     <body id="top">
+        <header id="masthead" class="site-header zeres-header" role="banner">
+            <div class="navigation-top zeres-header">
+                <div class="wrap zeres-header">
+                    <nav id="site-navigation" class="main-navigation zeres-header" role="navigation" aria-label="Top Menu">
+                        <div class="wrap zeres-header">
+                            <a class="logo" href="{{ path('app') }}">
+                                <img src="/images/logo.png" width="160px" alt="ammana.es">
+                            </a>
+                            <div class="menu-principal-container">
+                                <ul id="top-menu" class="menu">
+                                {% if not app.session.get('user') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.session.get('user') %}
+                                    {% for option in app.session.get('menu') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
+                                    </li>
+                                    {% endfor %}
+                                {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav><!-- #site-navigation -->
+                </div><!-- .wrap -->
+            </div><!-- .navigation-top -->
+        </header>
 
-        <div class="wrapper row0">
-            <div id="topbar" class="hoc clear"> 
-                {% if not app.session.get('user') %}
-                    <div class="fl_left">
-                        <ul class="nospace inline pushright">
-                            <li><i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a></li>
-                            <li><i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a></li>
-                        </ul>
+        <div class="site-content-contain">
+            <div id="content" class="site-content">
+                <header class="entry-header">
+                    <div class="wrap">
+                        <h1 class="entry-title">{{ title }}</h1>
                     </div>
-                {% endif %}
-                {% if app.session.get('user') %}
-                    <div class="fl_right">
-                        <ul class="nospace inline pushright">
-                            {% for option in app.session.get('menu') %}
-                                <li><i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
+                </header>
             </div>
-        </div>
-
-        <div class="wrapper row1">
-            <header id="header" class="hoc clear"> 
-                <div id="logo" class="fl_left">
-                    <h1><a href="{{ path('app') }}">{{ i18n.es.metadata.name }}</a></h1>
-                    <p>{{ i18n.es.metadata.slogan }}</p>
-                </div>
-                <nav id="mainav" class="fl_right">
-                    <ul class="clear">
-                        <li class="active"><a href="">{{ i18n.es.menus.new_user.home }}</a></li>
-                        <li><a class="drop" href="#">{{ i18n.es.menus.new_user.protocols }}</a>
-                            <ul>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_redes }}</a></li>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_telematica }}</a></li>
-                                <li><a href="">{{ i18n.es.menus.new_user.protocol_uso_mensajeria }}</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </nav>
-            </header>
         </div>
 
         {% block body %}
         {% endblock %}
-
-        <a id="backtotop" href="#top"><i class="fa fa-chevron-up"></i></a>
 
         {% block javascripts %}
             {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
@@ -69,65 +69,30 @@
             {% endjavascripts %}
         {% endblock %}
 
-        <div class="wrapper row4 bgded overlay" style="background-image:url('images/demo/backgrounds/03.png');">
-            <footer id="footer" class="hoc clear"> 
-                <div class="one_quarter first">
-                    <h6 class="title">Acerca de</h6>
-                    <p>Eros et magna ut vitae faucibus dui nec fermentum mauris nunc molestie venenatis metus et porttitor nisi faucibus ut cras non sem facilisis.</p>
-                    <p>Hendrerit ligula ut blandit sem nulla non ipsum rutrum tempor dolor non faucibus eros cras imperdiet cursus sapien.</p>
+        <div class="related-posts">
+            <div class="wrap">
+                <div class="related-post item_in_3col">
+                    <a href="">Información legal</a>
                 </div>
-                <div class="one_quarter">
-                    <h6 class="title">Datos de contacto y tal</h6>
-                    <ul class="nospace linklist contact">
-                        <li><i class="fa fa-map-marker"></i>
-                            <address>
-                            Street Name &amp; Number, Town, Postcode/Zip
-                            </address>
-                        </li>
-                        <li><i class="fa fa-phone"></i> +00 (123) 456 7890<br>
-                            +00 (123) 456 7890</li>
-                        <li><i class="fa fa-fax"></i> +00 (123) 456 7890</li>
-                        <li><i class="fa fa-envelope-o"></i> info@domain.com</li>
-                    </ul>
+                <div class="related-post item_in_3col">
+                    <a href="">Política de privacidad</a>
                 </div>
-                <div class="one_quarter">
-                    <h6 class="title">Donec at tellus eu</h6>
-                    <ul class="nospace linklist">
-                        <li><a href="#">Mauris in condimentum lacus</a></li>
-                        <li><a href="#">Sed hendrerit est praesent</a></li>
-                        <li><a href="#">Tempor dapibus enim phasellus</a></li>
-                        <li><a href="#">Convallis lectus a tristique</a></li>
-                        <li><a href="#">Lectus nisi sodales sem at</a></li>
-                    </ul>
+                <div class="related-post item_in_3col">
+                    <a href="">Política de cookies</a>
                 </div>
-                <div class="one_quarter">
-                    <h6 class="title">ac urna morbi rutrum</h6>
-                    <ul class="nospace linklist">
-                        <li>
-                            <article>
-                                <h2 class="nospace font-x1"><a href="#">dignissim libero augue</a></h2>
-                                <time class="font-xs block btmspace-10" datetime="2045-04-06">Friday, 6<sup>th</sup> April 2045</time>
-                                <p class="nospace">aenean non egestas urna curabitur vitae aliquam felis&hellip;</p>
-                            </article>
-                        </li>
-                        <li>
-                            <article>
-                                <h2 class="nospace font-x1"><a href="#">et nisl id pretium</a></h2>
-                                <time class="font-xs block btmspace-10" datetime="2045-04-05">Thursday, 5<sup>th</sup> April 2045</time>
-                                <p class="nospace">eros vehicula eros nec lacinia sem tellus vel turpis vivamus&hellip;</p>
-                            </article>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
-        </div>
-
-        <div class="wrapper row5">
-            <div id="copyright" class="hoc clear"> 
-                <p class="fl_left">{{ i18n.es.footer.copyright_note | raw }}</p>
-                <p class="fl_right">{{ i18n.es.footer.developed_by | raw }}</p>
             </div>
         </div>
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="wrap">
+                <div class="left">
+                    <p class="fl_left">{{ i18n.es.footer.copyright_note | raw }}</p>
+                </div>
+                <div class="right">
+                    <p class="fl_right">{{ i18n.es.footer.developed_by | raw }}</p>
+                </div>
+            </div><!-- .wrap -->
+        </footer>
 
     </body>
 

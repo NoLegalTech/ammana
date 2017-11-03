@@ -147,8 +147,25 @@ section#explanation h2 {
 }
 section#explanation h1,
 section#explanation article[name=why] {
-    width: 1000px;
-    margin: 0 auto;
+    width: 100%;
+}
+section#explanation article[name=why] p {
+    text-align: justify;
+    color: black;
+}
+section#explanation article[name=why] div {
+    height: 230px;
+    width: 40%;
+}
+section#explanation article[name=why] .column-left {
+    float: left;
+    margin-right: 3%;
+    margin-left: 7%;
+}
+section#explanation article[name=why] .column-right {
+    float: right;
+    margin-right: 7%;
+    margin-left: 3%;
 }
 
 section#steps {

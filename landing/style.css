@@ -18,17 +18,13 @@ body > header {
     padding-bottom: 9px;
     margin-bottom: 130px;
 }
-body > header a {
-    height: 18px;
-    width: 132px;
+a {
     color: #418CCB;
     font-family: 'Muli', sans-serif;
     font-size: 14px;
-    font-style: italic;
     line-height: 18px;
     text-decoration: none;
     padding-top: 25px;
-    float: right;
 }
 #logo {
     width: 267px;
@@ -42,30 +38,34 @@ body > header a {
 .left {
     float: left;
 }
-
-section#intro {
-    text-align: center;
-}
-section#intro h1 {
+h1 {
     color: #464556;
     font-size: 45px;
     line-height: 68px;
     font-family: 'Muli', sans-serif;
     font-weight: 400;
 }
-section#intro p {
+
+section#intro {
+    text-align: center;
+}
+section#intro p,
+section#explanation p {
     color: #929EA6;
     font-family: 'Muli', sans-serif;
     font-size: 21px;
     line-height: 29px;
     text-align: center;
     font-weight: 400;
-    max-width: 840px;
     margin: 0 auto;
     padding-bottom: 40px;
 }
+section#intro p {
+    max-width: 840px;
+}
 
-section#register p {
+section#register p,
+section#register-again p {
     color: #464556;
     font-family: 'Open Sans', sans-serif;
     font-size: 17px;
@@ -73,11 +73,13 @@ section#register p {
     text-align: center;
     padding-bottom: 20px;
 }
-section#register form {
+section#register form,
+section#register-again form {
     text-align: center;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
-section#register input {
+section#register input,
+section#register-again input {
     width: 244px;
     height: 40px;
     border: 2px solid #418CCB;
@@ -90,37 +92,46 @@ section#register input {
     font-size: 17px;
     line-height: 21px;
 }
-section#register input[type=submit] {
+section#register input[type=submit],
+section#register-again input[type=submit] {
     color: #EAEFF2;
     background-color: #418CCB;
     text-align: center;
 }
-section#register input[type=submit]:hover {
+section#register input[type=submit]:hover,
+section#register-again input[type=submit]:hover {
     cursor: pointer;
 }
 
-section#claim {
+section#explanation {
     font-family: 'Muli', sans-serif;
     margin-bottom: 100px;
 }
-section#claim h2,
-section#claim p {
+section#explanation h2 {
     text-align: center;
     font-size: 32px;
     line-height: 50px;
     font-weight: 400;
     margin-top: 0;
     margin-bottom: 0;
+    padding-bottom: 20px;
 }
-section#claim h2 {
+section#explanation h1 {
     color: #464556;
+    text-align: center;
+    padding-bottom: 40px;
 }
-section#claim a {
+section#explanation h2 {
     color: #418CCB;
     text-decoration: none;
 }
 .uppercase {
     text-transform: uppercase;
+}
+section#explanation h1,
+section#explanation article[name=why] {
+    width: 1000px;
+    margin: 0 auto;
 }
 
 section#steps {
@@ -160,6 +171,7 @@ section#steps article p {
     font-size: 15px;
     line-height: 25px;
     font-family: 'Montserrat', sans-serif;
+    text-align: left;
 }
 section#steps article:nth-child(1) {
     background-image: url(images/define.png);
@@ -180,4 +192,27 @@ footer {
     color: #2A4560;
     font-size: 12px;
     line-height: 15px;
+    margin-bottom: 80px;
+}
+footer #copyright {
+    float: left;
+}
+footer #aviso {
+    float: right;
+}
+
+body.legal section {
+    width: 80%;
+    margin: 0 auto;
+    color: #929EA6;
+    font-family: 'Muli', sans-serif;
+    font-size: 21px;
+    line-height: 29px;
+    font-weight: 400;
+    margin: 0 auto;
+    padding-bottom: 0;
+}
+body.legal section#intro p {
+    text-align: left;
+    max-width: 100%;
 }

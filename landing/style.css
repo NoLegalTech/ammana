@@ -1,0 +1,183 @@
+@font-face {
+    font-family: 'antonioregular';
+    src: url('fonts/antonio.regular-webfont.woff2') format('woff2'),
+         url('fonts/antonio.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
+}
+body > header {
+    width: 100%;
+    height: 60px;
+    border-bottom: 3px solid #c0cbd0;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    margin-bottom: 130px;
+}
+body > header a {
+    height: 18px;
+    width: 132px;
+    color: #418CCB;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 18px;
+    text-decoration: none;
+    padding-top: 25px;
+    float: right;
+}
+#logo {
+    width: 267px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-image: url(images/logo.png);
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+
+section#intro {
+    text-align: center;
+}
+section#intro h1 {
+    color: #464556;
+    font-size: 45px;
+    line-height: 68px;
+    font-family: 'Muli', sans-serif;
+    font-weight: 400;
+}
+section#intro p {
+    color: #929EA6;
+    font-family: 'Muli', sans-serif;
+    font-size: 21px;
+    line-height: 29px;
+    text-align: center;
+    font-weight: 400;
+    max-width: 840px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+section#register p {
+    color: #464556;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    line-height: 17px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+section#register form {
+    text-align: center;
+    padding-bottom: 200px;
+}
+section#register input {
+    width: 244px;
+    height: 40px;
+    border: 2px solid #418CCB;
+    border-radius: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Muli', sans-serif;
+    font-size: 17px;
+    line-height: 21px;
+}
+section#register input[type=submit] {
+    color: #EAEFF2;
+    background-color: #418CCB;
+    text-align: center;
+}
+section#register input[type=submit]:hover {
+    cursor: pointer;
+}
+
+section#claim {
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 100px;
+}
+section#claim h2,
+section#claim p {
+    text-align: center;
+    font-size: 32px;
+    line-height: 50px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+section#claim h2 {
+    color: #464556;
+}
+section#claim a {
+    color: #418CCB;
+    text-decoration: none;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+
+section#steps {
+    height: 420px;
+}
+section#steps .step.number {
+    font-family: 'antonioregular';
+    color: #418CCB;
+    font-size: 82px;
+    line-height: 68px;
+}
+section#steps article {
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+    background-position-y: top;
+    background-position-x: center;
+    background-repeat: no-repeat;
+    padding-top: 100px;
+}
+section#steps article:last-child {
+    margin-right: 0;
+}
+section#steps article h3 {
+    font-family: 'Muli', sans-serif;
+    font-size: 31px;
+    line-height: 35px;
+    color: #464556;
+    font-weight: 400;
+}
+h3 > .highlight {
+    font-weight: 600;
+    display: block;
+}
+section#steps article p {
+    color: #929EA6;
+    font-size: 15px;
+    line-height: 25px;
+    font-family: 'Montserrat', sans-serif;
+}
+section#steps article:nth-child(1) {
+    background-image: url(images/define.png);
+    background-position-x: right;
+}
+section#steps article:nth-child(2) {
+    background-image: url(images/design.png);
+}
+section#steps article:nth-child(3) {
+    background-image: url(images/implementa.png);
+}
+
+footer {
+    padding-top: 50px;
+    width: 1000px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    color: #2A4560;
+    font-size: 12px;
+    line-height: 15px;
+}

@@ -13,10 +13,26 @@
 body > header {
     width: 100%;
     height: 60px;
-    border-bottom: 3px solid #c0cbd0;
     padding-top: 9px;
     padding-bottom: 9px;
-    margin-bottom: 130px;
+    position: fixed;
+    top: 0;
+    background-color: white;
+}
+body > header:after {
+    content:"";
+    background: -webkit-linear-gradient(
+        top,
+        #c0cbd0 0%,
+        #c0cbd0 30%,
+        #c0cbd0 31%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    display: block;
+    height:8px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 a {
     color: #418CCB;
@@ -47,6 +63,7 @@ h1 {
 }
 
 section#intro {
+    margin-top: 130px;
     text-align: center;
 }
 section#intro p,

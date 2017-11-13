@@ -1,0 +1,262 @@
+@font-face {
+    font-family: 'antonioregular';
+    src: url('fonts/antonio.regular-webfont.woff2') format('woff2'),
+         url('fonts/antonio.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.wrap {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.highlight {
+    color: black;
+}
+
+body {
+    background: url(images/background.jpg);
+}
+
+body > header {
+    width: 100%;
+    height: 70px;
+    padding-top: 19px;
+    padding-bottom: 9px;
+    position: fixed;
+    top: 0;
+    background: url(images/background.jpg);
+}
+body > header:after {
+    content:"";
+    background: -webkit-linear-gradient(
+        top,
+        #c0cbd0 0%,
+        #c0cbd0 30%,
+        #c0cbd0 31%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    display: block;
+    height:8px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+a {
+    color: #418CCB;
+    font-family: 'Muli', sans-serif;
+    font-size: 14px;
+    text-decoration: none;
+}
+#logo {
+    width: 267px;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-image: url(images/logo_dark.png);
+    background-size: contain;
+    margin-left: 10px;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+h1 {
+    color: #464556;
+    font-size: 45px;
+    line-height: 68px;
+    font-family: 'Muli', sans-serif;
+    font-weight: 400;
+}
+
+section#intro {
+    margin-top: 130px;
+    text-align: center;
+}
+section#intro p,
+section#explanation p {
+    color: #929EA6;
+    font-family: 'Muli', sans-serif;
+    font-size: 21px;
+    line-height: 29px;
+    text-align: center;
+    font-weight: 400;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+section#register p,
+section#register-again p {
+    color: #464556;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    line-height: 24px;
+    text-align: center;
+    padding-bottom: 20px;
+}
+section#register form {
+    text-align: center;
+    padding-bottom: 100px;
+}
+section#register-again form {
+    text-align: center;
+    padding-bottom: 50px;
+}
+section#register input,
+section#register-again input {
+    width: 244px;
+    height: 40px;
+    border: 2px solid #418CCB;
+    border-radius: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+    font-family: 'Muli', sans-serif;
+    font-size: 17px;
+    line-height: 21px;
+}
+section#register input[type=submit],
+section#register-again input[type=submit] {
+    width: auto;
+    color: #EAEFF2;
+    background-color: #418CCB;
+    text-align: center;
+}
+section#register input[type=submit]:hover,
+section#register-again input[type=submit]:hover {
+    cursor: pointer;
+}
+
+section#explanation {
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 100px;
+}
+section#explanation h2 {
+    text-align: center;
+    font-size: 32px;
+    line-height: 50px;
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+section#explanation h1 {
+    color: #464556;
+    text-align: center;
+    padding-bottom: 40px;
+}
+section#explanation h2 {
+    color: #418CCB;
+    text-decoration: none;
+}
+.uppercase {
+    text-transform: uppercase;
+}
+section#explanation h1,
+section#explanation article[name=why] {
+    width: 100%;
+}
+section#explanation article[name=why] p {
+    text-align: justify;
+    color: #929EA6;
+}
+section#explanation article[name=why] div {
+    height: 230px;
+    width: 40%;
+}
+section#explanation article[name=why] .column-left {
+    float: left;
+    margin-right: 3%;
+    margin-left: 7%;
+}
+section#explanation article[name=why] .column-right {
+    float: right;
+    margin-right: 7%;
+    margin-left: 3%;
+}
+section#explanation article[name=how] h2 {
+    padding-bottom: 100px;
+}
+
+section#steps {
+    height: 300px;
+}
+section#steps .step.number {
+    font-family: 'antonioregular';
+    color: #418CCB;
+    font-size: 82px;
+    line-height: 68px;
+}
+section#steps article {
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+    background-position-y: top;
+    background-position-x: 80%;
+    background-repeat: no-repeat;
+    padding-top: 0;
+}
+section#steps article:last-child {
+    margin-right: 0;
+}
+section#steps article h3 {
+    font-family: 'Muli', sans-serif;
+    font-size: 31px;
+    line-height: 35px;
+    color: #464556;
+    font-weight: 400;
+}
+h3 > .highlight {
+    font-weight: 600;
+    display: block;
+}
+section#steps article p {
+    color: #929EA6;
+    font-size: 15px;
+    line-height: 25px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+}
+section#steps article:nth-child(1) {
+    background-image: url(images/define.png);
+}
+section#steps article:nth-child(2) {
+    background-image: url(images/design.png);
+}
+section#steps article:nth-child(3) {
+    background-image: url(images/implementa.png);
+}
+
+footer {
+    padding-top: 50px;
+    width: 1000px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    color: #2A4560;
+    font-size: 12px;
+    line-height: 15px;
+    margin-bottom: 46px;
+}
+footer div {
+    float: left;
+    margin-right: 30px;
+}
+
+body.legal section {
+    width: 80%;
+    margin: 0 auto;
+    color: #929EA6;
+    font-family: 'Muli', sans-serif;
+    font-size: 21px;
+    line-height: 29px;
+    font-weight: 400;
+    margin: 0 auto;
+    padding-bottom: 0;
+}
+body.legal section#intro p {
+    text-align: left;
+    max-width: 100%;
+}

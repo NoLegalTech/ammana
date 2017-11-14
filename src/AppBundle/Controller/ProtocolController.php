@@ -446,7 +446,7 @@ class ProtocolController extends Controller
         $sender_name = $this->container->getParameter('emails_sender_name');
         $email_to_report_errors = $this->container->getParameter('email_to_report_errors');
 
-        $message = (new \Swift_Message($this->getI18n()['emails']['error']['title']))
+        $swift_message = (new \Swift_Message($this->getI18n()['emails']['error']['title']))
             ->setFrom(array($sender_email => $sender_name))
             ->setTo($email_to_report_errors)
             ->setBody(
@@ -462,7 +462,7 @@ class ProtocolController extends Controller
             )
             ->addPart($plain_text, 'text/plain');
 
-        $mailer->send($message);
+        $mailer->send($swift_message);
     }
 
     private function getI18n() {

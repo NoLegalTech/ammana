@@ -6,9 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use \Firebase\JWT\JWT;
 
@@ -34,7 +31,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(SessionInterface $session, PermissionsService $permissions, Invoices $invoices)
+    public function indexAction(PermissionsService $permissions, Invoices $invoices)
     {
         if ($permissions->currentRolesInclude("admin")) {
             return $this->showAllOrders();
@@ -122,7 +119,7 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, Request $request, SessionInterface $session, PermissionsService $permissions, HashGenerator $hasher)
+    public function buyAction($id, Request $request, PermissionsService $permissions, HashGenerator $hasher)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -222,7 +219,7 @@ class ProtocolController extends Controller
      * Downloads a protocol.
      *
      */
-    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, SessionInterface $session, PermissionsService $permissions)
+    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -278,7 +275,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, \Swift_Mailer $mailer, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
+    public function payAction(Protocol $protocol, Request $request, \Swift_Mailer $mailer, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(

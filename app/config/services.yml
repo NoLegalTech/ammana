@@ -43,3 +43,8 @@ services:
         arguments:
             $ids: '%protocols%'
             $specs: [ '%protocol.uso_redes%', '%protocol.uso_telematica%', '%protocol.uso_mensajerias%' ]
+    AppBundle\Service\AlertsService:
+        arguments:
+            $sender_email: '%emails_sender_email%'
+            $sender_name: '%emails_sender_name%'
+            $email_to_report_errors: '%email_to_report_errors%'

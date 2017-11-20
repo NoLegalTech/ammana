@@ -285,6 +285,7 @@ twig:
                     error:
                         title:       ammana.es - Se ha producido un error
                         client_data: "Datos del cliente:"
+                        additional:  "Información adicional:"
                     new_password:
                         title:    Estableciendo nueva contraseña
                         text:     "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"

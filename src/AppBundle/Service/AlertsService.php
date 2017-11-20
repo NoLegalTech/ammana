@@ -26,7 +26,7 @@ class AlertsService {
         $this->email_to_report_errors = $email_to_report_errors;
     }
 
-    public function error($title, $message) {
+    public function error($title, $message, $additional_data = null) {
         $this->logger->error($title . ':');
         $this->logger->error('    ' . $message);
 
@@ -40,7 +40,8 @@ class AlertsService {
             array(
                 'title' => $title,
                 'message' => $message,
-                'user' => $user
+                'user' => $user,
+                'additional_data' => $additional_data
             )
         );
 
@@ -53,7 +54,8 @@ class AlertsService {
                     array(
                         'title' => $title,
                         'message' => $message,
-                        'user' => $user
+                        'user' => $user,
+                        'additional_data' => $additional_data
                     )
                 ),
                 'text/html'

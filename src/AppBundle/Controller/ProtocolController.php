@@ -299,7 +299,8 @@ class ProtocolController extends Controller
         if ($request->query->get('quaderno_error_message') != null) {
             $alerts->error(
                 $this->getI18n()['errors']['quaderno_paypal_error']['log'],
-                $request->query->get('quaderno_error_message')
+                $request->query->get('quaderno_error_message'),
+                $protocol->__toString()
             );
             return $this->redirectToRoute('error', array(
                 'message' => $this->getI18n()['errors']['quaderno_paypal_error']['user']
@@ -321,7 +322,8 @@ class ProtocolController extends Controller
             if ($payer_status != 'VERIFIED' || $formatter->format($protocol->getId()) != $item_number) {
                 $alerts->error(
                     $this->getI18n()['errors']['wrong_paypal_callback']['log'],
-                    $request->query->get('quaderno_error_message')
+                    $request->query->get('quaderno_error_message'),
+                    $protocol->__toString()
                 );
                 return $this->redirectToRoute('error', array(
                     'message' => $this->getI18n()['errors']['wrong_paypal_callback']['user']

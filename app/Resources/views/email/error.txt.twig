@@ -3,3 +3,7 @@
 {{ message }}
 
 {{ i18n.es.emails.error.client_data }} {{ user }}
+
+{% if additional_data %}
+    {{ i18n.es.emails.error.additional }} {{ additional_data }}
+{% endif %}

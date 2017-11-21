@@ -2,10 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Entity\User;
 
 class DefaultController extends Controller
 {
@@ -15,6 +13,11 @@ class DefaultController extends Controller
             'title' => $this->getI18n()['home_page']['claim']['title'],
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);
+    }
+
+    public function maintenanceAction(Request $request)
+    {
+        return $this->render('default/maintenance.html.twig');
     }
 
     public function errorAction(Request $request)

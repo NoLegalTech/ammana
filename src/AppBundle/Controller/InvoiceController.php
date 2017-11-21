@@ -2,13 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use Psr\Log\LoggerInterface;
-
 use AppBundle\Entity\Invoice;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Service\PermissionsService;
@@ -23,7 +19,7 @@ class InvoiceController extends Controller
      * Lists all invoice entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function indexAction(SessionInterface $session, PermissionsService $permissions)
     {
         if ($permissions->currentRolesInclude("customer")) {
             $user = $permissions->getCurrentUser($session);

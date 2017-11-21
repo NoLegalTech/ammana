@@ -2,16 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Psr\Log\LoggerInterface;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-use AppBundle\Entity\User;
 use AppBundle\Service\PermissionsService;
 
 class ProfileController extends Controller {

@@ -2,17 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use Psr\Log\LoggerInterface;
-
-use Symfony\Component\Filesystem\Filesystem;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 use \Firebase\JWT\JWT;
 
@@ -25,6 +18,7 @@ use AppBundle\Service\PermissionsService;
 use AppBundle\Service\OrderNumberFormatter;
 use AppBundle\Service\Quaderno;
 use AppBundle\Service\Protocols;
+use AppBundle\Service\AlertsService;
 
 /**
  * Protocol controller.
@@ -37,7 +31,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, Invoices $invoices)
+    public function indexAction(PermissionsService $permissions, Invoices $invoices)
     {
         if ($permissions->currentRolesInclude("admin")) {
             return $this->showAllOrders();
@@ -125,7 +119,7 @@ class ProtocolController extends Controller
      * Buys a protocol.
      *
      */
-    public function buyAction($id, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions, HashGenerator $hasher)
+    public function buyAction($id, Request $request, PermissionsService $permissions, HashGenerator $hasher)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -225,7 +219,7 @@ class ProtocolController extends Controller
      * Downloads a protocol.
      *
      */
-    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function downloadAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -281,7 +275,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, SessionInterface $session, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices)
+    public function payAction(Protocol $protocol, Request $request, \Swift_Mailer $mailer, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -303,12 +297,10 @@ class ProtocolController extends Controller
         }
 
         if ($request->query->get('quaderno_error_message') != null) {
-            $this->logSevereError(
-                $logger,
-                $mailer,
+            $alerts->error(
                 $this->getI18n()['errors']['quaderno_paypal_error']['log'],
                 $request->query->get('quaderno_error_message'),
-                $permissions->getCurrentUser()
+                $protocol->__toString()
             );
             return $this->redirectToRoute('error', array(
                 'message' => $this->getI18n()['errors']['quaderno_paypal_error']['user']
@@ -328,12 +320,10 @@ class ProtocolController extends Controller
             $item_number = $postData->get('item_number');
 
             if ($payer_status != 'VERIFIED' || $formatter->format($protocol->getId()) != $item_number) {
-                $this->logSevereError(
-                    $logger,
-                    $mailer,
+                $alerts->error(
                     $this->getI18n()['errors']['wrong_paypal_callback']['log'],
                     $request->query->get('quaderno_error_message'),
-                    $permissions->getCurrentUser()
+                    $protocol->__toString()
                 );
                 return $this->redirectToRoute('error', array(
                     'message' => $this->getI18n()['errors']['wrong_paypal_callback']['user']
@@ -389,7 +379,7 @@ class ProtocolController extends Controller
      * Marks a protocol as paid by transfer.
      *
      */
-    public function payTransferAction(Protocol $protocol, LoggerInterface $logger, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
+    public function payTransferAction(Protocol $protocol, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
@@ -423,46 +413,6 @@ class ProtocolController extends Controller
         $quaderno->sendToClient($theInvoice);
 
         return $this->redirectToRoute('protocol_index');
-    }
-
-    private function logSevereError($logger, $mailer, $title, $message, $user) {
-        $logger->error($title . ':');
-        $logger->error('    ' . $message);
-
-        if ($user != null) {
-            $user = $user->__toString();
-        }
-
-        $plain_text = $this->renderView(
-            'email/error.txt.twig',
-            array(
-                'title' => $title,
-                'message' => $message,
-                'user' => $user
-            )
-        );
-
-        $sender_email = $this->container->getParameter('emails_sender_email');
-        $sender_name = $this->container->getParameter('emails_sender_name');
-        $email_to_report_errors = $this->container->getParameter('email_to_report_errors');
-
-        $message = (new \Swift_Message($this->getI18n()['emails']['error']['title']))
-            ->setFrom(array($sender_email => $sender_name))
-            ->setTo($email_to_report_errors)
-            ->setBody(
-                $this->renderView(
-                    'email/error.html.twig',
-                    array(
-                        'title' => $title,
-                        'message' => $message,
-                        'user' => $user
-                    )
-                ),
-                'text/html'
-            )
-            ->addPart($plain_text, 'text/plain');
-
-        $mailer->send($message);
     }
 
     private function getI18n() {

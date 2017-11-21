@@ -255,5 +255,24 @@ class Protocol
         return $this->price;
     }
 
+    /**
+     * String representation fo this object
+     *
+     * @return string
+     */
+    public function __toString() {
+        return "Protocol {\n"
+                . "    id: "         . $this->getId()                         . ",\n"
+                . "    enabled: "    . $this->getEnabled()                    . ",\n"
+                . "    user: "       . $this->getUser()                       . ",\n"
+                . "    invoice: "    . $this->getInvoice()                    . ",\n"
+                . "    answers: "    . $this->getAnswers()                    . ",\n"
+                . "    identifier: " . $this->getIdentifier()                 . ",\n"
+                . "    orderHash: "  . $this->getOrderHash()                  . ",\n"
+                . "    orderDate: "  . $this->getOrderDate()->format('d/m/Y') . ",\n"
+                . "    price: "      . $this->getPrice()                      . "\n"
+                . "}";
+    }
+
 }
 

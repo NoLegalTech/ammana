@@ -2,4 +2,10 @@
 
 <p> {{ message }} </p>
 
-<p> {{ i18n.es.emails.error.client_data }} {{ user }} </p>
+<p> {{ i18n.es.emails.error.client_data }} </p>
+<pre> {{ user }} </pre>
+
+{% if additional_data %}
+    <p> {{ i18n.es.emails.error.additional }} </p>
+    <pre> {{ additional_data }} </pre>
+{% endif %}

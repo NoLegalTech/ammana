@@ -219,7 +219,7 @@ class UserController extends Controller
     /**
      * Login.
      */
-    public function loginAction(Request $request, LoggerInterface $logger, SessionInterface $session, PermissionsService $permissions)
+    public function loginAction(Request $request, PermissionsService $permissions, SessionInterface $session)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
@@ -330,7 +330,7 @@ class UserController extends Controller
     /**
      * Logout.
      */
-    public function logoutAction(Request $request, LoggerInterface $logger, SessionInterface $session)
+    public function logoutAction(Request $request, SessionInterface $session)
     {
         $session->invalidate();
         return $this->redirectToRoute('app');
@@ -408,7 +408,7 @@ class UserController extends Controller
     /**
      * Page to set new password.
      */
-    public function newPasswordAction(Request $request, LoggerInterface $logger, User $user, HashGenerator $hasher)
+    public function newPasswordAction(Request $request, User $user, HashGenerator $hasher)
     {
         $form = $this->createForm('AppBundle\Form\OnlyPasswordType', $user, array(
             'i18n' => $this->getI18n()

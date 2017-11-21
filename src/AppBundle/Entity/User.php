@@ -406,16 +406,16 @@ class User
      * @return string
      */
     public function __toString() {
-        return "User {"
-                . "    id: " . $this->getId()
-                . "    email: " . $this->getEmail()
-                . "    companyName: " . $this->getCompanyName()
-                . "    enabled: " . $this->getEnabled()
-                . "    cif: " . $this->getCif()
-                . "    address: " . $this->getAddress()
-                . "    contactPerson: " . $this->getContactPerson()
-                . "    roles: " . $this->getRoles()
-                . "    quadernoId: " . $this->getQuadernoId()
+        return "User {\n"
+                . "    id: "            . $this->getId()            . ",\n"
+                . "    email: "         . $this->getEmail()         . ",\n"
+                . "    companyName: "   . $this->getCompanyName()   . ",\n"
+                . "    enabled: "       . $this->getEnabled()       . ",\n"
+                . "    cif: "           . $this->getCif()           . ",\n"
+                . "    address: "       . $this->getAddress()       . ",\n"
+                . "    contactPerson: " . $this->getContactPerson() . ",\n"
+                . "    roles: "         . $this->getRoles()         . ",\n"
+                . "    quadernoId: "    . $this->getQuadernoId()    . "\n"
                 . "}";
     }
 

@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+                <p>
+                    {{ i18n.es.payment_page.info }}
+                </p>
+                <p>
+                    <form id="payment-form" action="" method="POST"
+                            data-gateway="paypal"
+                            data-charge="{{ charge }}"
+                            data-amount="{{ amount }}"
+                            data-taxes="included"
+                            data-key="pk_test_xH_ZFPoxFkqyRxx9Wq3z">
+                        <input type="hidden" value="1" data-quaderno="quantity">
+                        <span class="payment-errors"></span>
+                        <input type="hidden" data-quaderno="first-name" value="{{ user.companyName }}" />
+                        <input type="hidden" data-quaderno="last-name"/>
+                        <input type="hidden" data-quaderno="company-name"/>
+                        <input type="hidden" data-quaderno="email"/>
+                        <input type="hidden" data-quaderno="street-line-1"/>
+                        <input type="hidden" data-quaderno="street-line-2"/>
+                        <input type="hidden" data-quaderno="city"/>
+                        <input type="hidden" data-quaderno="postal-code"/>
+                        <input type="hidden" data-quaderno="region"/>
+                        <input type="hidden" data-quaderno="country" value="ES" />
+                        <input type="hidden" data-quaderno="vat-number"/>
+                        <button class="paypal-button" type="submit">
+                            {{ i18n.es.payment_page.pay_with_paypal | raw }}
+                        </button>
+                    </form> 
+                </p>
+                <p>
+                    {{ i18n.es.payment_page.transfer.info }}
+                    <blockquote>
+                        {{ i18n.es.payment_page.transfer.contact }}: <strong>{{ payment_data.order_hash }}</strong><br/>
+                        {{ i18n.es.payment_page.transfer.account_number }}: <strong>{{ payment_data.bank_account }}</strong><br/>
+                        {{ i18n.es.payment_page.transfer.amount }}: <strong>{{ payment_data.amount }} €</strong>
+                    </blockquote>
+                    {{ i18n.es.payment_page.note }}
+                </p>
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="https://js.quaderno.io/v2/"></script>
+    <script type="text/javascript">
+        jQuery(function($) {
+            $('#payment-form').submit(function(e) {
+                var $form = $(this);
+
+                // Disable the submit button to prevent repeated clicks
+                $form.find('button').prop('disabled', true);
+                Quaderno.createCharge({
+                    success: function(status, response) {
+                        console.log('success');
+                        console.log('status: ' + status + ', response:');
+                        console.log(response);
+                    },
+                    error: function(status, response) {
+                        console.error('Error: quaderno replied with ' + status);
+                        var errorDetails = response.message;
+                        if (response.details) {
+                            errorDetails += ' (' + response.details + ')';
+                        }
+                        console.error('Error details: ' + response.message);
+                        $form.find('button').prop('disabled', false);
+                    }
+                });
+                // Prevent the form from submitting with the default action
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

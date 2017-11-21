@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>{% block title %}{{ i18n.es.metadata.page_title }}{% endblock %}</title>
+        {% block stylesheets %}
+            {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:200,400,800" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+        <link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+        <link rel="manifest" href="/images/manifest.json">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+        <meta name="theme-color" content="#ffffff">
+    </head>
+
+    <body id="top">
+        <header id="masthead" class="site-header zeres-header" role="banner">
+            <div class="navigation-top zeres-header">
+                <div class="wrap zeres-header">
+                    <nav id="site-navigation" class="main-navigation zeres-header" role="navigation" aria-label="Top Menu">
+                        <div class="wrap zeres-header">
+                            <a class="logo" href="{{ path('app') }}">
+                                <img src="/images/logo.png" width="160px" alt="ammana.es">
+                            </a>
+                            <div class="menu-principal-container">
+                                <ul id="top-menu" class="menu">
+                                {% if not app.session.get('user') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
+                                    </li>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
+                                    </li>
+                                {% endif %}
+                                {% if app.session.get('user') %}
+                                    {% for option in app.session.get('menu') %}
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                        <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
+                                    </li>
+                                    {% endfor %}
+                                {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav><!-- #site-navigation -->
+                </div><!-- .wrap -->
+            </div><!-- .navigation-top -->
+        </header>
+
+        <div class="site-content-contain">
+            <div id="content" class="site-content">
+                <header class="entry-header">
+                    <div class="wrap">
+                        <h1 class="entry-title">{{ title }}</h1>
+                    </div>
+                </header>
+            </div>
+        </div>
+
+        {% block body %}
+        {% endblock %}
+
+        {% block javascripts %}
+            {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+
+        <div class="related-posts">
+            <div class="wrap">
+                <div class="related-post item_in_3col">
+                    <a href="">Información legal</a>
+                </div>
+                <div class="related-post item_in_3col">
+                    <a href="">Política de privacidad</a>
+                </div>
+                <div class="related-post item_in_3col">
+                    <a href="">Política de cookies</a>
+                </div>
+            </div>
+        </div>
+
+        <footer id="colophon" class="site-footer" role="contentinfo">
+            <div class="wrap">
+                <div class="left">
+                    <p class="fl_left">{{ i18n.es.footer.copyright_note | raw }}</p>
+                </div>
+                <div class="right">
+                    <p class="fl_right">{{ i18n.es.footer.developed_by | raw }}</p>
+                </div>
+            </div><!-- .wrap -->
+        </footer>
+
+    </body>
+
+</html>

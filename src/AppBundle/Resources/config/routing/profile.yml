@@ -1,0 +1,5 @@
+profile_homepage:
+    path:     "%urls.profile_homepage%"
+    defaults: { _controller: "AppBundle:Profile:index" }
+    methods:  [GET, POST]
+

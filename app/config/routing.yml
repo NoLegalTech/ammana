@@ -1,0 +1,23 @@
+maintenance:
+    path:     /
+    defaults: { _controller: "AppBundle:Default:maintenance" }
+    methods:  GET
+
+app:
+    path:     /home
+    defaults: { _controller: "AppBundle:Default:index" }
+    methods:  GET
+
+user:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix:   /
+
+error:
+    path:     /error
+    defaults: { _controller: "AppBundle:Default:error" }
+    methods:  GET
+
+icons:
+    path:     /icons
+    defaults: { _controller: "AppBundle:Default:icons" }
+    methods:  GET

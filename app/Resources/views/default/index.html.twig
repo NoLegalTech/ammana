@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="wrapper bgded overlay" style="background-image:url('images/demo/backgrounds/01.png');">
+        <div id="pageintro" class="hoc clear"> 
+            <article>
+                <h2 class="heading">{{ i18n.es.home_page.claim.title }}</h2>
+                <p>{{ i18n.es.home_page.claim.message }}</p>
+                <footer><a class="btn" href="#">{{ i18n.es.home_page.claim.button }}</a></footer>
+            </article>
+        </div>
+    </div>
+
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="center btmspace-50">
+                <h2 class="heading">{{ i18n.es.home_page.protocols_section.title }}</h2>
+                <p>{{ i18n.es.home_page.protocols_section.intro }}</p>
+            </div>
+            <ul class="nospace group btmspace-50">
+                {% for protocol in i18n.es.home_page.protocols_section.protocols %}
+                    {% if loop.first %}
+                        <li class="one_third first">
+                    {% else %}
+                        <li class="one_third">
+                    {% endif %}
+                        <article class="element">
+                            <figure><img src="images/demo/320x210.png" alt="">
+                                <figcaption><a class="btn small" href="#">More</a></figcaption>
+                            </figure>
+                            <div class="excerpt">
+                                <h6 class="heading"><a href="#">{{ protocol.title }}</a></h6>
+                                <p>{{ protocol.description }}</p>
+                            </div>
+                        </article>
+                    </li>
+                {% endfor %}
+            </ul>
+            <p class="center nospace"><a class="btn" href="#">{{ i18n.es.home_page.protocols_section.buy }}</a></p>
+            <div class="clear"></div>
+        </main>
+    </div>
+
+    <div class="wrapper bgded overlay coloured" style="background-image:url('images/demo/backgrounds/02.png');">
+            <div class="hoc container clear"> 
+                    <article class="center">
+                            <h2 class="font-x3 uppercase">{{ i18n.es.home_page.additional_section.title }}</h2>
+                            <p class="btmspace-50 font-x2 capitalise">{{ i18n.es.home_page.additional_section.intro }}</p>
+                            <footer>
+                                    <ul class="nospace inline pushright">
+                                            <li><a class="btn inverse" href="#">Un botón</a></li>
+                                            <li><a class="btn" href="#">Otro</a></li>
+                                    </ul>
+                            </footer>
+                    </article>
+            </div>
+    </div>
+
+    <div class="wrapper row3">
+        <section class="hoc container clear"> 
+            <div class="group">
+                <div class="one_third first btmspace-30">
+                    <h6 class="font-x3 uppercase">Otro apartado más <a href="#">&raquo;</a></h6>
+                </div>
+                <article class="one_third btmspace-30">
+                    <h6 class="uppercase font-x1"><a href="#">Dictum vivamus tortor</a></h6>
+                    <p class="nospace">Posuere enim sed    odio nam vulputate lorem scelerisque eget ut sed magna finibus auctor dui nec mollis turpis sed sollicitudin urna commodo&hellip;</p>
+                </article>
+                <article class="one_third btmspace-30">
+                    <h6 class="uppercase font-x1"><a href="#">Accumsan mollis nulla</a></h6>
+                    <p class="nospace">Efficitur maecenas iaculis dignissim nunc vitae facilisis libero laoreet nec donec luctus ligula finibus metus rhoncus ac eleifend nibh condimentum enim&hellip;</p>
+                </article>
+                <article class="one_third first">
+                    <h6 class="uppercase font-x1"><a href="#">Dapibus metus cras</a></h6>
+                    <p class="nospace">Dictum morbi elementum accumsan nisi quis lacinia turpis tristique et phasellus a turpis eu libero mattis ultricies vel vitae nulla morbi ut rhoncus&hellip;</p>
+                </article>
+                <article class="one_third">
+                    <h6 class="uppercase font-x1"><a href="#">Imperdiet nisl efficitur</a></h6>
+                    <p class="nospace">Magna vivamus gravida lobortis arcu ut ullamcorper leo lacinia quis duis a massa eget quam efficitur sagittis morbi erat sapien imperdiet vitae augue&hellip;</p>
+                </article>
+                <article class="one_third">
+                    <h6 class="uppercase font-x1"><a href="#">Gravida lorem ornare</a></h6>
+                    <p class="nospace">Nec faucibus consectetur velit class aptent taciti sociosqu ad litora torquent per conubia nostra per inceptos himenaeos in auctor arcu vel dui gravida&hellip;</p>
+                </article>
+            </div>
+        </section>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+<h1>{{ i18n.es.emails.welcome.title }}</h1>
+
+<p>
+{{ i18n.es.emails.welcome.text }}<br/>
+<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">{{ i18n.es.emails.welcome.link }}</a>
+</p>
+
+<p>
+{{ i18n.es.emails.welcome.fallback }}<br/>
+<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">{{ url('activate_user', {'activationHash': activationHash}) }}</a>
+</p>

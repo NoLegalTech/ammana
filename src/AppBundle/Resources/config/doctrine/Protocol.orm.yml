@@ -1,0 +1,37 @@
+AppBundle\Entity\Protocol:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ProtocolRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        user:
+            type: integer
+        invoice:
+            type: integer
+            nullable: true
+        enabled:
+            type: boolean
+            column: enabled
+            nullable: false
+        answers:
+            type: string
+            length: '400'
+        identifier:
+            type: string
+            length: '100'
+        orderHash:
+            type: string
+            length: '8'
+            nullable: true
+            column: order_hash
+        orderDate:
+            type: date
+            column: order_date
+        price:
+            type: integer
+    lifecycleCallbacks: {  }

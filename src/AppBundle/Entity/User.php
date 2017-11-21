@@ -62,6 +62,21 @@ class User
      */
     private $sector;
 
+    /**
+     * @var string
+     */
+    private $logo;
+
+    /**
+     * @var string
+     */
+    private $roles;
+
+    /**
+     * @var string
+     */
+    private $quadernoId;
+
 
     /**
      * Get id
@@ -312,5 +327,97 @@ class User
     {
         return $this->sector;
     }
+
+    /**
+     * Set logo
+     *
+     * @param string $logo
+     *
+     * @return User
+     */
+    public function setLogo($logo)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return string
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set roles
+     *
+     * @param string $roles
+     *
+     * @return User
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Get roles
+     *
+     * @return string
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * Set quadernoId
+     *
+     * @param string $quadernoId
+     *
+     * @return User
+     */
+    public function setQuadernoId($quadernoId)
+    {
+        $this->quadernoId = $quadernoId;
+
+        return $this;
+    }
+
+    /**
+     * Get quadernoId
+     *
+     * @return string
+     */
+    public function getQuadernoId()
+    {
+        return $this->quadernoId;
+    }
+
+    /**
+     * String representation fo this object
+     *
+     * @return string
+     */
+    public function __toString() {
+        return "User {\n"
+                . "    id: "            . $this->getId()            . ",\n"
+                . "    email: "         . $this->getEmail()         . ",\n"
+                . "    companyName: "   . $this->getCompanyName()   . ",\n"
+                . "    enabled: "       . $this->getEnabled()       . ",\n"
+                . "    cif: "           . $this->getCif()           . ",\n"
+                . "    address: "       . $this->getAddress()       . ",\n"
+                . "    contactPerson: " . $this->getContactPerson() . ",\n"
+                . "    roles: "         . $this->getRoles()         . ",\n"
+                . "    quadernoId: "    . $this->getQuadernoId()    . "\n"
+                . "}";
+    }
+
 }
 

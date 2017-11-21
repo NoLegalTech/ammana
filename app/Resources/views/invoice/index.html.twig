@@ -4,14 +4,12 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
-                <h2 class="heading">Lista de facturas</h2>
-
                 <table>
                     <thead>
                         <tr>
-                            <th>Fecha</th>
-                            <th>Número</th>
-                            <th></th>
+                            <th>{{ i18n.es.invoices_page.headers.date }}</th>
+                            <th>{{ i18n.es.invoices_page.headers.number }}</th>
+                            <th>{{ i18n.es.invoices_page.headers.download }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,7 +17,11 @@
                         <tr>
                             <td>{{ invoice.emittedAt | date('d/m/Y') }}</td>
                             <td>{{ invoice.number }}</td>
-                            <td><a href="{{ path('invoice_download', { 'id': invoice.id }) }}">Descargar</a></td>
+                            {% if invoice.url %}
+                                <td><a href="{{ invoice.url }}" target="_blank">{{ i18n.es.invoices_page.download }}</a></td>
+                            {% else %}
+                                <td>{{ i18n.es.invoices_page.no_invoice }}</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                     </tbody>

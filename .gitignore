@@ -22,3 +22,6 @@ pre/
 tools/
 .htaccess
 /deploy/parameters.yml
+/deploy/parameters_pre.yml
+/deploy/parameters_pro.yml
+web/uploads

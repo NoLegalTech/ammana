@@ -1,11 +1,11 @@
-<h1>Bienvenido a ammana.es</h1>
+<h1>{{ i18n.es.emails.welcome.title }}</h1>
 
 <p>
-Por favor, confirma tu cuenta de correo haciendo click en el siguiente enlace:<br/>
-<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">Activa tu cuenta</a>
+{{ i18n.es.emails.welcome.text }}<br/>
+<a href="{{ url('activate_user', {'activationHash': activationHash}) }}">{{ i18n.es.emails.welcome.link }}</a>
 </p>
 
 <p>
-Si el enlace no funciona, copia y pega esto en tu navegador:<br/>
+{{ i18n.es.emails.welcome.fallback }}<br/>
 <a href="{{ url('activate_user', {'activationHash': activationHash}) }}">{{ url('activate_user', {'activationHash': activationHash}) }}</a>
 </p>

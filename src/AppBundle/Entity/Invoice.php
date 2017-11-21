@@ -30,7 +30,12 @@ class Invoice
     /**
      * @var string
      */
-    private $path;
+    private $url;
+
+    /**
+     * @var string
+     */
+    private $quadernoId;
 
 
     /**
@@ -116,27 +121,51 @@ class Invoice
     }
 
     /**
-     * Set path
+     * Set url
      *
-     * @param string $path
+     * @param string $url
      *
      * @return Invoice
      */
-    public function setPath($path)
+    public function setUrl($url)
     {
-        $this->path = $path;
+        $this->url = $url;
 
         return $this;
     }
 
     /**
-     * Get path
+     * Get url
      *
      * @return string
      */
-    public function getPath()
+    public function getUrl()
     {
-        return $this->path;
+        return $this->url;
+    }
+
+    /**
+     * Set quadernoId
+     *
+     * @param string $quadernoId
+     *
+     * @return User
+     */
+    public function setQuadernoId($quadernoId)
+    {
+        $this->quadernoId = $quadernoId;
+
+        return $this;
+    }
+
+    /**
+     * Get quadernoId
+     *
+     * @return string
+     */
+    public function getQuadernoId()
+    {
+        return $this->quadernoId;
     }
 
 }

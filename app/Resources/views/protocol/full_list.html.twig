@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+                {% if protocols %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{ i18n.es.orders_page.headers.protocol }}</th>
+                                <th>{{ i18n.es.orders_page.headers.customer }}</th>
+                                <th>{{ i18n.es.orders_page.headers.date }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for protocol in protocols %}
+                            <tr>
+                                <td>{{ names[protocol.identifier] }}</td>
+                                <td>{{ users[protocol.user].companyName }} ({{ users[protocol.user].email }})</td>
+                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
+                                <td><a href="{{ path('protocol_pay_transfer', { 'id': protocol.id }) }}">{{ i18n.es.orders_page.mark_paid }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>
+                        {{ i18n.es.orders_page.no_orders }}
+                    </p>
+                {% endif %}
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

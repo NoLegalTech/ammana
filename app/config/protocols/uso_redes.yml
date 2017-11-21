@@ -1,0 +1,423 @@
+parameters:
+    protocol.uso_redes:
+        name: Modelo Autocobertura Redes Sociales
+        questions:
+            - id: uso_durante_jornada_laboral
+              question: "Uso de redes sociales durante la jornada de trabajo:"
+              answers:
+                  - "Se prohíbe al trabajador usar sus redes sociales durante la jornada laboral asignada."
+                  - "Se prohíbe al trabajador usar sus redes sociales durante la jornada laboral asignada, salvo que existan circunstancias personales o familiares de especial gravedad que lo justifiquen."
+                  - "Se permite al trabajador usar esporádicamente sus redes sociales durante la jornada laboral asignada, siempre que no retrasen el desempeño de las tareas encomendadas, ni la cantidad y calidad del trabajo a desarrollar."
+            - id: advertir_comentarios_injuriosos
+              question: "Si un trabajador se identifica en redes sociales como integrante de la plantilla de la empresa y realiza comentarios injuriosos o calumniosos, ¿Considera útil advertirle de los perjuicios que puede causar a la compañía y las consecuencias que esto puede provocar?"
+              answers:
+                  - Sí
+                  - No
+            - id: informar_de_comentarios_injuriosos
+              question: "¿Los trabajadores deberán informar a la empresa de los comentarios injuriosos, calumniosos o de odio que se dirijan entre compañeros de trabajo en redes sociales?"
+              answers:
+                  - Sí
+                  - No
+            - id: representantes_legales_o_sindicales
+              question: "¿La empresa cuenta con representantes legales o sindicales de los trabajadores?"
+              answers:
+                  - Sí
+                  - No
+            - id: autorizacion_imagenes_y_videos_del_trabajo
+              question: "¿La empresa autoriza a los trabajadores la captación y difusión en redes sociales de imágenes y videos que hayan podido realizar en el centro o lugar de trabajo?"
+              answers:
+                  - Sí
+                  - No
+            - id: divulgacion_informacion_confidencial
+              question: "¿Los trabajadores deben abstenerse de comentar o divulgar en redes sociales información confidencial de la empresa?"
+              answers:
+                  - Sí
+                  - No
+            - id: vigilancia_reuperacion_baja_laboral
+              question: "¿La empresa podrá vigilar las redes sociales de sus trabajadores para verificar que no realizan actividades incompatibles con la recuperación de su salud durante una baja laboral? "
+              answers:
+                  - Sí
+                  - No
+        document:
+            styles:
+                default:
+                    line-height: 7
+                    font-family: Cambria
+                    font-size: 13
+                    font-weight: normal
+                    text-align: justify
+                    text-style: none
+                    logo-max-width: 50
+                    logo-max-height: 25
+                    logo-x: 178
+                    logo-y: 20
+                h1:
+                    font-weight: bold
+                    text-align: center
+                    margin-bottom: 10
+                h2:
+                    font-weight: bold
+                    text-style: underline
+                    text-align: left
+                    margin-top: 4
+                    margin-bottom: 8
+                li:
+                    list-margin-left: 10
+            content:
+                - h1:
+                    - "PROTOCOLO SOBRE USO Y EMPLEO DE REDES SOCIALES EN INTERNET"
+                    - "EN [company_name]"
+                - h2: "Introducción:"
+                - p:
+                    - "Las redes sociales en internet son aplicaciones web cuya función es"
+                    - "favorecer el contacto entre individuos, así como también entre estos y"
+                    - "empresas, instituciones u organismos, ya sean públicos o privados. "
+                - p:
+                    - "Desde su puesta en marcha a comienzos del siglo XXI, la relevancia de las"
+                    - "redes sociales en internet no ha dejado de incrementarse, extendiendo su"
+                    - "influencia no solo a las interacciones exclusivamente personales, sino"
+                    - "también a las culturales, políticas, económicas y, como resulta evidente, a las"
+                    - "relaciones laborales."
+                - p:
+                    - "Nuestra sociedad avanza hacia una mayor “interconectividad digital” donde"
+                    - "las redes sociales en internet cobran cada vez mayor importancia en la"
+                    - "gestión y ordenación de los recursos humanos. "
+                - p:
+                    - "Por todos estos motivos resulta necesario para esta empresa implantar un"
+                    - "protocolo destinado a regular el correcto uso de las redes sociales en"
+                    - "internet durante el tiempo de trabajo, y fuera de el. También resulta preciso"
+                    - "aclarar los límites en el ejercicio de la libertad de expresión cuando esta"
+                    - "afecta al honor, a la intimidad personal y familiar, y a la propia imagen de"
+                    - "cualquiera de los empleados de la empresa y de sus órganos de dirección y"
+                    - "administración, adoptando las medidas que resulten precisas frente al acoso"
+                    - "en redes sociales. Asimismo, se abordarán medidas destinadas a evitar la"
+                    - "difusión de datos confidenciales o de carácter personal a través de las redes"
+                    - "sociales de internet."
+                - h2:
+                    - "Concepto de redes sociales en internet a los efectos del presente"
+                    - "protocolo:"
+                - p:
+                    - "A los efectos del presente protocolo se considerarán “redes sociales” los"
+                    - "sitios o aplicaciones web formados por comunidades de individuos"
+                    - "interrelacionados que permiten el intercambio de información entre los"
+                    - "mismos. A título meramente ilustrativo, pero no limitativo, podemos"
+                    - "clasificar e incluir dentro del presente protocolo las siguientes redes"
+                    - "sociales:"
+                - p:
+                    - "1.- Redes sociales genéricas. Son las más numerosas y conocidas, pudiendo"
+                    - "destacar entre las mismas Facebook, Instagram, Google+ y Twitter, entre"
+                    - "otras."
+                - p:
+                    - "2.- Redes sociales profesionales. Son aquellas en las que sus miembros"
+                    - "suelen estar relacionados laboralmente, pudiendo servir para conectar"
+                    - "compañeros o para la búsqueda de empleo. Las más conocidas son LinkedIn,"
+                    - "Xing y Viadeo, entre otras."
+                - p:
+                    - "3.- Redes sociales verticales o temáticas. Su finalidad suele estar centrada en"
+                    - "conectar usuarios con un mismo hobbie, actividad o interés. Dentro de este"
+                    - "grupo podrían incluirse Flickr, Pinterest o YouTube, entre otras."
+                - h2: "Uso de servicios de redes sociales durante la jornada de trabajo"
+                - p:
+                    - "La jornada laboral, independientemente del horario que cada trabajador"
+                    - "tenga asignado, está destinada al desempeño eficiente de las tareas"
+                    - "encomendadas por la dirección de la empresa, conforme al principio de"
+                    - "buena fe que debe regir las relaciones laborales. El trabajador deberá evitar"
+                    - "aquellas actividades y acciones que impliquen pérdidas de tiempo o"
+                    - "interrupciones innecesarias en el desempeño de su actividad laboral."
+                - p:
+                    - "En concreto, se prohíbe al trabajador acceder a cualquiera de sus cuentas en"
+                    - "redes sociales durante la jornada laboral que tenga asignada, la cual se debe"
+                    - "destinar exclusivamente a la realización de las tareas encomendadas por la"
+                    - "dirección de la empresa."
+                  condition: "uso_durante_jornada_laboral=0"
+                - p:
+                    - "En concreto, se prohíbe al trabajador acceder a cualquiera de sus cuentas en"
+                    - "redes sociales durante la jornada laboral que tenga asignada, salvo que"
+                    - "existan circunstancias personales y familiares del trabajador de"
+                    - "extraordinaria gravedad que hagan imprescindible su uso. "
+                  condition: "uso_durante_jornada_laboral=1"
+                - p:
+                    - "Se permite al trabajador el uso ocasional y esporádico de sus cuentas en"
+                    - "redes sociales durante la jornada laboral que tenga asignada, siempre y"
+                    - "cuando esto no suponga un retraso en el desempeño de las tareas"
+                    - "encomendadas por la empresa, ni en la cantidad y calidad del trabajo que se"
+                    - "le haya asignado. "
+                  condition: "uso_durante_jornada_laboral=2"
+                - p:
+                    - "Se considerará una transgresión de la buena fe contractual el"
+                    - "incumplimiento de las instrucciones señaladas en este protocolo en relación"
+                    - "con el uso de redes sociales durante la jornada de trabajo. La empresa se"
+                    - "reserva el derecho de adoptar las medidas disciplinarias que correspondan"
+                    - "en función de la gravedad del incumplimiento."
+                - h2:
+                    - "Contenido de los comentarios realizados por los trabajadores en"
+                    - "redes sociales."
+                - p:
+                    - "Con carácter general, las redes sociales en internet constituyen una"
+                    - "manifestación del derecho a la libre difusión de pensamientos, ideas y"
+                    - "opiniones amparada por el art. 20.1 de la Constitución Española. La empresa"
+                    - "valora especialmente la función de los trabajadores como embajadores de su"
+                    - "reputación y buena imagen social, si bien es preciso recordar que el derecho"
+                    - "a la libertad de expresión se encuentra limitado en su ejercicio por el debido"
+                    - "respeto a la dignidad, al honor, a la intimidad personal y familiar, y a la"
+                    - "propia imagen. "
+                - p:
+                    - "Los trabajadores de esta empresa deben ser conscientes de los derechos"
+                    - "concurrentes en el ejercicio de la libertad de expresión y de los límites de la"
+                    - "misma, que ampara la crítica, pero no las injurias y las calumnias."
+                - p:
+                    - "Cuando un trabajador opta por identificarse en redes sociales como"
+                    - "integrante de esta empresa el contenido de sus mensajes resulta relevante,"
+                    - "pues actúa como embajador de la misma,  pudiendo sus comentarios"
+                    - "beneficiar o dañar de forma consciente o inconsciente la reputación e"
+                    - "imagen corporativa de esta empresa. En consecuencia, se valorarán como"
+                    - "una eventual transgresión de la buena fe contractual los comentarios"
+                    - "calumniosos e injuriosos que el trabajador dirija en redes sociales contra"
+                    - "clientes o proveedores de esta empresa. También podrán ser considerados"
+                    - "como una transgresión de la buena fe contractual los comentarios dirigidos"
+                    - "contra personas o grupos inicialmente ajenos a la empresa, cuando su"
+                    - "contenido tenga un carácter claramente calumnioso, injurioso o promuevan"
+                    - "e inciten abiertamente al odio, la discriminación o la violencia por motivos"
+                    - "racistas, antisemitas u otros referentes a la ideología, religión o creencias,"
+                    - "situación familiar, la pertenencia a una etnia, raza o nación, su origen"
+                    - "nacional, su sexo, orientación o identidad sexual, por razones de género,"
+                    - "enfermedad o discapacidad, y debido a la difusión pública de los mismos se"
+                    - "dañe la reputación, la imagen o la consideración social de nuestra empresa, o"
+                    - "provoquen un daño económico a la misma."
+                  condition: "advertir_comentarios_injuriosos=0"
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho."
+                - h2:
+                    - "Comentarios realizados por los trabajadores en redes sociales sobre"
+                    - "compañeros de trabajo."
+                - p:
+                    - "La armonía, la tolerancia y el respeto mutuo entre todos los trabajadores,"
+                    - "constituyen normas básicas de convivencia en esta empresa que deben ser"
+                    - "observadas por todos los empleados de la misma. La empresa no tolerará"
+                    - "ataques a la dignidad, intimidad, honor, reputación o imagen de sus"
+                    - "empleados por parte de otros compañeros de trabajo, y ello con"
+                    - "independencia del medio utilizado por estos últimos para atentar contra la"
+                    - "dignidad e integridad de sus compañeros. Tampoco se toleraran las ofensas"
+                    - "o comentarios de tipo calumnioso, injurioso o que promuevan el odio, la"
+                    - "violencia, o el acoso y discriminación de todo tipo y condición hacia los"
+                    - "compañeros de trabajo. El incumplimiento de estas normas básicas de"
+                    - "convivencia conllevará la aplicación del régimen disciplinario en los"
+                    - "términos que corresponda."
+                - p:
+                    - "No se considerarán ajenos al contrato de trabajo, y por tanto excluidos de la"
+                    - "relación laboral, los comentarios que un empleado vierta en redes sociales"
+                    - "en contra de sus compañeros de trabajo, con independencia de la hora, fecha"
+                    - "y lugar en que se hayan efectuado."
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho."
+                - p:
+                    - "En aras a preservar el buen clima laboral los trabajadores deberán informar"
+                    - "inmediatamente a la dirección de la empresa de los enfrentamientos entre"
+                    - "compañeros de trabajo de los que tengan conocimiento y, específicamente,"
+                    - "de los comentarios efectuados en redes sociales entre compañeros de"
+                    - "trabajo cuyo contenido resulte manifiestamente calumnioso, injurioso,"
+                    - "amenazante, discriminatorio, sexista, odioso o que constituya un ejercicio de"
+                    - "acoso contra otro trabajador o trabajadores de la empresa. No poner estos"
+                    - "hechos en conocimiento de la dirección, teniendo constancia de los mismos,"
+                    - "podrá ser considerado como una conducta colaborativa de estas acciones"
+                    - "indebidas e irregulares."
+                  condition: "informar_de_comentarios_injuriosos=0"
+                - h2:
+                    - "Comentarios realizados por los trabajadores en redes sociales sobre"
+                    - "directivos de la empresa."
+                - p:
+                    - "La dirección y organización técnica del trabajo corresponde a la empresa y a"
+                    - "las personas en las que esta lo delegue. Las discrepancias de los trabajadores"
+                    - "en relación con las instrucciones y directrices recibidas por los"
+                    - "representantes de la empresa se deberán tramitar y solucionar a través de"
+                    - "los cauces internos previstos para ello. "
+                - p:
+                    - "La libertad de expresión reconocida por el art. 20.1 de la Constitución"
+                    - "Española ampara la crítica en el ámbito laboral, incluso cuando esta se dirige"
+                    - "frente a las decisiones adoptadas por los directivos y representantes de la"
+                    - "empresa, siempre y cuando se realicen con el debido respeto y"
+                    - "consideración. En consecuencia, no se tolerarán los ataques a la dignidad,"
+                    - "intimidad, honor, reputación o imagen de los directivos y representantes de"
+                    - "la empresa por parte de los empleados de la misma, y ello con"
+                    - "independencia del medio utilizado para estos fines. Tampoco se toleraran las"
+                    - "ofensas o comentarios de tipo calumnioso, injurioso o que promuevan el"
+                    - "odio, la violencia o la discriminación de todo tipo y condición contra los"
+                    - "directivos y representantes de la empresa. No se considerarán ajenos al"
+                    - "contrato de trabajo, y por tanto excluidos de la relación laboral, los"
+                    - "comentarios de esta naturaleza que un empleado vierta en redes sociales en"
+                    - "contra de los directivos y representantes de la empresa, con independencia"
+                    - "de la hora, fecha y lugar en que se hayan efectuado."
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho. El incumplimiento de estas normas"
+                    - "básicas de convivencia y respeto conllevará la aplicación del régimen"
+                    - "disciplinario en los términos que corresponda."
+                - h2:
+                    - "Comentarios sobre la empresa efectuados por los trabajadores en"
+                    - "redes sociales."
+                - p:
+                    - "La reputación y la buena imagen social de esta empresa constituyen"
+                    - "elementos de especial importancia para el desarrollo de nuestra marca y el"
+                    - "crecimiento de esta compañía."
+                - p:
+                    - "En este sentido, y sin perjuicio del respeto a la libertad de expresión de"
+                    - "todos los trabajadores de esta empresa, los comentarios efectuados en redes"
+                    - "sociales cuyo fin sea perjudicar, lesionar, agraviar, desprestigiar o dañar la"
+                    - "imagen de esta compañía podrán ser considerados como una eventual"
+                    - "transgresión de la buena fe contractual. La misma consideración tendrán las"
+                    - "acusaciones calumniosas o injuriosas realizadas en redes sociales,"
+                    - "imputando actuaciones a la empresa con el fin de dañar su reputación y su"
+                    - "marca."
+                - p:
+                    - "No se considerarán ajenos al contrato de trabajo, y por tanto excluidos de la"
+                    - "relación laboral, los comentarios de esta naturaleza que un empleado vierta"
+                    - "en redes sociales en contra de la empresa, con independencia de la hora,"
+                    - "fecha y lugar en que se hayan efectuado."
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho. El incumplimiento de estas normas"
+                    - "básicas de convivencia y respeto conllevará la aplicación del régimen"
+                    - "disciplinario en los términos que corresponda."
+                - h2:
+                    - "Comentarios en redes sociales efectuados por representantes legales"
+                    - "o sindicales de los trabajadores."
+                  condition: "representantes_legales_o_sindicales=0"
+                - p:
+                    - "El ejercicio del derecho a la libertad sindical comprende, entre otras"
+                    - "actuaciones, el desarrollo de acciones de defensa y promoción de los"
+                    - "intereses de los trabajadores, la participación en las actividades convocadas"
+                    - "y promovidas por las organizaciones sindicales, el derecho a opinar"
+                    - "libremente y a la libre difusión de información sindical, a no ser perjudicado"
+                    - "por el desarrollo de esta actividad, así como también el derecho a la"
+                    - "negociación colectiva y a la adopción de medidas de conflicto colectivo."
+                  condition: "representantes_legales_o_sindicales=0"
+                - p:
+                    - "En el desarrollo de su actividad, los representantes legales y sindicales de los"
+                    - "trabajadores en esta empresa podrán realizar las acciones que consideren"
+                    - "oportunas en defensa de sus derechos e intereses legítimos, siempre dentro"
+                    - "del respeto a la Constitución Española y al resto del ordenamiento jurídico."
+                    - "El derecho a la libertad sindical y a la libertad de expresión, sin embargo, no"
+                    - "ampara las expresiones insultantes y descalificatorias, ni tampoco las de"
+                    - "carácter injurioso, calumnioso o que resulten constitutivas de un delito de"
+                    - "odio. "
+                  condition: "representantes_legales_o_sindicales=0"
+                - p:
+                    - "En este sentido, no se considerarán ajenos al contrato de trabajo, y por tanto"
+                    - "excluidos de la relación laboral, los comentarios de esta naturaleza que un"
+                    - "representante legal o sindical de los trabajadores vierta en redes sociales en"
+                    - "contra de la empresa y sus directivos, sus compañeros de trabajo u otros"
+                    - "cargos sindicales y electos de la empresa, con independencia de la hora,"
+                    - "fecha y lugar en que se hayan efectuado."
+                  condition: "representantes_legales_o_sindicales=0"
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho. El incumplimiento de estas normas"
+                    - "básicas de convivencia y respeto conllevará la aplicación del régimen"
+                    - "disciplinario en los términos que corresponda."
+                  condition: "representantes_legales_o_sindicales=0"
+                - h2:
+                    - "Captación y difusión de imágenes del centro o lugar de trabajo en"
+                    - "redes sociales por parte de los trabajadores."
+                  condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
+                - p:
+                    - "La pública difusión de imágenes y videos captados en los centros de trabajo"
+                    - "de la empresa pueden poner en riesgo su seguridad, su imagen pública o la"
+                    - "protección de datos de carácter confidencial. Por estos motivos, los"
+                    - "propietarios y directivos de la empresa serán los únicos autorizados para la"
+                    - "captación y difusión de imágenes o videos de los centros y locales de trabajo."
+                  condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
+                - p:
+                    - "En consecuencia, se prohíbe a los trabajadores la toma de fotografías y"
+                    - "videos del lugar donde presten servicios para la empresa, especialmente si"
+                    - "en las mismas aparecen clientes u otros empleados de esta compañía. Su"
+                    - "pública difusión en redes sociales se considerará no solo una violación del"
+                    - "presente protocolo, sino también una grave transgresión de la buena fe"
+                    - "contractual que podrá conllevar la aplicación del régimen disciplinario."
+                  condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho."
+                  condition: "autorizacion_imagenes_y_videos_del_trabajo=0"
+                - h2:
+                    - "Difusión de información confidencial de la empresa en redes"
+                    - "sociales por parte de los trabajadores."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - p:
+                    - "Los trabajadores deberán abstenerse de comentar o divulgar información"
+                    - "confidencial de la empresa en redes sociales."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - p:
+                    - "El término información debe entenderse en sentido amplio, y por tanto"
+                    - "comprende los datos personales, corporativos, económicos, financieros o"
+                    - "judiciales de la empresa, sus empleados, directivos, clientes o proveedores."
+                    - "Dicha información será mantenida en reserva por el trabajador que la recibe"
+                    - "y no será revelada de ninguna forma, en todo o en parte, a ninguna persona"
+                    - "física o jurídica."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - p:
+                    - "Tendrán la consideración de datos de carácter personal y confidencial, y en"
+                    - "consecuencia no podrán ser divulgados en redes sociales ni por ningún otro"
+                    - "medio, los que a continuación se detallan:"
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a la ideología, afiliación sindical, religión o"
+                    - "creencias de los clientes, proveedores, empleados o equipo directivo de la"
+                    - "empresa, salvo que los clientes o proveedores tengan la condición de"
+                    - "partidos políticos, sindicatos, iglesias, confesiones o comunidades religiosas"
+                    - "y asociaciones, fundaciones y otras entidades sin ánimo de lucro, cuya"
+                    - "finalidad sea política, filosófica, religiosa o sindical, respetando en todo caso"
+                    - "la confidencialidad de los datos relativos a sus asociados, afiliados o"
+                    - "miembros."
+                  condition: "divulgacion_informacion_confidencial=0"
+                  start_at: 1
+                - li:
+                    - "Información y datos que hagan referencia al estado de salud de los"
+                    - "clientes, proveedores, empleados o equipo directivo de la empresa."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a las características sociales de los clientes,"
+                    - "proveedores, empleados o equipo directivo, como por ejemplo su domicilio,"
+                    - "vivienda, propiedades, estilo de vida, etc."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos financieros, contables, económicos o sobre solvencia"
+                    - "de nuestra empresa, clientes, proveedores, empleados o equipo directivo."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos industriales, mercantiles, hipotecarios, crediticios,"
+                    - "comerciales o de naturaleza semejante de nuestra empresa, clientes,"
+                    - "proveedores, empleados o equipo directivo."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a cualquier tipo de encargo, trabajo,"
+                    - "campaña, proyecto o evento de nuestra empresa, clientes o proveedores"
+                    - "hasta que este no se haya hecho público."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - li:
+                    - "Información y datos relativos a proyectos de innovación, investigación,"
+                    - "científicos, patentes, licencias o de naturaleza semejante de nuestra"
+                    - "empresa, clientes o proveedores."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - p:
+                    - "La empresa podrá verificar el cumplimiento de estas directrices por"
+                    - "cualquier medio admitido en derecho."
+                  condition: "divulgacion_informacion_confidencial=0"
+                - h2:
+                    - "Verificación del estado de salud durante los procesos de"
+                    - "incapacidad temporal."
+                  condition: "vigilancia_reuperacion_baja_laboral=0"
+                - p:
+                    - "La empresa podrá adoptar las medidas que estime más oportunas para"
+                    - "controlar el cumplimiento de los deberes laborales de sus trabajadores,"
+                    - "incluida la verificación de su estado de salud, de conformidad con lo"
+                    - "establecido en el artículo 20 del Estatuto de los Trabajadores. "
+                  condition: "vigilancia_reuperacion_baja_laboral=0"
+                - p:
+                    - "La actividad de los trabajadores de la empresa en redes sociales podrá"
+                    - "emplearse como mecanismo de verificación del estado de salud durante los"
+                    - "procesos de incapacidad temporal. La comprobación de la existencia de"
+                    - "actividades incompatibles con la situación de enfermedad se valorará como"
+                    - "una transgresión de la buena fe contractual por parte del trabajador."
+                  condition: "vigilancia_reuperacion_baja_laboral=0"

@@ -17,7 +17,12 @@ AppBundle\Entity\Invoice:
         number:
             type: string
             length: '32'
-        path:
+        url:
             type: string
             length: '200'
+        quadernoId:
+            type: string
+            length: '10'
+            column: quaderno_id
+            nullable: true
     lifecycleCallbacks: {  }

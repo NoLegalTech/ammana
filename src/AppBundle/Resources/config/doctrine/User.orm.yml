@@ -53,4 +53,17 @@ AppBundle\Entity\User:
             type: string
             length: '100'
             nullable: true
+        logo:
+            type: string
+            length: '200'
+            nullable: true
+        roles:
+            type: string
+            length: '50'
+            nullable: false
+        quadernoId:
+            type: string
+            length: '10'
+            column: quaderno_id
+            nullable: true
     lifecycleCallbacks: {  }

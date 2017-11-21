@@ -2,7 +2,14 @@ app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix:   /
 
+app_profile:
+    resource: "@AppBundle/Resources/config/routing/profile.yml"
+    prefix:   /
+
 app_invoice:
     resource: "@AppBundle/Resources/config/routing/invoice.yml"
     prefix:   /
 
+app_protocol:
+    resource: "@AppBundle/Resources/config/routing/protocol.yml"
+    prefix:   /

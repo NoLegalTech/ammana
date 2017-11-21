@@ -14,9 +14,10 @@ class OnlyEmailType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $i18n = $options['i18n'];
         $builder
             ->add('email', EmailType::class, array(
-                'label' => 'Email:',
+                'label' => $i18n['forms']['new_password_form']['email'] . ':',
                 'required' => true
             ));
     }
@@ -26,6 +27,7 @@ class OnlyEmailType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('i18n');
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User'
         ));

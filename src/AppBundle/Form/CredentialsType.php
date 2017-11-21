@@ -15,13 +15,14 @@ class CredentialsType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $i18n = $options['i18n'];
         $builder
             ->add('email', EmailType::class, array(
-                'label' => 'Email:',
+                'label' => $i18n['forms']['register_form']['email'] . ':',
                 'required' => true
             ))
             ->add('password', PasswordType::class, array(
-                'label' => 'Contraseña:'
+                'label' => $i18n['forms']['register_form']['password'] . ':'
             ));
     }
     
@@ -30,6 +31,7 @@ class CredentialsType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setRequired('i18n');
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\User'
         ));

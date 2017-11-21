@@ -15,6 +15,11 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function maintenanceAction(Request $request)
+    {
+        return $this->render('default/maintenance.html.twig');
+    }
+
     public function errorAction(Request $request)
     {
         return $this->render('default/error.html.twig', [

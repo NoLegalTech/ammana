@@ -33,11 +33,11 @@ deploy() {
         echo "KO"
         exit 1
     }
-    ssh ${server} "cd ${remote_folder} && php bin/console doctrine:migrations:migrate" > $out 2> $err || {
+    scp ${script_dir}/parameters_${target}.yml ${server}:${remote_folder}/app/config/parameters.yml > $out  2> $err || {
         echo "KO"
         exit 1
     }
-    scp ${script_dir}/parameters_${target}.yml ${server}:${remote_folder}/app/config/parameters.yml > $out  2> $err || {
+    ssh ${server} "cd ${remote_folder} && php bin/console doctrine:migrations:migrate" > $out 2> $err || {
         echo "KO"
         exit 1
     }

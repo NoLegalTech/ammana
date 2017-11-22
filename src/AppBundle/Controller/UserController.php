@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use AppBundle\Service\PermissionsService;
 use AppBundle\Service\HashGenerator;
+use AppBundle\Service\AlertsService;
 
 /**
  * User controller.
@@ -121,7 +122,7 @@ class UserController extends Controller
     /**
      * Registers a new user.
      */
-    public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher)
+    public function registerAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher, AlertsService $alerts)
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
@@ -162,6 +163,12 @@ class UserController extends Controller
                     ->addPart($plain_text, 'text/plain');
 
                 $mailer->send($message);
+
+                $alerts->info(
+                    $this->getI18n()['alerts']['user_registered']['title'],
+                    $this->getI18n()['alerts']['user_registered']['message'],
+                    $user->__toString()
+                );
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){

@@ -103,6 +103,10 @@ twig:
                     quaderno_invoice_not_created:
                         user: Ha ocurrido un error inesperado.
                         log:  No se ha podido crear la factura en Quaderno
+                alerts:
+                    user_registered:
+                        title:   Nuevo usuario registrado
+                        message: Se ha registrado un nuevo usuario.
                 # =================================================================================
 
 
@@ -284,6 +288,10 @@ twig:
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
                     error:
                         title:       ammana.es - Se ha producido un error
+                        client_data: "Datos del cliente:"
+                        additional:  "Información adicional:"
+                    info:
+                        title:       ammana.es - Alerta
                         client_data: "Datos del cliente:"
                         additional:  "Información adicional:"
                     new_password:

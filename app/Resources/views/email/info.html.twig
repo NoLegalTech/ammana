@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+
+<p> {{ message }} </p>
+
+{% if user %}
+    <p> {{ i18n.es.emails.info.client_data }} </p>
+    <pre> {{ user }} </pre>
+{% endif %}
+
+{% if additional_data %}
+    <p> {{ i18n.es.emails.info.additional }} </p>
+    <pre> {{ additional_data }} </pre>
+{% endif %}

@@ -351,6 +351,7 @@ class ProtocolController extends Controller
             'amount' => $amount,
             'protocol_spec' => $protocol_spec,
             'charge' => $jwt,
+            'quaderno_public_api_key' => $this->container->getParameter('quaderno_api_public_key'),
             'payment_data' => array(
                 'order_hash' => $protocol->getOrderHash(),
                 'bank_account' => $this->container->getParameter('account_number'),

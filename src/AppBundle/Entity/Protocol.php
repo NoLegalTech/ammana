@@ -52,6 +52,11 @@ class Protocol
      */
     private $price;
 
+    /**
+     * @var boolean
+     */
+    private $alerted;
+
 
     /**
      * Get id
@@ -256,6 +261,30 @@ class Protocol
     }
 
     /**
+     * Set alerted
+     *
+     * @param boolean $alerted
+     *
+     * @return Protocol
+     */
+    public function setAlerted($alerted)
+    {
+        $this->alerted = $alerted;
+
+        return $this;
+    }
+
+    /**
+     * Get alerted
+     *
+     * @return boolean
+     */
+    public function getAlerted()
+    {
+        return $this->alerted;
+    }
+
+    /**
      * String representation fo this object
      *
      * @return string
@@ -270,7 +299,8 @@ class Protocol
                 . "    identifier: " . $this->getIdentifier()                 . ",\n"
                 . "    orderHash: "  . $this->getOrderHash()                  . ",\n"
                 . "    orderDate: "  . $this->getOrderDate()->format('d/m/Y') . ",\n"
-                . "    price: "      . $this->getPrice()                      . "\n"
+                . "    price: "      . $this->getPrice()                      . ",\n"
+                . "    alerted: "    . $this->getAlerted()                    . "\n"
                 . "}";
     }
 

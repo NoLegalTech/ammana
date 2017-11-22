@@ -27,6 +27,7 @@ class CheckOrdersCommand extends ContainerAwareCommand {
             ->findAll();
 
         $this->printOrders($io, $theOrders);
+        $this->checkUnpaidOrders($io, $theOrders);
     }
 
     private function printOrders($io, $orders) {
@@ -67,20 +68,53 @@ class CheckOrdersCommand extends ContainerAwareCommand {
                 $close = '</error>';
             }
             $rows []= array(
+                $open . $order->getId() . $close,
                 $open . $orderDate->format('d/m/Y') . $close,
                 $open . $order->getIdentifier() . $close,
                 $open . $this->getContainer()->get('doctrine')
                     ->getRepository(User::class)
                     ->findOneById($order->getUser())
                     ->getEmail() . $close,
-                $open . $elapsed . ' days' . $close
+                $open . $elapsed . ' days' . $close,
+                $open . ($order->getAlerted() ? "true" : "false") . $close,
             );
         }
 
         $io->table(
-            array('Date', 'Protocol', 'User', 'Elapsed'),
+            array('ID', 'Date', 'Protocol', 'User', 'Elapsed', 'Alerted'),
             $rows
         );
+    }
+
+    private function checkUnpaidOrders($io, $orders) {
+        $days_to_worry = $this->getContainer()->getParameter('days_to_worry_about_unpaid_order');
+        $now = new \DateTime(date('Y-m-d'));
+
+        foreach ($orders as $order) {
+            $orderDate = $order->getOrderDate();
+            $elapsed = $now->diff($orderDate)->format('%a');
+            if (!$order->getEnabled() && $elapsed > $days_to_worry) {
+                if (!$order->getAlerted()) {
+                    $this->alertUnpaidOrder($io, $order, $elapsed);
+                    $order->setAlerted(true);
+                    $this->getContainer()->get('doctrine')->getManager()->flush();
+                }
+            }
+        }
+    }
+
+    private function alertUnpaidOrder($io, $order, $days) {
+        $io->note('Sending alert email for order ' . $order->getId());
+        $alerts = $this->getContainer()->get('AppBundle\Service\AlertsService');
+        $alerts->error(
+            $this->getI18n()['alerts']['unpaid_order']['title'],
+            $this->getI18n()['alerts']['unpaid_order']['message'],
+            $order->__toString()
+        );
+    }
+
+    private function getI18n() {
+        return $this->getContainer()->get('twig')->getGlobals()['i18n']['es'];
     }
 
 }

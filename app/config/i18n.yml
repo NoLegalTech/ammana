@@ -107,6 +107,9 @@ twig:
                     user_registered:
                         title:   Nuevo usuario registrado
                         message: Se ha registrado un nuevo usuario.
+                    unpaid_order:
+                        title:   Pedido sin pago
+                        message: Este pedido lleva demasiados días sin ser pagado.
                 # =================================================================================
 
 

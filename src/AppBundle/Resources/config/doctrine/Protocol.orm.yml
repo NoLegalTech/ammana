@@ -34,4 +34,8 @@ AppBundle\Entity\Protocol:
             column: order_date
         price:
             type: integer
+        alerted:
+            type: boolean
+            column: alerted
+            nullable: false
     lifecycleCallbacks: {  }

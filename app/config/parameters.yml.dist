@@ -24,6 +24,7 @@ parameters:
     email_to_report_errors: pepellou@gmail.com
     emails_sender_email: ammana_pre@ammana.es
     emails_sender_name: Ammana
+    days_to_worry_about_unpaid_order: 7
 
     # Quaderno
     quaderno_api_public_key: ThisIsTheQuadernoPublicKey

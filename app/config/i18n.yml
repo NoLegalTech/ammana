@@ -30,6 +30,8 @@ parameters:
     urls.protocol_pay:      /protocol/pay/{id}
     urls.protocol_paid:     /protocol/payment_complete
     urls.protocol_download: /protocol/{id}
+    urls.protocol_download_instructions: /protocol/{id}/instructions
+    urls.protocol_download_recibi: /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
 
 twig:
@@ -42,6 +44,19 @@ twig:
                     page_title: ammana - seal the deal!
                     name:       ammana
                     slogan:     Seal the deal!
+                protocols:
+                    models:
+                        uso_redes:      Modelo Autocobertura Redes Sociales
+                        uso_mensajeria: Modelo Autocobertura Mensajerías
+                        uso_telematica: Modelo Autocobertura Telemática
+                    instructions:
+                        uso_redes:      Instrucciones Redes Sociales
+                        uso_mensajeria: Instrucciones Mensajerías
+                        uso_telematica: Instrucciones Telemática
+                    recibi:
+                        uso_redes:      Recibí Redes Sociales
+                        uso_mensajeria: Recibí Mensajerías
+                        uso_telematica: Recibí Telemática
                 # =================================================================================
 
                 # Menus
@@ -165,6 +180,8 @@ twig:
                         download: Descarga
                         invoice:  Factura
                     download: Descargar
+                    instructions: Instrucciones
+                    recibi: Recibí
                     not_available: No disponible
                     pay: paga!
                     download_invoice: Descargar factura

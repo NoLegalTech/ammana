@@ -30,6 +30,8 @@ parameters:
     urls.protocol_pay:      /protocol/pay/{id}
     urls.protocol_paid:     /protocol/payment_complete
     urls.protocol_download: /protocol/{id}
+    urls.protocol_download_instructions: /protocol/{id}/instructions
+    urls.protocol_download_recibi: /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
 
 twig:
@@ -42,6 +44,19 @@ twig:
                     page_title: ammana - seal the deal!
                     name:       ammana
                     slogan:     Seal the deal!
+                protocols:
+                    models:
+                        uso_redes:      Modelo Autocobertura Redes Sociales
+                        uso_mensajeria: Modelo Autocobertura Mensajerías
+                        uso_telematica: Modelo Autocobertura Telemática
+                    instructions:
+                        uso_redes:      Instrucciones Redes Sociales
+                        uso_mensajeria: Instrucciones Mensajerías
+                        uso_telematica: Instrucciones Telemática
+                    recibi:
+                        uso_redes:      Recibí Redes Sociales
+                        uso_mensajeria: Recibí Mensajerías
+                        uso_telematica: Recibí Telemática
                 # =================================================================================
 
                 # Menus
@@ -103,6 +118,10 @@ twig:
                     quaderno_invoice_not_created:
                         user: Ha ocurrido un error inesperado.
                         log:  No se ha podido crear la factura en Quaderno
+                alerts:
+                    user_registered:
+                        title:   Nuevo usuario registrado
+                        message: Se ha registrado un nuevo usuario.
                 # =================================================================================
 
 
@@ -161,6 +180,8 @@ twig:
                         download: Descarga
                         invoice:  Factura
                     download: Descargar
+                    instructions: Instrucciones
+                    recibi: Recibí
                     not_available: No disponible
                     pay: paga!
                     download_invoice: Descargar factura
@@ -173,7 +194,7 @@ twig:
                 payment_page:
                     title: Pagar
                     info:  Tu protocolo está listo, pero antes paga!
-                    pay_with_paypal: Pagar con <img src="/images/paypal.png">
+                    pay_with_paypal: Pagar con <img src="/web/images/paypal.png">
                     transfer:
                         info: "O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:"
                         contact: Concepto
@@ -284,6 +305,10 @@ twig:
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
                     error:
                         title:       ammana.es - Se ha producido un error
+                        client_data: "Datos del cliente:"
+                        additional:  "Información adicional:"
+                    info:
+                        title:       ammana.es - Alerta
                         client_data: "Datos del cliente:"
                         additional:  "Información adicional:"
                     new_password:

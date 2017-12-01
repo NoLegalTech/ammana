@@ -272,6 +272,98 @@ class ProtocolController extends Controller
     }
 
     /**
+     * Downloads a protocol's instructions.
+     *
+     */
+    public function downloadInstructionsAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("customer")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $permissions->getCurrentUser();
+
+        if ($protocol->getUser() != $user->getId()) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/instrucciones_' . $protocol->getIdentifier() . '.pdf';
+        $fileName = $this->getI18n()['protocols']['instructions'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".pdf"
+            )
+        );
+    }
+
+    /**
+     * Downloads a protocol's recibi.
+     *
+     */
+    public function downloadRecibiAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("customer")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $permissions->getCurrentUser();
+
+        if ($protocol->getUser() != $user->getId()) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/recibi_' . $protocol->getIdentifier() . '.docx';
+        $fileName = $this->getI18n()['protocols']['recibi'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".docx"
+            )
+        );
+    }
+
+    /**
      * Pays a protocol.
      *
      */
@@ -351,6 +443,7 @@ class ProtocolController extends Controller
             'amount' => $amount,
             'protocol_spec' => $protocol_spec,
             'charge' => $jwt,
+            'quaderno_public_api_key' => $this->container->getParameter('quaderno_api_public_key'),
             'payment_data' => array(
                 'order_hash' => $protocol->getOrderHash(),
                 'bank_account' => $this->container->getParameter('account_number'),

@@ -30,13 +30,28 @@ class AlertsService {
         $this->logger->error($title . ':');
         $this->logger->error('    ' . $message);
 
+        $this->_alert('error', $title, $message, $additional_data);
+    }
+
+    public function info($title, $message, $additional_data = null) {
+        $this->logger->info($title . ':');
+        $this->logger->info('    ' . $message);
+
+        $this->_alert('info', $title, $message, $additional_data);
+    }
+
+    private function getI18n() {
+        return $this->twig->getGlobals()['i18n']['es'];
+    }
+
+    private function _alert($type, $title, $message, $additional_data = null) {
         $user = $this->permissions->getCurrentUser();
         if ($user != null) {
             $user = $user->__toString();
         }
 
         $plain_text = $this->twig->render(
-            'email/error.txt.twig',
+            'email/' . $type . '.txt.twig',
             array(
                 'title' => $title,
                 'message' => $message,
@@ -45,12 +60,12 @@ class AlertsService {
             )
         );
 
-        $swift_message = (new \Swift_Message($this->getI18n()['emails']['error']['title']))
+        $swift_message = (new \Swift_Message($this->getI18n()['emails'][$type]['title']))
             ->setFrom(array($this->sender_email => $this->sender_name))
             ->setTo($this->email_to_report_errors)
             ->setBody(
                 $this->twig->render(
-                    'email/error.html.twig',
+                    'email/' . $type . '.html.twig',
                     array(
                         'title' => $title,
                         'message' => $message,
@@ -63,10 +78,6 @@ class AlertsService {
             ->addPart($plain_text, 'text/plain');
 
         $this->mailer->send($swift_message);
-    }
-
-    private function getI18n() {
-        return $this->twig->getGlobals()['i18n']['es'];
     }
 
 }

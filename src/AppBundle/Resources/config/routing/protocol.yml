@@ -28,3 +28,13 @@ protocol_download:
     defaults: { _controller: "AppBundle:Protocol:download" }
     methods:  GET
 
+protocol_download_instructions:
+    path:     "%urls.protocol_download_instructions%"
+    defaults: { _controller: "AppBundle:Protocol:downloadInstructions" }
+    methods:  GET
+
+protocol_download_recibi:
+    path:     "%urls.protocol_download_recibi%"
+    defaults: { _controller: "AppBundle:Protocol:downloadRecibi" }
+    methods:  GET
+

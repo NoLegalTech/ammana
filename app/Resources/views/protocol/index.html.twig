@@ -19,7 +19,11 @@
                             <tr>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
-                                    <td><a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.download }}</a></td>
+                                    <td>
+                                        <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.recibi }}</a>
+                                    </td>
                                 {% else %}
                                     <td>{{ i18n.es.protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.pay }}</a>)</td>
                                 {% endif %}

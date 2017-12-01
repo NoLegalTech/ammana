@@ -1,0 +1,11 @@
+{{ title }}
+
+{{ message }}
+
+{% if user %}
+    {{ i18n.es.emails.info.client_data }} {{ user }}
+{% endif %}
+
+{% if additional_data %}
+    {{ i18n.es.emails.info.additional }} {{ additional_data }}
+{% endif %}

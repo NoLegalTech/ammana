@@ -16,10 +16,13 @@ class Quaderno {
 
     private $logger, $protocols;
 
+    private $errors;
+
     public function __construct($api_key, $api_url, LoggerInterface $logger, Protocols $protocols) {
         QuadernoBase::init($api_key, $api_url);
         $this->logger = $logger;
         $this->protocols = $protocols;
+        $this->errors = "";
         if (!QuadernoBase::ping()) {
             $this->logger->error('Quaderno does not respond to ping!');
         }
@@ -52,6 +55,9 @@ class Quaderno {
         $contact = $this->findContact($theUser);
         if ($contact == null) {
             $contact = $this->createContact($theUser);
+            if ($contact == null) {
+                $contact = $this->createContactWithoutVAT($theUser);
+            }
         }
 
         if ($contact == null) {
@@ -112,6 +118,26 @@ class Quaderno {
         return $contact;
     }
 
+    public function createContactWithoutVAT($user) {
+        $contact = new QuadernoContact(array(
+            'first_name' => $user->getCompanyName(),
+            'email' => $user->getEmail(),
+            'street_line_1' => $user->getAddress(),
+            'contact_name' => $user->getContactPerson(),
+            'notes' => "Número de empleados: " . $user->getNumberEmployees()
+                        .", sector: " .  $user->getSector()
+        ));
+        if (!$contact->save()) {
+            $this->logErrors(
+                'Error while creating contact for ' . print_r($user, true) . ' without VAT',
+                $contact->errors
+            );
+            return null;
+        }
+        $user->setQuadernoId($contact->id);
+        return $contact;
+    }
+
     public function findContact($user) {
         $id = $user->getQuadernoId();
         if ($id == null) {
@@ -122,10 +148,13 @@ class Quaderno {
 
     private function logErrors($message, $errors) {
         $this->logger->error($message);
+        $this->errors .= $message ."\n";
         foreach ($errors as $field => $field_errors) {
             $this->logger->error("    " . $field . ":");
+            $this->errors .= "    " . $field . ":" ."\n";
             foreach ($field_errors as $error) {
                 $this->logger->error("     - " . $error);
+                $this->errors .= "     - " . $error ."\n";
             }
         }
     }
@@ -135,6 +164,12 @@ class Quaderno {
         if ($qInvoice != null) {
             $qInvoice->deliver();
         }
+    }
+
+    public function popErrors() {
+        $err = $this->errors;
+        $this->errors = "";
+        return $err;
     }
 
 }

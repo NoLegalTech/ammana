@@ -601,6 +601,11 @@ input[type="radio"] + label:after {
     box-shadow: 5px 5px 20px;
 }
 
+button.paypal-button:hover {
+    background: #c5c4e4;
+    color: #316ccb;
+}
+
 .paypal-button img {
     padding: 7px 3px;
 }

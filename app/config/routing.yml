@@ -8,6 +8,21 @@ app:
     defaults: { _controller: "AppBundle:Default:index" }
     methods:  GET
 
+info_legal:
+    path:     /legal
+    defaults: { _controller: "AppBundle:Default:legal" }
+    methods:  GET
+
+info_privacy:
+    path:     /privacidad
+    defaults: { _controller: "AppBundle:Default:privacy" }
+    methods:  GET
+
+info_cookies:
+    path:     /cookies
+    defaults: { _controller: "AppBundle:Default:cookies" }
+    methods:  GET
+
 user:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /

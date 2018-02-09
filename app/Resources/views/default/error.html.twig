@@ -14,4 +14,14 @@
         </main>
     </div>
 
+    {% if technical_info is null %}
+        <script>
+            console.error('{{ message }}');
+        </script>
+    {% else %}
+        <script>
+            console.error('{{ technical_info }}');
+        </script>
+    {% endif %}
+
 {% endblock %}

@@ -24,7 +24,8 @@ class DefaultController extends Controller
     {
         return $this->render('default/error.html.twig', [
             'title' => $this->getI18n()['error_page']['error_label'],
-            'message' => $request->query->get('message')
+            'message' => $request->query->get('message'),
+            'technical_info' => $request->query->get('technical_info', null)
         ]);
     }
 

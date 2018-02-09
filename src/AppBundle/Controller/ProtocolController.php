@@ -494,7 +494,8 @@ class ProtocolController extends Controller
 
         if ($theInvoice == null) {
             return $this->redirectToRoute('error', array(
-                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']['user']
+                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']['user'],
+                'technical_info' => $quaderno->popErrors()
             ));
         }
 

@@ -601,6 +601,11 @@ input[type="radio"] + label:after {
     box-shadow: 5px 5px 20px;
 }
 
+button.paypal-button:hover {
+    background: #c5c4e4;
+    color: #316ccb;
+}
+
 .paypal-button img {
     padding: 7px 3px;
 }
@@ -1598,7 +1603,7 @@ input[type="checkbox"] + label {
 button,
 input[type="button"],
 input[type="submit"] {
-    background-color: #222;
+    background-color: #418ccb;
     border: 0;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -1638,7 +1643,8 @@ input[type="button"]:hover,
 input[type="button"]:focus,
 input[type="submit"]:hover,
 input[type="submit"]:focus {
-    background: #767676;
+    background: #a1cceb;
+    color: white;
 }
 
 button.secondary:hover,

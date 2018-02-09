@@ -29,6 +29,27 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function legalAction(Request $request)
+    {
+        return $this->render('default/legal.html.twig', [
+            'title' => $this->getI18n()['legal_page']['title']
+        ]);
+    }
+
+    public function privacyAction(Request $request)
+    {
+        return $this->render('default/privacy.html.twig', [
+            'title' => $this->getI18n()['privacy_page']['title']
+        ]);
+    }
+
+    public function cookiesAction(Request $request)
+    {
+        return $this->render('default/cookies.html.twig', [
+            'title' => $this->getI18n()['cookies_page']['title']
+        ]);
+    }
+
     public function iconsAction(Request $request)
     {
         return $this->render('default/icons.html.twig', array(

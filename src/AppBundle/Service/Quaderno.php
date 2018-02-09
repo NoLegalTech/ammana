@@ -55,6 +55,9 @@ class Quaderno {
         $contact = $this->findContact($theUser);
         if ($contact == null) {
             $contact = $this->createContact($theUser);
+            if ($contact == null) {
+                $contact = $this->createContactWithoutVAT($theUser);
+            }
         }
 
         if ($contact == null) {
@@ -107,6 +110,26 @@ class Quaderno {
         if (!$contact->save()) {
             $this->logErrors(
                 'Error while creating contact for ' . print_r($user, true),
+                $contact->errors
+            );
+            return null;
+        }
+        $user->setQuadernoId($contact->id);
+        return $contact;
+    }
+
+    public function createContactWithoutVAT($user) {
+        $contact = new QuadernoContact(array(
+            'first_name' => $user->getCompanyName(),
+            'email' => $user->getEmail(),
+            'street_line_1' => $user->getAddress(),
+            'contact_name' => $user->getContactPerson(),
+            'notes' => "Número de empleados: " . $user->getNumberEmployees()
+                        .", sector: " .  $user->getSector()
+        ));
+        if (!$contact->save()) {
+            $this->logErrors(
+                'Error while creating contact for ' . print_r($user, true) . ' without VAT',
                 $contact->errors
             );
             return null;

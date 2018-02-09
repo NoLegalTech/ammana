@@ -83,7 +83,7 @@ twig:
                 # Footer
                 # =================================================================================
                 footer:
-                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados (o no) - <a href="#">ammana.es</a>
+                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados - <a href="#">ammana.es</a>
                     developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>
                 # =================================================================================
 
@@ -123,7 +123,6 @@ twig:
                         title:   Nuevo usuario registrado
                         message: Se ha registrado un nuevo usuario.
                 # =================================================================================
-
 
                 # Pages
                 # =================================================================================
@@ -177,13 +176,13 @@ twig:
                     title: Lista de protocolos
                     headers:
                         name:     Nombre
-                        download: Descarga
+                        download: Descargar
                         invoice:  Factura
-                    download: Descargar
+                    download: Protocolo
                     instructions: Instrucciones
                     recibi: Recibí
                     not_available: No disponible
-                    pay: paga!
+                    pay: pagar
                     download_invoice: Descargar factura
                     invoice_not_available: Factura no disponible
                     no_protocols: No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
@@ -193,10 +192,10 @@ twig:
 
                 payment_page:
                     title: Pagar
-                    info:  Tu protocolo está listo, pero antes paga!
+                    info:  Tu protocolo está listo. Lo podrás descargar inmediatamente en cuanto pagues tu pedido.
                     pay_with_paypal: Pagar con <img src="/web/images/paypal.png">
                     transfer:
-                        info: "O si prefieres pagar por transferencia bancaria, haz una transferencia con los siguientes datos:"
+                        info: "Si prefieres pagar por transferencia bancaria, debes realizar una transferencia con los siguientes datos:"
                         contact: Concepto
                         account_number: Número de cuenta
                         amount: Importe
@@ -291,9 +290,17 @@ twig:
                 welcome_page:
                     title:   Bienvenido
                     message: Por favor, revisa tu bandeja de correo, donde encontrarás un correo para activar tu cuenta.
+
+                legal_page:
+                    title:   Condiciones de Uso y Contratación
+
+                privacy_page:
+                    title:   Política de privacidad
+
+                cookies_page:
+                    title:   Política de cookies
                 # =================================================================================
  
-
                 # Emails
                 # =================================================================================
                 emails:
@@ -338,4 +345,4 @@ twig:
                         sector:         Sector
                         num_employees:  Número de empleados
                         logo:           Logo
-                        delete_logo:    Marque para borrar logo
+                        delete_logo:    Marcar para borrar logo

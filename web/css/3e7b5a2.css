@@ -591,6 +591,16 @@ input[type="radio"] + label:after {
     text-align: justify;
 }
 
+.paypal-button {
+    background-color: #d0d9f2;
+    border-radius: 10px;
+    border: 2px solid #418ccb;
+    color: #418ccb;
+    font-size: 16px;
+    padding: 8px 20px;
+    box-shadow: 5px 5px 20px;
+}
+
 .paypal-button img {
     padding: 7px 3px;
 }

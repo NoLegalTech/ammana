@@ -1,0 +1,6 @@
+pdflatex manual.tex
+pdflatex manual.tex
+rm manual.aux
+rm manual.log
+rm manual.toc
+open manual.pdf

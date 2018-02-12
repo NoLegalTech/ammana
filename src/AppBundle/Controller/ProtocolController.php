@@ -374,7 +374,7 @@ class ProtocolController extends Controller
      * Pays a protocol.
      *
      */
-    public function payAction(Protocol $protocol, Request $request, \Swift_Mailer $mailer, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
+    public function payAction(Protocol $protocol, Request $request, Quaderno $quaderno, \Swift_Mailer $mailer, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(

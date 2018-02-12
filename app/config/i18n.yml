@@ -46,17 +46,17 @@ twig:
                     slogan:     Seal the deal!
                 protocols:
                     models:
-                        uso_redes:      Protocolo Laboral Redes Sociales
-                        uso_mensajeria: Protocolo Laboral Mensajerías
-                        uso_telematica: Protocolo Laboral Telemática
+                        uso_redes:      Protocolo laboral de uso de las redes sociales de empresa
+                        uso_mensajeria: Protocolo laboral de uso de los sistemas de mensajería instantánea
+                        uso_telematica: Protocolo laboral de uso de los equipos informáticos
                     instructions:
-                        uso_redes:      Instrucciones Redes Sociales
-                        uso_mensajeria: Instrucciones Mensajerías
-                        uso_telematica: Instrucciones Telemática
+                        uso_redes:      Instrucciones de uso de las redes sociales de empresa
+                        uso_mensajeria: Instrucciones de uso de los sistemas de mensajería instantánea
+                        uso_telematica: Instrucciones de uso de los equipos informáticos
                     recibi:
-                        uso_redes:      Recibí Redes Sociales
-                        uso_mensajeria: Recibí Mensajerías
-                        uso_telematica: Recibí Telemática
+                        uso_redes:      Recibí de uso de las redes sociales de empresa
+                        uso_mensajeria: Recibí de uso de los sistemas de mensajería instantánea
+                        uso_telematica: Recibí de uso de los equipos informáticos
                 # =================================================================================
 
                 # Menus
@@ -67,9 +67,9 @@ twig:
                         register:  Registrarse
                         home:      Inicio
                         protocols: Protocolos
-                        protocol_uso_redes:      Protocolo Laboral Redes Sociales
-                        protocol_uso_mensajeria: Protocolo Laboral Mensajerías
-                        protocol_uso_telematica: Protocolo Laboral Telemática
+                        protocol_uso_redes:      Protocolo laboral de uso de las redes sociales de empresa
+                        protocol_uso_mensajeria: Protocolo laboral de uso de los sistemas de mensajería instantánea
+                        protocol_uso_telematica: Protocolo laboral de uso de los equipos informáticos
                     registered_user:
                         profile:   Mi perfil
                         protocols: Mis protocolos
@@ -136,11 +136,11 @@ twig:
                         intro:   Estos protocolos te van a salvar la vida.
                         buy:     Contratar
                         protocols:
-                            - title: Protocolo Laboral Redes Sociales
+                            - title: Protocolo laboral de uso de las redes sociales de empresa
                               description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
-                            - title: Protocolo Laboral Mensajerías
+                            - title: Protocolo laboral de uso de los sistemas de mensajería instantánea
                               description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
-                            - title: Protocolo Laboral Telemática
+                            - title: Protocolo laboral de uso de los equipos informáticos
                               description: Cursus massa porta erat ac porttitor finibus velit elit mollis lorem ac...
                     additional_section:
                         title:   Otro apartado

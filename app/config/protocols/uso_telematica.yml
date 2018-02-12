@@ -1,6 +1,6 @@
 parameters:
     protocol.uso_telematica:
-        name: Protocolo Laboral Telemática
+        name: Protocolo laboral de uso de los equipos informáticos
         questions:
             - id: desidia_o_negligencia
               question: "¿La desidia o negligencia del empleado a la hora de informar a la empresa de la pérdida, robo o deterioro de los medios telemáticos puestos a su disposición conllevará la aplicación del régimen disciplinario?"

@@ -444,9 +444,15 @@ class ProtocolController extends Controller
         );
         $jwt = JWT::encode($token, $this->container->getParameter('quaderno_api_key'));
 
+        $vatnumber = $user->getCif();
+        if (!$quaderno->isValidVAT($vatnumber)) {
+            $vatnumber = "";
+        }
+
         return $this->render('protocol/payment.html.twig', array(
             'title' => $this->getI18n()['payment_page']['title'],
             'user' => $user,
+            'vatnumber' => $vatnumber,
             'amount' => $amount,
             'protocol_spec' => $protocol_spec,
             'charge' => $jwt,

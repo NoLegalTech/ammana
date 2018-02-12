@@ -8,6 +8,7 @@ use QuadernoBase;
 use QuadernoContact;
 use QuadernoDocumentItem;
 use QuadernoInvoice;
+use QuadernoTax;
 
 use AppBundle\Entity\Invoice;
 use AppBundle\Service\Protocols;
@@ -26,6 +27,10 @@ class Quaderno {
         if (!QuadernoBase::ping()) {
             $this->logger->error('Quaderno does not respond to ping!');
         }
+    }
+
+    public function isValidVAT($vatnumber) {
+        return QuadernoTax::validate_vat_number('ES', 'ES' . $vat_number);
     }
 
     public function getInvoice($orderNumber) {

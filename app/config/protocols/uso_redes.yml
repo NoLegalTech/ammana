@@ -1,6 +1,6 @@
 parameters:
     protocol.uso_redes:
-        name: Modelo Autocobertura Redes Sociales
+        name: Protocolo laboral de uso de las redes sociales de empresa
         questions:
             - id: uso_durante_jornada_laboral
               question: "Uso de redes sociales durante la jornada de trabajo:"

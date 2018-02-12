@@ -10,7 +10,12 @@
                     {% if user.logo %}
                         <img style="height: 100px" src="/uploads/{{ user.logo }}"/>
                     {% endif %}
-                    <input class="btn" type="submit" value="{{ i18n.es.profile_page.button }}" />
+                    {% if continue is null %}
+                        <input class="btn" type="submit" value="{{ i18n.es.profile_page.button }}" />
+                    {% else %}
+                        <input type="hidden" name="continue" value="{{ continue }}" />
+                        <input class="btn" type="submit" value="{{ i18n.es.profile_page.continue_button }}" />
+                    {% endif %}
                 {{ form_end(edit_form) }}
             </div>
             <div class="clear"></div>

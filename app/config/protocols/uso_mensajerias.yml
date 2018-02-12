@@ -1,6 +1,6 @@
 parameters:
     protocol.uso_mensajerias:
-        name: Modelo Autocobertura Mensajerías
+        name: Protocolo laboral de uso de los sistemas de mensajería instantánea
         questions:
             - id: ordenes_por_mensajeria
               question: "¿La empresa emplea o tiene pensado emplear sistemas de mensajería instantánea (intranet corporativa, WhatsApp, Facebook, Messenger o cualquier otro) para trasmitir ordenes o instrucciones de trabajo a sus empleados?"

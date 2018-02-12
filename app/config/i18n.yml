@@ -159,7 +159,6 @@ twig:
                 order_confirmation_page:
                     title:   Confirmación de pedido
                     please_review: Por favor, revisa tus respuestas y confirma que son correctas.
-                    to_buy:  Comprar
                     confirm: Confirmar
                     cancel:  Cancelar
 
@@ -208,8 +207,7 @@ twig:
                     protocols_list: la lista de protocolos
 
                 questions_page:
-                    title:  Planifica el uso de {protocol} en tu empresa
-                    to_buy: Comprar
+                    title:  Planifica el uso del protocolo laboral en tu empresa
                     profile_not_complete: Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.
                     please_go_to: Por favor, ve a
                     profile_page: tu página de perfil

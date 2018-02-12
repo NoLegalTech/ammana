@@ -177,14 +177,8 @@ class ProtocolController extends Controller
             ));
         }
 
-        $title = str_replace(
-            '{protocol}',
-            $protocol['name'],
-            $this->getI18n()['questions_page']['title']
-        );
-
         return $this->render('protocol/questions.html.twig', array(
-            'title' => $title,
+            'title' => $this->getI18n()['questions_page']['title'],
             'profile_completed' => $profile_completed,
             'form' => $questionsForm->createView(),
             'protocol' => $protocol

@@ -379,6 +379,9 @@ input[type="radio"] + label:after {
 #form label {
     text-align: justify;
 }
+#form > div > label {
+    margin-bottom: 10px;
+}
 
 .paypal-button {
     background-color: #d0d9f2;

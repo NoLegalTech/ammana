@@ -187,19 +187,22 @@ class ProtocolController extends Controller
 
     private function getForm($questions, $isConfirmation) {
         $formBuilder = $this->createFormBuilder();
+        $counter_questions = 1;
+        $subcounter_questions = 1;
         foreach ($questions as $question) {
             $choices = array();
-            $count = 0;
+            $counter_answers = 0;
             foreach ($question['answers'] as $answer) {
-                $choices[$answer] = $count++;
+                $choices[$answer] = $counter_answers++;
             }
             $properties = array(
-                'label' => $question['question'],
+                'label' => $counter_questions .') ' . $question['question'],
                 'choices' => $choices,
                 'expanded' => !$isConfirmation,
                 'multiple' => false
             );
             if (isset($question['condition'])) {
+                $properties['label'] = ($counter_questions - 1) . '.' . $subcounter_questions .') ' . $question['question'];
                 $properties['attr'] = array(
                     'class' => 'has-condition',
                     'data-condition' => $question['condition']
@@ -208,6 +211,10 @@ class ProtocolController extends Controller
                     'class' => 'has-condition',
                     'data-condition' => $question['condition']
                 );
+                $subcounter_questions++;
+            } else {
+                $counter_questions++;
+                $subcounter_questions = 1;
             }
             $formBuilder->add($question['id'], ChoiceType::class, $properties);
         }

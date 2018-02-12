@@ -17,16 +17,16 @@
                         <input type="hidden" value="1" data-quaderno="quantity">
                         <span class="payment-errors"></span>
                         <input type="hidden" data-quaderno="first-name" value="{{ user.companyName }}" />
-                        <input type="hidden" data-quaderno="last-name"/>
-                        <input type="hidden" data-quaderno="company-name"/>
-                        <input type="hidden" data-quaderno="email"/>
-                        <input type="hidden" data-quaderno="street-line-1"/>
-                        <input type="hidden" data-quaderno="street-line-2"/>
-                        <input type="hidden" data-quaderno="city"/>
-                        <input type="hidden" data-quaderno="postal-code"/>
-                        <input type="hidden" data-quaderno="region"/>
+                        <input type="hidden" data-quaderno="last-name" value=""/>
+                        <input type="hidden" data-quaderno="company-name" value=""/>
+                        <input type="hidden" data-quaderno="email" value="{{ user.email }}"/>
+                        <input type="hidden" data-quaderno="street-line-1" value="{{ user.address }}"/>
+                        <input type="hidden" data-quaderno="street-line-2" value=""/>
+                        <input type="hidden" data-quaderno="city" value=""/>
+                        <input type="hidden" data-quaderno="postal-code" value=""/>
+                        <input type="hidden" data-quaderno="region" value=""/>
                         <input type="hidden" data-quaderno="country" value="ES" />
-                        <input type="hidden" data-quaderno="vat-number"/>
+                        <input type="hidden" data-quaderno="vat-number" value="{{ user.cif }}"/>
                         <button class="paypal-button" type="submit">
                             {{ i18n.es.payment_page.pay_with_paypal | raw }}
                         </button>

@@ -73,7 +73,8 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
-            'to_buy' => $to_buy
+            'to_buy' => $to_buy,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -100,7 +101,8 @@ class ProtocolController extends Controller
             'title' => $this->getI18n()['orders_page']['title'],
             'protocols' => $protocols,
             'names' => $names,
-            'users' => $users
+            'users' => $users,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -152,7 +154,8 @@ class ProtocolController extends Controller
                     'title' => $this->getI18n()['order_confirmation_page']['title'],
                     'profile_completed' => $profile_completed,
                     'form' => $questionsForm->createView(),
-                    'protocol' => $protocol
+                    'protocol' => $protocol,
+                    'google_analytics' => $this->container->getParameter('google_analytics')
                 ));
             }
 
@@ -181,7 +184,8 @@ class ProtocolController extends Controller
             'title' => $this->getI18n()['questions_page']['title'],
             'profile_completed' => $profile_completed,
             'form' => $questionsForm->createView(),
-            'protocol' => $protocol
+            'protocol' => $protocol,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -461,7 +465,8 @@ class ProtocolController extends Controller
                 'order_hash' => $protocol->getOrderHash(),
                 'bank_account' => $this->container->getParameter('account_number'),
                 'amount' => $this->formatEuro($amount)
-            )
+            ),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -477,7 +482,8 @@ class ProtocolController extends Controller
     public function paymentCompleteAction()
     {
         return $this->render('protocol/payment_complete.html.twig', array(
-            'title' => $this->getI18n()['payment_complete_page']['title']
+            'title' => $this->getI18n()['payment_complete_page']['title'],
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 

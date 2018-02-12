@@ -2,6 +2,18 @@
 <html>
 
     <head>
+        {% if google_analytics is not null %}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_analytics }}"></script>
+            <script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '{{ google_analytics }}');
+            </script>
+        {% endif %}
+
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <title>{% block title %}{{ i18n.es.metadata.page_title }}{% endblock %}</title>

@@ -43,6 +43,7 @@ class InvoiceController extends Controller
         return $this->render('invoice/index.html.twig', array(
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -61,7 +62,8 @@ class InvoiceController extends Controller
         return $this->render('invoice/full_list.html.twig', array(
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
-            'users' => $users
+            'users' => $users,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 

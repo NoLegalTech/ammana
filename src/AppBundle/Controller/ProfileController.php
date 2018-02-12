@@ -67,7 +67,8 @@ class ProfileController extends Controller {
             'title' => $this->getI18n()['profile_page']['title'],
             'user' => $user,
             'edit_form' => $editForm->createView(),
-            'continue' => $request->query->get('continue')
+            'continue' => $request->query->get('continue'),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 

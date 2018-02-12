@@ -44,6 +44,7 @@ class UserController extends Controller
         return $this->render('user/index.html.twig', array(
             'title' => $this->getI18n()['user_list_page']['title'],
             'users' => $customers,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -76,6 +77,7 @@ class UserController extends Controller
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -184,6 +186,7 @@ class UserController extends Controller
             'title' => $this->getI18n()['register_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -193,7 +196,8 @@ class UserController extends Controller
     public function welcomeAction(Request $request)
     {
         return $this->render('user/welcome.html.twig', array(
-            'title' => $this->getI18n()['welcome_page']['title']
+            'title' => $this->getI18n()['welcome_page']['title'],
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -209,7 +213,8 @@ class UserController extends Controller
         $this->getDoctrine()->getManager()->flush();
         return $this->render('user/activated.html.twig', array(
             'title' => $this->getI18n()['activation_page']['title'],
-            'user' => $user
+            'user' => $user,
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -219,7 +224,8 @@ class UserController extends Controller
     public function activateErrorAction()
     {
         return $this->render('user/activation_error.html.twig', array(
-            'title' => $this->getI18n()['activation_error_page']['title']
+            'title' => $this->getI18n()['activation_error_page']['title'],
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -255,6 +261,7 @@ class UserController extends Controller
             'title' => $this->getI18n()['login_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -330,7 +337,8 @@ class UserController extends Controller
     public function loginErrorAction()
     {
         return $this->render('user/login_error.html.twig', array(
-            'title' => $this->getI18n()['login_error_page']['title']
+            'title' => $this->getI18n()['login_error_page']['title'],
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -399,6 +407,7 @@ class UserController extends Controller
             'title' => $this->getI18n()['forgot_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -408,7 +417,8 @@ class UserController extends Controller
     public function sentPasswordEmailAction(Request $request)
     {
         return $this->render('user/resetting_password.html.twig', array(
-            'title' => $this->getI18n()['new_password_requested_page']['title']
+            'title' => $this->getI18n()['new_password_requested_page']['title'],
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 
@@ -426,7 +436,8 @@ class UserController extends Controller
             $user->setActivationHash($hasher->generate());
             $this->getDoctrine()->getManager()->flush();
             return $this->render('user/password_set.html.twig', array(
-                'title' => $this->getI18n()['new_password_set_page']['title']
+                'title' => $this->getI18n()['new_password_set_page']['title'],
+                'google_analytics' => $this->container->getParameter('google_analytics')
             ));
         }
 
@@ -434,6 +445,7 @@ class UserController extends Controller
             'title' => $this->getI18n()['new_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
+            'google_analytics' => $this->container->getParameter('google_analytics')
         ));
     }
 

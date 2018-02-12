@@ -55,13 +55,19 @@ class ProfileController extends Controller {
             
             $this->getDoctrine()->getManager()->flush();
 
+            $continue = $request->get('continue');
+            if ($continue != null) {
+                return $this->redirectToRoute('protocol_buy', array('id' => $continue));
+            }
+
             return $this->redirectToRoute('profile_homepage');
         }
 
         return $this->render('user/profile.html.twig', array(
             'title' => $this->getI18n()['profile_page']['title'],
             'user' => $user,
-            'edit_form' => $editForm->createView()
+            'edit_form' => $editForm->createView(),
+            'continue' => $request->query->get('continue')
         ));
     }
 

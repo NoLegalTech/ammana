@@ -8,7 +8,7 @@
                 {% if not profile_completed %}
                     <p style="color: red">
                         {{ i18n.es.questions_page.profile_not_complete }}<br/>
-                        {{ i18n.es.questions_page.please_go_to }} <a href="{{ path('profile_homepage') }}">{{ i18n.es.questions_page.profile_page }}</a> {{ i18n.es.questions_page.fill_the_data }}
+                        {{ i18n.es.questions_page.please_go_to }} <a href="{{ path('profile_homepage', { 'continue': protocol.id }) }}">{{ i18n.es.questions_page.profile_page }}</a> {{ i18n.es.questions_page.fill_the_data }}
                     </p>
                 {% else %}
                     {{ form_start(form) }}

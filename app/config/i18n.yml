@@ -280,6 +280,7 @@ twig:
                 profile_page:
                     title:  Tu perfil
                     button: Actualizar
+                    continue_button: Continuar
 
                 register_page:
                     title:  Registro gratuito

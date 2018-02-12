@@ -1,6 +1,20 @@
-pdflatex manual.tex
-pdflatex manual.tex
-rm manual.aux
-rm manual.log
-rm manual.toc
-open manual.pdf
+#!/bin/bash
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+compile_tex() {
+    filename=$1
+
+    cd $dir/src && pdflatex $filename.tex
+    cd $dir/src && pdflatex $filename.tex
+
+    rm $dir/src/*.aux
+    rm $dir/src/*.log
+    rm $dir/src/*.toc
+
+    mv $dir/src/$filename.pdf $dir/pdf/$filename.pdf
+
+    open $dir/pdf/$filename.pdf
+}
+
+#compile_tex "manual_cliente"
+compile_tex "manual_admin"

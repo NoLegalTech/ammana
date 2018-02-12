@@ -208,7 +208,7 @@ twig:
                     protocols_list: la lista de protocolos
 
                 questions_page:
-                    title:  Configura tu protocolo
+                    title:  Planifica el uso de {protocol} en tu empresa
                     to_buy: Comprar
                     profile_not_complete: Tu perfil no está completo. Debes completarlo antes de generar ningún protocolo.
                     please_go_to: Por favor, ve a

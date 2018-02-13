@@ -128,7 +128,8 @@ class UserController extends Controller
     {
         $user = new User();
         $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
-            'i18n' => $this->getI18n()
+            'i18n' => $this->getI18n(),
+            'csrf_protection' => false
         ));
         $form->handleRequest($request);
 

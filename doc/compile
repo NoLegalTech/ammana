@@ -10,6 +10,7 @@ compile_tex() {
     rm $dir/src/*.aux
     rm $dir/src/*.log
     rm $dir/src/*.toc
+    rm $dir/src/*.out
 
     mv $dir/src/$filename.pdf $dir/pdf/$filename.pdf
 

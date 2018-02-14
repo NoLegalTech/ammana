@@ -37,6 +37,14 @@
 \fancyhf{}
 \fancyhead[L]{\includegraphics[height=5.0mm]{logo}}
 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=[rgb]{0.25,0.55,0.79},
+    filecolor=magenta,
+    urlcolor=[rgb]{0.25,0.55,0.79},
+}
+
 \newlist{steps}{enumerate}{1}
 \setlist[steps]{label={\arabic*)}}
 
@@ -67,178 +75,600 @@
     \newpage
 
 %----------------------------------------------------------------------------------------
+
     \section{Introducción}
 
-        \textbf{ammana.es} funciona de forma prácticamente autónoma y los clientes pueden
+        Este manual pretende servir de guía al administrador de \textbf{ammana.es} para 
+    realizar sus funciones, así como comprender las funciones de los clientes y poder, en
+    su caso, darles el soporte adecuado.
+
+        El manual está separado en 2 grandes secciones. La primera de ellas cubre las funciones
+    específicas del administrador, y la segunda las que el resto de usuarios (clientes) pueden
+    realizar.
+
+        Completamos ahora esta introducción con información básica sobre las urls y cuentas de
+    usuario de \textbf{ammana.es}.
+
+%----------------------------------------------------------------------------------------
+
+    \subsection{URLs}
+
+        ammana está publicado en \url{ammana.es}
+
+        También existen las siguientes {\em landing pages}:
+        \begin{itemize}
+            \item \url{protocololaboral.com}
+            \item \url{protocololaboral.es}
+        \end{itemize}
+
+%------------------------------------------------
+
+    \subsection{Cuentas de usuario}
+
+        Cada cliente tiene una única cuenta de usuario y podrá acceder a la página usando
+    sus credenciales (email + contraseña).
+
+        Los clientes se pueden (y deben) registrar ellos mismos (ver \hyperref[sec:registro]{Registro}).
+    
+        Existe además la cuenta de administrador, que es única (no se pueden registrar
+    más cuentas de administración). Como administrador, accederás al panel de administración
+    usando el mismo proceso de \hyperref[sec:login]{Identificación} que los clientes, pero con
+    tus credenciales de administrador.
+
+%----------------------------------------------------------------------------------------
+
+    \section{Funciones del administrador}
+
+            \textbf{ammana.es} funciona de forma prácticamente autónoma y los clientes pueden
         comprar y descargar protocolos sin intervención del administrador. La única
         excepción es cuando algún cliente paga por transferencia bancaria, en cuyo
         caso el pago debe ser marcado como cobrado de forma manual para que el cliente
         pueda descargarse el protocolo.
 
-        Por otro lado, el panel de administración de \textbf{ammana.es}, junto con los de \textbf{Paypal} y
-        \textbf{Quaderno}, dan acceso al administrador a la lista de clientes, facturas, pedidos, etc
-        para su consulta, bien por curiosidad bien para ofrecer soporte a un cliente..
+            Por otro lado, el panel de administración de \textbf{ammana.es}, junto con los de
+        \textbf{Paypal} y \textbf{Quaderno}, dan acceso al administrador a la lista de clientes,
+        facturas, pedidos, etc para su consulta, bien por curiosidad bien para ofrecer soporte
+        a un cliente..
 
         Es decir, las funciones del administrador son 2:
 
         \begin{steps}
-          \item Marcar como cobrados los pedidos que han sido pagados por transferencia
-          \item Acceder a la información de clientes y facturas
+            \item Marcar como cobrados los pedidos que han sido pagados por transferencia
+            \item Acceder a la información de clientes y facturas
         \end{steps}
 
 %----------------------------------------------------------------------------------------
-    \section{Acceso al panel de administración}
 
-    Para acceder al panel de administración, simplemente debes hacer login con las credenciales
-    del usuario, administrador. Es decir:
+    \section{Funciones del cliente}
+
+            Los clientes de \textbf{ammana.es} pueden registrarse, comprar protocolos y 
+        descargarlos sin intervención del administrador.
+
+            Además de descargar protocolos, pueden ver instrucciones de los mismos y descargar
+        modelos de ``recibí'', ver sus facturas o modificar su perfil.
+
+        Es decir, las funciones del cliente son:
+
+        \begin{steps}
+            \item Gestionar su cuenta (registro, identificación, datos de perfil, ...)
+            \item Acceder a la información de clientes y facturas
+        \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \subsection{Gestión de cuenta}
+
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Registrarse}
+
+    \label{sec:registro}
 
     \begin{steps}
-        \item Click en ``Identificarse'':
+
+        \item Clic en ``Registrarse'' en el menú superior:
 
             \medskip
             \begin{minipage}[t]{\linewidth}
             \raggedright
             \adjustbox{valign=t}{%
-                \includegraphics[width=1\linewidth]{login_button.png}%
+                \includegraphics[width=1\linewidth]{register/1.png}
             }
         \end{minipage}
+
+        \item Introducir email y contraseña en el formulario de registro:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{register/2.png}
+            }
+        \end{minipage}
+
+        \item Clic en el link de activación recibido por correo electrónico:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{register/3.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Identificarse}
+
+    \label{sec:login}
+
+    \begin{steps}
+
+        \item Clic en ``Identificarse'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{login/1.png}
+            }
+        \end{minipage}
+
         \item Introducir email y contraseña en el formulario de login:
 
             \medskip
             \begin{minipage}[t]{\linewidth}
             \raggedright
             \adjustbox{valign=t}{%
-                \includegraphics[width=1\linewidth]{login_form.png}%
+                \includegraphics[width=1\linewidth]{login/2.png}
             }
         \end{minipage}
+
+        \item Clic en botón ``Identificarse'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{login/3.png}
+            }
+        \end{minipage}
+
     \end{steps}
 
-%------------------------------------------------
+        Si has olvidado tu contraseña, siempre puedes recuperar el acceso a tu cuenta
+    siguiendo los pasos indicados en \hyperref[sec:forgot-password]{Recuperar contraseña}.
 
-    \subsection{URLs}
+%----------------------------------------------------------------------------------------
 
-    ammana está publicado en ammana.es y protocololaboral.es
+    \subsubsection{Recuperar contraseña}
 
-%------------------------------------------------
+    \label{sec:forgot-password}
 
-    \subsubsection{Cuentas de usuario}
+    \begin{steps}
 
-    Cada usuario tiene una cuenta.
-    Los usuarios se registran ellos solos.
-    Existe la cuenta de administrador, que es especial. No se pueden registrar más cuentas de administración.
+        \item Clic en ``Identificarse'' en el menú superior:
 
-    \begin{figure}[H] % Example image
-    \center{\includegraphics[width=0.5\linewidth]{placeholder}}
-    \caption{Example image.}
-    \label{fig:speciation}
-    \end{figure}
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{forgot-password/1.png}
+            }
+        \end{minipage}
 
-%------------------------------------------------
+        \item Clic en ``Olvidé mi contraseña'':
 
-    \subsubsection{Registrar usuario}
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{forgot-password/2.png}
+            }
+        \end{minipage}
 
-    1) Ir a ammana.es
-    2) Click en registrarse
-    3) Introducir email y contraseña
-    4) En dicho email se recibe correo de bienvenida
-    5) Click en link de activación
+        \item Introducir email y clic en ``Enviar'':
 
-%------------------------------------------------
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{forgot-password/3.png}
+            }
+        \end{minipage}
 
-    \section{Login}
+        \item Clic en el link de recuperación recibido por correo electrónico:
 
-    1) Ir a ammana.es
-    2) Click en identificarse
-    3) Introducir email y contraseña
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{forgot-password/4.png}
+            }
+        \end{minipage}
 
-%------------------------------------------------
+        \item Introducir nueva contraseña y clic en ``Establecer'':
 
-    \subsection{Recuperar contraseña}
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{forgot-password/5.png}
+            }
+        \end{minipage}
 
-    1) Ir a ammana.es
-    2) Click en identificarse
-    3) Click en "Olvidé mi contraseña"
-    4) Introducir email y click en "Enviar"
-    5) En dicho email se recibe correo de establecer nueva contraseña
-    6) Click en link
-    7) Introducir nueva contraseña y clic en establecer
+    \end{steps}
 
-%------------------------------------------------
+%----------------------------------------------------------------------------------------
 
-    \subsection{Modificar datos de perfil de usuario}
+    \subsubsection{Modificar datos de perfil de usuario}
 
-    1) Hacer login
-    2) Clic en "Mi perfil"
-    3) Modificar datos y clic en "actualizar"
-    \begin{wrapfigure}{l}{0.4\textwidth} % Inline image example
-      \begin{center}
-        \includegraphics[width=0.38\textwidth]{fish}
-      \end{center}
-      \caption{Fish}
-    \end{wrapfigure}
-    Lorem ipsum...
+    \label{sec:profile}
 
-%------------------------------------------------
+    \begin{steps}
+
+        \item Clic en ``Mi perfil'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{profile/1.png}
+            }
+        \end{minipage}
+
+        \item Modificar datos y clic en ``Actualizar'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{profile/2.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Cerrar sesión}
+
+    \label{sec:logout}
+
+        Es importante que cierres tu sesión, especialmente si utilizas un ordenador público
+    o compartido, para prevenir accesos no autorizados a tu cuenta de ammana.
+
+    \begin{steps}
+
+        \item Clic en ``Cerrar sesión'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{profile/1.png}
+            }
+        \end{minipage}
+
+        \item Modificar datos y clic en ``Actualizar'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{profile/2.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \subsection{Protocolos laborales}
+
+%----------------------------------------------------------------------------------------
 
     \subsubsection{Comprar protocolo}
 
-    \begin{description}
+    \label{sec:buy-protocol}
 
-        \item[First] \hfill \\
-        Hacer login
+    \begin{steps}
 
-        \item[Second] \hfill \\
-        Clic en "Mis protocolos"
+        \item Clic en ``Mis protocolos'' en el menú superior:
 
-        \item[Third] \hfill \\
-        Escoger protocolo en la lista bajo el epígrafe "Comprar protocolos"
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/1.png}
+            }
+        \end{minipage}
 
-        \item[Fourth] \hfill \\
-        En el formulario, responder a todas las preguntas y clic en "Generar protocolo"
+        \item Escoger protocolo en la lista bajo el epígrafe ``Comprar protocolos'':
 
-        \item[Fifth] \hfill \\
-            Revisar las respuestas (modificarlas en su caso) y clic en "Confirmar"
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/2.png}
+            }
+        \end{minipage}
 
-        \item[Sixth] \hfill \\
-        Clic en botón de Paypal y pagar.  Alternativamente pagar por transferencia bancaria.
+        \item Responder todas las preguntas del formulario de preguntas/respuestas sobre el protocolo:
 
-    \end{description} 
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/3.png}
+            }
+        \end{minipage}
 
-%------------------------------------------------
+        \item Clic en ``Generar protocolo'':
 
-    \subsubsection{Marcar protocolo como pagado}
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/4.png}
+            }
+        \end{minipage}
 
-    \begin{description}
+        \item Revisar las respuestas (modificarlas en su caso) y clic en ``Confirmar'':
 
-        \item[First] \hfill \\
-        Hacer login como administrador
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/5.png}
+            }
+        \end{minipage}
 
-        \item[Second] \hfill \\
-        Clic en "Pedidos". Se muestran los pedidos que están sin cobrar.
+        \item El protocolo está pedido. Proceder al \hyperref[sec:paypal]{pago con Paypal}
+            o al \hyperref[sec:transfer]{pago por transferencia bancaria}
 
-        \item[Third] \hfill \\
-        En el pedido correspondiente, clic en "Marcar como cobrado".
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{buy-protocol/6.png}
+            }
+        \end{minipage}
 
-    \end{description} 
+    \end{steps}
 
-%------------------------------------------------
+%----------------------------------------------------------------------------------------
 
-    \section{Conclusion}
+    \subsubsection{Pagar con Paypal}
 
-    Esta es la conclusión
+    \label{sec:paypal}
 
-%------------------------------------------------
+        Si acabas de pedir un protocolo y estás en la página de pago resultante, pasa directamente
+    al paso 3.
 
-    \begin{thebibliography}{99}
+    \begin{steps}
 
-        \bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
-        Figueredo, A.~J. and Wolf, P. S.~A. (2009).
-        \newblock Assortative pairing and life history strategy - a cross-cultural
-          study.
-        \newblock {\em Human Nature}, 20:317--330.
-         
-    \end{thebibliography}
+        \item Clic en ``Mis protocolos'' en el menú superior:
 
-    %----------------------------------------------------------------------------------------
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/1.png}
+            }
+        \end{minipage}
+
+        \item Escoger un protocolo sin pagar y clic en enlace ``pagar'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/2.png}
+            }
+        \end{minipage}
+
+        \item Clic en botón ``Pagar con PayPal'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/3.png}
+            }
+        \end{minipage}
+
+        \item Hacer login en Paypal con la cuenta con la que vas a pagar:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/4.png}
+            }
+        \end{minipage}
+
+        \item Clic en botón ``Pagar ahora'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/5.png}
+            }
+        \end{minipage}
+
+    \item Clic en ``Volver al vendedor'' para volver a \textbf{ammana.es}:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{paypal/6.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Pagar por transferencia bancaria}
+
+    \label{sec:transfer}
+
+        Si acabas de pedir un protocolo y estás en la página de pago resultante, pasa directamente
+    al paso 3.
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{transfer/1.png}
+            }
+        \end{minipage}
+
+        \item Escoger un protocolo sin pagar y clic en enlace ``pagar'':
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{transfer/2.png}
+            }
+        \end{minipage}
+
+        \item Usa los datos indicados para realizar tu transferencia:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{transfer/3.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+            Las transferencias bancarias pueden tardar hasta 2 días en hacerse efectivas, y tras ello
+        el personal de \textbf{ammana.es} tiene que procesar manualmente las transferencias recibidas,
+        por lo que pueden pasar algunos días hasta que tengas tu protocolo disponible.
+
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Descargar protocolo, instrucciones y recibí}
+
+    \label{sec:download-protocol}
+
+        Siempre vas a tener disponibles todos tus documentos en la sección ``Mis protocolos''.
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-protocol/1.png}
+            }
+        \end{minipage}
+
+        \item Escoger un protocolo y clic en enlace ``Protocolo'' para descargarlo:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-protocol/2.png}
+            }
+        \end{minipage}
+
+        \item Clic en enlace ``Instrucciones'' para descargar documento con instrucciones de uso del protocolo:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-protocol/3.png}
+            }
+        \end{minipage}
+
+        \item Clic en enlace ``Recibí'' para descargar modelo de recibí del protocolo laboral:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-protocol/4.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \subsubsection{Descargar facturas}
+
+    \label{sec:download-invoices}
+
+            Tanto si pagas por Paypal como por transferencia, siempre vas a tener disponibles
+        las facturas de tus pedidos en la sección ``Mis facturas'':
+
+    \begin{steps}
+
+        \item Clic en ``Mis facturas'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-invoices/1.png}
+            }
+        \end{minipage}
+
+        \item Escoger una factura y clic en enlace ``Descargar factura'' para descargarla:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-invoices/2.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+            Alternativamente puedes acceder a cada factura desde la lista de protocolos:
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-invoices/3.png}
+            }
+        \end{minipage}
+
+        \item Escoger un protocolo y clic en enlace ``Descargar factura'' para descargarla:
+
+            \medskip
+            \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \includegraphics[width=1\linewidth]{download-invoices/4.png}
+            }
+        \end{minipage}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
 
 \end{document}

@@ -51,9 +51,14 @@
                 <div class="wrap zeres-header">
                     <nav id="site-navigation" class="main-navigation zeres-header" role="navigation" aria-label="Top Menu">
                         <div class="wrap zeres-header">
-                            <a class="logo" href="{{ path('app') }}">
-                                <img src="/web/images/logo.png" width="160px" alt="ammana.es">
-                            </a>
+                            <div style="float: left">
+                                <a class="logo" href="{{ path('app') }}">
+                                    <img src="/images/logo.png" width="160px" alt="ammana.es">
+                                </a>
+                                <div class="zeres-mention" style="">
+                                    by <a class="zeres-link" href="https://zeres.es/" target="_blank">Zeres ABOGADOS</a>
+                                </div>
+                            </div>
                             <div class="menu-principal-container">
                                 <ul id="top-menu" class="menu">
                                 {% if not app.session.get('user') %}

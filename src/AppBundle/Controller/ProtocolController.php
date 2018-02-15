@@ -74,7 +74,7 @@ class ProtocolController extends Controller
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
             'to_buy' => $to_buy,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -102,7 +102,7 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'names' => $names,
             'users' => $users,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -155,7 +155,7 @@ class ProtocolController extends Controller
                     'profile_completed' => $profile_completed,
                     'form' => $questionsForm->createView(),
                     'protocol' => $protocol,
-                    'google_analytics' => $this->container->getParameter('google_analytics')
+                    'google_analytics' => $this->getAnalyticsCode()
                 ));
             }
 
@@ -185,7 +185,7 @@ class ProtocolController extends Controller
             'profile_completed' => $profile_completed,
             'form' => $questionsForm->createView(),
             'protocol' => $protocol,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -466,7 +466,7 @@ class ProtocolController extends Controller
                 'bank_account' => $this->container->getParameter('account_number'),
                 'amount' => $this->formatEuro($amount)
             ),
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -483,7 +483,7 @@ class ProtocolController extends Controller
     {
         return $this->render('protocol/payment_complete.html.twig', array(
             'title' => $this->getI18n()['payment_complete_page']['title'],
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -530,6 +530,12 @@ class ProtocolController extends Controller
 
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
+    private function getAnalyticsCode() {
+        return $this->container->hasParameter('google_analytics')
+            ? $this->container->getParameter('google_analytics')
+            : null;
     }
 
 }

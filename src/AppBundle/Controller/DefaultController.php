@@ -12,14 +12,14 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', [
             'title' => $this->getI18n()['home_page']['claim']['title'],
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
     public function maintenanceAction(Request $request)
     {
         return $this->render('default/maintenance.html.twig', [
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
@@ -29,7 +29,7 @@ class DefaultController extends Controller
             'title' => $this->getI18n()['error_page']['error_label'],
             'message' => $request->query->get('message'),
             'technical_info' => $request->query->get('technical_info', null),
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
@@ -37,7 +37,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/legal.html.twig', [
             'title' => $this->getI18n()['legal_page']['title'],
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
@@ -45,7 +45,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/privacy.html.twig', [
             'title' => $this->getI18n()['privacy_page']['title'],
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
@@ -53,7 +53,7 @@ class DefaultController extends Controller
     {
         return $this->render('default/cookies.html.twig', [
             'title' => $this->getI18n()['cookies_page']['title'],
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ]);
     }
 
@@ -61,12 +61,18 @@ class DefaultController extends Controller
     {
         return $this->render('default/icons.html.twig', array(
             'title' => 'Iconos',
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
+    private function getAnalyticsCode() {
+        return $this->container->hasParameter('google_analytics')
+            ? $this->container->getParameter('google_analytics')
+            : null;
     }
 
 }

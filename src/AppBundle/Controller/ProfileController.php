@@ -68,12 +68,18 @@ class ProfileController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'continue' => $request->query->get('continue'),
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
+    private function getAnalyticsCode() {
+        return $this->container->hasParameter('google_analytics')
+            ? $this->container->getParameter('google_analytics')
+            : null;
     }
 
 }

@@ -43,7 +43,7 @@ class InvoiceController extends Controller
         return $this->render('invoice/index.html.twig', array(
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
@@ -63,12 +63,18 @@ class InvoiceController extends Controller
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
             'users' => $users,
-            'google_analytics' => $this->container->getParameter('google_analytics')
+            'google_analytics' => $this->getAnalyticsCode()
         ));
     }
 
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
+    }
+
+    private function getAnalyticsCode() {
+        return $this->container->hasParameter('google_analytics')
+            ? $this->container->getParameter('google_analytics')
+            : null;
     }
 
 }

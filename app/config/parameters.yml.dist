@@ -29,3 +29,6 @@ parameters:
     quaderno_api_public_key: ThisIsTheQuadernoPublicKey
     quaderno_api_key: ThisIsTheQuadernoPrivateKey
     quaderno_api_url: TheQuadernoApiUrlAsProvidedByQuaderno
+
+    # Google Analytics
+    google_analytics: null      # null for no analytics, otherwise use GA code (UA-XXXXXXX-1)

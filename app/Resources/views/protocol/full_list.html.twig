@@ -8,6 +8,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>{{ i18n.es.orders_page.headers.code }}</th>
                                 <th>{{ i18n.es.orders_page.headers.protocol }}</th>
                                 <th>{{ i18n.es.orders_page.headers.customer }}</th>
                                 <th>{{ i18n.es.orders_page.headers.date }}</th>
@@ -17,6 +18,7 @@
                         <tbody>
                         {% for protocol in protocols %}
                             <tr>
+                                <td>{{ protocol.orderHash }}</td>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 <td>{{ users[protocol.user].companyName }} ({{ users[protocol.user].email }})</td>
                                 <td>{{ protocol.orderDate | date('d/m/Y') }}</td>

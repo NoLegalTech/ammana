@@ -165,6 +165,7 @@ twig:
                 orders_page:
                     title: Protocolos pendientes de cobro
                     headers:
+                        code:     Código
                         protocol: Protocolo
                         customer: Cliente
                         date:     Fecha pedido

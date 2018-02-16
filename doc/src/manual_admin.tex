@@ -51,13 +51,13 @@
 \setlength{\headheight}{7.50mm}
 \pagestyle{fancy}
 
-\newcommand{\screenshot}[1]{
+\newcommand{\screenshot}[2][1]{
 
         \medskip
         \begin{minipage}[t]{\linewidth}
             \raggedright
             \adjustbox{valign=t}{%
-                \includegraphics[width=1\linewidth]{#1}
+                \fbox{\includegraphics[width=#1\linewidth]{#2}}
             }
         \end{minipage}
 }
@@ -168,11 +168,10 @@
 
         \item Buscar el pedido en la lista (para facilitar la búsqueda, además del cliente y
             la fecha, se muestra el código que se ha sugerido al cliente usar como concepto
-            de la transferencia):
-            \screenshot{mark-paid/2.png}
+            de la transferencia).
 
         \item Clic en ``Marcar como cobrado'':
-            \screenshot{mark-paid/3.png}
+            \screenshot{mark-paid/2.png}
 
     \end{steps}
 
@@ -225,19 +224,25 @@
     total sobre las facturas generadas. No vamos a cubrir todas las posibilidades en este manual,
     si no simplemente ofrecer unos pasos básicos de uso habitual:
 
+    \newpage
+
     \begin{steps}
 
         \item Clic en ``Log in'' en el menú superior de \url{quaderno.io}:
             \screenshot{invoices-quaderno/1.png}
 
         \item Identificarse con email y contraseña:
-            \screenshot{invoices-quaderno/2.png}
+            \screenshot[0.6]{invoices-quaderno/2.png}
+
+        \newpage
 
         \item Inicialmente siempre entramos a una pantalla de resumen:
             \screenshot{invoices-quaderno/3.png}
 
         \item Clic en ``Ventas'' en el menú lateral para  ver el listado completo:
-            \screenshot{invoices-quaderno/4.png}
+            \screenshot[0.2]{invoices-quaderno/4.png}
+
+        \newpage
 
         \item Clic en ``Filtro'' para aplicar filtros al listado si es necesario:
             \screenshot{invoices-quaderno/5.png}
@@ -276,7 +281,7 @@
         \item Clic en ``Registrarse'' en el menú superior:
             \screenshot{register/1.png}
 
-        \item Introducir email y contraseña en el formulario de registro:
+        \item Introducir email y contraseña en el formulario de registro y clic en botón ``Registrarse'':
             \screenshot{register/2.png}
 
         \item Clic en el link de activación recibido por correo electrónico:
@@ -295,11 +300,10 @@
         \item Clic en ``Identificarse'' en el menú superior:
             \screenshot{login/1.png}
 
-        \item Introducir email y contraseña en el formulario de login:
-            \screenshot{login/2.png}
+        \newpage
 
-        \item Clic en botón ``Identificarse'':
-            \screenshot{login/3.png}
+        \item Introducir email y contraseña en el formulario de login y clic en botón ``Identificarse'':
+            \screenshot{login/2.png}
 
     \end{steps}
 
@@ -317,11 +321,15 @@
         \item Clic en ``Identificarse'' en el menú superior:
             \screenshot{forgot-password/1.png}
 
+        \newpage
+
         \item Clic en ``Olvidé mi contraseña'':
             \screenshot{forgot-password/2.png}
 
         \item Introducir email y clic en ``Enviar'':
             \screenshot{forgot-password/3.png}
+
+        \newpage
 
         \item Clic en el link de recuperación recibido por correo electrónico:
             \screenshot{forgot-password/4.png}
@@ -342,8 +350,10 @@
         \item Clic en ``Mi perfil'' en el menú superior:
             \screenshot{profile/1.png}
 
+        \newpage
+
         \item Modificar datos y clic en ``Actualizar'':
-            \screenshot{profile/2.png}
+            \screenshot[0.8]{profile/2.png}
 
     \end{steps}
 %----------------------------------------------------------------------------------------
@@ -358,10 +368,7 @@
     \begin{steps}
 
         \item Clic en ``Cerrar sesión'' en el menú superior:
-            \screenshot{profile/1.png}
-
-        \item Modificar datos y clic en ``Actualizar'':
-            \screenshot{profile/2.png}
+            \screenshot{logout/1.png}
 
     \end{steps}
 
@@ -380,17 +387,23 @@
         \item Clic en ``Mis protocolos'' en el menú superior:
             \screenshot{buy-protocol/1.png}
 
-        \item Escoger protocolo en la lista bajo el epígrafe ``Comprar protocolos'':
+        \item Escoger protocolo en la lista bajo el epígrafe ``Comprar protocolos'' y clic en ``Comprar'':
             \screenshot{buy-protocol/2.png}
 
+        \newpage
+
         \item Responder todas las preguntas del formulario de preguntas/respuestas sobre el protocolo:
-            \screenshot{buy-protocol/3.png}
+            \screenshot[0.9]{buy-protocol/3.png}
 
         \item Clic en ``Generar protocolo'':
-            \screenshot{buy-protocol/4.png}
+            \screenshot[0.9]{buy-protocol/4.png}
+
+        \newpage
 
         \item Revisar las respuestas (modificarlas en su caso) y clic en ``Confirmar'':
             \screenshot{buy-protocol/5.png}
+
+        \newpage
 
         \item El protocolo está pedido. Proceder al \hyperref[sec:paypal]{pago con Paypal}
             o al \hyperref[sec:transfer]{pago por transferencia bancaria}
@@ -412,20 +425,26 @@
         \item Clic en ``Mis protocolos'' en el menú superior:
             \screenshot{paypal/1.png}
 
+        \newpage
+
         \item Escoger un protocolo sin pagar y clic en enlace ``pagar'':
             \screenshot{paypal/2.png}
 
         \item Clic en botón ``Pagar con PayPal'':
             \screenshot{paypal/3.png}
 
+        \newpage
+
         \item Hacer login en Paypal con la cuenta con la que vas a pagar:
-            \screenshot{paypal/4.png}
+            \screenshot[0.5]{paypal/4.png}
 
         \item Clic en botón ``Pagar ahora'':
-            \screenshot{paypal/5.png}
+            \screenshot[0.7]{paypal/5.png}
 
-    \item Clic en ``Volver al vendedor'' para volver a \textbf{ammana.es}:
-            \screenshot{paypal/6.png}
+        \newpage
+
+        \item Clic en ``Volver al vendedor'' para volver a \textbf{ammana.es}:
+            \screenshot[0.6]{paypal/6.png}
 
     \end{steps}
 
@@ -474,6 +493,8 @@
         \item Clic en enlace ``Instrucciones'' para descargar documento con instrucciones de uso del protocolo:
             \screenshot{download-protocol/3.png}
 
+        \newpage
+
         \item Clic en enlace ``Recibí'' para descargar modelo de recibí del protocolo laboral:
             \screenshot{download-protocol/4.png}
 
@@ -494,7 +515,7 @@
             \screenshot{download-invoices/1.png}
 
         \item Escoger una factura y clic en enlace ``Descargar factura'' para descargarla:
-            \screenshot{download-invoices/2.png}
+            \screenshot[0.4]{download-invoices/2.png}
 
     \end{steps}
 

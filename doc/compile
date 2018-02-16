@@ -1,0 +1,21 @@
+#!/bin/bash
+dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+compile_tex() {
+    filename=$1
+
+    cd $dir/src && pdflatex $filename.tex
+    cd $dir/src && pdflatex $filename.tex
+
+    rm $dir/src/*.aux
+    rm $dir/src/*.log
+    rm $dir/src/*.toc
+    rm $dir/src/*.out
+
+    mv $dir/src/$filename.pdf $dir/pdf/$filename.pdf
+
+    open $dir/pdf/$filename.pdf
+}
+
+compile_tex "manual_cliente"
+compile_tex "manual_admin"

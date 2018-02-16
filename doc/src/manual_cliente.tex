@@ -1,0 +1,377 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ammana.es | Manual de cliente %
+%                               %
+%  Made with ❤️  by NoLegalTech  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[12pt, spanish]{article}
+
+\usepackage{geometry}
+\geometry{a4paper}
+
+\usepackage{graphicx}
+\graphicspath{{img/}}
+
+\usepackage{adjustbox}
+
+\usepackage{float}
+\usepackage{wrapfig}
+
+\usepackage[spanish]{babel}
+\selectlanguage{spanish}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{enumitem}
+
+\linespread{1.2}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{1em}
+
+\usepackage{concmath}
+\usepackage[T1]{fontenc}
+
+\usepackage{fancyhdr}
+
+\fancyhf{}
+\fancyhead[L]{\includegraphics[height=5.0mm]{logo}}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=[rgb]{0.25,0.55,0.79},
+    filecolor=magenta,
+    urlcolor=[rgb]{0.25,0.55,0.79},
+}
+
+\newlist{steps}{enumerate}{1}
+\setlist[steps]{label={\arabic*)}}
+
+\setlength{\headheight}{7.50mm}
+\pagestyle{fancy}
+
+\newcommand{\screenshot}[2][1]{
+
+        \medskip
+        \begin{minipage}[t]{\linewidth}
+            \raggedright
+            \adjustbox{valign=t}{%
+                \fbox{\includegraphics[width=#1\linewidth]{#2}}
+            }
+        \end{minipage}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+
+    \begin{titlepage}
+        \newcommand { \HRule } { \rule {\linewidth} {0.5mm} }
+        \center
+        \textsc {\LARGE ammana.es} \\ [1.5cm]
+        \HRule \\ [0.4cm]
+        { \huge \bfseries Manual del cliente } \\ [0.4cm]
+        \HRule \\ [1.5cm]
+        { \large \today } \\ [3cm]
+        \vfill
+    \end{titlepage}
+
+%----------------------------------------------------------------------------------------
+
+    \tableofcontents
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \section{Introducción}
+
+        Este manual es una guía para el cliente de \textbf{ammana.es}, mostrando las operaciones
+    que puede realizar en dicha plataforma. Éstas se clasifican en 2 grandes grupos:
+
+        \begin{steps}
+            \item Gestionar la cuenta (registro, identificación, datos de perfil, ...)
+            \item Comprar y descargar protocolos
+        \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \section{Gestión de cuenta}
+
+%----------------------------------------------------------------------------------------
+
+    \subsection{Registrarse}
+
+    \label{sec:registro}
+
+    \begin{steps}
+
+        \item Clic en ``Registrarse'' en el menú superior:
+            \screenshot{register/1.png}
+
+        \item Introducir email y contraseña en el formulario de registro y clic en botón ``Registrarse'':
+            \screenshot[0.6]{register/2.png}
+
+        \item Clic en el link de activación recibido por correo electrónico:
+            \screenshot{register/3.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage 
+
+    \subsection{Identificarse}
+
+    \label{sec:login}
+
+    \begin{steps}
+
+        \item Clic en ``Identificarse'' en el menú superior:
+            \screenshot{login/1.png}
+
+        \item Introducir email y contraseña en el formulario de login y clic en botón ``Identificarse'':
+            \screenshot{login/2.png}
+
+    \end{steps}
+
+        Si has olvidado tu contraseña, siempre puedes recuperar el acceso a tu cuenta
+    siguiendo los pasos indicados en \hyperref[sec:forgot-password]{Recuperar contraseña}.
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Recuperar contraseña}
+
+    \label{sec:forgot-password}
+
+    \begin{steps}
+
+        \item Clic en ``Identificarse'' en el menú superior:
+            \screenshot{forgot-password/1.png}
+
+        \item Clic en ``Olvidé mi contraseña'':
+            \screenshot{forgot-password/2.png}
+
+        \item Introducir email y clic en ``Enviar'':
+            \screenshot{forgot-password/3.png}
+
+        \item Clic en el link de recuperación recibido por correo electrónico:
+            \screenshot{forgot-password/4.png}
+
+        \item Introducir nueva contraseña y clic en ``Establecer'':
+            \screenshot{forgot-password/5.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Modificar datos de perfil de usuario}
+
+    \label{sec:profile}
+
+    \begin{steps}
+
+        \item Clic en ``Mi perfil'' en el menú superior:
+            \screenshot{profile/1.png}
+
+        \item Modificar datos y clic en ``Actualizar'':
+            \screenshot[0.8]{profile/2.png}
+
+    \end{steps}
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Cerrar sesión}
+
+    \label{sec:logout}
+
+        Es importante que cierres tu sesión, especialmente si utilizas un ordenador público
+    o compartido, para prevenir accesos no autorizados a tu cuenta de ammana.
+
+    \begin{steps}
+
+        \item Clic en ``Cerrar sesión'' en el menú superior:
+            \screenshot{logout/1.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \section{Protocolos laborales}
+
+%----------------------------------------------------------------------------------------
+
+    \subsection{Comprar protocolo}
+
+    \label{sec:buy-protocol}
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+            \screenshot{buy-protocol/1.png}
+
+        \item Escoger protocolo en la lista bajo el epígrafe ``Comprar protocolos'' y clic en ``Comprar'':
+            \screenshot{buy-protocol/2.png}
+
+        \newpage
+
+        \item Responder todas las preguntas del formulario de preguntas/respuestas sobre el protocolo:
+            \screenshot[0.9]{buy-protocol/3.png}
+
+        \item Clic en ``Generar protocolo'':
+            \screenshot[0.9]{buy-protocol/4.png}
+
+        \newpage
+
+        \item Revisar las respuestas (modificarlas en su caso) y clic en ``Confirmar'':
+            \screenshot{buy-protocol/5.png}
+
+        \newpage
+
+        \item El protocolo está pedido. Proceder al \hyperref[sec:paypal]{pago con Paypal}
+            o al \hyperref[sec:transfer]{pago por transferencia bancaria}
+            \screenshot{buy-protocol/6.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Pagar con Paypal}
+
+    \label{sec:paypal}
+
+        Si acabas de pedir un protocolo y estás en la página de pago resultante, pasa directamente
+    al paso 3.
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+            \screenshot{paypal/1.png}
+
+        \item Escoger un protocolo sin pagar y clic en enlace ``pagar'':
+            \screenshot{paypal/2.png}
+
+        \item Clic en botón ``Pagar con PayPal'':
+            \screenshot[0.7]{paypal/3.png}
+
+        \item Hacer login en Paypal con la cuenta con la que vas a pagar:
+            \screenshot[0.5]{paypal/4.png}
+
+        \item Clic en botón ``Pagar ahora'':
+            \screenshot[0.7]{paypal/5.png}
+
+        \newpage
+
+        \item Clic en ``Volver al vendedor'' para volver a \textbf{ammana.es}:
+            \screenshot[0.6]{paypal/6.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Pagar por transferencia bancaria}
+
+    \label{sec:transfer}
+
+        Si acabas de pedir un protocolo y estás en la página de pago resultante, pasa directamente
+    al paso 3.
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+            \screenshot{transfer/1.png}
+
+        \item Escoger un protocolo sin pagar y clic en enlace ``pagar'':
+            \screenshot[0.8]{transfer/2.png}
+
+        \item Usa los datos indicados para realizar tu transferencia:
+            \screenshot[0.8]{transfer/3.png}
+
+    \end{steps}
+
+    \newpage
+
+            Las transferencias bancarias pueden tardar hasta 2 días en hacerse efectivas, y tras ello
+        el personal de \textbf{ammana.es} tiene que procesar manualmente las transferencias recibidas,
+        por lo que pueden pasar algunos días hasta que tengas tu protocolo disponible.
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Descargar protocolo, instrucciones y recibí}
+
+    \label{sec:download-protocol}
+
+        Siempre vas a tener disponibles todos tus documentos en la sección ``Mis protocolos''.
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+            \screenshot{download-protocol/1.png}
+
+        \item Escoger un protocolo y clic en enlace ``Protocolo'' para descargarlo:
+            \screenshot{download-protocol/2.png}
+
+        \item Clic en enlace ``Instrucciones'' para descargar documento con instrucciones de uso del protocolo:
+            \screenshot{download-protocol/3.png}
+
+        \newpage
+
+        \item Clic en enlace ``Recibí'' para descargar modelo de recibí del protocolo laboral:
+            \screenshot{download-protocol/4.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Descargar facturas}
+
+    \label{sec:download-invoices}
+
+            Tanto si pagas por Paypal como por transferencia, siempre vas a tener disponibles
+        las facturas de tus pedidos en la sección ``Mis facturas'':
+
+    \begin{steps}
+
+        \item Clic en ``Mis facturas'' en el menú superior:
+            \screenshot[0.8]{download-invoices/1.png}
+
+        \item Escoger una factura y clic en enlace ``Descargar factura'' para descargarla:
+            \screenshot[0.4]{download-invoices/2.png}
+
+    \end{steps}
+
+            Alternativamente puedes acceder a cada factura desde la lista de protocolos:
+
+    \begin{steps}
+
+        \item Clic en ``Mis protocolos'' en el menú superior:
+            \screenshot[0.8]{download-invoices/3.png}
+
+        \item Escoger un protocolo y clic en enlace ``Descargar factura'' para descargarla:
+            \screenshot[0.8]{download-invoices/4.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

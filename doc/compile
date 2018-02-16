@@ -17,5 +17,5 @@ compile_tex() {
     open $dir/pdf/$filename.pdf
 }
 
-#compile_tex "manual_cliente"
+compile_tex "manual_cliente"
 compile_tex "manual_admin"

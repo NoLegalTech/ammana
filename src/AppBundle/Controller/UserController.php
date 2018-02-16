@@ -302,28 +302,23 @@ class UserController extends Controller
             "admin" => array(
                 array(
                     'icon' => 'fa-user',
-                    'path' => 'profile_homepage',
-                    'text' => $this->getI18n()['menus']['registered_user']['profile']
-                ),
-                array(
-                    'icon' => 'fa-user',
                     'path' => 'user_index',
-                    'text' => $this->getI18n()['menus']['registered_user']['customers']
+                    'text' => $this->getI18n()['menus']['admin']['customers']
                 ),
                 array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
-                    'text' => $this->getI18n()['menus']['registered_user']['invoices']
+                    'text' => $this->getI18n()['menus']['admin']['invoices']
                 ),
                 array(
                     'icon' => 'fa-files-o',
                     'path' => 'protocol_index',
-                    'text' => $this->getI18n()['menus']['registered_user']['orders']
+                    'text' => $this->getI18n()['menus']['admin']['orders']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => $this->getI18n()['menus']['registered_user']['logout']
+                    'text' => $this->getI18n()['menus']['admin']['logout']
                 )
             )
         );

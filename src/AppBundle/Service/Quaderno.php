@@ -29,7 +29,7 @@ class Quaderno {
         }
     }
 
-    public function isValidVAT($vatnumber) {
+    public function isValidVAT($vat_number) {
         return QuadernoTax::validate_vat_number('ES', 'ES' . $vat_number);
     }
 

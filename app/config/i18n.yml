@@ -77,6 +77,11 @@ twig:
                         logout:    Cerrar sesión
                         customers: Clientes
                         orders:    Pedidos
+                    admin:
+                        invoices:  Facturas
+                        logout:    Cerrar sesión
+                        customers: Clientes
+                        orders:    Pedidos
                 # =================================================================================
 
 
@@ -165,6 +170,7 @@ twig:
                 orders_page:
                     title: Protocolos pendientes de cobro
                     headers:
+                        code:     Código
                         protocol: Protocolo
                         customer: Cliente
                         date:     Fecha pedido
@@ -232,7 +238,7 @@ twig:
                     back_to_list: Volver a la lista
 
                 user_list_page:
-                    title: Lista de usuarios
+                    title: Lista de clientes
                     headers:
                         id: Id
                         active: Activo

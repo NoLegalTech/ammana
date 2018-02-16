@@ -1366,31 +1366,9 @@ body {
     position: relative;
 }
 
-.zeres-header {
-    height: 127px;
-}
-
 .zeres-header > div > a.logo {
     padding: 0;
     margin: 0;
-}
-
-.zeres-header .zeres-mention {
-    float: left;
-    width: 100%;
-    padding-left: 5px;
-    margin-top: -11px;
-    letter-spacing: 0.4em;
-}
-
-.zeres-header .zeres-mention > .zeres-link {
-    padding: 0;
-    margin: 0;
-    display: inline;
-    color: #418ccb;
-    letter-spacing: 0.4em;
-    margin-left: 14px;
-    font-weight: 100;
 }
 
 /* Site branding */

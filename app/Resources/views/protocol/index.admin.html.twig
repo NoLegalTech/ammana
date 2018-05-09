@@ -9,6 +9,7 @@
                     <table class="full">
                         <thead>
                             <tr>
+                                <th>{{ i18n.es.protocols_admin_page.headers.company }}</th>
                                 <th>{{ i18n.es.protocols_admin_page.headers.name }}</th>
                                 <th>{{ i18n.es.protocols_admin_page.headers.download }}</th>
                                 <th>{{ i18n.es.protocols_admin_page.headers.html }}</th>
@@ -17,11 +18,12 @@
                         <tbody>
                         {% for protocol in protocols %}
                             <tr>
+                                <td>{{ company_names[protocol.id] }}</td>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 <td>
-                                    <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                    <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                    <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.recibi }}</a>
+                                    <a href="{{ path('protocol_admin_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('protocol_admin_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('protocol_admin_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.recibi }}</a>
                                 </td>
                                 <td><a href="">{{ i18n.es.protocols_admin_page.see_in_html }}</a></td>
                             </tr>
@@ -41,7 +43,7 @@
                             {% for protocol in to_buy %}
                                 <tr>
                                     <td>{{ protocol.name }}</td>
-                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.buy.button }}</a></td>
+                                    <td><a href="{{ path('protocol_create', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.buy.button }}</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

@@ -33,10 +33,6 @@ class ProtocolController extends Controller
      */
     public function indexAction(PermissionsService $permissions, Invoices $invoices)
     {
-        if ($permissions->currentRolesInclude("admin")) {
-            return $this->showAllOrders();
-        }
-
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => $this->getI18n()['errors']['restricted_access']['user']
@@ -78,7 +74,14 @@ class ProtocolController extends Controller
         ));
     }
 
-    private function showAllOrders() {
+    public function ordersAction(PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
             ->findByEnabled(false);
@@ -102,6 +105,49 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'names' => $names,
             'users' => $users,
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
+    }
+
+    public function indexAdminAction(PermissionsService $permissions, Invoices $invoices)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $permissions->getCurrentUser();
+
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByUser($user->getId());
+
+        $already_ordered_ids = [];
+        foreach ($protocols as $protocol) {
+            $already_ordered_ids []= $protocol->getIdentifier();
+        }
+
+        $names = [];
+        $to_buy = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+            if (!in_array($id, $already_ordered_ids)) {
+                $to_buy []= array(
+                    'id' => $id,
+                    'name' => $protocol_spec['name']
+                );
+            }
+        }
+
+        return $this->render('protocol/index.admin.html.twig', array(
+            'title' => $this->getI18n()['protocols_page']['title'],
+            'protocols' => $protocols,
+            'invoices' => $invoices->getInvoicesForProtocols($protocols),
+            'names' => $names,
+            'to_buy' => $to_buy,
             'google_analytics' => $this->getAnalyticsCode()
         ));
     }

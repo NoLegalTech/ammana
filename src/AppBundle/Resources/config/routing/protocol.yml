@@ -38,3 +38,8 @@ protocol_download_recibi:
     defaults: { _controller: "AppBundle:Protocol:downloadRecibi" }
     methods:  GET
 
+protocol_admin_index:
+    path:     "%urls.protocol_admin_index%"
+    defaults: { _controller: "AppBundle:Protocol:indexAdmin" }
+    methods:  GET
+

@@ -23,6 +23,10 @@ parameters:
     # ------------
     urls.profile_homepage: /profile/
 
+    # order urls
+    # ----------
+    urls.order_index:      /order/
+
     # protocol urls
     # -------------
     urls.protocol_index:    /protocol/
@@ -33,6 +37,7 @@ parameters:
     urls.protocol_download_instructions: /protocol/{id}/instructions
     urls.protocol_download_recibi: /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
+    urls.protocol_admin_index:  /protocol/admin/
 
 twig:
     globals:
@@ -82,6 +87,7 @@ twig:
                         logout:    Cerrar sesión
                         customers: Clientes
                         orders:    Pedidos
+                        protocols: Protocolos
                 # =================================================================================
 
 
@@ -194,6 +200,21 @@ twig:
                     buy:
                         title: Comprar protocolos
                         button: Comprar
+
+                protocols_admin_page:
+                    title: Lista de protocolos (admin)
+                    headers:
+                        name:     Nombre
+                        download: Descargar en PDF
+                        html:     Ver en HTML
+                    download: Protocolo
+                    instructions: Instrucciones
+                    recibi: Recibí
+                    see_in_html: Ver en HTML
+                    no_protocols: No hay protocolos todavía.
+                    buy:
+                        title: Crear protocolos
+                        button: Crear
 
                 payment_page:
                     title: Pagar

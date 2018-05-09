@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+
+                {% if protocols %}
+                    <table class="full">
+                        <thead>
+                            <tr>
+                                <th>{{ i18n.es.protocols_admin_page.headers.name }}</th>
+                                <th>{{ i18n.es.protocols_admin_page.headers.download }}</th>
+                                <th>{{ i18n.es.protocols_admin_page.headers.html }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for protocol in protocols %}
+                            <tr>
+                                <td>{{ names[protocol.identifier] }}</td>
+                                <td>
+                                    <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                    <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.recibi }}</a>
+                                </td>
+                                <td><a href="">{{ i18n.es.protocols_admin_page.see_in_html }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>
+                        {{ i18n.es.protocols_admin_page.no_protocols }}
+                    </p>
+                {% endif %}
+
+                {% if to_buy %}
+                    <h3 class="heading">{{ i18n.es.protocols_admin_page.buy.title }}</h2>
+                    <table>
+                        <tbody>
+                            {% for protocol in to_buy %}
+                                <tr>
+                                    <td>{{ protocol.name }}</td>
+                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.buy.button }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

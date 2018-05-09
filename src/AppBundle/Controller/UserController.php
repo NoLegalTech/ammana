@@ -312,8 +312,13 @@ class UserController extends Controller
                 ),
                 array(
                     'icon' => 'fa-files-o',
-                    'path' => 'protocol_index',
+                    'path' => 'order_index',
                     'text' => $this->getI18n()['menus']['admin']['orders']
+                ),
+                array(
+                    'icon' => 'fa-files-o',
+                    'path' => 'protocol_admin_index',
+                    'text' => $this->getI18n()['menus']['admin']['protocols']
                 ),
                 array(
                     'icon' => 'fa-sign-out',

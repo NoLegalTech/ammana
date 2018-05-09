@@ -1,1 +1,23 @@
-<p>start_at</p>
+{% if tag == '1' %}
+<style>
+    #ol_{{ ol_counter }} {
+        list-style: decimal;
+    }
+</style>
+{% endif %}
+
+{% if tag == 'a' %}
+<style>
+    #ol_{{ ol_counter }} {
+        list-style: lower-latin;
+    }
+</style>
+{% endif %}
+
+{% if tag == ' ' %}
+<style>
+    #ol_{{ ol_counter }} {
+        list-style: none;
+    }
+</style>
+{% endif %}

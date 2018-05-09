@@ -5,10 +5,18 @@
 </style>
 {% for key in variables|keys %}
     {% if key ~ "=" ~ variables[key] == tag %}
-        <style>
-            #element_{{ id }} {
-                display: block;
-            }
-        </style>
+        {% if previous == 'li' %}
+            <style>
+                #element_{{ id }} {
+                    display: list-item;
+                }
+            </style>
+        {% else %}
+            <style>
+                #element_{{ id }} {
+                    display: block;
+                }
+            </style>
+        {% endif %}
     {% endif %}
 {% endfor %}

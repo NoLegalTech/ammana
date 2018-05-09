@@ -6,8 +6,20 @@
             <div class="btmspace-50">
                 <h2 class="heading"></h2>
                 {% set h2_counter = 1 %}
+                {% set ol_counter = 0 %}
+                {% set previous = '' %}
+                {% set previous_tag = '' %}
                 {% for element in content %}
                     {% for tag in element|keys %}
+
+                        {% if ( loop.first ) and ( tag == 'li' ) and ( previous_tag != 'li' ) %}
+                            {% set ol_counter = ol_counter + 1 %}
+                            <ol id="ol_{{ ol_counter }}">
+                        {% endif %}
+
+                        {% if ( loop.first ) and ( tag != 'li' ) and ( previous_tag == 'li' ) %}
+                            </ol>
+                        {% endif %}
 
                         {% include 'protocol/show.admin.' ~ tag ~ '.html.twig' with {'tag': element[tag], 'id': loop.parent.loop.index, 'sub': loop.index } %}
 
@@ -25,6 +37,10 @@
                         {% endif %}
 
                         {% set previous = tag %}
+
+                        {% if loop.index == 1 %}
+                            {% set previous_tag = tag %}
+                        {% endif %}
 
                     {% endfor %}
                 {% endfor %}

@@ -215,6 +215,7 @@ twig:
                 protocols_admin_page:
                     title: Lista de protocolos (admin)
                     headers:
+                        date:     Fecha
                         company:  Empresa
                         name:     Nombre
                         download: Descargar en PDF

@@ -1,0 +1,14 @@
+<style>
+    #element_{{ id }} {
+        display: none;
+    }
+</style>
+{% for key in variables|keys %}
+    {% if key ~ "=" ~ variables[key] == tag %}
+        <style>
+            #element_{{ id }} {
+                display: block;
+            }
+        </style>
+    {% endif %}
+{% endfor %}

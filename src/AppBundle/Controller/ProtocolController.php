@@ -665,6 +665,60 @@ class ProtocolController extends Controller
     }
 
     /**
+     * Shows a protocol in HTML.
+     *
+     */
+    public function htmlAdminAction(Protocol $protocol, /* HTMLPrinter $printer, */ Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($protocol->getUser());
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $document = $protocol_spec['document'];
+
+        if ($company->getLogo() != null) {
+            // $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $company->getLogo());
+        }
+
+        $variables = [];
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            $variables[$var] = $val;
+        }
+        $variables['company_name'] = $company->getCompanyName();
+
+        return $this->render('protocol/show.admin.html.twig', array(
+            'title' => $protocol_spec['short_name'] ." " . $company->getCompanyName(),
+            'protocol' => $protocol,
+            'variables' => $variables,
+            'questions' => $protocol_spec['questions'],
+            'styles' => $document['styles'],
+            'content' => $document['content'],
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
+    }
+
+    /**
      * Pays a protocol.
      *
      */

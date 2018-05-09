@@ -27,7 +27,7 @@
                                     <a href="{{ path('protocol_admin_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                                     <a href="{{ path('protocol_admin_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.recibi }}</a>
                                 </td>
-                                <td><a href="">{{ i18n.es.protocols_admin_page.see_in_html }}</a></td>
+                                <td><a href="{{ path('protocol_admin_html', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.see_in_html }}</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

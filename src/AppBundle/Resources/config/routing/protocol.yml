@@ -68,3 +68,8 @@ protocol_admin_download_recibi:
     defaults: { _controller: "AppBundle:Protocol:downloadRecibiAdmin" }
     methods:  GET
 
+protocol_admin_html:
+    path:     "%urls.protocol_admin_html%"
+    defaults: { _controller: "AppBundle:Protocol:htmlAdmin" }
+    methods:  GET
+

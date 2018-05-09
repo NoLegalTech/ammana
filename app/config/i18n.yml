@@ -43,6 +43,7 @@ parameters:
     urls.protocol_admin_download: /admin/protocol/{id}
     urls.protocol_admin_download_instructions: /admin/protocol/{id}/instructions
     urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
+    urls.protocol_admin_html:     /admin/protocol/{id}/html
 
 twig:
     globals:

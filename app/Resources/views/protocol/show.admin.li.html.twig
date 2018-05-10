@@ -1,0 +1,15 @@
+{% if tag is iterable %}
+
+    <li>
+    {% for line in tag %}
+        {% include 'protocol/show.admin.line.html.twig' with {'line': line } %}
+    {% endfor %}
+    </li>
+
+{% else %}
+
+    <li>
+        {% include 'protocol/show.admin.line.html.twig' with {'line': tag } %}
+    </li>
+
+{% endif %}

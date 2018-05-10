@@ -1,0 +1,16 @@
+{% if tag is iterable %}
+
+    <h2 id="element_{{ id }}">
+        {{ h2_counter }}.
+        {% for line in tag %}
+            {% include 'protocol/show.admin.line.html.twig' with {'line': line } %}
+        {% endfor %}
+    </h2>
+
+{% else %}
+
+    <h2 id="element_{{ id }}">
+        {{ h2_counter }}. {% include 'protocol/show.admin.line.html.twig' with {'line': tag } %}
+    </h2>
+
+{% endif %}

@@ -11,9 +11,9 @@ parameters:
     urls.forgot_password:  /forgot_password
     urls.sent_password_email: /resetting_password
     urls.new_password:        /newPassword/{activationHash}
-    urls.user_index:  /user/
-    urls.user_edit:   /user/{id}/edit
-    urls.user_delete: /user/{id}/delete
+    urls.user_index:  /admin/user/
+    urls.user_edit:   /admin/user/{id}/edit
+    urls.user_delete: /admin/user/{id}/delete
 
     # invoice urls
     # ------------
@@ -22,6 +22,10 @@ parameters:
     # profile urls
     # ------------
     urls.profile_homepage: /profile/
+
+    # order urls
+    # ----------
+    urls.order_index:      /admin/order/
 
     # protocol urls
     # -------------
@@ -33,6 +37,14 @@ parameters:
     urls.protocol_download_instructions: /protocol/{id}/instructions
     urls.protocol_download_recibi: /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
+    urls.protocol_admin_index:  /admin/protocol/
+    urls.protocol_create:       /admin/protocol/create/{id}
+    urls.protocol_config:       /admin/protocol/config/{id}/{company_id}
+    urls.protocol_admin_download: /admin/protocol/{id}
+    urls.protocol_admin_download_instructions: /admin/protocol/{id}/instructions
+    urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
+    urls.protocol_admin_html:     /admin/protocol/{id}/html
+    urls.protocol_admin_delete:   /admin/protocol/{id}/delete
 
 twig:
     globals:
@@ -82,6 +94,7 @@ twig:
                         logout:    Cerrar sesión
                         customers: Clientes
                         orders:    Pedidos
+                        protocols: Protocolos
                 # =================================================================================
 
 
@@ -167,6 +180,12 @@ twig:
                     confirm: Confirmar
                     cancel:  Cancelar
 
+                order_confirmation_admin_page:
+                    title:   Confirmación de protocolo
+                    please_review: Por favor, revisa tus respuestas y confirma que son correctas.
+                    confirm: Confirmar
+                    cancel:  Cancelar
+
                 orders_page:
                     title: Protocolos pendientes de cobro
                     headers:
@@ -195,6 +214,29 @@ twig:
                         title: Comprar protocolos
                         button: Comprar
 
+                protocols_admin_page:
+                    title: Lista de protocolos (admin)
+                    headers:
+                        date:     Fecha
+                        company:  Empresa
+                        name:     Nombre
+                        download: Descargas
+                        html:     HTML
+                        delete:   Borrar
+                    delete: Borrar
+                    download: Protocolo
+                    instructions: Instrucciones
+                    recibi: Recibí
+                    see_in_html: Ver
+                    no_protocols: No hay protocolos todavía.
+                    buy:
+                        title: Crear protocolos
+                        button: Crear
+
+                show_protocol_admin_page:
+                    copy_button: Copiar protocolo
+                    copied: Protocolo copiado al portapapeles
+
                 payment_page:
                     title: Pagar
                     info:  Tu protocolo está listo. Lo podrás descargar inmediatamente en cuanto pagues tu pedido.
@@ -218,6 +260,10 @@ twig:
                     please_go_to: Por favor, ve a
                     profile_page: tu página de perfil
                     fill_the_data: y rellena los datos que faltan.
+                    generate_protocol: Generar protocolo
+
+                questions_admin_page:
+                    title:  Planifica el uso del protocolo laboral
                     generate_protocol: Generar protocolo
 
                 activation_page:
@@ -288,6 +334,11 @@ twig:
                     button: Actualizar
                     continue_button: Continuar
 
+                company_name_admin_page:
+                    title:  Nombre de la empresa
+                    button: Crear protocolo
+                    intro:  Por favor, introduce el nombre de la empresa para la que vas a generar el protocolo. Opcionalmente añade su logo.
+
                 register_page:
                     title:  Registro gratuito
                     button: Registrarse
@@ -351,3 +402,6 @@ twig:
                         num_employees:  Número de empleados
                         logo:           Logo
                         delete_logo:    Marcar para borrar logo
+                    company_name_form:
+                        company_name:   Nombre de la compañía
+                        logo:           Logo

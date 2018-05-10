@@ -230,6 +230,10 @@ twig:
                         title: Crear protocolos
                         button: Crear
 
+                show_protocol_admin_page:
+                    copy_button: Copiar protocolo
+                    copied: Protocolo copiado al portapapeles
+
                 payment_page:
                     title: Pagar
                     info:  Tu protocolo está listo. Lo podrás descargar inmediatamente en cuanto pagues tu pedido.

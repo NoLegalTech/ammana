@@ -695,8 +695,11 @@ class ProtocolController extends Controller
 
         $document = $protocol_spec['document'];
 
+        $with_logo = false;
+        $logo_url = '';
         if ($company->getLogo() != null) {
-            // $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $company->getLogo());
+            $with_logo = true;
+            $logo_url = '/uploads/' . $company->getLogo();
         }
 
         $variables = [];
@@ -714,6 +717,8 @@ class ProtocolController extends Controller
             'questions' => $protocol_spec['questions'],
             'styles' => $document['styles'],
             'content' => $document['content'],
+            'with_logo' => $with_logo,
+            'logo_url' => $logo_url,
             'google_analytics' => $this->getAnalyticsCode()
         ));
     }

@@ -699,7 +699,7 @@ class ProtocolController extends Controller
         $logo_url = '';
         if ($company->getLogo() != null) {
             $with_logo = true;
-            $logo_url = '/uploads/' . $company->getLogo();
+            $logo_url = '/web/uploads/' . $company->getLogo();
         }
 
         $variables = [];

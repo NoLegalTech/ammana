@@ -38,3 +38,43 @@ protocol_download_recibi:
     defaults: { _controller: "AppBundle:Protocol:downloadRecibi" }
     methods:  GET
 
+protocol_admin_index:
+    path:     "%urls.protocol_admin_index%"
+    defaults: { _controller: "AppBundle:Protocol:indexAdmin" }
+    methods:  GET
+
+protocol_create:
+    path:     "%urls.protocol_create%"
+    defaults: { _controller: "AppBundle:Protocol:create" }
+    methods:  [GET, POST]
+
+protocol_config:
+    path:     "%urls.protocol_config%"
+    defaults: { _controller: "AppBundle:Protocol:config" }
+    methods:  [GET, POST]
+
+protocol_admin_download:
+    path:     "%urls.protocol_admin_download%"
+    defaults: { _controller: "AppBundle:Protocol:downloadAdmin" }
+    methods:  GET
+
+protocol_admin_download_instructions:
+    path:     "%urls.protocol_admin_download_instructions%"
+    defaults: { _controller: "AppBundle:Protocol:downloadInstructionsAdmin" }
+    methods:  GET
+
+protocol_admin_download_recibi:
+    path:     "%urls.protocol_admin_download_recibi%"
+    defaults: { _controller: "AppBundle:Protocol:downloadRecibiAdmin" }
+    methods:  GET
+
+protocol_admin_html:
+    path:     "%urls.protocol_admin_html%"
+    defaults: { _controller: "AppBundle:Protocol:htmlAdmin" }
+    methods:  GET
+
+protocol_admin_delete:
+    path:     "%urls.protocol_admin_delete%"
+    defaults: { _controller: "AppBundle:Protocol:deleteAdmin" }
+    methods:  GET
+

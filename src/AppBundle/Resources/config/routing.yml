@@ -13,3 +13,7 @@ app_invoice:
 app_protocol:
     resource: "@AppBundle/Resources/config/routing/protocol.yml"
     prefix:   /
+
+app_order:
+    resource: "@AppBundle/Resources/config/routing/order.yml"
+    prefix:   /

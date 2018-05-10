@@ -1,6 +1,7 @@
 parameters:
     protocol.uso_redes:
         name: Protocolo laboral de uso de las redes sociales de empresa
+        short_name: Protocolo de uso de redes sociales
         questions:
             - id: uso_durante_jornada_laboral
               question: "Uso de redes sociales durante la jornada de trabajo:"

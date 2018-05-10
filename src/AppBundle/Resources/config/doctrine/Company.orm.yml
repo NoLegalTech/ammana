@@ -1,0 +1,21 @@
+AppBundle\Entity\Company:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\CompanyRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        companyName:
+            type: string
+            length: '75'
+            column: company_name
+            nullable: true
+        logo:
+            type: string
+            length: '200'
+            nullable: true
+    lifecycleCallbacks: {  }

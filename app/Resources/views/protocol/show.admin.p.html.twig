@@ -1,0 +1,15 @@
+{% if tag is iterable %}
+
+    <p id="element_{{ id }}">
+    {% for line in tag %}
+        {% include 'protocol/show.admin.line.html.twig' with {'line': line } %}
+    {% endfor %}
+    </p>
+
+{% else %}
+
+    <p id="element_{{ id }}">
+        {% include 'protocol/show.admin.line.html.twig' with {'line': tag } %}
+    </p>
+
+{% endif %}

@@ -11,6 +11,8 @@ AppBundle\Entity\Protocol:
     fields:
         user:
             type: integer
+        createdBy:
+            type: integer
         invoice:
             type: integer
             nullable: true

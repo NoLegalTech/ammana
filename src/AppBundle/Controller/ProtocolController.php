@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use \Firebase\JWT\JWT;
 
+use AppBundle\Entity\Company;
 use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 use AppBundle\Service\HashGenerator;
@@ -33,10 +34,6 @@ class ProtocolController extends Controller
      */
     public function indexAction(PermissionsService $permissions, Invoices $invoices)
     {
-        if ($permissions->currentRolesInclude("admin")) {
-            return $this->showAllOrders();
-        }
-
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
                 'message' => $this->getI18n()['errors']['restricted_access']['user']
@@ -78,7 +75,14 @@ class ProtocolController extends Controller
         ));
     }
 
-    private function showAllOrders() {
+    public function ordersAction(PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
             ->findByEnabled(false);
@@ -102,6 +106,51 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'names' => $names,
             'users' => $users,
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
+    }
+
+    public function indexAdminAction(PermissionsService $permissions, Invoices $invoices)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $permissions->getCurrentUser();
+
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByCreatedBy($user->getId());
+
+        $company_names = [];
+        foreach($protocols as $protocol) {
+            $company_names[$protocol->getId()] = $this->getDoctrine()
+                ->getRepository(Company::class)
+                ->find($protocol->getUser())
+                ->getCompanyName();
+        }
+
+        $names = [];
+        $to_buy = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+            $to_buy []= array(
+                'id' => $id,
+                'name' => $protocol_spec['name']
+            );
+        }
+
+        return $this->render('protocol/index.admin.html.twig', array(
+            'title' => $this->getI18n()['protocols_page']['title'],
+            'protocols' => $protocols,
+            'invoices' => $invoices->getInvoicesForProtocols($protocols),
+            'names' => $names,
+            'company_names' => $company_names,
+            'to_buy' => $to_buy,
             'google_analytics' => $this->getAnalyticsCode()
         ));
     }
@@ -162,6 +211,7 @@ class ProtocolController extends Controller
             $purchasedProtocol = new Protocol();
             $purchasedProtocol->setIdentifier($id);
             $purchasedProtocol->setUser($user->getId());
+            $purchasedProtocol->setCreatedBy($user->getId());
             $purchasedProtocol->setEnabled(false);
             $purchasedProtocol->setOrderHash($hasher->generate(8, false));
             $purchasedProtocol->setOrderDate(new \DateTime(date('Y-m-d')));
@@ -224,6 +274,118 @@ class ProtocolController extends Controller
         }
 
         return $formBuilder ->getForm();
+    }
+
+    /**
+     * Creates a protocol (admin).
+     *
+     */
+    public function createAction($id, Request $request, PermissionsService $permissions, HashGenerator $hasher)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $company = new Company();
+
+        $companyNameForm = $this->createForm('AppBundle\Form\CompanyNameType', $company, array(
+            'i18n' => $this->getI18n()
+        ));
+
+        $companyNameForm->handleRequest($request);
+
+        if ($companyNameForm->isSubmitted() && $companyNameForm->isValid()) {
+            $file = $company->getLogo();
+            if ($file != null) {
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+                $company->setLogo($fileName);
+            }
+
+            $this->getDoctrine()->getManager()->persist($company);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('protocol_config', array('id' => $id, 'company_id' => $company->getId()));
+        }
+
+        return $this->render('user/company_name.admin.html.twig', array(
+            'title' => $this->getI18n()['company_name_admin_page']['title'],
+            'company' => $company,
+            'edit_form' => $companyNameForm->createView(),
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
+    }
+
+    /**
+     * Creates a protocol (admin).
+     *
+     */
+    public function configAction($id, $company_id, Request $request, PermissionsService $permissions, HashGenerator $hasher)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($company_id);
+
+        $protocol = $this->container->getParameter('protocol.'.$id);
+        if ($protocol == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+        $protocol['id'] = $id;
+
+        $questionsForm = $this->getForm(
+            $protocol['questions'],
+            $request->isMethod('POST')
+        );
+
+        $questionsForm->handleRequest($request);
+
+        if ($questionsForm->isSubmitted() && $questionsForm->isValid()) {
+            if ($request->get('confirmed') == null) {
+                return $this->render('protocol/confirmation.admin.html.twig', array(
+                    'title' => $this->getI18n()['order_confirmation_admin_page']['title'],
+                    'form' => $questionsForm->createView(),
+                    'protocol' => $protocol,
+                    'company' => $company,
+                    'google_analytics' => $this->getAnalyticsCode()
+                ));
+            }
+
+            $purchasedProtocol = new Protocol();
+            $purchasedProtocol->setIdentifier($id);
+            $purchasedProtocol->setUser($company->getId());
+            $purchasedProtocol->setCreatedBy($permissions->getCurrentUser()->getId());
+            $purchasedProtocol->setEnabled(true);
+            $purchasedProtocol->setOrderHash($hasher->generate(8, false));
+            $purchasedProtocol->setOrderDate(new \DateTime(date('Y-m-d')));
+            $purchasedProtocol->setPrice($this->container->getParameter('protocol_price'));
+            $answers = [];
+            foreach ($questionsForm->getData() as $key => $value) {
+                $answers []= $key . '=' . $value;
+            }
+            $purchasedProtocol->setAnswers(implode(',', $answers));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($purchasedProtocol);
+            $em->flush();
+
+            return $this->redirectToRoute('protocol_admin_index');
+        }
+
+        return $this->render('protocol/questions.admin.html.twig', array(
+            'title' => $this->getI18n()['questions_admin_page']['title'],
+            'form' => $questionsForm->createView(),
+            'protocol' => $protocol,
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
     }
 
     /**
@@ -372,6 +534,213 @@ class ProtocolController extends Controller
                 'Content-Disposition' => 'attachment;filename="'.$fileName.".docx"
             )
         );
+    }
+
+    /**
+     * Downloads a protocol.
+     *
+     */
+    public function downloadAdminAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($protocol->getUser());
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $document = $protocol_spec['document'];
+        $printer->setFileName($protocol_spec['name'].'.pdf');
+
+        if ($company->getLogo() != null) {
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $company->getLogo());
+        }
+
+        $variables = [];
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            $variables[$var] = $val;
+        }
+        $variables['company_name'] = $company->getCompanyName();
+        $printer->setVariables($variables);
+        $printer->setQuestions($protocol_spec['questions']);
+
+        $printer->setStyles($document['styles']);
+        $printer->setContent($document['content']);
+
+        return new Response($printer->print(), 200, array( 'Content-Type' => 'application/pdf'));
+    }
+
+    /**
+     * Downloads a protocol's instructions.
+     *
+     */
+    public function downloadInstructionsAdminAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/instrucciones_' . $protocol->getIdentifier() . '.pdf';
+        $fileName = $this->getI18n()['protocols']['instructions'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".pdf"
+            )
+        );
+    }
+
+    /**
+     * Downloads a protocol's recibi.
+     *
+     */
+    public function downloadRecibiAdminAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/recibi_' . $protocol->getIdentifier() . '.docx';
+        $fileName = $this->getI18n()['protocols']['recibi'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".docx"
+            )
+        );
+    }
+
+    /**
+     * Shows a protocol in HTML.
+     *
+     */
+    public function htmlAdminAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($protocol->getUser());
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $document = $protocol_spec['document'];
+
+        $with_logo = false;
+        $logo_url = '';
+        if ($company->getLogo() != null) {
+            $with_logo = true;
+            $logo_url = '/uploads/' . $company->getLogo();
+        }
+
+        $variables = [];
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            $variables[$var] = $val;
+        }
+        $variables['company_name'] = $company->getCompanyName();
+
+        return $this->render('protocol/show.admin.html.twig', array(
+            'title' => $protocol_spec['short_name'] ." " . $company->getCompanyName(),
+            'protocol' => $protocol,
+            'variables' => $variables,
+            'questions' => $protocol_spec['questions'],
+            'styles' => $document['styles'],
+            'content' => $document['content'],
+            'with_logo' => $with_logo,
+            'logo_url' => $logo_url,
+            'google_analytics' => $this->getAnalyticsCode()
+        ));
+    }
+
+    /**
+     * Deletes a protocol.
+     *
+     */
+    public function deleteAdminAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($protocol);
+        $em->flush();
+
+        return $this->redirectToRoute('protocol_admin_index');
     }
 
     /**

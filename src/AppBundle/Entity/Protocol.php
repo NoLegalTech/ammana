@@ -25,6 +25,11 @@ class Protocol
     /**
      * @var int
      */
+    private $createdBy;
+
+    /**
+     * @var int
+     */
     private $invoice;
 
     /**
@@ -109,6 +114,30 @@ class Protocol
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param int $createdBy
+     *
+     * @return Protocol
+     */
+    public function setCreatedBy($createdBy)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return int
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
     }
 
     /**
@@ -265,6 +294,7 @@ class Protocol
                 . "    id: "         . $this->getId()                         . ",\n"
                 . "    enabled: "    . $this->getEnabled()                    . ",\n"
                 . "    user: "       . $this->getUser()                       . ",\n"
+                . "    createdBy: "  . $this->getCreatedBy()                  . ",\n"
                 . "    invoice: "    . $this->getInvoice()                    . ",\n"
                 . "    answers: "    . $this->getAnswers()                    . ",\n"
                 . "    identifier: " . $this->getIdentifier()                 . ",\n"

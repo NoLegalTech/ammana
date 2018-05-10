@@ -73,3 +73,8 @@ protocol_admin_html:
     defaults: { _controller: "AppBundle:Protocol:htmlAdmin" }
     methods:  GET
 
+protocol_admin_delete:
+    path:     "%urls.protocol_admin_delete%"
+    defaults: { _controller: "AppBundle:Protocol:deleteAdmin" }
+    methods:  GET
+

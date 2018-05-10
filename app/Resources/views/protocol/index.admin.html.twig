@@ -14,6 +14,7 @@
                                 <th>{{ i18n.es.protocols_admin_page.headers.name }}</th>
                                 <th>{{ i18n.es.protocols_admin_page.headers.download }}</th>
                                 <th>{{ i18n.es.protocols_admin_page.headers.html }}</th>
+                                <th>{{ i18n.es.protocols_admin_page.headers.delete }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -28,6 +29,7 @@
                                     <a href="{{ path('protocol_admin_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.recibi }}</a>
                                 </td>
                                 <td><a href="{{ path('protocol_admin_html', { 'id': protocol.id }) }}">{{ i18n.es.protocols_admin_page.see_in_html }}</a></td>
+                                <td><a href="{{ path('protocol_admin_delete', { 'id': protocol.id }) }}" onclick="return confirm('Estás seguro de borrar este protocolo?')">{{ i18n.es.protocols_admin_page.delete }}</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

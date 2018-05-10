@@ -668,7 +668,7 @@ class ProtocolController extends Controller
      * Shows a protocol in HTML.
      *
      */
-    public function htmlAdminAction(Protocol $protocol, /* HTMLPrinter $printer, */ Request $request, PermissionsService $permissions)
+    public function htmlAdminAction(Protocol $protocol, Request $request, PermissionsService $permissions)
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
@@ -721,6 +721,26 @@ class ProtocolController extends Controller
             'logo_url' => $logo_url,
             'google_analytics' => $this->getAnalyticsCode()
         ));
+    }
+
+    /**
+     * Deletes a protocol.
+     *
+     */
+    public function deleteAdminAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($protocol);
+        $em->flush();
+
+        return $this->redirectToRoute('protocol_admin_index');
     }
 
     /**

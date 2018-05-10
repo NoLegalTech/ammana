@@ -44,6 +44,7 @@ parameters:
     urls.protocol_admin_download_instructions: /admin/protocol/{id}/instructions
     urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
     urls.protocol_admin_html:     /admin/protocol/{id}/html
+    urls.protocol_admin_delete:   /admin/protocol/{id}/delete
 
 twig:
     globals:
@@ -219,12 +220,14 @@ twig:
                         date:     Fecha
                         company:  Empresa
                         name:     Nombre
-                        download: Descargar en PDF
-                        html:     Ver en HTML
+                        download: Descargas
+                        html:     HTML
+                        delete:   Borrar
+                    delete: Borrar
                     download: Protocolo
                     instructions: Instrucciones
                     recibi: Recibí
-                    see_in_html: Ver en HTML
+                    see_in_html: Ver
                     no_protocols: No hay protocolos todavía.
                     buy:
                         title: Crear protocolos

@@ -20,7 +20,7 @@ parameters:
 
     # Specific settings for Ammana
     account_number: ESXX XXXX XXXX XXXX XXXX
-    protocol_price: 25000
+    protocol_price: 7500
     email_to_report_errors: pepellou@gmail.com
     emails_sender_email: ammana_pre@ammana.es
     emails_sender_name: Ammana

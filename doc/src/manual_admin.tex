@@ -1,8 +1,8 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% ammana.es | Manual de cliente %
-%                               %
-%  Made with ❤️  by NoLegalTech  %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ammana.es | Manual de administrador %
+%                                     %
+%     Made with ❤️  by NoLegalTech     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \documentclass[12pt, spanish]{article}
 
@@ -141,13 +141,14 @@
             Por otro lado, el panel de administración de \textbf{ammana.es}, junto con los de
         \textbf{Paypal} y \textbf{Quaderno}, dan acceso al administrador a la lista de clientes,
         facturas, pedidos, etc para su consulta, bien por curiosidad bien para ofrecer soporte
-        a un cliente..
+        a un cliente.. Adicionalmente el administrador puede crear manualmente protocolos para
+        casos en los que el cliente no pueda hacerlo.
 
         Es decir, las funciones del administrador son 2:
 
         \begin{steps}
             \item Marcar como cobrados los pedidos que han sido pagados por transferencia
-            \item Acceder a la información de clientes y facturas
+            \item Acceder a la información de clientes y facturas, así como crear protocolos manualmente
         \end{steps}
 
 %----------------------------------------------------------------------------------------
@@ -258,6 +259,133 @@
     \end{steps}
 
     \newpage
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsection{Crear protocolos manualmente}
+
+    \label{sec:manually-create-protocols}
+
+            El administrador puede crear protocolos manualmente. Adicionalmente a las descargas
+        en PDF habituales, también dispondrá de una versión HTML del protocolo generado, que se
+        pueda copiar a cualquier procesador de textos para realizar cualquier modificación o
+        añadido manual que se salga del cometido de \textbf{ammana.es}
+
+            Además el administrador podrá eliminar cualquier protocolo añadido a esta lista.
+
+            Es importante destacar que estos protocolos creados por el administrador solo los
+        puede ver él, aunque la empresa para la que se genere el protocolo se haya dado de alta
+        como cliente.
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsubsection{Crear un protocolo}
+
+    \label{sec:create-protocol}
+
+        Para crear un nuevo protocolo se han de seguir estos pasos:
+
+    \begin{steps}
+
+        \item Clic en ``Protocolos'' en el menú superior:
+            \screenshot{create-protocol/1.png}
+
+        \item En la lista de abajo, escoger un protocolo a crear y clic en el botón ``Crear``:
+            \screenshot{create-protocol/2.png}
+
+        \item Rellenar el nombre de la empresa y opcionalmente adjuntar un logo. Clic en ``Crear protocolo``:
+            \screenshot[0.8]{create-protocol/3.png}
+
+        \item Cubrir formulario de protocolo y click en ``Generar protocolo``:
+            \screenshot{create-protocol/4.png}
+            \screenshot[0.25]{create-protocol/5.png}
+
+        \item Revisar las respuestas (modificarlas en su caso) y clic en ``Confirmar'':
+            \screenshot{create-protocol/6.png}
+            \screenshot[0.25]{create-protocol/7.png}
+
+        \newpage
+
+        \item El nuevo protocolo ha sido creado y sale en el listado:
+            \screenshot{create-protocol/8.png}
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsubsection{Copiar un protocolo a un procesador de textos}
+
+    \label{sec:copy-protocol}
+
+            Para copiar un protocolo creado a un procesador de textos (como por ejemplo Word), se han
+        de seguir estos pasos:
+
+    \begin{steps}
+
+        \item Clic en ``Protocolos'' en el menú superior:
+            \screenshot{copy-protocol/1.png}
+
+        \item En la lista de protocolos creados, escoger el que deseemos y clic en ``Ver'':
+            \screenshot{copy-protocol/2.png}
+
+        \item Vemos el protocolo en versión HTML. Clic en ``Copiar protocolo'':
+            \screenshot[0.8]{copy-protocol/3.png}
+
+        \item Pegar en el procesador de textos.
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsubsection{Descargar un protocolo}
+
+    \label{sec:admin-download-protocol}
+
+        Para descargar un protocolo creado, se han de seguir estos pasos:
+
+    \begin{steps}
+
+        \item Clic en ``Protocolos'' en el menú superior:
+            \screenshot{admin-download-protocol/1.png}
+
+        \item En la lista de protocolos creados, escoger el que deseemos y clic en ``Protocolo'', ``Instrucciones'' o ``Recibí`'':
+            \screenshot{admin-download-protocol/2.png}
+
+        \item Se descargan los documentos tal como los vería un cliente.
+
+    \end{steps}
+
+%----------------------------------------------------------------------------------------
+
+    \newpage
+
+    \subsubsection{Eliminar un protocolo}
+
+    \label{sec:delete-protocol}
+
+        Para eliminar un protocolo creado, se han de seguir estos pasos:
+
+    \begin{steps}
+
+        \item Clic en ``Protocolos'' en el menú superior:
+            \screenshot{delete-protocol/1.png}
+
+        \item En la lista de protocolos creados, escoger el que deseemos y clic en ``Borrar'':
+            \screenshot{delete-protocol/2.png}
+
+        \item Confirmar en el diálogo emergente.
+
+        \item El protocolo habrá sido eliminado.
+
+    \end{steps}
 
 %----------------------------------------------------------------------------------------
 

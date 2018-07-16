@@ -3,23 +3,23 @@
 {% block body %}
 
     <style>
-        #top {
+        #top-banner {
             background-image: url('/images/home-up.png');
             height: 881px;
         }
-        #top h1, #top h2 {
+        #top-banner h1, #top-banner h2 {
             color: rgba(254, 255, 255, 0.67);
             font-family: Sans, sans-serif;
             text-align: center;
             text-transform: uppercase;
             font-weight: 100;
         }
-        #top h1 {
+        #top-banner h1 {
             font-size: 55px;
             margin-bottom: 15px;
-            padding-top: 150px;
+            padding-top: 300px;
         }
-        #top h2 {
+        #top-banner h2 {
             padding-top: 0;
             font-size: 35px;
         }
@@ -27,6 +27,7 @@
             background-color: rgba(133, 138, 143, 0.5);
             width: 100%;
             height: 150px;
+            position: fixed;
         }
         #proba-menu > div {
             max-width: 1000px;
@@ -49,20 +50,12 @@
             font-size: 24px;
             padding: 0px 0px 0px 70px;
         }
+        #proba-menu li a {
+            color: #feffff;
+        }
     </style>
 
-    <section id="top">
-        <div id="proba-menu">
-            <div>
-                <img src="/images/logo-mini.png" width="160px" alt="ammana.es">
-                <ul>
-                    <li>Productos</li>
-                    <li>Quiénes somos</li>
-                    <li>Blog</li>
-                    <li>Contacto</li>
-                </ul>
-            </div>
-        </div>
+    <section id="top-banner">
         <h1>Prevención de riesgos laborales</h1>
         <h2>en medios digitales</h2>
     </section>

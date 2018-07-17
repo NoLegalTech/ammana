@@ -7,7 +7,7 @@
             background-image: url('/images/home-up.png');
             height: 881px;
         }
-        #top-banner h1, #top-banner h2 {
+        #top-banner h1, #top-banner h2, section#steps h1 {
             color: rgba(254, 255, 255, 0.67);
             text-align: center;
             text-transform: uppercase;
@@ -23,7 +23,7 @@
             font-size: 35px;
         }
 
-        html { 
+        body { 
             background: url('/images/home-mid.png') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
@@ -105,6 +105,74 @@
         #proba-menu li a {
             color: #feffff;
         }
+
+        section#steps h1 {
+            font-size: 55px;
+            margin-bottom: 15px;
+            padding-top: 100px;
+            padding-bottom: 40px;
+        }
+
+        section#steps .step.number {
+            display: block;
+            float: left;
+            grid-column: 1;
+            grid-row: 1;
+            color: white;
+        }
+
+        section#steps .step.number.blue {
+            color: #418CCB;
+        }
+
+        section#steps article {
+            display: grid;
+            grid-template-columns: 60px auto;
+        }
+
+        section#steps article h3 {
+            display: block;
+            float: right;
+            grid-column: 2;
+            grid-row: 1;
+            padding-top: 0;
+            color: white;
+            font-size: 20px;
+        }
+
+        section#steps h3 > .highlight {
+            color: white;
+            font-size: 32px;
+        }
+
+        section#steps article p {
+            grid-column: 2;
+            grid-row: 2;
+            color: white;
+            margin-left: 0;
+        }
+
+        .wrap-steps {
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+            padding-left: 10%;
+            padding-right: 10%;
+            background: rgba(79, 128, 176, 0.40);
+            padding-top: 30px;
+            float: left;
+            margin-bottom: 150px;
+        }
+
+        .related-posts {
+            background: none;
+            padding-top: 200px;
+            color: white;
+        }
+
+        body, p, a, a:hover {
+            color: white;
+        }
     </style>
 
     <section id="top-banner">
@@ -126,33 +194,36 @@
     </section>
 
     <section id="steps">
-        <div class="wrap">
+        <h1>Cómo hacerlo</h1>
+        <div class="wrap-steps">
             <article>
                 <span class="step number">1</span>
-                <h3><span class="highlight">Define</span> tu empresa</h3>
+                <h3><span class="highlight">Define</span>cómo es tu empresa</h3>
                 <p>
-                    Introduce la información de la empresa
-                    más relevante, para que podamos
-                    indicarte cuál es la mejor opción para ti.
+                    Introduce la información de la empresa<br/>
+                    más relevante, para que podamos<br/>
+                    indicarte cuál es la mejor opción para ti.<br/>
                     Ten claros los límites legales.
                 </p>
             </article>
             <article>
                 <span class="step number">2</span>
-                <h3><span class="highlight">Diseña</span> tu protocolo</h3>
+                <h3><span class="highlight">Diseña</span> un protocolo laboral a tu medida</h3>
                 <p>
-                    Contesta unas sencillas preguntas en tiempo real,
-                    y crea una imagen de tu día a día. ¿Qué
-                    hacen tus empleados? ¿Cómo trabajan?
+                    Contesta unas sencillas preguntas en tiempo<br/>
+                    real, y crea una imagen de tu día a día.<br/>
+                    ¿Qué hacen tus empleados?<br/>
+                    ¿Cómo trabajan?
                 </p>
             </article>
             <article>
-                <span class="step number">3</span>
-                <h3><span class="highlight">Implementa</span> tu solución</h3>
+                <span class="step number blue">3</span>
+                <h3><span class="highlight">Descarga</span> on line tu protocolo laboral</h3>
                 <p>
-                    ¡Listo! De manera inmediata recibirás el
-                    protocolo que has creado, y un manual
-                    de instrucciones para ayudarte en su
+                    ¡Listo! De manera inmediata<br/>
+                    recibirás el protocolo que has<br/>
+                    creado, y un manual de<br/>
+                    instrucciones para ayudarte en su<br/>
                     implementación.
                 </p>
             </article>

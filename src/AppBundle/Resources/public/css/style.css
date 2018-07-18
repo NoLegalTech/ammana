@@ -1130,7 +1130,6 @@ thead th {
     color: black;
     border: 0;
     border-bottom: 2px solid #EF8E50;
-    border-right: 5px solid white;
 }
 
 th {
@@ -4017,6 +4016,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-blend-mode: hard-light;
+    background-color: #ccc;
 }
 
 #mid-banner {
@@ -4180,9 +4181,6 @@ section#steps article p {
     color: white;
 }
 
-body, p, a, a:hover {
-    color: white;
-}
 a:hover, a:active {
     letter-spacing: 0;
     font-weight: 200;
@@ -4191,6 +4189,9 @@ a:hover, a:active {
 #main-menu > div {
     line-height: 1.5;
 }
+
+a       { color: #1275ca; }
+a:hover { color: black; }
 
 @media screen and ( max-width: 615px ) {
 

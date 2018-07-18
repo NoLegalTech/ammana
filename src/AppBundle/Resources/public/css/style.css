@@ -4182,3 +4182,39 @@ a:hover, a:active {
     letter-spacing: 0;
     font-weight: 200;
 }
+
+#main-menu > div {
+    line-height: 1.5;
+}
+
+@media screen and ( max-width: 615px ) {
+
+    #main-menu > div img {
+        width: 50%;
+        margin-left: 25%;
+        margin-bottom: 10px;
+        margin-top: -40px;
+    }
+
+    #main-menu ul {
+        width: 100%;
+        text-align: center;
+    }
+
+}
+
+@media screen and ( min-width: 616px ) {
+
+    #main-menu ul {
+        width: 400px;
+    }
+
+}
+
+@media screen and ( min-width: 1015px ) {
+
+    #main-menu ul {
+        width: 800px;
+    }
+
+}

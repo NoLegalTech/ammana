@@ -4222,3 +4222,38 @@ a:hover, a:active {
     }
 
 }
+
+@media screen and ( max-width: 548px ) {
+
+    #mid-banner > article,
+    #mid-banner-left,
+    #mid-banner-center,
+    #mid-banner-right {
+        width: 100%;
+    }
+
+}
+
+@media screen and ( min-width: 548px ) {
+
+    #mid-banner h3 {
+        height: 120px;
+    }
+
+    #mid-banner a span.fill {
+        height: 359px;
+    }
+
+}
+
+@media screen and ( min-width: 1040px ) {
+
+    #mid-banner h3 {
+        height: 80px;
+    }
+
+    #mid-banner a span.fill {
+        height: 399px;
+    }
+
+}

@@ -4016,8 +4016,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-blend-mode: hard-light;
-    background-color: #ccc;
+    background-blend-mode: color-burn;
+    background-color: #eee;
 }
 
 #mid-banner {

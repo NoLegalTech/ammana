@@ -3993,6 +3993,7 @@ object {
     background-image: url('/images/home-up.png') no-repeat center center;
     background-size: cover;
     height: 881px;
+    margin-top: -200px;
 }
 #top-banner h1, #top-banner h2, section#steps h1 {
     color: rgba(254, 255, 255, 0.67);
@@ -4381,4 +4382,9 @@ a:hover, a:active {
 @media screen and ( max-width: 200px ) {
     body               { background-image: url('/images/home-mid.w200.png');        }  /* 200x881 */
     #top-banner        { background-image: url('/images/home-up.w200.png');         }  /* 200x881 */
+}
+
+section#fill-pre-content {
+    width: 100%;
+    height: 200px;
 }

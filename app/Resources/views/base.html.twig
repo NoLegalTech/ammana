@@ -49,7 +49,9 @@
 
         <header id="main-menu">
             <div>
-                <img src="/images/logo-mini.png" width="160px" alt="ammana.es">
+                <a href="{{ path('app') }}">
+                    <img src="/images/logo-mini.png" width="160px" alt="ammana.es">
+                </a>
                 <ul>
                     {% if not app.session.get('user') %}
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">

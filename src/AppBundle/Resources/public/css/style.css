@@ -4161,8 +4161,8 @@ section#steps article p {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
     background: rgba(79, 128, 176, 0.40);
     padding-top: 30px;
     float: left;
@@ -4254,6 +4254,14 @@ a:hover, a:active {
 
     #mid-banner a span.fill {
         height: 399px;
+    }
+
+}
+
+@media screen and ( max-width: 915px ) {
+
+    section#steps article {
+        width: 100%;
     }
 
 }

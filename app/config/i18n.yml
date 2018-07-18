@@ -101,7 +101,7 @@ twig:
                 # Footer
                 # =================================================================================
                 footer:
-                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados - <a href="#">ammana.es</a>
+                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados - <a href="#">ammana.es</a><br/>Un producto de <a target="_blank" href="https://zeres.es/">Zeres Abogados</a>
                     developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a><br/>Design by <a target="_blank" href="https://alterwork.net/">AlterWork</a>
                 # =================================================================================
 

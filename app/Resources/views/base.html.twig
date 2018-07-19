@@ -46,53 +46,34 @@
     </head>
 
     <body id="top">
-        <header id="masthead" class="site-header zeres-header" role="banner">
-            <div class="navigation-top zeres-header">
-                <div class="wrap zeres-header">
-                    <nav id="site-navigation" class="main-navigation zeres-header" role="navigation" aria-label="Top Menu">
-                        <div class="wrap zeres-header">
-                            <div class="div_logo">
-                                <a class="logo" href="{{ path('app') }}">
-                                    <img src="/web/images/logo.png" width="160px" alt="ammana.es">
-                                </a>
-                                <div class="zeres-mention" style="">
-                                    by <a class="zeres-link" href="https://zeres.es/" target="_blank">Zeres ABOGADOS</a>
-                                </div>
-                            </div>
-                            <div class="menu-principal-container">
-                                <ul id="top-menu" class="menu">
-                                {% if not app.session.get('user') %}
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                        <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
-                                    </li>
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                        <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
-                                    </li>
-                                {% endif %}
-                                {% if app.session.get('user') %}
-                                    {% for option in app.session.get('menu') %}
-                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                        <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
-                                    </li>
-                                    {% endfor %}
-                                {% endif %}
-                                </ul>
-                            </div>
-                        </div>
-                    </nav><!-- #site-navigation -->
-                </div><!-- .wrap -->
-            </div><!-- .navigation-top -->
+
+        <header id="main-menu">
+            <div>
+                <a href="{{ path('app') }}">
+                    <img src="/web/images/logo-mini.png" width="160px" alt="ammana.es">
+                </a>
+                <ul>
+                    {% if not app.session.get('user') %}
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
+                        </li>
+                    {% endif %}
+                    {% if app.session.get('user') %}
+                        {% for option in app.session.get('menu') %}
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </header>
 
-        <div class="site-content-contain">
-            <div id="content" class="site-content">
-                <header class="entry-header">
-                    <div class="wrap">
-                        <h1 class="entry-title">{{ title }}</h1>
-                    </div>
-                </header>
-            </div>
-        </div>
+        <section id="fill-pre-content">
+        </section>
 
         {% block body %}
         {% endblock %}
@@ -120,10 +101,10 @@
         <footer id="colophon" class="site-footer" role="contentinfo">
             <div class="wrap">
                 <div class="left">
-                    <p class="fl_left">{{ i18n.es.footer.copyright_note | raw }}</p>
+                    <p>{{ i18n.es.footer.copyright_note | raw }}</p>
                 </div>
                 <div class="right">
-                    <p class="fl_right">{{ i18n.es.footer.developed_by | raw }}</p>
+                    <p>{{ i18n.es.footer.developed_by | raw }}</p>
                 </div>
             </div><!-- .wrap -->
         </footer>

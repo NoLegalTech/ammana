@@ -101,8 +101,8 @@ twig:
                 # Footer
                 # =================================================================================
                 footer:
-                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados - <a href="#">ammana.es</a>
-                    developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a>
+                    copyright_note: Copyright &copy; 2017 - Todos los derechos reservados - <a href="#">ammana.es</a><br/>Un producto de <a target="_blank" href="https://zeres.es/">Zeres Abogados</a>
+                    developed_by:   Desarrollado con &hearts; por <a target="_blank" href="http://nolegaltech.com/">NoLegalTech</a><br/>Design by <a target="_blank" href="https://alterwork.net/">AlterWork</a>
                 # =================================================================================
 
 
@@ -355,6 +355,15 @@ twig:
 
                 cookies_page:
                     title:   Política de cookies
+
+                redes_page:
+                    title:   Uso de redes
+
+                mensajerias_page:
+                    title:   Uso de sistemas de mensajería
+
+                equipos_page:
+                    title:   Uso de equipos informáticos
                 # =================================================================================
  
                 # Emails

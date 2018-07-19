@@ -4011,13 +4011,13 @@ object {
 }
 
 body { 
-    background: url(images/home-mid.png) no-repeat center center fixed;
+    background: url(/web/images/app-bg.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-blend-mode: color-burn;
-    background-color: #eee;
+    background-blend-mode: unset;
+    background-color: unset;
 }
 
 #mid-banner {
@@ -4290,97 +4290,97 @@ a:hover { color: black; }
     /* Responsive background images */
 
 @media screen and ( min-width: 1900px ) {
-    body               { background-image: url(images/home-mid.w1920.png);        }  /* 1920x881 */
+    body               { background-image: url(images/app-bg.w1920.png);          }  /* 1920x881 */
     #top-banner        { background-image: url(images/home-up.w1920.png);         }  /* 1920x881 */
 }
 
 @media screen and ( max-width: 1900px ) {
-    body               { background-image: url(images/home-mid.w1900.png);        }  /* 1900x881 */
+    body               { background-image: url(images/app-bg.w1900.png);          }  /* 1900x881 */
     #top-banner        { background-image: url(images/home-up.w1900.png);         }  /* 1900x881 */
 }
 
 @media screen and ( max-width: 1800px ) {
-    body               { background-image: url(images/home-mid.w1800.png);        }  /* 1800x881 */
+    body               { background-image: url(images/app-bg.w1800.png);          }  /* 1800x881 */
     #top-banner        { background-image: url(images/home-up.w1800.png);         }  /* 1800x881 */
 }
 
 @media screen and ( max-width: 1700px ) {
-    body               { background-image: url(images/home-mid.w1700.png);        }  /* 1700x881 */
+    body               { background-image: url(images/app-bg.w1700.png);          }  /* 1700x881 */
     #top-banner        { background-image: url(images/home-up.w1700.png);         }  /* 1700x881 */
 }
 
 @media screen and ( max-width: 1600px ) {
-    body               { background-image: url(images/home-mid.w1600.png);        }  /* 1600x881 */
+    body               { background-image: url(images/app-bg.w1600.png);          }  /* 1600x881 */
     #top-banner        { background-image: url(images/home-up.w1600.png);         }  /* 1600x881 */
 }
 
 @media screen and ( max-width: 1500px ) {
-    body               { background-image: url(images/home-mid.w1500.png);        }  /* 1500x881 */
+    body               { background-image: url(images/app-bg.w1500.png);          }  /* 1500x881 */
     #top-banner        { background-image: url(images/home-up.w1500.png);         }  /* 1500x881 */
 }
 
 @media screen and ( max-width: 1400px ) {
-    body               { background-image: url(images/home-mid.w1400.png);        }  /* 1400x881 */
+    body               { background-image: url(images/app-bg.w1400.png);          }  /* 1400x881 */
     #top-banner        { background-image: url(images/home-up.w1400.png);         }  /* 1400x881 */
 }
 
 @media screen and ( max-width: 1300px ) {
-    body               { background-image: url(images/home-mid.w1300.png);        }  /* 1300x881 */
+    body               { background-image: url(images/app-bg.w1300.png);          }  /* 1300x881 */
     #top-banner        { background-image: url(images/home-up.w1300.png);         }  /* 1300x881 */
 }
 
 @media screen and ( max-width: 1200px ) {
-    body               { background-image: url(images/home-mid.w1200.png);        }  /* 1200x881 */
+    body               { background-image: url(images/app-bg.w1200.png);          }  /* 1200x881 */
     #top-banner        { background-image: url(images/home-up.w1200.png);         }  /* 1200x881 */
 }
 
 @media screen and ( max-width: 1100px ) {
-    body               { background-image: url(images/home-mid.w1100.png);        }  /* 1100x881 */
+    body               { background-image: url(images/app-bg.w1100.png);          }  /* 1100x881 */
     #top-banner        { background-image: url(images/home-up.w1100.png);         }  /* 1100x881 */
 }
 
 @media screen and ( max-width: 1000px ) {
-    body               { background-image: url(images/home-mid.w1000.png);        }  /* 1000x881 */
+    body               { background-image: url(images/app-bg.w1000.png);          }  /* 1000x881 */
     #top-banner        { background-image: url(images/home-up.w1000.png);         }  /* 1000x881 */
 }
 
 @media screen and ( max-width: 900px ) {
-    body               { background-image: url(images/home-mid.w900.png);        }  /* 900x881 */
+    body               { background-image: url(images/app-bg.w900.png);          }  /* 900x881 */
     #top-banner        { background-image: url(images/home-up.w900.png);         }  /* 900x881 */
 }
 
 @media screen and ( max-width: 800px ) {
-    body               { background-image: url(images/home-mid.w800.png);        }  /* 800x881 */
+    body               { background-image: url(images/app-bg.w800.png);          }  /* 800x881 */
     #top-banner        { background-image: url(images/home-up.w800.png);         }  /* 800x881 */
 }
 
 @media screen and ( max-width: 700px ) {
-    body               { background-image: url(images/home-mid.w700.png);        }  /* 700x881 */
+    body               { background-image: url(images/app-bg.w700.png);          }  /* 700x881 */
     #top-banner        { background-image: url(images/home-up.w700.png);         }  /* 700x881 */
 }
 
 @media screen and ( max-width: 600px ) {
-    body               { background-image: url(images/home-mid.w600.png);        }  /* 600x881 */
+    body               { background-image: url(images/app-bg.w600.png);          }  /* 600x881 */
     #top-banner        { background-image: url(images/home-up.w600.png);         }  /* 600x881 */
 }
 
 @media screen and ( max-width: 500px ) {
-    body               { background-image: url(images/home-mid.w500.png);        }  /* 500x881 */
+    body               { background-image: url(images/app-bg.w500.png);          }  /* 500x881 */
     #top-banner        { background-image: url(images/home-up.w500.png);         }  /* 500x881 */
 }
 
 @media screen and ( max-width: 400px ) {
-    body               { background-image: url(images/home-mid.w400.png);        }  /* 400x881 */
+    body               { background-image: url(images/app-bg.w400.png);          }  /* 400x881 */
     #top-banner        { background-image: url(images/home-up.w400.png);         }  /* 400x881 */
 }
 
 @media screen and ( max-width: 300px ) {
-    body               { background-image: url(images/home-mid.w300.png);        }  /* 300x881 */
+    body               { background-image: url(images/app-bg.w300.png);          }  /* 300x881 */
     #top-banner        { background-image: url(images/home-up.w300.png);         }  /* 300x881 */
 }
 
 @media screen and ( max-width: 200px ) {
-    body               { background-image: url(images/home-mid.w200.png);        }  /* 200x881 */
+    body               { background-image: url(images/app-bg.w200.png);          }  /* 200x881 */
     #top-banner        { background-image: url(images/home-up.w200.png);         }  /* 200x881 */
 }
 

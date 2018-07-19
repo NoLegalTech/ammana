@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section id="info">
+        <div class="wrap">
+            <article>
+
+                <h1>PLANIFICA EL USO DE LAS REDES SOCIALES EN LA EMPRESA</h1>
+                
+                <p>
+                    Este protocolo laboral permite regular en la empresa, el uso de las redes sociales por parte de sus empleados
+                </p>
+                
+                <ul>
+                    <li> ¿Se prohíbe o se permite el uso de las redes sociales en la jornada de trabajo? </li>
+                    <li> ¿Qué ocurre en el caso de insultos de un trabajador que perjudique la imagen de la empresa? </li>
+                    <li> ¿Qué sucede cuándo se captan imágenes o vídeos del centro de trabajo de la empresa? </li>
+                </ul>
+                
+                <p>
+                    El protocolo laboral de uso de las redes sociales es un documento, con plena validez legal
+                    elaborado por abogados especializados en derecho laboral.                
+                </p>
+                
+                <p>
+                    Responde a un breve cuestionario y obtendrás online un protocolo laboral sobre el uso de las
+                    redes sociales en la empresa               
+                </p>
+                
+                <p>
+                    Anticipa soluciones y evita problemas con <a target="_blank" href="{{ path('app') }}">Ammana</a> by <a target="_blank" href="https://zeres.es/">Zeres Abogados</a>
+                </p>
+                
+                <p>
+                    {% if not app.session.get('user') %}
+                        <a href="{{ path('register_user') }}">
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                        </a>
+                    {% endif %}
+                    {% if app.session.get('user') %}
+                        <a href="{{ path('protocol_buy', { 'id': 'uso_redes' }) }}">
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                        </a>
+                    {% endif %}
+                </p>
+
+            </article>
+        </div>
+    </section>
+
+{% endblock %}

@@ -355,6 +355,15 @@ twig:
 
                 cookies_page:
                     title:   Política de cookies
+
+                redes_page:
+                    title:   Uso de redes
+
+                mensajerias_page:
+                    title:   Uso de sistemas de mensajería
+
+                equipos_page:
+                    title:   Uso de equipos informáticos
                 # =================================================================================
  
                 # Emails

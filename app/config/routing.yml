@@ -23,6 +23,21 @@ info_cookies:
     defaults: { _controller: "AppBundle:Default:cookies" }
     methods:  GET
 
+info_redes:
+    path:     /servicios/redes
+    defaults: { _controller: "AppBundle:Default:redes" }
+    methods:  GET
+
+info_mensajerias:
+    path:     /servicios/sistemas-mensajeria
+    defaults: { _controller: "AppBundle:Default:mensajerias" }
+    methods:  GET
+
+info_equipos:
+    path:     /servicios/equipos-informaticos
+    defaults: { _controller: "AppBundle:Default:equipos" }
+    methods:  GET
+
 user:
     resource: "@AppBundle/Resources/config/routing.yml"
     prefix:   /

@@ -57,6 +57,33 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function redesAction(Request $request)
+    {
+        return $this->render('default/redes.html.twig', [
+            'title' => $this->getI18n()['redes_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'price' => $this->container->getParameter('protocol_price') / 100
+        ]);
+    }
+
+    public function mensajeriasAction(Request $request)
+    {
+        return $this->render('default/mensajerias.html.twig', [
+            'title' => $this->getI18n()['mensajerias_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'price' => $this->container->getParameter('protocol_price') / 100
+        ]);
+    }
+
+    public function equiposAction(Request $request)
+    {
+        return $this->render('default/equipos.html.twig', [
+            'title' => $this->getI18n()['equipos_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'price' => $this->container->getParameter('protocol_price') / 100
+        ]);
+    }
+
     public function iconsAction(Request $request)
     {
         return $this->render('default/icons.html.twig', array(

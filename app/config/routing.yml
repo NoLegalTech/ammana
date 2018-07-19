@@ -1,10 +1,10 @@
 maintenance:
-    path:     /
+    path:     /maintenance
     defaults: { _controller: "AppBundle:Default:maintenance" }
     methods:  GET
 
 app:
-    path:     /home
+    path:     /
     defaults: { _controller: "AppBundle:Default:index" }
     methods:  GET
 

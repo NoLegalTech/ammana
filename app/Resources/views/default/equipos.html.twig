@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <section id="info">
+        <div class="wrap">
+            <article>
+
+                <h1>PLANIFICA EL USO DE LOS EQUIPOS INFORMÁTICOS DE LA EMPRESA</h1>
+
+                <p>
+                    El protocolo laboral de equipos informáticos regula el uso de los dispositivos que
+                    son propiedad de la empresa por parte de los trabajadores:
+                </p>
+
+                <ul>
+                    <li> Cuentas de correo electrónico corporativas </li>
+                    <li> Instalación de Programas informáticos </li>
+                    <li> Uso de los equipos, tablets, smartphones </li>
+                </ul>
+
+                <p>
+                    El protocolo de uso de los equipos informáticos de la empresa es un documento,
+                    con plena validez legal elaborado por abogados especializados en derecho laboral.
+                </p>
+
+                <p>
+                    Responde un breve cuestionario y obtendrás online un protocolo laboral sobre el uso de los
+                    equipos informáticos en la empresa 
+                </p>
+
+                <p>
+                    Anticipa soluciones y evita problemas con <a target="_blank" href="{{ path('app') }}">Ammana</a> by <a target="_blank" href="https://zeres.es/">Zeres Abogados</a>
+                </p>
+                
+                <p>
+                    {% if not app.session.get('user') %}
+                        <a href="{{ path('register_user') }}">
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                        </a>
+                    {% endif %}
+                    {% if app.session.get('user') %}
+                        <a href="{{ path('protocol_buy', { 'id': 'uso_telematica' }) }}">
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                        </a>
+                    {% endif %}
+                </p>
+
+            </article>
+        </div>
+    </section>
+
+{% endblock %}

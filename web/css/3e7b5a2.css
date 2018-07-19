@@ -135,7 +135,6 @@ address, article, aside, figcaption, figure, footer, header, main, nav, section{
 /* Homepage
 --------------------------------------------------------------------------------------------------------------- */
 section#steps {
-    height: 300px;
     margin-top: 100px;
     margin-bottom: 100px;
 }
@@ -268,15 +267,15 @@ section#steps article {
 }
 
 section#steps article:nth-child(1) {
-    background-image: url(../Resources/public/css/images/define.png);
+    background-image: url(images/define.png);
 }
 
 section#steps article:nth-child(2) {
-    background-image: url(../Resources/public/css/images/design.png);
+    background-image: url(images/design.png);
 }
 
 section#steps article:nth-child(3) {
-    background-image: url(../Resources/public/css/images/implementa.png);
+    background-image: url(images/implementa.png);
 }
 
 section#steps article:last-child {
@@ -317,7 +316,6 @@ section#steps article p {
     margin: 0 auto;
     padding-bottom: 40px;
 }
-
 
 
 
@@ -771,6 +769,7 @@ Use it to make something cool, have fun, and share what you've learned with othe
 18.0 SVGs Fallbacks
 19.0 Media Queries
 20.0 Print
+21.0 Changes suggeste by AlterWork
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -1856,7 +1855,6 @@ thead th {
     color: black;
     border: 0;
     border-bottom: 2px solid #EF8E50;
-    border-right: 5px solid white;
 }
 
 th {
@@ -4710,4 +4708,431 @@ object {
     .site-footer {
         padding: 0;
     }
+}
+
+/*--------------------------------------------------------------
+21.0 Changes suggested by AlterWork
+--------------------------------------------------------------*/
+#top-banner {
+    background-image: url(images/home-up.png) no-repeat center center;
+    background-size: cover;
+    height: 881px;
+    margin-top: -200px;
+}
+#top-banner h1, #top-banner h2, section#steps h1 {
+    color: rgba(254, 255, 255, 0.67);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 100;
+}
+#top-banner h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+    padding-top: 300px;
+}
+#top-banner h2 {
+    padding-top: 0;
+    font-size: 35px;
+}
+
+body { 
+    background: url(images/home-mid.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-blend-mode: color-burn;
+    background-color: #eee;
+}
+
+#mid-banner {
+    text-align: center;
+}
+#mid-banner h1 {
+    color: rgba(254, 255, 255, 0.67);
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 55px;
+    margin-bottom: 15px;
+    padding-top: 200px;
+    padding-bottom: 40px;
+}
+#mid-banner > article {
+    display: inline-block;
+    float: left;
+}
+#mid-banner-left {
+    background-image: url(images/home-mid-left.png);
+    height: 479px;
+    width: 34.1%;
+    background-size: cover;
+}
+#mid-banner-center {
+    background-image: url(images/home-mid-center.png);
+    height: 479px;
+    width: 37.4%;
+    background-size: cover;
+}
+#mid-banner-right {
+    background-image: url(images/home-mid-right.png);
+    height: 479px;
+    width: 28.5%;
+    background-size: cover;
+}
+#mid-banner h3 {
+    top: 0;
+    height: 80px;
+    background: rgba(133, 138, 143, 0.56);
+    color: white;
+    text-align: left;
+    padding-left: 5%;
+    padding-top: 20px;
+    font-family: 'Muli', sans-serif;
+    margin-bottom: 0;
+}
+#mid-banner a:hover h3 {
+    background: rgba(133, 138, 143, 0.78);
+}
+#mid-banner a span.fill {
+    width: 100%;
+    height: 399px;
+    display: block;
+}
+#mid-banner a:hover span.fill {
+    background: rgba(133, 138, 143, 0.28);
+}
+
+#main-menu {
+    background-color: rgba(133, 138, 143, 0.5);
+    width: 100%;
+    height: 150px;
+    position: fixed;
+}
+#main-menu > div {
+    max-width: 1000px;
+    margin: 0 auto;
+    color: #feffff;
+    padding-top: 50px;
+}
+#main-menu > div img {
+    margin-top: -10px;
+}
+#main-menu ul {
+    display: inline;
+    list-style: none;
+    width: 800px;
+    text-align: right;
+    float: right;
+}
+#main-menu li {
+    display: inline;
+    font-size: 24px;
+    margin: 0px 5px 0px 5px;
+    padding: 30px;
+}
+#main-menu li:last-child {
+    margin-right: 0;
+}
+#main-menu li a {
+    color: #feffff;
+}
+#main-menu li:hover {
+    background-color: rgba(133, 138, 143, 0.5);
+}
+
+section#steps h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+    padding-top: 100px;
+    padding-bottom: 40px;
+}
+
+section#steps .step.number {
+    display: block;
+    float: left;
+    grid-column: 1;
+    grid-row: 1;
+    color: white;
+}
+
+section#steps .step.number.blue {
+    color: #418CCB;
+}
+
+section#steps article {
+    display: grid;
+    grid-template-columns: 60px auto;
+}
+
+section#steps article h3 {
+    display: block;
+    float: right;
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+    color: white;
+    font-size: 20px;
+}
+
+section#steps h3 > .highlight {
+    color: white;
+    font-size: 32px;
+}
+
+section#steps article p {
+    grid-column: 2;
+    grid-row: 2;
+    color: white;
+    margin-left: 0;
+}
+
+.wrap-steps {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background: rgba(79, 128, 176, 0.40);
+    padding-top: 30px;
+    float: left;
+    margin-bottom: 150px;
+}
+
+.related-posts {
+    background: none;
+    padding-top: 200px;
+    color: white;
+}
+
+a:hover, a:active {
+    letter-spacing: 0;
+    font-weight: 200;
+}
+
+#main-menu > div {
+    line-height: 1.5;
+}
+
+a       { color: #1275ca; }
+a:hover { color: black; }
+
+@media screen and ( max-width: 615px ) {
+
+    #main-menu > div img {
+        width: 50%;
+        margin-left: 25%;
+        margin-bottom: 10px;
+        margin-top: -40px;
+    }
+
+    #main-menu ul {
+        width: 100%;
+        text-align: center;
+    }
+
+    #main-menu li {
+        padding: 10px 30px;
+    }
+
+}
+
+@media screen and ( min-width: 616px ) {
+
+    #main-menu ul {
+        width: 400px;
+    }
+
+}
+
+@media screen and ( min-width: 1015px ) {
+
+    #main-menu ul {
+        width: 800px;
+    }
+
+}
+
+@media screen and ( max-width: 548px ) {
+
+    #mid-banner > article,
+    #mid-banner-left,
+    #mid-banner-center,
+    #mid-banner-right {
+        width: 100%;
+    }
+
+}
+
+@media screen and ( min-width: 548px ) {
+
+    #mid-banner h3 {
+        height: 120px;
+    }
+
+    #mid-banner a span.fill {
+        height: 359px;
+    }
+
+}
+
+@media screen and ( min-width: 1040px ) {
+
+    #mid-banner h3 {
+        height: 80px;
+    }
+
+    #mid-banner a span.fill {
+        height: 399px;
+    }
+
+}
+
+@media screen and ( max-width: 915px ) {
+
+    section#steps article {
+        width: 100%;
+    }
+
+}
+
+#colophon {
+    padding-top: 50px;
+    border-top: 1px solid white;
+}
+
+#colophon .left,
+#colophon .right {
+    width: 100%;
+}
+
+#colophon .left p,
+#colophon .right p {
+    text-align: center;
+}
+
+
+    /* Responsive background images */
+
+@media screen and ( min-width: 1900px ) {
+    body               { background-image: url(images/home-mid.w1920.png);        }  /* 1920x881 */
+    #top-banner        { background-image: url(images/home-up.w1920.png);         }  /* 1920x881 */
+}
+
+@media screen and ( max-width: 1900px ) {
+    body               { background-image: url(images/home-mid.w1900.png);        }  /* 1900x881 */
+    #top-banner        { background-image: url(images/home-up.w1900.png);         }  /* 1900x881 */
+}
+
+@media screen and ( max-width: 1800px ) {
+    body               { background-image: url(images/home-mid.w1800.png);        }  /* 1800x881 */
+    #top-banner        { background-image: url(images/home-up.w1800.png);         }  /* 1800x881 */
+}
+
+@media screen and ( max-width: 1700px ) {
+    body               { background-image: url(images/home-mid.w1700.png);        }  /* 1700x881 */
+    #top-banner        { background-image: url(images/home-up.w1700.png);         }  /* 1700x881 */
+}
+
+@media screen and ( max-width: 1600px ) {
+    body               { background-image: url(images/home-mid.w1600.png);        }  /* 1600x881 */
+    #top-banner        { background-image: url(images/home-up.w1600.png);         }  /* 1600x881 */
+}
+
+@media screen and ( max-width: 1500px ) {
+    body               { background-image: url(images/home-mid.w1500.png);        }  /* 1500x881 */
+    #top-banner        { background-image: url(images/home-up.w1500.png);         }  /* 1500x881 */
+}
+
+@media screen and ( max-width: 1400px ) {
+    body               { background-image: url(images/home-mid.w1400.png);        }  /* 1400x881 */
+    #top-banner        { background-image: url(images/home-up.w1400.png);         }  /* 1400x881 */
+}
+
+@media screen and ( max-width: 1300px ) {
+    body               { background-image: url(images/home-mid.w1300.png);        }  /* 1300x881 */
+    #top-banner        { background-image: url(images/home-up.w1300.png);         }  /* 1300x881 */
+}
+
+@media screen and ( max-width: 1200px ) {
+    body               { background-image: url(images/home-mid.w1200.png);        }  /* 1200x881 */
+    #top-banner        { background-image: url(images/home-up.w1200.png);         }  /* 1200x881 */
+}
+
+@media screen and ( max-width: 1100px ) {
+    body               { background-image: url(images/home-mid.w1100.png);        }  /* 1100x881 */
+    #top-banner        { background-image: url(images/home-up.w1100.png);         }  /* 1100x881 */
+}
+
+@media screen and ( max-width: 1000px ) {
+    body               { background-image: url(images/home-mid.w1000.png);        }  /* 1000x881 */
+    #top-banner        { background-image: url(images/home-up.w1000.png);         }  /* 1000x881 */
+}
+
+@media screen and ( max-width: 900px ) {
+    body               { background-image: url(images/home-mid.w900.png);        }  /* 900x881 */
+    #top-banner        { background-image: url(images/home-up.w900.png);         }  /* 900x881 */
+}
+
+@media screen and ( max-width: 800px ) {
+    body               { background-image: url(images/home-mid.w800.png);        }  /* 800x881 */
+    #top-banner        { background-image: url(images/home-up.w800.png);         }  /* 800x881 */
+}
+
+@media screen and ( max-width: 700px ) {
+    body               { background-image: url(images/home-mid.w700.png);        }  /* 700x881 */
+    #top-banner        { background-image: url(images/home-up.w700.png);         }  /* 700x881 */
+}
+
+@media screen and ( max-width: 600px ) {
+    body               { background-image: url(images/home-mid.w600.png);        }  /* 600x881 */
+    #top-banner        { background-image: url(images/home-up.w600.png);         }  /* 600x881 */
+}
+
+@media screen and ( max-width: 500px ) {
+    body               { background-image: url(images/home-mid.w500.png);        }  /* 500x881 */
+    #top-banner        { background-image: url(images/home-up.w500.png);         }  /* 500x881 */
+}
+
+@media screen and ( max-width: 400px ) {
+    body               { background-image: url(images/home-mid.w400.png);        }  /* 400x881 */
+    #top-banner        { background-image: url(images/home-up.w400.png);         }  /* 400x881 */
+}
+
+@media screen and ( max-width: 300px ) {
+    body               { background-image: url(images/home-mid.w300.png);        }  /* 300x881 */
+    #top-banner        { background-image: url(images/home-up.w300.png);         }  /* 300x881 */
+}
+
+@media screen and ( max-width: 200px ) {
+    body               { background-image: url(images/home-mid.w200.png);        }  /* 200x881 */
+    #top-banner        { background-image: url(images/home-up.w200.png);         }  /* 200x881 */
+}
+
+section#fill-pre-content {
+    width: 100%;
+    height: 200px;
+}
+
+.site-footer .wrap {
+    padding-bottom: 0;
+}
+
+.related-posts {
+    padding-top: 60px;
+    border-top: 1px solid white;
+    margin-top: 50px;
+}
+
+section#steps,
+section#top-banner,
+section#mid-banner,
+footer#colophon,
+.related-posts {
+    width: 100%;
+    float: left;
+}
+
+section#steps {
+    height: auto;
 }

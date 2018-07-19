@@ -36,12 +36,12 @@
                 <p>
                     {% if not app.session.get('user') %}
                         <a href="{{ path('register_user') }}">
-                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} € + I.V.A.
                         </a>
                     {% endif %}
                     {% if app.session.get('user') %}
                         <a href="{{ path('protocol_buy', { 'id': 'uso_telematica' }) }}">
-                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} €
+                            Cómpralo ahora por {{ price | number_format(2, '\'', '.') }} € + I.V.A.
                         </a>
                     {% endif %}
                 </p>

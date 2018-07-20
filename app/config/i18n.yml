@@ -110,7 +110,7 @@ twig:
                 # =================================================================================
                 error_page:
                     error_label: "Error:"
-                    contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: support@ammana.es'>support@ammana.es</a>"
+                    contact_us:  "Si necesitas ayuda, por favor contacta con nosotros en <a href='mailto: soporte@ammana.es'>soporte@ammana.es</a>"
                 errors:
                     restricted_access:
                         user: No tienes permiso para ver esta página.
@@ -136,6 +136,7 @@ twig:
                     quaderno_invoice_not_created:
                         user: Ha ocurrido un error inesperado.
                         log:  No se ha podido crear la factura en Quaderno
+                    contact_with_support: "Si necesitas ayuda humana, contáctanos en <a href='mailto: soporte@ammana.es'>soporte@ammana.es</a>"
                 alerts:
                     user_registered:
                         title:   Nuevo usuario registrado

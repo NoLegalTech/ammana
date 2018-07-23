@@ -1,16 +1,116 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <style>
+        form>div.buttons {
+            display: inline-grid;
+            grid-template-columns: auto auto;
+            width: 100%;
+        }
+        form>div.buttons>p {
+            margin-top: 25px;
+        }
+        form>div.buttons>p.left {
+            text-align: left;
+        }
+        form>div.buttons>p.right {
+            text-align: right;
+        }
+        .modal {
+            display: none;
+        }
+        .modal table td:nth-child(odd) {
+            font-weight: 700;
+            padding: 1px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+    </style>
+
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50 small-sheet">
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
-                    <input class="btn" type="submit" value="{{ i18n.es.register_page.button }}" />
+                    <div class="buttons">
+                        <p class="left">
+                            <a href="" class="trigger-modal info-legal" data-modal-id="info-legal-register" data-modal-title="Información sobre protección de datos">
+                                Información básica sobre protección de datos
+                            </a>
+                        </p>
+                        <p class="right">
+                            <input class="btn" type="submit" value="{{ i18n.es.register_page.button }}" />
+                        </p>
+                    </div>
                 {{ form_end(form) }}
             </div>
             <div class="clear"></div>
         </main>
     </div>
 
+    <div id="info-legal-register" class="modal">
+        <h3>Información básica sobre protección de datos</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Responsable</td>
+                    <td>ZERES ABOGADOS Y CONSULTORES LABORALES, SLP</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Finalidad</td>
+                    <td>Prestación del servicio</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Legitimación</td>
+                    <td>Consentimiento del interesado</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Destinatarios</td>
+                    <td>Google Analytics y terceros por obligación legal</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Derechos</td>
+                    <td>Acceder, rectificar y suprimir los datos, así como otros derechos, como se explica en la información adicional</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Información Adicional</td>
+                    <td>Puede consultar la información adicional y detallada sobre Protección de datos en nuestra política de privacidad</td>
+                    <td><a href="">+info</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        jQuery(document).ready(function () {
+
+            $('a.trigger-modal').on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).data('modal-id');
+                var title = $(this).data('modal-title');;
+
+                console.log(id);
+                console.log($( "#" + id ));
+                var dialog = $( "#" + id ).dialog({
+                    autoOpen: true,
+                    width: 800,
+                    modal: true,
+                    title: title,
+                    buttons: {
+                        Aceptar: function() { dialog.dialog( "close" ) }
+                    }
+                });
+            });
+
+        });
+    </script>
 {% endblock %}

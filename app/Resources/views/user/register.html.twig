@@ -25,6 +25,24 @@
             padding-right: 10px;
             padding-bottom: 10px;
         }
+        div.ui-dialog {
+            width: 60%;
+        }
+        @media screen and ( max-width: 600px ) {
+            form>div.buttons {
+                grid-template-columns: auto;
+            }
+            form>div.buttons>p.left {
+                text-align: center;
+            }
+            form>div.buttons>p.right {
+                text-align: center;
+            }
+            div.ui-dialog {
+                width: 100%;
+                left: 0;
+            }
+        }
     </style>
 
     <div class="wrapper row3">
@@ -91,6 +109,7 @@
     {{ parent() }}
 
     <script>
+
         jQuery(document).ready(function () {
 
             $('a.trigger-modal').on('click', function(e) {
@@ -98,11 +117,9 @@
                 var id = $(this).data('modal-id');
                 var title = $(this).data('modal-title');;
 
-                console.log(id);
-                console.log($( "#" + id ));
                 var dialog = $( "#" + id ).dialog({
                     autoOpen: true,
-                    width: 800,
+                    width: $(window).width() > 600 ? "60%" : "100%",
                     modal: true,
                     title: title,
                     buttons: {

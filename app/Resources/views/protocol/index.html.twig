@@ -28,7 +28,7 @@
                                     <td>{{ i18n.es.protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.pay }}</a>)</td>
                                 {% endif %}
                                 {% if invoices[protocol.id] %}
-                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank">{{ i18n.es.protocols_page.download_invoice }}</a></td>
+                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank" rel="noopener">{{ i18n.es.protocols_page.download_invoice }}</a></td>
                                 {% else %}
                                     <td>{{ i18n.es.protocols_page.invoice_not_available }}</td>
                                 {% endif %}

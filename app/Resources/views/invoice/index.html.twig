@@ -18,7 +18,7 @@
                             <td>{{ invoice.emittedAt | date('d/m/Y') }}</td>
                             <td>{{ invoice.number }}</td>
                             {% if invoice.url %}
-                                <td><a href="{{ invoice.url }}" target="_blank">{{ i18n.es.invoices_page.download }}</a></td>
+                                <td><a href="{{ invoice.url }}" target="_blank" rel="noopener">{{ i18n.es.invoices_page.download }}</a></td>
                             {% else %}
                                 <td>{{ i18n.es.invoices_page.no_invoice }}</td>
                             {% endif %}

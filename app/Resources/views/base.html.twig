@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es-ES" class="no-js no-svg">
 
     <head>
         {% if google_analytics is not null %}
@@ -15,7 +15,7 @@
         {% endif %}
 
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
         <title>{% block title %}{{ i18n.es.metadata.page_title }}{% endblock %}</title>
         {% block stylesheets %}
             {% stylesheets '@AppBundle/Resources/public/css/*' filter='cssrewrite' %}
@@ -43,6 +43,7 @@
         <meta name="msapplication-TileColor" content="#ffffff">
         <meta name="msapplication-TileImage" content="/web/images/ms-icon-144x144.png">
         <meta name="theme-color" content="#ffffff">
+        <meta name="Description" content="ammana, prevención de riesgos laborales en medios digitales">
     </head>
 
     <body id="top">

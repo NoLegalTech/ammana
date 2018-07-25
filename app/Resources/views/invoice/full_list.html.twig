@@ -20,7 +20,7 @@
                             <td>{{ invoice.number }}</td>
                             <td>{{ users[invoice.user].companyName }} ({{ users[invoice.user].email }})</td>
                             {% if invoice.url %}
-                                <td><a href="{{ invoice.url }}" target="_blank">{{ i18n.es.invoices_page.download }}</a></td>
+                                <td><a href="{{ invoice.url }}" target="_blank" rel="noopener">{{ i18n.es.invoices_page.download }}</a></td>
                             {% else %}
                                 <td>{{ i18n.es.invoices_page.no_invoice }}</td>
                             {% endif %}

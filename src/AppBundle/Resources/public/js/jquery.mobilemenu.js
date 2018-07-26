@@ -6,6 +6,13 @@ Licence: Free to use under our free template licence terms
 Licence URI: http://www.os-templates.com/template-terms
 File: Mobile Menu JS
 
+/*!
+ * ammana.es - job protocols generator
+ * https://github.com/NoLegalTech/ammana
+ * Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ * https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ */
+
 Thanks to:
 "Convert a Menu to a Dropdown for Small Screens" from Chris Collier - http://css-tricks.com/convert-menu-to-dropdown/
 "Submenu's with a dash" Daryn St. Pierre - http://jsfiddle.net/bloqhead/Kq43X/

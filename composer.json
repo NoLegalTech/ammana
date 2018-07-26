@@ -1,6 +1,6 @@
 {
     "name": "pepellou/ammana",
-    "license": "proprietary",
+    "license": "gpl",
     "type": "project",
     "autoload": {
         "psr-4": {

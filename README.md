@@ -1,7 +1,7 @@
 ammana
 ======
 
-Generator for job protocols.
+Generator for job protocols - [ammana.es](https://ammana.es)
 
 ## Build status
 [![Build Status](https://travis-ci.org/NoLegalTech/ammana.svg?branch=master)](https://travis-ci.org/NoLegalTech/ammana)

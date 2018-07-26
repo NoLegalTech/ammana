@@ -1,3 +1,9 @@
+#!
+# ammana.es - job protocols generator
+# https://github.com/NoLegalTech/ammana
+# Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+# https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+
 # This file is a "template" of what your parameters.yml file should look like
 # Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
 # https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration

@@ -53,9 +53,9 @@ twig:
                 # General info
                 # =================================================================================
                 metadata:
-                    page_title: ammana - seal the deal!
+                    page_title: ammana - protocolos laborales
                     name:       ammana
-                    slogan:     Seal the deal!
+                    slogan:     Protocolos laborales
                 protocols:
                     models:
                         uso_redes:      Protocolo laboral de uso de las redes sociales de empresa

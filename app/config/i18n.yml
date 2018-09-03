@@ -241,7 +241,7 @@ twig:
                 payment_page:
                     title: Pagar
                     info:  Tu protocolo está listo. Lo podrás descargar inmediatamente en cuanto pagues tu pedido.
-                    pay_with_paypal: Pagar con <img src="/web/images/paypal.png">
+                    pay_with_paypal: Pagar con <img src="/images/paypal.png">
                     transfer:
                         info: "Si prefieres pagar por transferencia bancaria, debes realizar una transferencia con los siguientes datos:"
                         contact: Concepto

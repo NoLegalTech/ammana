@@ -1,6 +1,6 @@
 <IfModule mod_rewrite.c>                                                        
     RewriteEngine On                                                            
-    RewriteRule ^(.*)$ https://www.ammana.es/web/$1 [R=301,L]                                                 
+    RewriteRule ^(.*)$ https://www.ammana.es/$1 [R=301,L]                                                 
 </IfModule>                                                                     
 
 <IfModule mod_expires.c>

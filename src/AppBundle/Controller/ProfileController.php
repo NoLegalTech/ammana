@@ -53,13 +53,13 @@ class ProfileController extends Controller {
                 $file = $user->getLogo();
                 if ($file != null) {
                     $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                    $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+                    $file->move($this->get('kernel')->getRootDir(). '/../uploads', $fileName);
                     $user->setLogo($fileName);
                 } else {
                     $user->setLogo($previous_logo);
                 }
             }
-            
+
             $this->getDoctrine()->getManager()->flush();
 
             $continue = $request->get('continue');

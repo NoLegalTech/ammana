@@ -307,7 +307,7 @@ class ProtocolController extends Controller
             $file = $company->getLogo();
             if ($file != null) {
                 $fileName = md5(uniqid()).'.'.$file->guessExtension();
-                $file->move($this->get('kernel')->getRootDir(). '/../web/uploads', $fileName);
+                $file->move($this->get('kernel')->getRootDir(). '/../uploads', $fileName);
                 $company->setLogo($fileName);
             }
 
@@ -432,7 +432,7 @@ class ProtocolController extends Controller
         $printer->setFileName($protocol_spec['name'].'.pdf');
 
         if ($user->getLogo() != null) {
-            $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $user->getLogo());
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../uploads/' . $user->getLogo());
         }
 
         $variables = [];
@@ -576,7 +576,7 @@ class ProtocolController extends Controller
         $printer->setFileName($protocol_spec['name'].'.pdf');
 
         if ($company->getLogo() != null) {
-            $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $company->getLogo());
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../uploads/' . $company->getLogo());
         }
 
         $variables = [];
@@ -706,7 +706,7 @@ class ProtocolController extends Controller
         $logo_url = '';
         if ($company->getLogo() != null) {
             $with_logo = true;
-            $logo_url = '/web/uploads/' . $company->getLogo();
+            $logo_url = '/uploads/' . $company->getLogo();
         }
 
         $variables = [];

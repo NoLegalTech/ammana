@@ -1,0 +1,30 @@
+- Menu: split login, scrolldown de protocolos
+- Home: presentación de protocolos
+- Home: pasos
+- Home: incrustar actualidad
+  >> La idea es un blog nuevo para ammana o aquí se incrustan noticias de
+Zeres?
+- Dudas frecuentes: desplegables
+  >> Hay un botón de "más dudas frecuentes", entiendo que esto también lo
+podrá editar Fabián
+- Formulario de contacto
+  >> Email a Fabián? A qué cuenta?
+  >> @kuartillo Para mostrar la info de primera capa, ¿cómo lo encajaríamos
+con este diseño?
+- Las noticias de Ammana en tu correo: esto parece la suscripción a una
+  newsletter
+  >> Va a escribir Fabián esos correos electrónicos comerciales a mano o hay
+que incluir alguna herramienta de mailing?
+- Footer
+- Página de protocolos: presentación + botones
+- Diseño cuestionario: los números de las preguntas se tienen que regenerar
+- Actualidad: diseño de lista
+- Actualidad: diseño de post
+- Formulario de login y anexos
+  >> @kuartillo Para mostrar la info de primera capa, ¿cómo lo encajaríamos
+con este diseño?
+- Formulario de registro
+- Página de perfil
+  >> No sé si al diseño le falta algo en esta pantalla. Imagino que en vez de
+"login" pondrá otra cosa o nada. Y el contenido será diferente.
+- Vista móvil de todo

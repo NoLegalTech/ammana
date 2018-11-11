@@ -25,3 +25,6 @@ tools/
 /deploy/parameters_pre.yml
 /deploy/parameters_pro.yml
 web/uploads
+
+# Blog
+blog/wp-config.php

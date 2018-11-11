@@ -43,6 +43,10 @@ deploy() {
         echo "KO"
         exit 1
     }
+    scp ${script_dir}/wp-config_${target}.php ${server}:${remote_folder}/blog/wp-config > $out  2> $err || {
+        echo "KO"
+        exit 1
+    }
     ssh ${server} "cd ${remote_folder} && php bin/console doctrine:migrations:migrate" > $out 2> $err || {
         echo "KO"
         exit 1

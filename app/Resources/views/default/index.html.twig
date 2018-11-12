@@ -51,6 +51,50 @@ padding: 25px 10px;
     text-align: center;
     font-weight: 100;
 }
+section#steps .wrap-steps {
+    background: #61ace3 url('/images/clouds.png');
+background-repeat: no-repeat;
+    background-size: 120px;
+    background-position-x: 20px;
+    background-position-y: 10px;
+    border-bottom: solid 20px #2b313d;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+#top-banner {
+    height: auto;
+}
+section#steps {
+    margin-top: 0;
+}
+section#steps article h3 {
+    display: block;
+    float: right;
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+    color: white;
+    font-size: 14px;
+    color: #2467ad;
+    text-transform: uppercase;
+    text-align: center;
+}
+section#steps article p {
+    grid-column: 2;
+    grid-row: 2;
+    color: white;
+    margin-left: 0;
+    text-align: center;
+    font-size: 12px;
+    padding: 0px 10px 30px 10px;
+}
+section#steps h3 > .highlight {
+    color: white;
+    font-size: 24px;
+    text-transform: none;
+    font-weight: 100;
+}
+
     </style>
 
     <section id="top-banner">
@@ -80,30 +124,7 @@ padding: 25px 10px;
         </div>
     </section>
 
-    <section id="mid-banner">
-        <h1>Protocolos laborales de empresa</h1>
-        <article id="mid-banner-left">
-            <a href="{{ path('info_redes') }}">
-                <h3>Uso de redes</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-        <article id="mid-banner-center">
-            <a href="{{ path('info_equipos') }}">
-                <h3>Uso de equipos informáticos</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-        <article id="mid-banner-right">
-            <a href="{{ path('info_mensajerias') }}">
-                <h3>Uso de sistema de mensajería</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-    </section>
-
     <section id="steps">
-        <h1>Cómo hacerlo</h1>
         <div class="wrap-steps">
             <article>
                 <span class="step number">1</span>

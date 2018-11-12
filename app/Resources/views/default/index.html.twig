@@ -12,71 +12,72 @@
     <style>
         /* Not ideal, but this way we ensure these are specific to the home page */
         body, p, a, a:hover {
-            color: white;
+            color: #2b313d;
         }
-        body { background-image: url(/images/home-mid.w1920.jpg); }
-        @media screen and ( min-width: 1900px ) {
-            body { background-image: url(/images/home-mid.w1920.jpg);        }  /* 1920x881 */
+        #top-banner .left {
+                float: left;
+    width: 60%;
+    border-right: 1px solid #c4c9cf;
+    color: black;
         }
-        @media screen and ( max-width: 1900px ) {
-            body { background-image: url(/images/home-mid.w1900.jpg);        }  /* 1900x881 */
+        #top-banner .right {
+    float: right;
+    width: 40%;
+    color: black;
         }
-        @media screen and ( max-width: 1800px ) {
-            body { background-image: url(/images/home-mid.w1800.jpg);        }  /* 1800x881 */
+        #top-banner h1 {
+            color: #4e9bd3;
+            padding-top: 0;
+color: #4e9bd3;
+    padding-top: 100px;
+    font-size: 40px;
+    text-transform: none;
+    font-weight: 500;
+margin-bottom: 0;
         }
-        @media screen and ( max-width: 1700px ) {
-            body { background-image: url(/images/home-mid.w1700.jpg);        }  /* 1700x881 */
-        }
-        @media screen and ( max-width: 1600px ) {
-            body { background-image: url(/images/home-mid.w1600.jpg);        }  /* 1600x881 */
-        }
-        @media screen and ( max-width: 1500px ) {
-            body { background-image: url(/images/home-mid.w1500.jpg);        }  /* 1500x881 */
-        }
-        @media screen and ( max-width: 1400px ) {
-            body { background-image: url(/images/home-mid.w1400.jpg);        }  /* 1400x881 */
-        }
-        @media screen and ( max-width: 1300px ) {
-            body { background-image: url(/images/home-mid.w1300.jpg);        }  /* 1300x881 */
-        }
-        @media screen and ( max-width: 1200px ) {
-            body { background-image: url(/images/home-mid.w1200.jpg);        }  /* 1200x881 */
-        }
-        @media screen and ( max-width: 1100px ) {
-            body { background-image: url(/images/home-mid.w1100.jpg);        }  /* 1100x881 */
-        }
-        @media screen and ( max-width: 1000px ) {
-            body { background-image: url(/images/home-mid.w1000.jpg);        }  /* 1000x881 */
-        }
-        @media screen and ( max-width: 900px ) {
-            body { background-image: url(/images/home-mid.w900.jpg);        }  /* 900x881 */
-        }
-        @media screen and ( max-width: 800px ) {
-            body { background-image: url(/images/home-mid.w800.jpg);        }  /* 800x881 */
-        }
-        @media screen and ( max-width: 700px ) {
-            body { background-image: url(/images/home-mid.w700.jpg);        }  /* 700x881 */
-        }
-        @media screen and ( max-width: 600px ) {
-            body { background-image: url(/images/home-mid.w600.jpg);        }  /* 600x881 */
-        }
-        @media screen and ( max-width: 500px ) {
-            body { background-image: url(/images/home-mid.w500.jpg);        }  /* 500x881 */
-        }
-        @media screen and ( max-width: 400px ) {
-            body { background-image: url(/images/home-mid.w400.jpg);        }  /* 400x881 */
-        }
-        @media screen and ( max-width: 300px ) {
-            body { background-image: url(/images/home-mid.w300.jpg);        }  /* 300x881 */
-        }
-        @media screen and ( max-width: 200px ) {
-            body { background-image: url(/images/home-mid.w200.jpg);        }  /* 200x881 */
-        }
+#top-banner h2 {
+    padding-top: 0;
+    font-size: 35px;
+    color: #2b313d;
+    text-transform: none;
+    width: 50%;
+    text-align: center;
+    margin: 0 25%;
+}
+#top-banner p {
+padding: 25px 10px;
+    font-size: 20px;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 100;
+}
     </style>
 
     <section id="top-banner">
-        <h1>Prevención de riesgos laborales</h1>
-        <h2>en medios digitales</h2>
+        <div class="wrap">
+            <div class="left">
+                <h1>Protocolos laborales</h1>
+                <h2>para proteger su empresa</h2>
+                <p>
+                    En Ammana te ofrecemos ayuda para crear de forma rápida, sencilla y efectiva
+                    un protocolo laboral seguro y personalizado para proteger tu empresa.
+                </p>
+                <p>
+                    <img src="/images/locker.png">
+                </p>
+            </div>
+            <div class="right">
+                <div>
+                    <h3>Uso de <em>redes sociales</em></h3>
+                </div>
+                <div>
+                    <h3>Uso de <em>redes sociales</em></h3>
+                </div>
+                <div>
+                    <h3>Uso de <em>redes sociales</em></h3>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="mid-banner">

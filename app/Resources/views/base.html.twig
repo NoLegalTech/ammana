@@ -30,9 +30,6 @@
             {% endstylesheets %}
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-        <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Muli:200,400,800" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
         <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
@@ -55,29 +52,73 @@
 
     <body id="top">
 
-        <header id="main-menu">
-            <div>
-                <a href="{{ path('app') }}">
-                    <img src="/images/logo-mini.png" width="160px" alt="ammana.es">
-                </a>
+        <header id="masthead" class="site-header" role="banner">
+
+        <style>
+@font-face{
+    font-family:'Helvetica Neue';
+    src:url('fonts/fonts/Helvetica-Neue/HelveticaNeue-Medium.otf');
+    font-weight:normal;
+    font-style:normal
+}
+        #masthead {
+        height: 100px;
+        background-color: white;
+        border-bottom: 1px solid #c4c9cf;
+        }
+        .main-menu {
+        padding-top: 20px;
+        }
+#masthead ul {
+    float: right;
+width: auto;
+}
+            #masthead li {
+    display: inline;
+    font-size: 24px;
+    margin: 0px 5px 0px 5px;
+    padding: 30px;
+display: inline;
+    font-size: 20px;
+    margin: 0px 5px 0px 5px;
+    padding: 5px;
+    color: black;
+    line-height: 3.5;
+}
+            #masthead li a {
+color: black;
+}
+body {
+    font-family: 'Helvetica';
+}
+        </style>
+
+        <div class="custom-header" style="margin-bottom: 0px;">
+
+        <div class="wrap main-menu">
+        <img src="http://localhost:8000/blog//wp-content/themes/twentyseventeen/assets/images/logo.png" width="200" alt="El blog de ammana">
+
+
                 <ul>
                     {% if not app.session.get('user') %}
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                            <i class="fa fa-sign-in"></i> <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
+                            <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
                         </li>
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                            <i class="fa fa-user-plus"></i> <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
+                            <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
                         </li>
                     {% endif %}
                     {% if app.session.get('user') %}
                         {% for option in app.session.get('menu') %}
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                            <i class="fa {{ option.icon }}"></i> <a href="{{ path(option.path) }}">{{ option.text }}</a>
+                            <a href="{{ path(option.path) }}">{{ option.text }}</a>
                         </li>
                         {% endfor %}
                     {% endif %}
                 </ul>
-            </div>
+        </div><!-- .wrap -->
+
+        </div><!-- .custom-header -->
         </header>
 
         <section id="fill-pre-content">

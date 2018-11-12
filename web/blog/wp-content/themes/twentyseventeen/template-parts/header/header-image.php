@@ -9,12 +9,21 @@
  */
 
 ?>
+<style>
+#masthead {
+    height: 100px;
+    background-color: white;
+    border-bottom: 1px solid #c4c9cf;
+}
+.main-menu {
+    padding-top: 20px;
+}
+</style>
+
 <div class="custom-header">
 
-		<div class="custom-header-media">
-			<?php the_custom_header_markup(); ?>
-		</div>
-
-	<?php get_template_part( 'template-parts/header/site', 'branding' ); ?>
+    <div class="wrap main-menu">
+        <img src="<?php echo esc_url( home_url( '/' ) ); ?>/wp-content/themes/twentyseventeen/assets/images/logo.png" width="200" alt="El blog de ammana">
+    </div><!-- .wrap -->
 
 </div><!-- .custom-header -->

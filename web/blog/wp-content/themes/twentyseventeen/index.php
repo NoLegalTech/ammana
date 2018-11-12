@@ -17,16 +17,43 @@
 
 get_header(); ?>
 
+<style>
+body {
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+}
+h2.page-title {
+    font-size: 30px;
+    color: #8dc4eb;
+    font-weight: normal;
+}
+.page-header-wrap {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #c4c9cf;
+    width: 100%;
+    margin-bottom: 30px;
+}
+.page-header-wrap .wrap {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+</style>
+
+<div class="page-header-wrap">
+    <div class="wrap">
+        <?php if ( is_home() && ! is_front_page() ) : ?>
+            <header class="page-header">
+                <h1 class="page-title"><?php single_post_title(); ?></h1>
+            </header>
+        <?php else : ?>
+            <header class="page-header">
+                <h2 class="page-title">Actualidad</h2>
+            </header>
+        <?php endif; ?>
+    </div>
+</div>
+
 <div class="wrap">
-	<?php if ( is_home() && ! is_front_page() ) : ?>
-		<header class="page-header">
-			<h1 class="page-title"><?php single_post_title(); ?></h1>
-		</header>
-	<?php else : ?>
-	<header class="page-header">
-		<h2 class="page-title"><?php _e( 'Posts', 'twentyseventeen' ); ?></h2>
-	</header>
-	<?php endif; ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">

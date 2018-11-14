@@ -104,6 +104,61 @@ section#steps .step.number {
     display: block;
 }
 
+        #contact .left {
+            float: left;
+            width: 60%;
+            color: white;
+        }
+        #contact .right {
+            float: right;
+            width: 40%;
+            color: white;
+        }
+        #contact .left h1 {
+            font-size: 50px;
+            margin-bottom: 0;
+        }
+        #contact .left h2 {
+            font-size: 50px;
+            color: #64ade4;
+            font-weight: 100;
+            padding-top: 20px;
+        }
+        #contact .left p {
+            font-size: 20px;
+            font-weight: 100;
+            padding-right: 50px;
+        }
+        #contact .left p {
+            color: white;
+        }
+        #contact .right form {
+            width: 100%;
+            padding-top: 40px;
+        }
+        #contact .right form .row {
+            width: 100%;
+            float: left;
+        }
+        #contact .right form .row label {
+            float: left;
+            width: 30%;
+            text-align: left;
+            font-size: 18px;
+        }
+        #contact .right form .row input {
+            float: left;
+            width: 70%;
+            height: 30px;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+        #contact .right form .row textarea {
+            float: right;
+            width: 70%;
+            margin-top: 15px;
+            height: 150px;
+        }
     </style>
 
     <section id="top-banner">
@@ -176,6 +231,63 @@ section#steps .step.number {
                 </p>
             </article>
         </div>
+    </section>
+
+    <section id="blog">
+        <div class="wrap">
+            <div class="left">
+                <h1>Actualidad</h1>
+            </div>
+            <div class="right">
+                <h1>Dudas frecuentes</h1>
+            </div>
+        </div>
+    </section>
+
+<style>
+#contact {
+    background: #2b313d;
+}
+</style>
+
+    <section id="contact">
+
+        <div class="wrap">
+            <div class="left">
+                <h1>Contacto</h1>
+                <h2>¿Tienes alguna duda?</h2>
+                <p>
+                    Si tienes un caso especial en tu empresa o
+                    necesitas ayuda con cualquier paso del proceso
+                    de creación, no dudes en consultarnos.<br/>
+                    Te ayudaremos encantados.
+                </p>
+            </div>
+            <div class="right">
+                <form>
+                    <div class="row">
+                        <label for="contact_name">Nombre</label>
+                        <input id="contact_name" type="text" name="contact_name"></input>
+                    </div>
+                    <div class="row">
+                        <label for="contact_company">Empresa</label>
+                        <input id="contact_company" type="text" name="contact_company"></input>
+                    </div>
+                    <div class="row">
+                        <label for="contact_email">e-mail</label>
+                        <input id="contact_email" type="text" name="contact_email"></input>
+                    </div>
+                    <div class="row">
+                        <label for="contact_comment">Comentario</label>
+                        <textarea id="contact_comment"></textarea>
+                    </div>
+                    <div class="row">
+                        <input type="checkbox">Acepto condiciones</input>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </section>
 
 {% endblock %}

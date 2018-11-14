@@ -67,9 +67,6 @@
         background-color: white;
         border-bottom: 1px solid #c4c9cf;
         }
-        .main-menu {
-        padding-top: 20px;
-        }
 #masthead ul {
     float: right;
 width: auto;
@@ -92,21 +89,37 @@ color: black;
 body {
     font-family: 'Helvetica';
 }
+.custom-header .wrap.main-menu {
+    height: 100px;
+    padding-top: 0px;
+}
+.custom-header .wrap.main-menu > img {
+    margin-top: 20px;
+}
+.custom-header .wrap.main-menu > ul {
+    height: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.custom-header .wrap.main-menu > ul.general {
+    padding-right: 20px;
+    border-right: 1px solid #c4c9cf;
+}
+.custom-header .wrap.main-menu > ul.user {
+    padding-left: 20px;
+}
         </style>
 
         <div class="custom-header" style="margin-bottom: 0px;">
 
-        <div class="wrap main-menu">
-        <img src="http://localhost:8000/blog//wp-content/themes/twentyseventeen/assets/images/logo.png" width="200" alt="El blog de ammana">
+            <div class="wrap main-menu">
 
+                <img src="http://localhost:8000/blog//wp-content/themes/twentyseventeen/assets/images/logo.png" width="200" alt="El blog de ammana">
 
-                <ul>
+                <ul class="user">
                     {% if not app.session.get('user') %}
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
                             <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
-                        </li>
-                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                            <a href="{{ path('register_user') }}">{{ i18n.es.menus.new_user.register }}</a>
                         </li>
                     {% endif %}
                     {% if app.session.get('user') %}
@@ -116,6 +129,21 @@ body {
                         </li>
                         {% endfor %}
                     {% endif %}
+                </ul>
+
+                <ul class="general">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                        <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.who_we_are }}</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                        <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocols }}</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                        <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.news }}</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                        <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.contact }}</a>
+                    </li>
                 </ul>
         </div><!-- .wrap -->
 

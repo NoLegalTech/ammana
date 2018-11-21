@@ -12,7 +12,7 @@ maintenance:
 app:
     path:     /
     defaults: { _controller: "AppBundle:Default:index" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_legal:
     path:     /legal

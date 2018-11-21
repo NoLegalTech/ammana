@@ -392,6 +392,9 @@ twig:
                         link:     "Establecer nueva contraseña"
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
+                    contact:
+                        title:    Nuevo mensaje en formulario de contacto de ammana.es
+                        text:     " ha dejado el siguiente mensaje:"
                 # =================================================================================
  
                 # Forms
@@ -417,3 +420,10 @@ twig:
                     company_name_form:
                         company_name:   Nombre de la compañía
                         logo:           Logo
+                    contact_form:
+                        name:           Nombre
+                        company:        Empresa
+                        email:          Email
+                        comment:        Comentario
+                        acceptsTerms:   Acepto condiciones
+                        button:         Enviar

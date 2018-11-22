@@ -18,45 +18,7 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request, \Swift_Mailer $mailer)
     {
-        $contactMessage = new ContactMessage();
-
-        $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
-            'i18n' => $this->getI18n()
-        ));
-        $contactForm->handleRequest($request);
-
-        $sender_email = $this->container->getParameter('emails_sender_email');
-        $sender_name = $this->container->getParameter('emails_sender_name');
-        $contactEmail = $this->container->getParameter('contact_email');
-
-        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
-            $message = (new \Swift_Message($this->getI18n()['emails']['contact']['title']))
-                ->setFrom(array($sender_email => $sender_name))
-                ->setTo($contactEmail)
-                ->setBody(
-                    $this->renderView(
-                        'email/contact.html.twig',
-                        array('data' => $contactMessage)
-                    ),
-                    'text/html'
-                )
-                ->addPart(
-                    $this->renderView(
-                        'email/contact.txt.twig',
-                        array('data' => $contactMessage)
-                    ),
-                    'text/plain'
-                );
-
-            $mailer->send($message);
-
-            unset($contactMessage);
-            unset($contactForm);
-            $contactMessage = new ContactMessage();
-            $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
-                'i18n' => $this->getI18n()
-            ));
-        }
+        $contactForm = $this->getContactForm($request, $mailer);
 
         return $this->render('default/index.html.twig', [
             'title' => $this->getI18n()['home_page']['claim']['title'],
@@ -153,6 +115,52 @@ class DefaultController extends Controller
         return $this->container->hasParameter('google_analytics')
             ? $this->container->getParameter('google_analytics')
             : null;
+    }
+
+    private function getContactForm(Request $request, \Swift_Mailer $mailer)
+    {
+        $contactMessage = new ContactMessage();
+
+        $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
+            'i18n' => $this->getI18n()
+        ));
+        $contactForm->handleRequest($request);
+
+        $sender_email = $this->container->getParameter('emails_sender_email');
+        $sender_name = $this->container->getParameter('emails_sender_name');
+        $contactEmail = $this->container->getParameter('contact_email');
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+            $message = (new \Swift_Message($this->getI18n()['emails']['contact']['title']))
+                ->setFrom(array($sender_email => $sender_name))
+                ->setTo($contactEmail)
+                ->setBody(
+                    $this->renderView(
+                        'email/contact.html.twig',
+                        array('data' => $contactMessage)
+                    ),
+                    'text/html'
+                )
+                ->addPart(
+                    $this->renderView(
+                        'email/contact.txt.twig',
+                        array('data' => $contactMessage)
+                    ),
+                    'text/plain'
+                );
+
+            $mailer->send($message);
+
+            unset($contactMessage);
+            unset($contactForm);
+            $contactMessage = new ContactMessage();
+            $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $contactForm;
     }
 
 }

@@ -187,30 +187,101 @@ body {
             {% endjavascripts %}
         {% endblock %}
 
-        <div class="related-posts">
-            <div class="wrap">
-                <div class="related-post item_in_3col">
-                    <a href="{{ path('info_legal') }}">Información legal</a>
-                </div>
-                <div class="related-post item_in_3col">
-                    <a href="{{ path('info_privacy') }}">Política de privacidad</a>
-                </div>
-                <div class="related-post item_in_3col">
-                    <a href="{{ path('info_cookies') }}">Política de cookies</a>
+        <style>
+            #footer {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                float: left;
+            }
+            #newsletter {
+                width: 50%;
+                float: left;
+                background-color: #eaeff2;
+                padding: 0 80px;
+            }
+            #newsletter > h1 {
+                color: #939ab7;
+                font-size: 24px;
+            }
+            #newsletter_form > div > label {
+                display: none;
+            }
+            #newsletter_form > div {
+                width: 60%;
+                float: left;
+            }
+            #newsletter > form > input[type="submit"] {
+                background-color: #9299b6;
+                border-radius: 20px;
+                height: 40px;
+                width: 30%;
+                margin-left: 10%;
+                font-size: 16px;
+                padding: 0;
+                font-weight: 400;
+            }
+            #newsletter > p {
+                color: #939ab7;
+                margin-top: 20px;
+                float: left;
+                width: 60%;
+                text-align: center;
+                font-size: 12px;
+            }
+            #footer_footer {
+                width: 50%;
+                float: right;
+            }
+        </style>
+
+        <div id="footer">
+
+            <div id="newsletter">
+                <h1> Las noticias de Ammana en tu correo </h1>
+                {{ form_start(newsletter_form) }}
+                    {{ form_widget(newsletter_form) }}
+                    <input type="submit" value="Subscribirme" />
+                {{ form_end(newsletter_form) }}
+                <p>
+                    Al subscribirse está aceptando recibir correos
+                    electrónicos comerciales de Ammana
+                </p>
+            </div>
+
+            <div id="footer_footer">
+                <div class="wrap">
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_legal') }}">Quiénes somos</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_legal') }}">Información legal</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_legal') }}">Twitter</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_privacy') }}">Protocolos</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_privacy') }}">Política de privacidad</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_privacy') }}">Linkedin</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_cookies') }}">Blog</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_cookies') }}">Política de cookies</a>
+                    </div>
+                    <div class="related-post item_in_3col">
+                        <a href="{{ path('info_cookies') }}">Contacto</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <footer id="colophon" class="site-footer" role="contentinfo">
-            <div class="wrap">
-                <div class="left">
-                    <p>{{ i18n.es.footer.copyright_note | raw }}</p>
-                </div>
-                <div class="right">
-                    <p>{{ i18n.es.footer.developed_by | raw }}</p>
-                </div>
-            </div><!-- .wrap -->
-        </footer>
+        </div>
 
     </body>
 

@@ -12,7 +12,10 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use AppBundle\Entity\ContactMessage;
+use AppBundle\Entity\NewsletterSubscriber;
 
 class DefaultController extends Controller
 {
@@ -20,11 +23,14 @@ class DefaultController extends Controller
     {
         $contactForm = $this->getContactForm($request, $mailer);
 
+        $newsletterForm = $this->getNewsletterForm($request);
+
         return $this->render('default/index.html.twig', [
             'title' => $this->getI18n()['home_page']['claim']['title'],
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'google_analytics' => $this->getAnalyticsCode(),
-            'contact_form' => $contactForm->createView()
+            'contact_form' => $contactForm->createView(),
+            'newsletter_form' => $newsletterForm->createView()
         ]);
     }
 
@@ -121,16 +127,16 @@ class DefaultController extends Controller
     {
         $contactMessage = new ContactMessage();
 
-        $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
+        $form = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
             'i18n' => $this->getI18n()
         ));
-        $contactForm->handleRequest($request);
+        $form->handleRequest($request);
 
         $sender_email = $this->container->getParameter('emails_sender_email');
         $sender_name = $this->container->getParameter('emails_sender_name');
         $contactEmail = $this->container->getParameter('contact_email');
 
-        if ($contactForm->isSubmitted() && $contactForm->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $message = (new \Swift_Message($this->getI18n()['emails']['contact']['title']))
                 ->setFrom(array($sender_email => $sender_name))
                 ->setTo($contactEmail)
@@ -152,15 +158,45 @@ class DefaultController extends Controller
             $mailer->send($message);
 
             unset($contactMessage);
-            unset($contactForm);
+            unset($form);
             $contactMessage = new ContactMessage();
-            $contactForm = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
+            $form = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
                 'i18n' => $this->getI18n()
             ));
         }
 
 
-        return $contactForm;
+        return $form;
+    }
+
+    private function getNewsletterForm(Request $request)
+    {
+        $subscriber = new NewsletterSubscriber();
+
+        $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+
+            try {
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+            }
+
+            unset($subscriber);
+            unset($form);
+            $subscriber = new NewsletterSubscriber();
+            $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
     }
 
 }

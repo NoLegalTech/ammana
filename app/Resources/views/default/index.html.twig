@@ -265,7 +265,7 @@ section#steps h3 > .title {
         font-size: 24px;
         text-transform: uppercase;
         font-weight: 500;
-        margin-bottom: 0;
+        margin-bottom: 40px;
     }
     #blog .left {
         float: left;
@@ -276,6 +276,31 @@ section#steps h3 > .title {
         float: right;
         width: 50%;
         color: black;
+        text-align: left;
+        margin-bottom: 60px;
+    }
+    #blog .right h2 {
+        color: #2976ac;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    #blog .right div.closed img.closed {
+        display: inline-block;
+    }
+    #blog .right div.closed img.open {
+        display: none;
+    }
+    #blog .right div.open img.closed {
+        display: none;
+    }
+    #blog .right div.open img.open {
+        display: inline-block;
+    }
+    #blog .right div.closed p {
+        display: none;
+    }
+    #blog .right div.open p {
+        display: inline-block;
     }
 </style>
 
@@ -286,9 +311,116 @@ section#steps h3 > .title {
             </div>
             <div class="right">
                 <h1>Dudas frecuentes</h1>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Para que sirve un protocolo laboral para el uso de la tecnología?
+                    </h2>
+                    <p>
+                        Los protocolos laborales de Ammana fijan las reglas de uso de los equipos informáticos,
+                        el correo electrónico, las aplicaciones de mensajería o las redes sociales por parte
+                        de los trabajadores, reduciendo notablemente con ellos las malas prácticas laborales.
+                        Su empresa estará más protegida frente a cualquier conflicto que pueda surgir en estos
+                        y otros muchos aspectos.  
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Puede una empresa controlar el uso que hacen sus trabajadores de los móviles y dispositivos electrónicos?
+                    </h2>
+                    <p>
+                        Sí, el art. 20 del Estatuto de los Trabajadores dice que el control y la dirección del
+                        uso de las tecnologías en la empresa recae sobre el empresario. Esto incluye el control
+                        sobre el tiempo de trabajo y sobre  los dispositivos informáticos, electrónicos o los
+                        móviles propiedad de la empresa. Solo se podrá realizar de forma correcta y efectiva este
+                        control y dirección si existen protocolos laborales en la empresa. 
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Qué tipo de medidas puede adoptar la empresa cuando un trabajador habla mal de ella en su perfil personal de Facebook?
+                    </h2>
+                    <p>
+                        Empresa y trabajador deben actuar con buena fe y por tanto no caben los comentarios injuriosos,
+                        calumniosos, difamatorios o que pongan en riesgo la buena imagen de la compañía en redes
+                        sociales.
+                        El protocolo de uso de redes sociales es el instrumento idóneo para implantar en la
+                        empresa una política que la proteja frente a riesgos en su reputación online.
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Cuáles son los beneficios de tener un protocolo laboral para la empresa y trabajador?
+                    </h2>
+                    <p>
+                        Los protocolos laborales establecen normas claras y transparentes de actuación en la empresa,
+                        evitando con ello los riesgos, costes, trastornos o conflictos que pueden surgir entre empresa
+                        y trabajador.
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿El protocolo laboral tiene validez legal?
+                    </h2>
+                    <p>
+                        Los protocolos laborales tienen plena validez legal una vez comunicados a los trabajadores,
+                        debiendo ser respetadas sus cláusulas.
+                    </p>
+                </div>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Cuánto se tarda en obtener un protocolo laboral con Ammana?
+                    </h2>
+                    <p>
+                        Podrá tener su protocolo laboral, más una guía sobre cómo utilizarlo correctamente para que
+                        tenga validez legal, en tan solo unos minutos. 
+                    </p>
+                </div>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Por qué necesito una guía de uso del protocolo?
+                    </h2>
+                    <p>
+                        Porque el protocolo debe utilizarse de forma correcta en la empresa para que su empresa
+                        quede protegida y tenga validez legal.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
+
+        <script language="javascript">
+            window.addEventListener("DOMContentLoaded", function() {
+                var submit = document.getElementById("contact_form_submit");
+                var check = document.getElementById("accept_terms");
+
+                submit.disabled = !check.checked;
+
+                check.onchange = function() {
+                    submit.disabled = !check.checked;
+                };
+            }, false);
+        </script>
 
 <style>
     #contact {
@@ -481,5 +613,27 @@ section#steps h3 > .title {
         </script>
 
     </section>
+{% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        jQuery(document).ready(function () {
+
+            $('#blog .right h2').on('click', function(e) {
+                e.preventDefault();
+                var parentDiv = $(this).parent();
+                if (parentDiv.hasClass('open')) {
+                    parentDiv.removeClass('open');
+                    parentDiv.addClass('closed');
+                } else {
+                    parentDiv.removeClass('closed');
+                    parentDiv.addClass('open');
+                }
+            });
+
+        });
+    </script>
 {% endblock %}

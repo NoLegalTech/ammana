@@ -193,11 +193,11 @@ body {
                 margin: 0;
                 padding: 0;
                 float: left;
+                background-color: #eaeff2;
             }
             #newsletter {
                 width: 50%;
                 float: left;
-                background-color: #eaeff2;
                 padding: 0 80px;
             }
             #newsletter > h1 {
@@ -232,6 +232,31 @@ body {
             #footer_footer {
                 width: 50%;
                 float: right;
+                padding: 30px 80px;
+                display: grid;
+                grid-template-columns: auto auto;
+                color: #939ab6;
+                background-color: white;
+            }
+            #footer_footer > a {
+                color: #939ab6;
+                font-size: 16px;
+            }
+            #footer_footer > p {
+                color: #939ab6;
+                margin-top: 10px;
+                margin-bottom: 0;
+                font-size: 14px;
+            }
+            #footer_footer > p > a {
+                color: #61ace3;
+                font-size: 14px;
+            }
+            .first_column {
+                grid-column: 1 / 2;
+            }
+            .two_columns {
+                grid-column: 1 / 3;
             }
         </style>
 
@@ -250,35 +275,19 @@ body {
             </div>
 
             <div id="footer_footer">
-                <div class="wrap">
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_legal') }}">Quiénes somos</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_legal') }}">Información legal</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_legal') }}">Twitter</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_privacy') }}">Protocolos</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_privacy') }}">Política de privacidad</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_privacy') }}">Linkedin</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_cookies') }}">Blog</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_cookies') }}">Política de cookies</a>
-                    </div>
-                    <div class="related-post item_in_3col">
-                        <a href="{{ path('info_cookies') }}">Contacto</a>
-                    </div>
-                </div>
+                <a href="{{ path('info_legal') }}">Quiénes somos</a>
+                <a href="{{ path('info_legal') }}">Información legal</a>
+                <a href="{{ path('info_privacy') }}">Protocolos</a>
+                <a href="{{ path('info_privacy') }}">Política de privacidad</a>
+                <a href="{{ path('info_cookies') }}">Blog</a>
+                <a href="{{ path('info_cookies') }}">Política de cookies</a>
+                <a class="first_column" href="{{ path('info_cookies') }}">Contacto</a>
+                <p class="two_columns">
+                    Copyright &copy; 2017 - Todos los derechos reservados - ammana.es
+                </p>
+                <p class="two_columns">
+                    Un producto de <a href="https://zeres.es/" target="_blank">Zeres Abogados</a>
+                </p>
             </div>
 
         </div>

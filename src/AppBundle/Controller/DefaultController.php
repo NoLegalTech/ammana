@@ -23,14 +23,12 @@ class DefaultController extends Controller
     {
         $contactForm = $this->getContactForm($request, $mailer);
 
-        $newsletterForm = $this->getNewsletterForm($request);
-
         return $this->render('default/index.html.twig', [
             'title' => $this->getI18n()['home_page']['claim']['title'],
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'google_analytics' => $this->getAnalyticsCode(),
             'contact_form' => $contactForm->createView(),
-            'newsletter_form' => $newsletterForm->createView()
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -47,7 +45,8 @@ class DefaultController extends Controller
             'title' => $this->getI18n()['error_page']['error_label'],
             'message' => $request->query->get('message'),
             'technical_info' => $request->query->get('technical_info', null),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -55,7 +54,8 @@ class DefaultController extends Controller
     {
         return $this->render('default/legal.html.twig', [
             'title' => $this->getI18n()['legal_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -63,7 +63,8 @@ class DefaultController extends Controller
     {
         return $this->render('default/privacy.html.twig', [
             'title' => $this->getI18n()['privacy_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -71,7 +72,8 @@ class DefaultController extends Controller
     {
         return $this->render('default/cookies.html.twig', [
             'title' => $this->getI18n()['cookies_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -81,7 +83,8 @@ class DefaultController extends Controller
         return $this->render('default/redes.html.twig', [
             'title' => $this->getI18n()['redes_page']['title'],
             'google_analytics' => $this->getAnalyticsCode(),
-            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax))
+            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax)),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -91,7 +94,8 @@ class DefaultController extends Controller
         return $this->render('default/mensajerias.html.twig', [
             'title' => $this->getI18n()['mensajerias_page']['title'],
             'google_analytics' => $this->getAnalyticsCode(),
-            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax))
+            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax)),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -101,7 +105,8 @@ class DefaultController extends Controller
         return $this->render('default/equipos.html.twig', [
             'title' => $this->getI18n()['equipos_page']['title'],
             'google_analytics' => $this->getAnalyticsCode(),
-            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax))
+            'price' => $this->container->getParameter('protocol_price') / (100 * (1 + $tax)),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
 
@@ -109,7 +114,8 @@ class DefaultController extends Controller
     {
         return $this->render('default/icons.html.twig', array(
             'title' => 'Iconos',
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 

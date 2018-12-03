@@ -9,10 +9,15 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Invoice;
-use AppBundle\Entity\User;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+use AppBundle\Entity\Invoice;
+use AppBundle\Entity\NewsletterSubscriber;
+use AppBundle\Entity\User;
 
 use AppBundle\Service\PermissionsService;
 
@@ -26,15 +31,15 @@ class InvoiceController extends Controller
      * Lists all invoice entities of the current user.
      *
      */
-    public function indexAction(SessionInterface $session, PermissionsService $permissions)
+    public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
     {
         if ($permissions->currentRolesInclude("customer")) {
             $user = $permissions->getCurrentUser($session);
-            return $this->showUserInvoices($user);
+            return $this->showUserInvoices($request, $user);
         }
 
         if ($permissions->currentRolesInclude("admin")) {
-            return $this->showAllInvoices();
+            return $this->showAllInvoices($request);
         }
 
         return $this->redirectToRoute('error', array(
@@ -42,7 +47,7 @@ class InvoiceController extends Controller
         ));
     }
 
-    private function showUserInvoices($user) {
+    private function showUserInvoices(Request $request, $user) {
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
             ->findByUser($user->getId());
@@ -50,11 +55,12 @@ class InvoiceController extends Controller
         return $this->render('invoice/index.html.twig', array(
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
-    private function showAllInvoices() {
+    private function showAllInvoices(Request $request) {
         $invoices = $this->getDoctrine()
             ->getRepository(Invoice::class)
             ->findAll();
@@ -70,7 +76,8 @@ class InvoiceController extends Controller
             'title' => $this->getI18n()['invoices_page']['title'],
             'invoices' => $invoices,
             'users' => $users,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -82,6 +89,36 @@ class InvoiceController extends Controller
         return $this->container->hasParameter('google_analytics')
             ? $this->container->getParameter('google_analytics')
             : null;
+    }
+
+    private function getNewsletterForm(Request $request)
+    {
+        $subscriber = new NewsletterSubscriber();
+
+        $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+
+            try {
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+            }
+
+            unset($subscriber);
+            unset($form);
+            $subscriber = new NewsletterSubscriber();
+            $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
     }
 
 }

@@ -11,10 +11,14 @@ namespace AppBundle\Controller;
 
 use Psr\Log\LoggerInterface;
 
-use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
+use AppBundle\Entity\NewsletterSubscriber;
+use AppBundle\Entity\User;
 
 use AppBundle\Service\PermissionsService;
 use AppBundle\Service\HashGenerator;
@@ -30,7 +34,7 @@ class UserController extends Controller
      * Lists all user entities.
      *
      */
-    public function indexAction(PermissionsService $permissions)
+    public function indexAction(Request $request, PermissionsService $permissions)
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
@@ -51,7 +55,8 @@ class UserController extends Controller
         return $this->render('user/index.html.twig', array(
             'title' => $this->getI18n()['user_list_page']['title'],
             'users' => $customers,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -84,7 +89,8 @@ class UserController extends Controller
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -194,7 +200,8 @@ class UserController extends Controller
             'title' => $this->getI18n()['register_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -205,14 +212,15 @@ class UserController extends Controller
     {
         return $this->render('user/welcome.html.twig', array(
             'title' => $this->getI18n()['welcome_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
     /**
      * Activates a user.
      */
-    public function activateAction(User $user)
+    public function activateAction(Request $request, User $user)
     {
         if ($user->getEnabled()) {
             return $this->redirectToRoute('activation_error');
@@ -222,18 +230,20 @@ class UserController extends Controller
         return $this->render('user/activated.html.twig', array(
             'title' => $this->getI18n()['activation_page']['title'],
             'user' => $user,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
     /**
      * Shown when activation does not succeed.
      */
-    public function activateErrorAction()
+    public function activateErrorAction(Request $request)
     {
         return $this->render('user/activation_error.html.twig', array(
             'title' => $this->getI18n()['activation_error_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -269,7 +279,8 @@ class UserController extends Controller
             'title' => $this->getI18n()['login_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -342,11 +353,12 @@ class UserController extends Controller
     /**
      * Shown when login does not succeed.
      */
-    public function loginErrorAction()
+    public function loginErrorAction(Request $request)
     {
         return $this->render('user/login_error.html.twig', array(
             'title' => $this->getI18n()['login_error_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -415,7 +427,8 @@ class UserController extends Controller
             'title' => $this->getI18n()['forgot_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -426,7 +439,8 @@ class UserController extends Controller
     {
         return $this->render('user/resetting_password.html.twig', array(
             'title' => $this->getI18n()['new_password_requested_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -445,7 +459,8 @@ class UserController extends Controller
             $this->getDoctrine()->getManager()->flush();
             return $this->render('user/password_set.html.twig', array(
                 'title' => $this->getI18n()['new_password_set_page']['title'],
-                'google_analytics' => $this->getAnalyticsCode()
+                'google_analytics' => $this->getAnalyticsCode(),
+                'newsletter_form' => $this->getNewsletterForm($request)->createView()
             ));
         }
 
@@ -453,7 +468,8 @@ class UserController extends Controller
             'title' => $this->getI18n()['new_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -465,6 +481,36 @@ class UserController extends Controller
         return $this->container->hasParameter('google_analytics')
             ? $this->container->getParameter('google_analytics')
             : null;
+    }
+
+    private function getNewsletterForm(Request $request)
+    {
+        $subscriber = new NewsletterSubscriber();
+
+        $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+
+            try {
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+            }
+
+            unset($subscriber);
+            unset($form);
+            $subscriber = new NewsletterSubscriber();
+            $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
     }
 
 }

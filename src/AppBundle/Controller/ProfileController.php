@@ -9,11 +9,15 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+use AppBundle\Entity\NewsletterSubscriber;
 
 use AppBundle\Service\PermissionsService;
 
@@ -59,7 +63,7 @@ class ProfileController extends Controller {
                     $user->setLogo($previous_logo);
                 }
             }
-            
+
             $this->getDoctrine()->getManager()->flush();
 
             $continue = $request->get('continue');
@@ -75,7 +79,8 @@ class ProfileController extends Controller {
             'user' => $user,
             'edit_form' => $editForm->createView(),
             'continue' => $request->query->get('continue'),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -87,6 +92,36 @@ class ProfileController extends Controller {
         return $this->container->hasParameter('google_analytics')
             ? $this->container->getParameter('google_analytics')
             : null;
+    }
+
+    private function getNewsletterForm(Request $request)
+    {
+        $subscriber = new NewsletterSubscriber();
+
+        $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+
+            try {
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+            }
+
+            unset($subscriber);
+            unset($form);
+            $subscriber = new NewsletterSubscriber();
+            $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
     }
 
 }

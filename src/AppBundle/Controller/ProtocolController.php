@@ -9,6 +9,8 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +20,7 @@ use \Firebase\JWT\JWT;
 
 use AppBundle\Entity\Company;
 use AppBundle\Entity\Protocol;
+use AppBundle\Entity\NewsletterSubscriber;
 use AppBundle\Entity\User;
 use AppBundle\Service\HashGenerator;
 use AppBundle\Service\Invoices;
@@ -39,7 +42,7 @@ class ProtocolController extends Controller
      * Lists all protocol entities of the current user.
      *
      */
-    public function indexAction(PermissionsService $permissions, Invoices $invoices)
+    public function indexAction(Request $request, PermissionsService $permissions, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("customer")) {
             return $this->redirectToRoute('error', array(
@@ -78,11 +81,12 @@ class ProtocolController extends Controller
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
             'to_buy' => $to_buy,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
-    public function ordersAction(PermissionsService $permissions)
+    public function ordersAction(Request $request, PermissionsService $permissions)
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
@@ -113,11 +117,12 @@ class ProtocolController extends Controller
             'protocols' => $protocols,
             'names' => $names,
             'users' => $users,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
-    public function indexAdminAction(PermissionsService $permissions, Invoices $invoices)
+    public function indexAdminAction(Request $request, PermissionsService $permissions, Invoices $invoices)
     {
         if (!$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
@@ -158,7 +163,8 @@ class ProtocolController extends Controller
             'names' => $names,
             'company_names' => $company_names,
             'to_buy' => $to_buy,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -211,7 +217,8 @@ class ProtocolController extends Controller
                     'profile_completed' => $profile_completed,
                     'form' => $questionsForm->createView(),
                     'protocol' => $protocol,
-                    'google_analytics' => $this->getAnalyticsCode()
+                    'google_analytics' => $this->getAnalyticsCode(),
+                    'newsletter_form' => $this->getNewsletterForm($request)->createView()
                 ));
             }
 
@@ -242,7 +249,8 @@ class ProtocolController extends Controller
             'profile_completed' => $profile_completed,
             'form' => $questionsForm->createView(),
             'protocol' => $protocol,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -321,7 +329,8 @@ class ProtocolController extends Controller
             'title' => $this->getI18n()['company_name_admin_page']['title'],
             'company' => $company,
             'edit_form' => $companyNameForm->createView(),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -363,7 +372,8 @@ class ProtocolController extends Controller
                     'form' => $questionsForm->createView(),
                     'protocol' => $protocol,
                     'company' => $company,
-                    'google_analytics' => $this->getAnalyticsCode()
+                    'google_analytics' => $this->getAnalyticsCode(),
+                    'newsletter_form' => $this->getNewsletterForm($request)->createView()
                 ));
             }
 
@@ -391,7 +401,8 @@ class ProtocolController extends Controller
             'title' => $this->getI18n()['questions_admin_page']['title'],
             'form' => $questionsForm->createView(),
             'protocol' => $protocol,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -726,7 +737,8 @@ class ProtocolController extends Controller
             'content' => $document['content'],
             'with_logo' => $with_logo,
             'logo_url' => $logo_url,
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -842,7 +854,8 @@ class ProtocolController extends Controller
                 'bank_account' => $this->container->getParameter('account_number'),
                 'amount' => $this->formatEuro($amount)
             ),
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -855,11 +868,12 @@ class ProtocolController extends Controller
      * Shows a payment completion status page.
      *
      */
-    public function paymentCompleteAction()
+    public function paymentCompleteAction(Request $request)
     {
         return $this->render('protocol/payment_complete.html.twig', array(
             'title' => $this->getI18n()['payment_complete_page']['title'],
-            'google_analytics' => $this->getAnalyticsCode()
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
 
@@ -912,6 +926,36 @@ class ProtocolController extends Controller
         return $this->container->hasParameter('google_analytics')
             ? $this->container->getParameter('google_analytics')
             : null;
+    }
+
+    private function getNewsletterForm(Request $request)
+    {
+        $subscriber = new NewsletterSubscriber();
+
+        $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($subscriber);
+
+            try {
+                $em->flush();
+            } catch (UniqueConstraintViolationException $e) {
+            }
+
+            unset($subscriber);
+            unset($form);
+            $subscriber = new NewsletterSubscriber();
+            $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
     }
 
 }

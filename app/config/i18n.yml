@@ -303,8 +303,10 @@ twig:
 
                 login_page:
                     title: Identifícate
-                    button: Identificarse
-                    forgot_password: Olvidé mi contraseña
+                    button: Enviar
+                    forgot_password: He olvidado mi contraseña
+                    must_register: Si no es usuario debe
+                    must_register_button: Registrarse
 
                 login_error_page:
                     title: Error de identificación

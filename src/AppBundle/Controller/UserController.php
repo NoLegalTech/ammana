@@ -206,6 +206,77 @@ class UserController extends Controller
     }
 
     /**
+     * Registers a new adviser user.
+     */
+    public function registerAdviserAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher, AlertsService $alerts)
+    {
+        $user = new User();
+        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+            'i18n' => $this->getI18n(),
+            'csrf_protection' => false
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $user->setEnabled(false);
+                $user->setRoles('adviser');
+                $user->setActivationHash($hasher->generate());
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();
+
+                $plain_text = $this->renderView(
+                    'email/activation.txt.twig',
+                    array('activationHash' => $user->getActivationHash())
+                );
+
+                $logger->info('Sending welcome mail to '.$user->getEmail().' with content:');
+                $logger->info($plain_text);
+
+                $sender_email = $this->container->getParameter('emails_sender_email');
+                $sender_name = $this->container->getParameter('emails_sender_name');
+
+                $message = (new \Swift_Message($this->getI18n()['emails']['welcome']['title']))
+                    ->setFrom(array($sender_email => $sender_name))
+                    ->setTo($user->getEmail())
+                    ->setBody(
+                        $this->renderView(
+                            'email/activation.html.twig',
+                            array('activationHash' => $user->getActivationHash())
+                        ),
+                        'text/html'
+                    )
+                    ->addPart($plain_text, 'text/plain');
+
+                $mailer->send($message);
+
+                $alerts->info(
+                    $this->getI18n()['alerts']['user_registered']['title'],
+                    $this->getI18n()['alerts']['user_registered']['message'],
+                    $user->__toString()
+                );
+
+                return $this->redirectToRoute('thanks_for_registering');
+            } catch(\Exception $e){
+                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $user->getEmail());
+                $logger->error($e);
+                return $this->redirectToRoute('error', array(
+                    'message' => $this->getI18n()['errors']['cannot_register_user']['user']
+                ));
+            }
+        }
+
+        return $this->render('user/register.adviser.html.twig', array(
+            'title' => $this->getI18n()['register_page']['title'],
+            'user' => $user,
+            'form' => $form->createView(),
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
      * Welcome page to new user.
      */
     public function welcomeAction(Request $request)

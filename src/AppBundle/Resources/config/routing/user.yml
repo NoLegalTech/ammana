@@ -9,6 +9,11 @@ register_user:
     defaults: { _controller: "AppBundle:User:register" }
     methods:  [GET, POST]
 
+register_adviser:
+    path:     "%urls.register_adviser%"
+    defaults: { _controller: "AppBundle:User:registerAdviser" }
+    methods:  [GET, POST]
+
 thanks_for_registering:
     path:     "%urls.thanks_for_registering%"
     defaults: { _controller: "AppBundle:User:welcome" }

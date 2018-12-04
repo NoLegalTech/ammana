@@ -2,6 +2,7 @@ parameters:
     # user urls
     # ---------
     urls.register_user: /register
+    urls.register_adviser: /adviser/register
     urls.user_login:    /login
     urls.login_error:   /login/error
     urls.user_logout:   /logout
@@ -347,6 +348,8 @@ twig:
                 register_page:
                     title:  Registro gratuito
                     button: Registrarse
+                    advisers_register: ¿Eres una asesoría? Regístrate
+                    advisers_register_button: aquí
 
                 welcome_page:
                     title:   Bienvenido

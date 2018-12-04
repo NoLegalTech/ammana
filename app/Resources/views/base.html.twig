@@ -53,7 +53,7 @@
 
     <body id="top">
 
-        <header id="masthead" class="site-header" role="banner">
+        <header id="masthead" class="site-header collapsed" role="banner">
 
         <style>
 @font-face{
@@ -117,6 +117,67 @@ body {
     border: 1px solid #c4c9cf;
     display: block;
 }
+
+            img.menubar {
+                display: none;
+            }
+
+            @media (max-width: 480px) {
+                #masthead .wrap {
+                    margin: 0;
+                    padding: 0;
+                }
+                .custom-header .wrap.main-menu > a > img {
+                    margin-left: 20px;
+                }
+                img.menubar {
+                    display: block;
+                    float: right;
+                    margin-top: 15px;
+                    cursor: pointer;
+                    margin-bottom: 15px;
+                }
+                #masthead ul {
+                    display: block;
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                }
+                #masthead.collapsed ul {
+                    display: none;
+                }
+                #masthead li {
+                    width: 100%;
+                    display: block;
+                    padding: 0;
+                    margin: 0;
+                    border-bottom: 1px solid #c4c9cf;
+                    padding-left: 10%;
+                    height: 70px;
+                }
+                #masthead li:hover {
+                    background-color: #c4c9cf;
+                }
+                #masthead li a {
+                    font-size: 20px;
+                }
+                #masthead li:hover a {
+                    color: white;
+                }
+                section#fill-pre-content {
+                    height: 550px;
+                }
+                #masthead.collapsed + section#fill-pre-content {
+                    height: 200px;
+                }
+                #masthead .custom-header .wrap.main-menu > ul.user {
+                    height: 70px;
+                }
+                #masthead .custom-header .wrap.main-menu > ul.general {
+                    height: 280px;
+                }
+            }
+
         </style>
 
         <div class="custom-header" style="margin-bottom: 0px;">
@@ -126,6 +187,8 @@ body {
                 <a href="{{ path('app') }}">
                     <img src="/blog/wp-content/themes/twentyseventeen/assets/images/logo.png" width="200" alt="El blog de ammana">
                 </a>
+
+                <img class="menubar" src="/images/menubar.png">
 
                 <ul class="user">
                     {% if not app.session.get('user') %}
@@ -170,6 +233,7 @@ body {
                         <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.contact }}</a>
                     </li>
                 </ul>
+
         </div><!-- .wrap -->
 
         </div><!-- .custom-header -->
@@ -182,6 +246,19 @@ body {
             {% javascripts '@AppBundle/Resources/public/js/*' filter='uglifyjs2' %}
                 <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
+
+            <script language="javascript">
+                $(function() {
+                    $('img.menubar').click(function() {
+                        var header = $('#masthead');
+                        if (header.hasClass('collapsed')) {
+                            header.removeClass('collapsed');
+                        } else {
+                            header.addClass('collapsed');
+                        }
+                    });
+                });
+            </script>
         {% endblock %}
 
         <style>

@@ -461,6 +461,42 @@ section#steps h3 > .title {
     #blog .right div.open p {
         display: inline-block;
     }
+
+    @media (max-width: 480px) {
+
+        #blog .left,
+        #blog .right {
+            width: 100%;
+            padding: 0;
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-bottom: 0;
+            padding-bottom: 40px;
+        }
+
+        #blog .left {
+            border-bottom: 1px solid #c4c9cf;
+        }
+
+        #blog h1 {
+            text-align: center;
+            text-transform: none;
+            font-size: 36px;
+            font-weight: 200;
+            padding-top: 50px;
+        }
+
+        #blog > .wrap {
+            padding: 0;
+        }
+
+        #blog .right div.closed img.closed,
+        #blog .right div.open img.open {
+            display: none;
+        }
+
+    }
+
 </style>
 
     <section id="blog">

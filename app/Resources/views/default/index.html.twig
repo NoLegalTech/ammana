@@ -31,25 +31,25 @@
         }
         #top-banner h1 {
             color: #4e9bd3;
-            padding-top: 100px;
-            font-size: 35px;
+            padding-top: 80px;
+            font-size: 50px;
             text-transform: none;
             font-weight: 500;
             margin-bottom: 0;
         }
         #top-banner h2 {
             padding-top: 0;
-            font-size: 26px;
+            font-size: 45px;
             color: #2b313d;
             text-transform: none;
             width: 80%;
             text-align: center;
             margin: 0 10%;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         #top-banner p {
             padding: 16px 10px;
-            font-size: 16px;
+            font-size: 20px;
             line-height: 1.5;
             text-align: center;
             font-weight: 100;
@@ -163,58 +163,179 @@ section#steps h3 > .title {
         #top-banner .right > div:nth-child(2) > img {
             margin-top: -10px;
         }
+
+        .show-in-mobile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            #top-banner {
+                height: 1025px;
+            }
+            #top-banner .left {
+                height: 485px;
+            }
+            #top-banner .right {
+                height: 541px;
+            }
+            #top-banner h1 {
+                padding-top: 30px;
+                font-size: 40px;
+            }
+            #top-banner h2 {
+                font-size: 36px;
+            }
+            #top-banner .left,
+            #top-banner .right {
+                width: 100%;
+                border-bottom: 1px solid #c4c9cf;
+            }
+            .hide-in-mobile {
+                display: none;
+            }
+            .show-in-mobile {
+                display: block;
+            }
+            #top-banner .right > div > h3 {
+                text-align: center;
+                font-size: 24px;
+                margin: 20px 10px 0px 20px;
+            }
+            #top-banner .right > div > p {
+                grid-column: 1 / 3;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+                font-size: 16px;
+            }
+            #top-banner .right > div > img {
+                grid-row: 3 / 4;
+                grid-column: 1 / 3;
+                text-align: center;
+                max-width: 60%;
+                margin: 0 auto;
+                max-height: 80px;
+            }
+
+            section#steps .wrap-steps {
+                height: 280px;
+            }
+
+            section#steps article {
+                grid-template-columns: auto;
+            }
+
+            section#steps article p,
+            section#steps article h3 {
+                grid-column: 1;
+            }
+
+            section#steps .step.number {
+                display: none;
+            }
+
+            section#steps h3 > .highlight {
+                font-size: 30px;
+            }
+
+            section#steps h3 > .title {
+                font-size: 20px;
+            }
+
+            section#steps article p {
+                font-size: 16px;
+                padding-bottom: 0;
+            }
+
+            section#steps article p.show-in-mobile {
+                grid-column: 1;
+                grid-row: 3;
+                margin: 15px auto;
+            }
+
+            section#steps .circle {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                margin: 0px 5px;
+                cursor: pointer;
+            }
+
+            .circle.white {
+                background: white;
+            }
+
+            .circle.blue {
+                background: #2475c7;
+            }
+
+            section#steps article.slider {
+                -webkit-transition: left .6s; /* Safari */
+                transition: left .6s;
+                position: absolute;
+            }
+
+            #steps.step1 #step1  { left:    0%; }
+            #steps.step1 #step2  { left:  100%; }
+            #steps.step1 #step3  { left:  200%; }
+
+            #steps.step2 #step1  { left: -100%; }
+            #steps.step2 #step2  { left:    0%; }
+            #steps.step2 #step3  { left:  100%; }
+
+            #steps.step3 #step1  { left: -200%; }
+            #steps.step3 #step2  { left: -100%; }
+            #steps.step3 #step3  { left:    0%; }
+        }
+
     </style>
 
     <section id="top-banner">
         <div class="left">
             <h1>Protocolos laborales</h1>
-            <h2>para un uso responsable de la tecnología en la empresa</h2>
-            <p>
-                Asegúrese de que su empresa y sus empleados utilizan correctamente las tecnologías
-                de información y comunicación.
-                Fije normas claras de uso y evite conflictos innecesarios con clientes, proveedores y empleados.
-            </p>
+            <h2>para proteger su empresa</h2>
             <p>
                 Cree de forma rápida y sencilla un protocolo laboral personalizado para proteger su empresa.
+                Asegure el uso responsable de la tecnología y evite conflictos innecesarios.
             </p>
             <p>
-                <img src="/images/locker.png">
+                <img class="hide-in-mobile" src="/images/locker.png">
             </p>
         </div>
         <div class="right">
             <div>
                 <h3>Uso de <em>redes sociales</em></h3>
                 <p>
-                    Evite comentarios tóxicos, <br/>
-                    inoportunos o inapropiados entre <br/>
-                    empleados o con clientes y proveedores.
+                    <span> Comunicación </span>
+                    <span> apropiada </span>
+                    <span> y reputación. </span>
                 </p>
                 <img src="/images/protocolo_redes.png">
             </div>
             <div>
                 <h3>Uso de <em>equipos informáticos</em></h3>
                 <p>
-                    Sepa cómo tratar y gestionar <br/>
-                    el uso privado (compras, estudios, viajes...) <br/>
-                    de los sistemas de la empresa.
+                    <span> Gestión del </span>
+                    <span> uso privado </span>
+                    <span> de los equipos. </span>
                 </p>
                 <img src="/images/protocolo_equipos.png">
             </div>
             <div>
                 <h3>Uso de <em>sistemas de mensajería</em></h3>
                 <p>
-                    Conozca los límites legales en la <br/>
-                    creación de grupos de whatsapp con <br/>
-                    empleados y el envío de mensajes sms.
+                    <span> Límites legales </span>
+                    <span> para intranet, </span>
+                    <span> whatsapp, sms, ... </span>
                 </p>
                 <img src="/images/protocolo_mensajeria.png">
             </div>
         </div>
     </section>
 
-    <section id="steps">
+    <section id="steps" class="step1">
         <div class="wrap-steps">
-            <article>
+            <article id="step1" class="slider">
                 <h3>
                     <span class="step number">1</span>
                     <span class="highlight">Elige</span>
@@ -226,8 +347,13 @@ section#steps h3 > .title {
                     establecer normas claras y
                     transparentes de uso.
                 </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle white"></span>
+                    <span data-link="step2" class="circle blue"></span>
+                    <span data-link="step3" class="circle blue"></span>
+                </p>
             </article>
-            <article>
+            <article id="step2" class="slider">
                 <h3>
                     <span class="step number">2</span>
                     <span class="highlight">Diseña</span>
@@ -235,14 +361,19 @@ section#steps h3 > .title {
                 </h3>
                 <p>
                     Responde un sencillo
-                    formulario sobre cómo es
+                    formulario sobre
                     tu empresa y el uso que
                     hacéis de la tecnología. <br/>
                     Hazlo online y de forma
                     segura.
                 </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle blue"></span>
+                    <span data-link="step2" class="circle white"></span>
+                    <span data-link="step3" class="circle blue"></span>
+                </p>
             </article>
-            <article>
+            <article id="step3" class="slider">
                 <h3>
                     <span class="step number">3</span>
                     <span class="highlight">Descarga</span>
@@ -251,11 +382,15 @@ section#steps h3 > .title {
                 <p>
                     Obtén al instante el
                     protocolo para proteger tu
-                    empresa de posibles
-                    conflictos y un manual
+                    empresa y un manual
                     para implantarlo. <br/>
                     Documento con validez
                     legal.
+                </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle blue"></span>
+                    <span data-link="step2" class="circle blue"></span>
+                    <span data-link="step3" class="circle white"></span>
                 </p>
             </article>
         </div>
@@ -635,6 +770,27 @@ section#steps h3 > .title {
                     parentDiv.removeClass('closed');
                     parentDiv.addClass('open');
                 }
+            });
+
+            var intervalSlider = setInterval(function() {
+                if ($('#steps').hasClass('step1')) {
+                    $('#steps').removeClass('step1');
+                    $('#steps').addClass('step2');
+                } else if ($('#steps').hasClass('step2')) {
+                    $('#steps').removeClass('step2');
+                    $('#steps').addClass('step3');
+                } else {
+                    $('#steps').removeClass('step3');
+                    $('#steps').addClass('step1');
+                }
+            }, 5000);
+
+            $('span.circle').click(function() {
+                $('#steps').removeClass('step1');
+                $('#steps').removeClass('step2');
+                $('#steps').removeClass('step3');
+                $('#steps').addClass($(this).data('link'));
+                clearInterval(intervalSlider);
             });
 
         });

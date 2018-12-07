@@ -28,19 +28,23 @@ class ContactType extends AbstractType {
         $builder
             ->add('name', TextType::class, array(
                 'label' => $i18n['forms']['contact_form']['name'] . ':',
-                'required' => true
+                'required' => true,
+                'attr' => [ 'placeholder' => 'Nombre' ]
             ))
             ->add('company', TextType::class, array(
                 'label' => $i18n['forms']['contact_form']['company'] . ':',
-                'required' => true
+                'required' => true,
+                'attr' => [ 'placeholder' => 'Empresa' ]
             ))
             ->add('email', TextType::class, array(
                 'label' => $i18n['forms']['contact_form']['email'] . ':',
-                'required' => true
+                'required' => true,
+                'attr' => [ 'placeholder' => 'e-mail' ]
             ))
             ->add('comment', TextareaType::class, array(
                 'label' => $i18n['forms']['contact_form']['comment'] . ':',
-                'required' => true
+                'required' => true,
+                'attr' => [ 'placeholder' => 'Comentario' ]
             ));
     }
 

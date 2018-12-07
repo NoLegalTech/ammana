@@ -462,7 +462,17 @@ section#steps h3 > .title {
         display: inline-block;
     }
 
+    #contact ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+    }
+
     @media (max-width: 480px) {
+
+        #contact ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #abacb0;
+            opacity: 1; /* Firefox */
+        }
 
         #blog .left,
         #blog .right {
@@ -796,6 +806,51 @@ section#steps h3 > .title {
         background-color: #98a3ab;
         color: #3a3a3a;
         cursor: default;
+    }
+
+
+    @media (max-width: 480px) {
+
+        #contact .left,
+        #contact .right {
+            width: 100%;
+        }
+
+        #contact .left,
+        #contact .left p {
+            text-align: center;
+        }
+
+        #contact .left h1 {
+            margin-top: 30px;
+            padding: 0;
+            font-size: 36px;
+        }
+
+        #contact .left h2 {
+            font-size: 28px;
+            padding: 0;
+        }
+
+        #contact .left p {
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #contact_form label {
+            display: none;
+        }
+
+        #contact .right form .row div.form-buttons,
+        #contact .right form > div > div textarea,
+        #contact .right form > div > div input {
+            width: 100%;
+        }
+
+        #contact .right form {
+            padding-top: 10px;
+        }
+
     }
 
 </style>

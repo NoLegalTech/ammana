@@ -372,6 +372,9 @@ twig:
 
                 equipos_page:
                     title:   Uso de equipos informáticos
+
+                who_page:
+                    title:   Quiénes somos
                 # =================================================================================
  
                 # Emails

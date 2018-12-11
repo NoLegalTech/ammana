@@ -119,6 +119,15 @@ class DefaultController extends Controller
         ));
     }
 
+    public function whoAction(Request $request)
+    {
+        return $this->render('default/who.html.twig', [
+            'title' => $this->getI18n()['who_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ]);
+    }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }

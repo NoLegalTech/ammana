@@ -1,0 +1,107 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style>
+        main.container {
+            padding: 0;
+        }
+        div.wrapper.row3 {
+            border-bottom: 1px solid #c4c9cf;
+        }
+        div.section-title {
+            width: 100%;
+            border-bottom: 1px solid #c4c9cf;
+        }
+        div.section-title h1 {
+            text-align: left;
+            text-transform: uppercase;
+            color: #4e9bd3;
+            font-size: 28px;
+            font-weight: 500;
+            max-width: 978px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        main.container .left {
+            width: 50%;
+            float: left;
+            padding-right: 50px;
+            border-right: 1px solid #c4c9cf;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        main.container .right {
+            width: 50%;
+            float: right;
+            padding-left: 50px;
+            padding-top: 50px;
+        }
+        p.centered {
+            text-align: center;
+            display: grid;
+            grid-template-columns: auto;
+        }
+        main.container .right .centered img {
+            width: 120px;
+            margin: 0 auto;
+        }
+    </style>
+
+    <div class="wrapper row3 section-title">
+        <h1>Quienes somos</h1>
+    </div>
+
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="left">
+                <p>
+                    AMMANA es una Startup Legaltech, que pertenece a
+                    ZERES, equipo de abogados formada por
+                    profesionales especializados en Derecho Laboral.
+                </p>
+                <p>
+                    AMMANA es una solución que permite al usuario
+                    generar sus propios protocolos laborales en el uso de
+                    las nuevas tecnologías de forma fácil e intuitiva.
+                </p>
+                <p>
+                    Con AMMANA cualquier usuario puede realizar todos
+                    los protocolos de forma online, desde cualquier
+                    dispositivo con conexión a internet.
+                </p>
+                <p>
+                    AMMANA permite una optimización de recursos
+                    (principalmente dinero y tiempo) en la gestión de
+                    documentos legales, con la tranquilidad de tener
+                    detrás una firma de abogados especializados en
+                    derecho laboral.
+                </p>
+            </div>
+            <div class="right">
+                <p class="centered">
+                    <img src="/images/zeres.png">
+                    <a href="http://www.zeres.com">www.zeres.com</a>
+                </p>
+                <p>
+                    ZERES es una firma de abogados con más de veinte años de experiencia
+                    que ofrece servicios especializados de consultoría, asesoramiento y
+                    defensa judicial en materia laboral, con una firma orientación al cliente.
+                </p>
+                <p>
+                    La especialidad de ZERES como abogados laboralistas ha permitido
+                    desarrollar y automatizar protocolos laborales de uso de nuevas
+                    tecnologías con total validez legal.
+                </p>
+            </div>
+        </main>
+    </div>
+
+{% endblock %}

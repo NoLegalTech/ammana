@@ -21,13 +21,11 @@ class DefaultController extends Controller
 {
     public function indexAction(Request $request, \Swift_Mailer $mailer)
     {
-        $contactForm = $this->getContactForm($request, $mailer);
-
         return $this->render('default/index.html.twig', [
             'title' => $this->getI18n()['home_page']['claim']['title'],
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
             'google_analytics' => $this->getAnalyticsCode(),
-            'contact_form' => $contactForm->createView(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }
@@ -119,11 +117,12 @@ class DefaultController extends Controller
         ));
     }
 
-    public function whoAction(Request $request)
+    public function whoAction(Request $request, \Swift_Mailer $mailer)
     {
         return $this->render('default/who.html.twig', [
             'title' => $this->getI18n()['who_page']['title'],
             'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ]);
     }

@@ -46,6 +46,7 @@ parameters:
     urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
     urls.protocol_admin_html:     /admin/protocol/{id}/html
     urls.protocol_admin_delete:   /admin/protocol/{id}/delete
+    urls.protocol_public_list:    /protocolos
 
 twig:
     globals:
@@ -375,6 +376,10 @@ twig:
 
                 who_page:
                     title:   Quiénes somos
+
+                protocols_public_list_page:
+                    title:   Lista de protocolos
+
                 # =================================================================================
  
                 # Emails

@@ -20,6 +20,7 @@ use \Firebase\JWT\JWT;
 
 use AppBundle\Entity\Company;
 use AppBundle\Entity\Protocol;
+use AppBundle\Entity\ContactMessage;
 use AppBundle\Entity\NewsletterSubscriber;
 use AppBundle\Entity\User;
 use AppBundle\Service\HashGenerator;
@@ -918,6 +919,20 @@ class ProtocolController extends Controller
         return $this->redirectToRoute('protocol_index');
     }
 
+    /**
+     * Public info of protocols list.
+     *
+     */
+    public function publicListAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('protocol/public.list.html.twig', array(
+            'title' => $this->getI18n()['protocols_public_list_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
@@ -950,6 +965,52 @@ class ProtocolController extends Controller
             unset($form);
             $subscriber = new NewsletterSubscriber();
             $form = $this->createForm('AppBundle\Form\NewsletterType', $subscriber, array(
+                'i18n' => $this->getI18n()
+            ));
+        }
+
+
+        return $form;
+    }
+
+    private function getContactForm(Request $request, \Swift_Mailer $mailer)
+    {
+        $contactMessage = new ContactMessage();
+
+        $form = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        $sender_email = $this->container->getParameter('emails_sender_email');
+        $sender_name = $this->container->getParameter('emails_sender_name');
+        $contactEmail = $this->container->getParameter('contact_email');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = (new \Swift_Message($this->getI18n()['emails']['contact']['title']))
+                ->setFrom(array($sender_email => $sender_name))
+                ->setTo($contactEmail)
+                ->setBody(
+                    $this->renderView(
+                        'email/contact.html.twig',
+                        array('data' => $contactMessage)
+                    ),
+                    'text/html'
+                )
+                ->addPart(
+                    $this->renderView(
+                        'email/contact.txt.twig',
+                        array('data' => $contactMessage)
+                    ),
+                    'text/plain'
+                );
+
+            $mailer->send($message);
+
+            unset($contactMessage);
+            unset($form);
+            $contactMessage = new ContactMessage();
+            $form = $this->createForm('AppBundle\Form\ContactType', $contactMessage, array(
                 'i18n' => $this->getI18n()
             ));
         }

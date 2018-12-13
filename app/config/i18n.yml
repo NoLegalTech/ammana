@@ -46,7 +46,9 @@ parameters:
     urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
     urls.protocol_admin_html:     /admin/protocol/{id}/html
     urls.protocol_admin_delete:   /admin/protocol/{id}/delete
-    urls.protocol_public_list:    /protocolos
+    urls.protocol_public_redes:       /protocolos/redes
+    urls.protocol_public_equipos:     /protocolos/equipos
+    urls.protocol_public_mensajeria:  /protocolos/mensajeria
 
 twig:
     globals:
@@ -377,8 +379,14 @@ twig:
                 who_page:
                     title:   Quiénes somos
 
-                protocols_public_list_page:
-                    title:   Lista de protocolos
+                protocols_public_redes_page:
+                    title:   Protocolo de uso de redes sociales
+
+                protocols_public_equipos_page:
+                    title:   Protocolo de uso de equipos informáticos
+
+                protocols_public_mensajeria_page:
+                    title:   Protocolo de uso de sistemas de mensajería
 
                 # =================================================================================
  

@@ -920,13 +920,41 @@ class ProtocolController extends Controller
     }
 
     /**
-     * Public info of protocols list.
+     * Public info of redes protocol.
      *
      */
-    public function publicListAction(Request $request, \Swift_Mailer $mailer)
+    public function publicRedesAction(Request $request, \Swift_Mailer $mailer)
     {
-        return $this->render('protocol/public.list.html.twig', array(
-            'title' => $this->getI18n()['protocols_public_list_page']['title'],
+        return $this->render('protocol/public.redes.html.twig', array(
+            'title' => $this->getI18n()['protocols_public_redes_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Public info of equipos protocol.
+     *
+     */
+    public function publicEquiposAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('protocol/public.equipos.html.twig', array(
+            'title' => $this->getI18n()['protocols_public_equipos_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Public info of mensajeria protocol.
+     *
+     */
+    public function publicMensajeriaAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('protocol/public.mensajeria.html.twig', array(
+            'title' => $this->getI18n()['protocols_public_mensajeria_page']['title'],
             'google_analytics' => $this->getAnalyticsCode(),
             'contact_form' => $this->getContactForm($request, $mailer)->createView(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()

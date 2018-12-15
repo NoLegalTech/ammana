@@ -137,6 +137,46 @@ class DefaultController extends Controller
         ]);
     }
 
+    public function blogAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('default/blog.html.twig', [
+            'title' => $this->getI18n()['who_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ]);
+    }
+
+    public function blogRedesAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('default/blog.redes.html.twig', [
+            'title' => $this->getI18n()['who_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ]);
+    }
+
+    public function blogMensajeriaAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('default/blog.mensajeria.html.twig', [
+            'title' => $this->getI18n()['who_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ]);
+    }
+
+    public function blogEquiposAction(Request $request, \Swift_Mailer $mailer)
+    {
+        return $this->render('default/blog.equipos.html.twig', [
+            'title' => $this->getI18n()['who_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'contact_form' => $this->getContactForm($request, $mailer)->createView(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ]);
+    }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }

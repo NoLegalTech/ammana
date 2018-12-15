@@ -68,6 +68,21 @@ blog:
     defaults: { _controller: "AppBundle:Default:blog" }
     methods:  GET
 
+blog_redes:
+    path:     /blog/redes
+    defaults: { _controller: "AppBundle:Default:blogRedes" }
+    methods:  GET
+
+blog_mensajeria:
+    path:     /blog/mensajeria
+    defaults: { _controller: "AppBundle:Default:blogMensajeria" }
+    methods:  GET
+
+blog_equipos:
+    path:     /blog/equipos
+    defaults: { _controller: "AppBundle:Default:blogEquipos" }
+    methods:  GET
+
 contact:
     path:     /contacto
     defaults: { _controller: "AppBundle:Default:contact" }

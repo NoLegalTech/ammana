@@ -67,10 +67,8 @@
             border-bottom: 1px solid #c4c9cf;
             width: 100%;
             box-sizing: border-box;
-        }
-
-        #blog article div {
-            max-width: 489px;
+            padding-top: 80px;
+            padding-bottom: 50px;
         }
 
         #blog article:nth-child(odd) {
@@ -80,14 +78,57 @@
         #blog article:nth-child(odd) div {
             float: right;
             padding-right: 40px;
+            max-width: 289px;
         }
 
         #blog article:nth-child(even) div {
             float: left;
             padding-left: 40px;
+            max-width: 689px;
+        }
+
+        #blog article:nth-child(odd) div p {
+            text-align: right;
         }
 
         #blog h2 {
+            color: #4f5877;
+            margin: 0;
+            padding: 0px 0px 0px 0px;
+            font-weight: 400;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        #blog p.date {
+            color: #4f5877;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        #blog p.author,
+        #blog p.tags {
+            color: #4e9bd3;
+        }
+
+        #related {
+            display: grid;
+            width: 100%;
+            grid-template-columns: auto auto;
+        }
+
+        #related h1 {
+            color: #c0cbcf;
+            text-align: left;
+            font-size: 28px;
+            font-weight: 500;
+            max-width: 978px;
+            margin: 0 auto;
+            padding: 30px 0;
+            grid-column: 1 / 3;
+        }
+
+        #related h2 {
             color: #f08e51;
             text-transform: uppercase;
             font-size: 16px;
@@ -95,31 +136,54 @@
             padding: 30px 0px 0px 0px;
         }
 
-        #blog h3 {
+        #related h3 {
             color: #4f5877;
             margin: 0;
             padding: 0px 0px 0px 0px;
         }
 
-        #blog h3 a {
+        #related h3 a {
             color: #4f5877;
             font-size: 28px;
             font-weight: 400;
             text-decoration: none;
         }
 
-        #blog h3 a:hover {
+        #related h3 a:hover {
             text-decoration: underline;
         }
 
-        #blog span.date {
+        #related span.date {
             color: #9299b6;
             margin-right: 10px;
         }
 
-        #blog span.author {
+        #related span.author {
             color: #4e9bd3;
             margin-left: 10px;
+        }
+
+        #related article {
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 0;
+            padding-bottom: 50px;
+        }
+
+        #related article:nth-child(even) div {
+            float: right;
+            padding-right: 40px;
+            max-width: 489px;
+        }
+
+        #related article:nth-child(odd) div {
+            float: left;
+            padding-left: 40px;
+            max-width: 489px;
+        }
+
+        #related article:nth-child(even) div p {
+            text-align: right;
         }
 
     </style>
@@ -128,19 +192,48 @@
 
         <article>
             <div>
-                <h2>Protocolos</h2>
-                <h3><a href="{{ path('blog_redes') }}">Uso de redes</a></h3>
-                <p>
-                    <span class="date">15.12.2018</span> | <span class="author">Fabián Valero Moldes</span>
+                <p class="date">
+                    15.12.2018
                 </p>
-                <p>
-                    El impacto de las tecnologías digitales en todos los ámbitos
-                    de la sociedad aparece continuamente en los medios y afecta
-                    especialmente al ámbito laboral y empresarial, desde los
-                    ciberataques mundiales a la inteligencia artificial.
+                <p class="author">
+                    Fabián Valero Moldes
+                </p>
+                <p class="tags">
+                    <span class="tag">Protocolos</span>
                 </p>
             </div>
         </article>
+
+        <article>
+            <div>
+                <h2>Uso de redes</h2>
+                <p>
+                    El impacto de las tecnologías digitales en todos los ámbitos de la sociedad aparece continuamente en los medios y afecta especialmente al ámbito laboral y empresarial, desde los ciberataques mundiales a la inteligencia artificial.
+                </p>
+                <p>
+                    A medida que las tecnologías digitales transforman rápidamente los entornos laborales, el impacto que tienen en los trabajadores no se siente por igual en todas ella.. La "sociedad conectada" en la que vivimos debe hacer frente a una serie de desafíos para lograr beneficiarse de las tecnologías digitales. Si no se prevén los riesgos relacionados con el uso de las redes sociales y la ética laboral, la confianza del público en la imagen de la empresa se verá socavada. Y si afecta a su imagen y tiene un coste reputacional, nos afecta a todos.
+                </p>
+                <p>
+                    Por este motivo, desde Zeres Abogados hemos combinado nuestra experiencia asesorando a empresas en conflictos laborales con las nuevas tecnologías, desarrollando una solución tecnológica que logrará, por un lado, evitar conflictos entre los trabajadores de una empresa por los comentarios que puedan dirigirse en redes sociales, y por el otro, evitar que se compartan información o imágenes del trabajo que pongan en riesgo los intereses de la empresa. Todo a partir de unas instrucciones elaboradas por un grupo de expertos en materia laboral y empresarial, enfocado a prevenir los peligros inherentes al uso de las redes sociales cuando no hay una regulación clara sobre estas cuestiones.
+                </p>
+                <p>
+                    ¿Se imagina una revelación de información confidencial por un selfie en Twitter? ¿O una pelea entre empleados por una disputa laboral en Facebook? La debida precaución a la hora de informar a la plantilla sobre el uso racional de las nuevas tecnologías debe plasmarse en protocolos debidamente comunicados a los trabajadores, fijando en estos los mecanismos de control que la empresa empleará para controlar su cumplimiento.
+                </p>
+                <p>
+                    Si quiere evitarlo, le recomendamos la implantación de un protocolo de prevención de riesgos laborales en uso de redes, que puede encontrar aquí.
+                </p>
+                <p>
+                    Para obtener más información sobre cómo Ammana puede ayudarle a implementar estos protocolos de prevención, póngase en contacto con nosotros hoy mismo.
+                </p>
+            </p>
+            </div>
+        </article>
+
+    </section>
+
+    <section id="related">
+
+        <h1>Otras noticias relacionadas</h1>
 
         <article>
             <div>
@@ -148,13 +241,6 @@
                 <h3><a href="{{ path('blog_equipos') }}">Uso de equipos informáticos</a></h3>
                 <p>
                     <span class="date">15.12.2018</span> | <span class="author">Fabián Valero Moldes</span>
-                </p>
-                <p>
-                    La proliferación de dispositivos inteligentes en el ámbito laboral,
-                    con la introducción de software integrado y dispositivos que ayudan
-                    a los trabajadores en su desempeño diario, y la capacidad que tienen
-                    de almacenar información podrían generar nuevos problemas laborales
-                    que muchas veces no se tienen en cuenta hasta que surge un conflicto.
                 </p>
             </div>
         </article>
@@ -165,12 +251,6 @@
                 <h3><a href="{{ path('blog_mensajeria') }}">Uso de sistema de mensajería</a></h3>
                 <p>
                     <span class="date">15.12.2018</span> | <span class="author">Fabián Valero Moldes</span>
-                </p>
-                <p>
-                    Los sistemas de mensajería empresarial de primer nivel son formas
-                    seguras y fiables de comunicación en tiempo real que satisfacen una
-                    necesidad urgente de mejorar la colaboración en las organizaciones
-                    empresariales.
                 </p>
             </div>
         </article>

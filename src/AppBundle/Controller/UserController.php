@@ -414,6 +414,18 @@ class UserController extends Controller
                     'path' => 'user_logout',
                     'text' => $this->getI18n()['menus']['admin']['logout']
                 )
+            ),
+            'adviser' => array(
+                array(
+                    'icon' => 'fa-user',
+                    'path' => 'profile_homepage',
+                    'text' => $this->getI18n()['menus']['registered_user']['profile']
+                ),
+                array(
+                    'icon' => 'fa-sign-out',
+                    'path' => 'user_logout',
+                    'text' => $this->getI18n()['menus']['registered_user']['logout']
+                )
             )
         );
         return isset($options[$role])

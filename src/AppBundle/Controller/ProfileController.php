@@ -25,7 +25,7 @@ class ProfileController extends Controller {
 
     public function indexAction(Request $request, SessionInterface $session, PermissionsService $permissions)
     {
-        if (!$permissions->currentRolesInclude("customer") && !$permissions->currentRolesInclude("admin")) {
+        if (!$permissions->currentRolesInclude("adviser") && !$permissions->currentRolesInclude("customer") && !$permissions->currentRolesInclude("admin")) {
             return $this->redirectToRoute('error', array(
                 'message' => $this->getI18n()['errors']['restricted_access']['user']
             ));

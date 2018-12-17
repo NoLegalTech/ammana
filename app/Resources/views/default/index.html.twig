@@ -9,133 +9,940 @@
 
 {% block body %}
 
+    <section id="fill-pre-content">
+    </section>
+
     <style>
         /* Not ideal, but this way we ensure these are specific to the home page */
         body, p, a, a:hover {
-            color: white;
+            color: #2b313d;
         }
-        body { background-image: url(/web/images/home-mid.w1920.jpg); }
-        @media screen and ( min-width: 1900px ) {
-            body { background-image: url(/web/images/home-mid.w1920.jpg);        }  /* 1920x881 */
+        #top-banner .left {
+            float: left;
+            width: 60%;
+            color: black;
+            padding: 0px 10%;
         }
-        @media screen and ( max-width: 1900px ) {
-            body { background-image: url(/web/images/home-mid.w1900.jpg);        }  /* 1900x881 */
+        #top-banner .right {
+            float: right;
+            width: 40%;
+            color: black;
+            border-left: 1px solid #c4c9cf;
         }
-        @media screen and ( max-width: 1800px ) {
-            body { background-image: url(/web/images/home-mid.w1800.jpg);        }  /* 1800x881 */
+        #top-banner h1 {
+            color: #4e9bd3;
+            padding-top: 80px;
+            font-size: 50px;
+            text-transform: none;
+            font-weight: 500;
+            margin-bottom: 0;
         }
-        @media screen and ( max-width: 1700px ) {
-            body { background-image: url(/web/images/home-mid.w1700.jpg);        }  /* 1700x881 */
+        #top-banner h2 {
+            padding-top: 0;
+            font-size: 45px;
+            color: #2b313d;
+            text-transform: none;
+            width: 80%;
+            text-align: center;
+            margin: 0 10%;
+            margin-bottom: 20px;
         }
-        @media screen and ( max-width: 1600px ) {
-            body { background-image: url(/web/images/home-mid.w1600.jpg);        }  /* 1600x881 */
+        #top-banner p {
+            padding: 16px 10px;
+            font-size: 20px;
+            line-height: 1.5;
+            text-align: center;
+            font-weight: 100;
+            margin: 0;
         }
-        @media screen and ( max-width: 1500px ) {
-            body { background-image: url(/web/images/home-mid.w1500.jpg);        }  /* 1500x881 */
+section#steps .wrap-steps {
+    background: #61ace3 url('/web/images/clouds.png');
+background-repeat: no-repeat;
+    background-size: 120px;
+    background-position-x: 20px;
+    background-position-y: 10px;
+    border-bottom: solid 20px #2b313d;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+#top-banner {
+    height: auto;
+}
+section#steps {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+section#steps article h3 {
+    display: block;
+    float: right;
+    grid-column: 2;
+    grid-row: 1;
+    padding-top: 0;
+    color: white;
+    font-size: 14px;
+    color: #2467ad;
+    text-transform: uppercase;
+    text-align: center;
+}
+section#steps article p {
+    grid-column: 2;
+    grid-row: 2;
+    color: white;
+    margin-left: 0;
+    text-align: center;
+font-size: 14px;
+    padding: 0px 0px 50px 0px;
+    font-weight: 100;
+}
+section#steps h3 > .highlight {
+    color: white;
+    font-size: 24px;
+    text-transform: none;
+    font-weight: 100;
+}
+section#steps .step.number {
+    font-family: 'Berkshire Swash', cursive;
+    color: #2474c9;
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 40px;
+    float: none;
+    display: block;
+    margin-right: 10px;
+}
+section#steps h3 > .highlight,
+section#steps .step.number {
+    display: inline;
+}
+section#steps h3 > .title {
+    display: block;
+}
+
+        #top-banner {
+            height: 540px;
         }
-        @media screen and ( max-width: 1400px ) {
-            body { background-image: url(/web/images/home-mid.w1400.jpg);        }  /* 1400x881 */
+        #top-banner .right > div {
+            grid-template-columns: auto auto;
+            display: grid;
+            border-bottom: 1px solid #c4c9cf;
+            height: 180px;
         }
-        @media screen and ( max-width: 1300px ) {
-            body { background-image: url(/web/images/home-mid.w1300.jpg);        }  /* 1300x881 */
+        #top-banner .right > div:last-child {
+            border-bottom: none;
         }
-        @media screen and ( max-width: 1200px ) {
-            body { background-image: url(/web/images/home-mid.w1200.jpg);        }  /* 1200x881 */
+        #top-banner .right > div > h3 {
+            padding-top: 0;
+            font-size: 22px;
+            color: #2b313d;
+            text-transform: none;
+            text-align: left;
+            margin: 20px 30px 0px 40px;
+            font-weight: 100;
+            grid-row: 1 / 2;
+            grid-column: 1 / 3;
         }
-        @media screen and ( max-width: 1100px ) {
-            body { background-image: url(/web/images/home-mid.w1100.jpg);        }  /* 1100x881 */
+        #top-banner .right > div > h3 > em {
+            color: #4e9bd3;
+            font-style: normal;
         }
-        @media screen and ( max-width: 1000px ) {
-            body { background-image: url(/web/images/home-mid.w1000.jpg);        }  /* 1000x881 */
+        #top-banner .right > div > p {
+            padding: 0;
+            margin: 10px 0px 20px 50px;
+            font-size: 14px;
+            line-height: 1.5;
+            text-align: left;
+            font-weight: 600;
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
         }
-        @media screen and ( max-width: 900px ) {
-            body { background-image: url(/web/images/home-mid.w900.jpg);        }  /* 900x881 */
+        #top-banner .right > div > img {
+            grid-row: 2 / 3;
+            grid-column: 2 / 3;
+            float: right;
+            margin-top: 0px;
         }
-        @media screen and ( max-width: 800px ) {
-            body { background-image: url(/web/images/home-mid.w800.jpg);        }  /* 800x881 */
+        #top-banner .right > div:nth-child(2) > img {
+            margin-top: -10px;
         }
-        @media screen and ( max-width: 700px ) {
-            body { background-image: url(/web/images/home-mid.w700.jpg);        }  /* 700x881 */
+
+        .show-in-mobile {
+            display: none;
         }
-        @media screen and ( max-width: 600px ) {
-            body { background-image: url(/web/images/home-mid.w600.jpg);        }  /* 600x881 */
+
+        @media (max-width: 480px) {
+            #top-banner {
+                height: 1025px;
+            }
+            #top-banner .left {
+                height: 485px;
+            }
+            #top-banner .right {
+                height: 541px;
+            }
+            #top-banner h1 {
+                padding-top: 30px;
+                font-size: 40px;
+            }
+            #top-banner h2 {
+                font-size: 36px;
+            }
+            #top-banner .left,
+            #top-banner .right {
+                width: 100%;
+                border-bottom: 1px solid #c4c9cf;
+            }
+            .hide-in-mobile {
+                display: none;
+            }
+            .show-in-mobile {
+                display: block;
+            }
+            #top-banner .right > div > h3 {
+                text-align: center;
+                font-size: 24px;
+                margin: 20px 10px 0px 20px;
+            }
+            #top-banner .right > div > p {
+                grid-column: 1 / 3;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+                font-size: 16px;
+            }
+            #top-banner .right > div > img {
+                grid-row: 3 / 4;
+                grid-column: 1 / 3;
+                text-align: center;
+                max-width: 60%;
+                margin: 0 auto;
+                max-height: 80px;
+            }
+
+            section#steps .wrap-steps {
+                height: 280px;
+            }
+
+            section#steps article {
+                grid-template-columns: auto;
+            }
+
+            section#steps article p,
+            section#steps article h3 {
+                grid-column: 1;
+            }
+
+            section#steps .step.number {
+                display: none;
+            }
+
+            section#steps h3 > .highlight {
+                font-size: 30px;
+            }
+
+            section#steps h3 > .title {
+                font-size: 20px;
+            }
+
+            section#steps article p {
+                font-size: 16px;
+                padding-bottom: 0;
+            }
+
+            section#steps article p.show-in-mobile {
+                grid-column: 1;
+                grid-row: 3;
+                margin: 15px auto;
+            }
+
+            section#steps .circle {
+                height: 10px;
+                width: 10px;
+                display: inline-block;
+                margin: 0px 5px;
+                cursor: pointer;
+            }
+
+            .circle.white {
+                background: white;
+            }
+
+            .circle.blue {
+                background: #2475c7;
+            }
+
+            section#steps article.slider {
+                -webkit-transition: left .6s; /* Safari */
+                transition: left .6s;
+                position: absolute;
+            }
+
+            #steps.step1 #step1  { left:    0%; }
+            #steps.step1 #step2  { left:  100%; }
+            #steps.step1 #step3  { left:  200%; }
+
+            #steps.step2 #step1  { left: -100%; }
+            #steps.step2 #step2  { left:    0%; }
+            #steps.step2 #step3  { left:  100%; }
+
+            #steps.step3 #step1  { left: -200%; }
+            #steps.step3 #step2  { left: -100%; }
+            #steps.step3 #step3  { left:    0%; }
         }
-        @media screen and ( max-width: 500px ) {
-            body { background-image: url(/web/images/home-mid.w500.jpg);        }  /* 500x881 */
-        }
-        @media screen and ( max-width: 400px ) {
-            body { background-image: url(/web/images/home-mid.w400.jpg);        }  /* 400x881 */
-        }
-        @media screen and ( max-width: 300px ) {
-            body { background-image: url(/web/images/home-mid.w300.jpg);        }  /* 300x881 */
-        }
-        @media screen and ( max-width: 200px ) {
-            body { background-image: url(/web/images/home-mid.w200.jpg);        }  /* 200x881 */
-        }
+
     </style>
 
     <section id="top-banner">
-        <h1>Prevención de riesgos laborales</h1>
-        <h2>en medios digitales</h2>
+        <div class="left">
+            <h1>Protocolos laborales</h1>
+            <h2>para proteger su empresa</h2>
+            <p>
+                Cree de forma rápida y sencilla un protocolo laboral personalizado para proteger su empresa.
+                Asegure el uso responsable de la tecnología y evite conflictos innecesarios.
+            </p>
+            <p>
+                <img class="hide-in-mobile" src="/images/locker.png">
+            </p>
+        </div>
+        <div class="right">
+            <div>
+                <h3>Uso de <em>redes sociales</em></h3>
+                <p>
+                    <span> Comunicación </span>
+                    <span> apropiada </span>
+                    <span> y reputación. </span>
+                </p>
+                <img src="/images/protocolo_redes.png">
+            </div>
+            <div>
+                <h3>Uso de <em>equipos informáticos</em></h3>
+                <p>
+                    <span> Gestión del </span>
+                    <span> uso privado </span>
+                    <span> de los equipos. </span>
+                </p>
+                <img src="/images/protocolo_equipos.png">
+            </div>
+            <div>
+                <h3>Uso de <em>sistemas de mensajería</em></h3>
+                <p>
+                    <span> Límites legales </span>
+                    <span> para intranet, </span>
+                    <span> whatsapp, sms, ... </span>
+                </p>
+                <img src="/images/protocolo_mensajeria.png">
+            </div>
+        </div>
     </section>
 
-    <section id="mid-banner">
-        <h1>Protocolos laborales de empresa</h1>
-        <article id="mid-banner-left">
-            <a href="{{ path('info_redes') }}">
-                <h3>Uso de redes</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-        <article id="mid-banner-center">
-            <a href="{{ path('info_equipos') }}">
-                <h3>Uso de equipos informáticos</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-        <article id="mid-banner-right">
-            <a href="{{ path('info_mensajerias') }}">
-                <h3>Uso de sistema de mensajería</h3>
-                <span class="fill"> </span>
-            </a>
-        </article>
-    </section>
-
-    <section id="steps">
-        <h1>Cómo hacerlo</h1>
+    <section id="steps" class="step1">
         <div class="wrap-steps">
-            <article>
-                <span class="step number">1</span>
-                <h3><span class="highlight">Define</span>cómo es tu empresa</h3>
+            <article id="step1" class="slider">
+                <h3>
+                    <span class="step number">1</span>
+                    <span class="highlight">Elige</span>
+                    <span class="title">tu protocolo</span>
+                </h3>
                 <p>
-                    Introduce la información de la empresa
-                    más relevante, para que podamos
-                    indicarte cuál es la mejor opción para ti.<br/>
-                    Ten claros los límites legales.
+                    Selecciona la tecnología
+                    sobre la que quieres
+                    establecer normas claras y
+                    transparentes de uso.
+                </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle white"></span>
+                    <span data-link="step2" class="circle blue"></span>
+                    <span data-link="step3" class="circle blue"></span>
                 </p>
             </article>
-            <article>
-                <span class="step number">2</span>
-                <h3><span class="highlight">Diseña</span> un protocolo laboral a tu medida</h3>
+            <article id="step2" class="slider">
+                <h3>
+                    <span class="step number">2</span>
+                    <span class="highlight">Diseña</span>
+                    <span class="title">el protocolo</span>
+                </h3>
                 <p>
-                    Contesta unas sencillas preguntas en tiempo
-                    real, y crea una imagen de tu día a día.<br/>
-                    ¿Qué hacen tus empleados?<br/>
-                    ¿Cómo trabajan?
+                    Responde un sencillo
+                    formulario sobre
+                    tu empresa y el uso que
+                    hacéis de la tecnología. <br/>
+                    Hazlo online y de forma
+                    segura.
+                </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle blue"></span>
+                    <span data-link="step2" class="circle white"></span>
+                    <span data-link="step3" class="circle blue"></span>
                 </p>
             </article>
-            <article>
-                <span class="step number blue">3</span>
-                <h3><span class="highlight">Descarga</span> on line tu protocolo laboral</h3>
+            <article id="step3" class="slider">
+                <h3>
+                    <span class="step number">3</span>
+                    <span class="highlight">Descarga</span>
+                    <span class="title">tu protocolo</span>
+                </h3>
                 <p>
-                    ¡Listo! De manera inmediata
-                    recibirás el protocolo que has
-                    creado, y un manual de
-                    instrucciones para ayudarte en su
-                    implementación.
+                    Obtén al instante el
+                    protocolo para proteger tu
+                    empresa y un manual
+                    para implantarlo. <br/>
+                    Documento con validez
+                    legal.
+                </p>
+                <p class="show-in-mobile">
+                    <span data-link="step1" class="circle blue"></span>
+                    <span data-link="step2" class="circle blue"></span>
+                    <span data-link="step3" class="circle white"></span>
                 </p>
             </article>
         </div>
     </section>
 
+<style>
+    #blog h1 {
+        color: #4e9bd3;
+        padding-top: 100px;
+        font-size: 24px;
+        text-transform: uppercase;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+    #blog .left {
+        float: left;
+        width: 50%;
+        color: black;
+        padding-right: 50px;
+        margin-bottom: 40px;
+    }
+    #blog .left h2 {
+        font-size: 24px;
+        font-weight: 400;
+        margin-top: 0;
+        padding-top: 10px;
+    }
+    #blog .left h2:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    #blog .left span.date,
+    #blog .left span.author {
+        color: #2475c7;
+    }
+    #blog .left span.author {
+        border-left: 1px solid #2475c7;
+        padding-left: 10px;
+        margin-left: 5px;
+    }
+    #blog .right {
+        float: right;
+        width: 50%;
+        color: black;
+        text-align: left;
+        margin-bottom: 60px;
+    }
+    #blog .right h2 {
+        color: #2976ac;
+        font-size: 14px;
+        cursor: pointer;
+    }
+    #blog .right div.closed img.closed {
+        display: inline-block;
+    }
+    #blog .right div.closed img.open {
+        display: none;
+    }
+    #blog .right div.open img.closed {
+        display: none;
+    }
+    #blog .right div.open img.open {
+        display: inline-block;
+    }
+    #blog .right div.closed p {
+        display: none;
+    }
+    #blog .right div.open p {
+        display: inline-block;
+    }
+
+    #contact ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: white;
+        opacity: 1; /* Firefox */
+    }
+
+    @media (max-width: 480px) {
+
+        #contact ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #abacb0;
+            opacity: 1; /* Firefox */
+        }
+
+        #blog .left,
+        #blog .right {
+            width: 100%;
+            padding: 0;
+            padding-left: 2em;
+            padding-right: 2em;
+            margin-bottom: 0;
+            padding-bottom: 40px;
+        }
+
+        #blog .left {
+            border-bottom: 1px solid #c4c9cf;
+        }
+
+        #blog h1 {
+            text-align: center;
+            text-transform: none;
+            font-size: 36px;
+            font-weight: 200;
+            padding-top: 50px;
+        }
+
+        #blog > .wrap {
+            padding: 0;
+        }
+
+        #blog .right div.closed img.closed,
+        #blog .right div.open img.open {
+            display: none;
+        }
+
+    }
+
+</style>
+
+    <section id="blog">
+        <div class="wrap">
+            <div class="left">
+                <h1>Actualidad</h1>
+                <article>
+                    <h2>Uso de redes</h2>
+                    <p>
+                        <span class="date">14.08.2018</span>
+                        <span class="author">Fabián Valero Moldes</span>
+                    </p>
+                    <p class="summary">
+                        El impacto de las tecnologías digitales en todos los ámbitos de la sociedad
+                        aparece continuamente en los medios y afecta especialmente al ámbito laboral
+                        y empresarial, desde los ciberataques mundiales a la inteligencia artificial.
+                    </p>
+                </article>
+                <article>
+                    <h2>Uso de equipos informáticos</h2>
+                    <p>
+                        <span class="date">14.08.2018</span>
+                        <span class="author">Fabián Valero Moldes</span>
+                    </p>
+                    <p class="summary">
+                        La proliferación de dispositivos inteligentes en el ámbito laboral, con la
+                        introducción de software integrado y dispositivos que ayudan a los trabajadores
+                        en su desempeño diario, y la capacidad que tienen de almacenar información
+                        podrían generar nuevos problemas laborales que muchas veces no se tienen en
+                        cuenta hasta que surge un conflicto.
+                    </p>
+                </article>
+                <article>
+                    <h2>Uso de sistema de mensajería</h2>
+                    <p>
+                        <span class="date">14.08.2018</span>
+                        <span class="author">Fabián Valero Moldes</span>
+                    </p>
+                    <p class="summary">
+                        Los sistemas de mensajería empresarial de primer nivel son formas seguras y
+                        fiables de comunicación en tiempo real que satisfacen una necesidad urgente
+                        de mejorar la colaboración en las organizaciones empresariales.
+                    </p>
+                </article>
+            </div>
+            <div class="right">
+                <h1>Dudas frecuentes</h1>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Para que sirve un protocolo laboral para el uso de la tecnología?
+                    </h2>
+                    <p>
+                        Los protocolos laborales de Ammana fijan las reglas de uso de los equipos informáticos,
+                        el correo electrónico, las aplicaciones de mensajería o las redes sociales por parte
+                        de los trabajadores, reduciendo notablemente con ellos las malas prácticas laborales.
+                        Su empresa estará más protegida frente a cualquier conflicto que pueda surgir en estos
+                        y otros muchos aspectos.  
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Puede una empresa controlar el uso que hacen sus trabajadores de los móviles y dispositivos electrónicos?
+                    </h2>
+                    <p>
+                        Sí, el art. 20 del Estatuto de los Trabajadores dice que el control y la dirección del
+                        uso de las tecnologías en la empresa recae sobre el empresario. Esto incluye el control
+                        sobre el tiempo de trabajo y sobre  los dispositivos informáticos, electrónicos o los
+                        móviles propiedad de la empresa. Solo se podrá realizar de forma correcta y efectiva este
+                        control y dirección si existen protocolos laborales en la empresa. 
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Qué tipo de medidas puede adoptar la empresa cuando un trabajador habla mal de ella en su perfil personal de Facebook?
+                    </h2>
+                    <p>
+                        Empresa y trabajador deben actuar con buena fe y por tanto no caben los comentarios injuriosos,
+                        calumniosos, difamatorios o que pongan en riesgo la buena imagen de la compañía en redes
+                        sociales.
+                        El protocolo de uso de redes sociales es el instrumento idóneo para implantar en la
+                        empresa una política que la proteja frente a riesgos en su reputación online.
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Cuáles son los beneficios de tener un protocolo laboral para la empresa y trabajador?
+                    </h2>
+                    <p>
+                        Los protocolos laborales establecen normas claras y transparentes de actuación en la empresa,
+                        evitando con ello los riesgos, costes, trastornos o conflictos que pueden surgir entre empresa
+                        y trabajador.
+                    </p>
+                </div>
+     
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿El protocolo laboral tiene validez legal?
+                    </h2>
+                    <p>
+                        Los protocolos laborales tienen plena validez legal una vez comunicados a los trabajadores,
+                        debiendo ser respetadas sus cláusulas.
+                    </p>
+                </div>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Cuánto se tarda en obtener un protocolo laboral con Ammana?
+                    </h2>
+                    <p>
+                        Podrá tener su protocolo laboral, más una guía sobre cómo utilizarlo correctamente para que
+                        tenga validez legal, en tan solo unos minutos. 
+                    </p>
+                </div>
+
+                <div class="question closed">
+                    <h2>
+                        <img class="closed" src="/images/faq_closed.png">
+                        <img class="open"   src="/images/faq_open.png">
+                        ¿Por qué necesito una guía de uso del protocolo?
+                    </h2>
+                    <p>
+                        Porque el protocolo debe utilizarse de forma correcta en la empresa para que su empresa
+                        quede protegida y tenga validez legal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <script language="javascript">
+            window.addEventListener("DOMContentLoaded", function() {
+                var submit = document.getElementById("contact_form_submit");
+                var check = document.getElementById("accept_terms");
+
+                submit.disabled = !check.checked;
+
+                check.onchange = function() {
+                    submit.disabled = !check.checked;
+                };
+            }, false);
+        </script>
+
+<style>
+    #contact {
+        background: #2b313d;
+    }
+    #contact .left {
+        float: left;
+        width: 50%;
+        color: white;
+    }
+    #contact .right {
+        float: right;
+        width: 50%;
+        color: white;
+    }
+    #contact .left h1 {
+        font-size: 40px;
+        margin-bottom: 0;
+    }
+    #contact .left h2 {
+        font-size: 40px;
+        color: #64ade4;
+        font-weight: 100;
+        padding-top: 20px;
+    }
+    #contact .left p {
+        font-size: 20px;
+        font-weight: 100;
+        padding-right: 80px;
+        text-align: left;
+    }
+    #contact .left p {
+        color: white;
+    }
+    #contact .right {
+        margin-bottom: 80px;
+    }
+    #contact .right form {
+        width: 100%;
+        padding-top: 40px;
+    }
+    #contact .right form .row,
+    #contact .right form > div > div {
+        width: 100%;
+        float: left;
+    }
+    #contact .right form .row label,
+    #contact .right form > div > div label {
+        float: left;
+        width: 30%;
+        text-align: left;
+        font-size: 18px;
+    }
+    #contact .right form .row input,
+    #contact .right form .row div.form-buttons,
+    #contact .right form > div > div input,
+    #contact .right form > div > div div.form-buttons {
+        float: left;
+        width: 70%;
+        height: 30px;
+        font-size: 12px;
+        margin-top: 15px;
+    }
+    #contact .right form .row textarea,
+    #contact .right form > div > div textarea {
+        float: right;
+        width: 70%;
+        margin-top: 15px;
+        height: 150px;
+    }
+    #contact .right form .row div.form-buttons > div,
+    #contact .right form > div > div div.form-buttons > div {
+        width: 50%;
+    }
+    #contact .right form .row div.form-buttons > div.left,
+    #contact .right form > div > div div.form-buttons > div.left {
+        float: left;
+        text-align: left;
+        line-height: 30px;
+        color: #979797;
+    }
+    #contact .right form .row div.form-buttons > div.right,
+    #contact .right form > div > div div.form-buttons > div.right {
+        float: right;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type=checkbox],
+    #contact .right form > div > div div.form-buttons > div.left input[type=checkbox] {
+        width: 1px;
+        margin-top: 0;
+        visibility:hidden;
+        margin-right: 0;
+    }
+    #contact .right form .row div.form-buttons > div.left label,
+    #contact .right form > div > div div.form-buttons > div.left label {
+        cursor: pointer;
+        font-size: 12px;
+        width: auto;
+        line-height: 20px;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type=checkbox] + label:before,
+    #contact .right form > div > div div.form-buttons > div.left input[type=checkbox] + label:before {
+        border: 1px solid #979797;
+        content: "\00a0";
+        display: inline-block;
+        font: 16px/1em sans-serif;
+        height: 16px;
+        margin: 0 8px 0 0;
+        padding: 0;
+        vertical-align: top;
+        width: 16px;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:checked + label:before,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:checked + label:before {
+        color: #979797;
+        content: "\2713";
+        text-align: center;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:checked + label:after,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:checked + label:after {
+        font-weight: bold;
+    }
+
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:focus + label::before,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:focus + label::before {
+        outline: #979797 auto 5px;
+    }
+
+    #contact .right form .row div.form-buttons > div.right input[type="submit"],
+    #contact .right form > div > div div.form-buttons > div.right input[type="submit"] {
+        background-color: #61ace3;
+        border-radius: 15px;
+        line-height: 4px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        float: right;
+        margin-top: 10px;
+    }
+    #contact .right form .row div.form-buttons > div.right input[type="submit"]:disabled,
+    #contact .right form > div > div div.form-buttons > div.right input[type="submit"]:disabled {
+        background-color: #98a3ab;
+        color: #3a3a3a;
+        cursor: default;
+    }
+
+
+    @media (max-width: 480px) {
+
+        #contact .left,
+        #contact .right {
+            width: 100%;
+        }
+
+        #contact .left,
+        #contact .left p {
+            text-align: center;
+        }
+
+        #contact .left h1 {
+            margin-top: 30px;
+            padding: 0;
+            font-size: 36px;
+        }
+
+        #contact .left h2 {
+            font-size: 28px;
+            padding: 0;
+        }
+
+        #contact .left p {
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #contact_form label {
+            display: none;
+        }
+
+        #contact .right form .row div.form-buttons,
+        #contact .right form > div > div textarea,
+        #contact .right form > div > div input {
+            width: 100%;
+        }
+
+        #contact .right form {
+            padding-top: 10px;
+        }
+
+    }
+
+</style>
+
+    <section id="contact">
+
+        <div class="wrap">
+            <div class="left">
+                <h1>Contacto</h1>
+                <h2>¿Tienes alguna duda?</h2>
+                <p>
+                    Si tienes un caso especial en tu empresa o
+                    necesitas ayuda con cualquier paso del proceso
+                    de creación, no dudes en consultarnos.<br/>
+                    Te ayudaremos encantados.
+                </p>
+            </div>
+            <div class="right">
+                {{ form_start(contact_form) }}
+                    {{ form_widget(contact_form) }}
+                    <div class="row">
+                        <label></label>
+                        <div class="form-buttons">
+                            <div class="left">
+                                <input id="accept_terms" type="checkbox">
+                                <label for="accept_terms">Acepto condiciones</label>
+                            </div>
+                            <div class="right">
+                                <input id="contact_form_submit" type="submit" value="Enviar"/>
+                            </div>
+                        </div>
+                    </div>
+                {{ form_end(contact_form) }}
+            </div>
+        </div>
+
+        <script language="javascript">
+            window.addEventListener("DOMContentLoaded", function() {
+                var submit = document.getElementById("contact_form_submit");
+                var check = document.getElementById("accept_terms");
+
+                submit.disabled = !check.checked;
+
+                check.onchange = function() {
+                    submit.disabled = !check.checked;
+                };
+            }, false);
+        </script>
+
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        jQuery(document).ready(function () {
+
+            $('#blog .right h2').on('click', function(e) {
+                e.preventDefault();
+                var parentDiv = $(this).parent();
+                if (parentDiv.hasClass('open')) {
+                    parentDiv.removeClass('open');
+                    parentDiv.addClass('closed');
+                } else {
+                    parentDiv.removeClass('closed');
+                    parentDiv.addClass('open');
+                }
+            });
+
+            var intervalSlider = setInterval(function() {
+                if ($('#steps').hasClass('step1')) {
+                    $('#steps').removeClass('step1');
+                    $('#steps').addClass('step2');
+                } else if ($('#steps').hasClass('step2')) {
+                    $('#steps').removeClass('step2');
+                    $('#steps').addClass('step3');
+                } else {
+                    $('#steps').removeClass('step3');
+                    $('#steps').addClass('step1');
+                }
+            }, 5000);
+
+            $('span.circle').click(function() {
+                $('#steps').removeClass('step1');
+                $('#steps').removeClass('step2');
+                $('#steps').removeClass('step3');
+                $('#steps').addClass($(this).data('link'));
+                clearInterval(intervalSlider);
+            });
+
+        });
+    </script>
 {% endblock %}

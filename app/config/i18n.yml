@@ -2,6 +2,7 @@ parameters:
     # user urls
     # ---------
     urls.register_user: /register
+    urls.register_adviser: /adviser/register
     urls.user_login:    /login
     urls.login_error:   /login/error
     urls.user_logout:   /logout
@@ -45,6 +46,9 @@ parameters:
     urls.protocol_admin_download_recibi: /admin/protocol/{id}/recibi
     urls.protocol_admin_html:     /admin/protocol/{id}/html
     urls.protocol_admin_delete:   /admin/protocol/{id}/delete
+    urls.protocol_public_redes:       /protocolos/redes
+    urls.protocol_public_equipos:     /protocolos/equipos
+    urls.protocol_public_mensajeria:  /protocolos/mensajeria
 
 twig:
     globals:
@@ -75,13 +79,15 @@ twig:
                 # =================================================================================
                 menus:
                     new_user:
-                        login:     Identificarse
-                        register:  Registrarse
-                        home:      Inicio
-                        protocols: Protocolos
-                        protocol_uso_redes:      Protocolo laboral de uso de las redes sociales de empresa
-                        protocol_uso_mensajeria: Protocolo laboral de uso de los sistemas de mensajería instantánea
-                        protocol_uso_telematica: Protocolo laboral de uso de los equipos informáticos
+                        who_we_are: Quiénes somos
+                        news:       Actualidad
+                        contact:    Contacto
+                        login:      Login
+                        home:       Inicio
+                        protocols:  Protocolos
+                        protocol_uso_redes:      Uso de las redes sociales de empresa
+                        protocol_uso_mensajeria: Uso de los sistemas de mensajería instantánea
+                        protocol_uso_telematica: Uso de los equipos informáticos
                     registered_user:
                         profile:   Mi perfil
                         protocols: Mis protocolos
@@ -301,8 +307,10 @@ twig:
 
                 login_page:
                     title: Identifícate
-                    button: Identificarse
-                    forgot_password: Olvidé mi contraseña
+                    button: Enviar
+                    forgot_password: He olvidado mi contraseña
+                    must_register: Si no es usuario debe
+                    must_register_button: Registrarse
 
                 login_error_page:
                     title: Error de identificación
@@ -343,6 +351,8 @@ twig:
                 register_page:
                     title:  Registro gratuito
                     button: Registrarse
+                    advisers_register: ¿Eres una asesoría? Regístrate
+                    advisers_register_button: aquí
 
                 welcome_page:
                     title:   Bienvenido
@@ -365,6 +375,19 @@ twig:
 
                 equipos_page:
                     title:   Uso de equipos informáticos
+
+                who_page:
+                    title:   Quiénes somos
+
+                protocols_public_redes_page:
+                    title:   Protocolo de uso de redes sociales
+
+                protocols_public_equipos_page:
+                    title:   Protocolo de uso de equipos informáticos
+
+                protocols_public_mensajeria_page:
+                    title:   Protocolo de uso de sistemas de mensajería
+
                 # =================================================================================
  
                 # Emails
@@ -390,6 +413,9 @@ twig:
                         link:     "Establecer nueva contraseña"
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Recibes este correo porque alguien ha indicado que quieres restablecer tu contraseña. Si no has sido tú, puedes ignorar este correo con seguridad. En otro caso, sigue el siguiente enlace para establecer una nueva contraseña:"
+                    contact:
+                        title:    Nuevo mensaje en formulario de contacto de ammana.es
+                        text:     " ha dejado el siguiente mensaje:"
                 # =================================================================================
  
                 # Forms
@@ -415,3 +441,10 @@ twig:
                     company_name_form:
                         company_name:   Nombre de la compañía
                         logo:           Logo
+                    contact_form:
+                        name:           Nombre
+                        company:        Empresa
+                        email:          Email
+                        comment:        Comentario
+                        acceptsTerms:   Acepto condiciones
+                        button:         Enviar

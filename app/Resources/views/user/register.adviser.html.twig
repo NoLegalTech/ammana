@@ -1,0 +1,180 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        form>div.buttons {
+            display: inline-grid;
+            grid-template-columns: auto auto;
+            width: 100%;
+        }
+        form>div.buttons>p {
+            margin-top: 25px;
+        }
+        form>div.buttons>p.left {
+            text-align: left;
+        }
+        form>div.buttons>p.right {
+            text-align: right;
+        }
+        .modal {
+            display: none;
+        }
+        .modal table td:nth-child(odd) {
+            font-weight: 700;
+            padding: 1px;
+            padding-right: 10px;
+            padding-bottom: 10px;
+        }
+        div.ui-dialog {
+            width: 60%;
+        }
+        @media screen and ( max-width: 600px ) {
+            form>div.buttons {
+                grid-template-columns: auto;
+            }
+            form>div.buttons>p.left {
+                text-align: center;
+            }
+            form>div.buttons>p.right {
+                text-align: center;
+            }
+            div.ui-dialog {
+                width: 100%;
+                left: 0;
+            }
+        }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #abacb0;
+            opacity: 1; /* Firefox */
+        }
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: #4e9bd3;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        #credentials_form input {
+            margin: 10px;
+        }
+        #credentials_form input[type=password] {
+            margin-bottom: 20px;
+        }
+        form[name=credentials_form] input[type=submit] {
+            background-color: #61ace3;
+            height: 40px;
+            border-radius: 20px;
+            text-transform: none;
+            font-weight: 400;
+            line-height: 20px;
+            padding: 10px 40px;
+            font-size: 16px;
+            text-align: center;
+            float: none;
+            margin: 0 auto;
+            display: block;
+            margin-top: 40px;
+        }
+        p.in-the-middle {
+            padding: 0 25%;
+        }
+        a.uppercase {
+            text-transform: uppercase;
+        }
+    </style>
+
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <h1>Registro de asesoría</h1>
+
+            <div class="btmspace-50 small-sheet">
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <div class="buttons">
+                        <p class="left">
+                            <a href="" class="trigger-modal info-legal" data-modal-id="info-legal-register" data-modal-title="Información sobre protección de datos">
+                                Información básica sobre protección de datos
+                            </a>
+                        </p>
+                        <p class="right">
+                            <input class="btn" type="submit" value="{{ i18n.es.register_page.button }}" />
+                        </p>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+
+    <div id="info-legal-register" class="modal">
+        <h3>Información básica sobre protección de datos</h3>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Responsable</td>
+                    <td>ZERES ABOGADOS Y CONSULTORES LABORALES, SLP</td>
+                    <td><a href="{{ path('info_privacy') }}">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Finalidad</td>
+                    <td>Prestación del servicio</td>
+                    <td><a href="{{ path('info_privacy') }}#privacidad">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Legitimación</td>
+                    <td>Consentimiento del interesado</td>
+                    <td><a href="{{ path('info_privacy') }}#legitimacion">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Destinatarios</td>
+                    <td>Google Analytics y terceros por obligación legal</td>
+                    <td><a href="{{ path('info_privacy') }}#destinatarios">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Derechos</td>
+                    <td>Acceder, rectificar y suprimir los datos, así como otros derechos, como se explica en la información adicional</td>
+                    <td><a href="{{ path('info_privacy') }}#derechos">+info</a></td>
+                </tr>
+                <tr>
+                    <td>Información Adicional</td>
+                    <td>Puede consultar la información adicional y detallada sobre Protección de datos en nuestra política de privacidad</td>
+                    <td><a href="{{ path('info_privacy') }}">+info</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+
+        jQuery(document).ready(function () {
+
+            $('a.trigger-modal').on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).data('modal-id');
+                var title = $(this).data('modal-title');;
+
+                var dialog = $( "#" + id ).dialog({
+                    autoOpen: true,
+                    width: $(window).width() > 600 ? "60%" : "100%",
+                    modal: true,
+                    title: title,
+                    buttons: {
+                        Aceptar: function() { dialog.dialog( "close" ) }
+                    }
+                });
+            });
+
+        });
+    </script>
+{% endblock %}

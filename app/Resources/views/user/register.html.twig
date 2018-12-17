@@ -50,10 +50,50 @@
                 left: 0;
             }
         }
+        ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+            color: #abacb0;
+            opacity: 1; /* Firefox */
+        }
+        h1 {
+            text-align: center;
+            text-transform: uppercase;
+            color: #4e9bd3;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        #credentials_form input {
+            margin: 10px;
+        }
+        #credentials_form input[type=password] {
+            margin-bottom: 20px;
+        }
+        form[name=credentials_form] input[type=submit] {
+            background-color: #61ace3;
+            height: 40px;
+            border-radius: 20px;
+            text-transform: none;
+            font-weight: 400;
+            line-height: 20px;
+            padding: 10px 40px;
+            font-size: 16px;
+            text-align: center;
+            float: none;
+            margin: 0 auto;
+            display: block;
+            margin-top: 40px;
+        }
+        p.in-the-middle {
+            padding: 0 25%;
+        }
+        a.uppercase {
+            text-transform: uppercase;
+        }
     </style>
 
     <div class="wrapper row3">
         <main class="hoc container clear"> 
+            <h1>Registro</h1>
+
             <div class="btmspace-50 small-sheet">
                 {{ form_start(form) }}
                     {{ form_widget(form) }}
@@ -70,6 +110,10 @@
                 {{ form_end(form) }}
             </div>
             <div class="clear"></div>
+            <p class="in-the-middle">
+                {{ i18n.es.register_page.advisers_register }}
+                <a class="uppercase" href="{{ path('register_adviser') }}">{{ i18n.es.register_page.advisers_register_button }}</a>
+            </p>
         </main>
     </div>
 

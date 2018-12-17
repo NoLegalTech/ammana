@@ -140,6 +140,28 @@
             margin-left: 10px;
         }
 
+        @media (max-width: 480px) {
+
+            #blog {
+                grid-template-columns: auto;
+            }
+
+            #blog article div,
+            #blog article:nth-child(even) div,
+            #blog article:nth-child(odd) div {
+                max-width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            #blog article,
+            #blog article:nth-child(even),
+            #blog article:nth-child(odd) {
+                border-right: none;
+            }
+
+        }
+
     </style>
 
     <section id="blog">

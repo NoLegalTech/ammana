@@ -25,14 +25,17 @@ class CredentialsType extends AbstractType {
         $i18n = $options['i18n'];
         $builder
             ->add('email', EmailType::class, array(
-                'label' => $i18n['forms']['register_form']['email'] . ':',
-                'required' => true
+                'label' => false,
+                'required' => true,
+                'attr' => [ 'placeholder' => 'Correo electrónico' ]
             ))
             ->add('password', PasswordType::class, array(
-                'label' => $i18n['forms']['register_form']['password'] . ':'
+                'label' => false,
+                'required' => true,
+                'attr' => [ 'placeholder' => 'Contraseña' ]
             ));
     }
-    
+
     /**
      * {@inheritdoc}
      */

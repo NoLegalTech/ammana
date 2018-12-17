@@ -84,3 +84,18 @@ protocol_admin_delete:
     defaults: { _controller: "AppBundle:Protocol:deleteAdmin" }
     methods:  GET
 
+protocol_public_redes:
+    path:     "%urls.protocol_public_redes%"
+    defaults: { _controller: "AppBundle:Protocol:publicRedes" }
+    methods:  GET
+
+protocol_public_equipos:
+    path:     "%urls.protocol_public_equipos%"
+    defaults: { _controller: "AppBundle:Protocol:publicEquipos" }
+    methods:  GET
+
+protocol_public_mensajeria:
+    path:     "%urls.protocol_public_mensajeria%"
+    defaults: { _controller: "AppBundle:Protocol:publicMensajeria" }
+    methods:  GET
+

@@ -1,0 +1,571 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style>
+        main.container {
+            padding: 0;
+        }
+        div.section-title {
+            width: 100%;
+            border-bottom: 1px solid #c4c9cf;
+        }
+        div.section-title h1 {
+            text-align: left;
+            text-transform: uppercase;
+            color: #4e9bd3;
+            font-size: 28px;
+            font-weight: 500;
+            max-width: 978px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        main.container .left {
+            width: 50%;
+            float: left;
+            padding-right: 50px;
+            border-right: 1px solid #c4c9cf;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        main.container .right {
+            width: 50%;
+            float: right;
+            padding-left: 50px;
+            padding-top: 50px;
+        }
+        p.centered {
+            text-align: center;
+            display: grid;
+            grid-template-columns: auto;
+        }
+        main.container .right .centered img {
+            width: 120px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 480px) {
+            div.section-title h1 {
+                padding: 30px 20px;
+                font-size: 24px;
+            }
+            main.container .left,
+            main.container .right {
+                width: 100%;
+                padding-right: 0px;
+                padding-left: 0px;
+                border-bottom: 1px solid #c4c9cf;
+                border-right: none;
+                padding-top: 50px;
+                padding-bottom: 50px;
+            }
+        }
+
+    </style>
+
+    <div class="wrapper row3 section-title">
+        <h1>Actualidad</h1>
+    </div>
+
+    <style>
+        #blog {
+            display: grid;
+            width: 100%;
+            grid-template-columns: auto auto;
+        }
+
+        #blog article {
+            border-bottom: 1px solid #c4c9cf;
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 80px;
+            padding-bottom: 50px;
+        }
+
+        #blog article:nth-child(odd) {
+            border-right: 1px solid #c4c9cf;
+        }
+
+        #blog article:nth-child(odd) div {
+            float: right;
+            padding-right: 40px;
+            max-width: 289px;
+        }
+
+        #blog article:nth-child(even) div {
+            float: left;
+            padding-left: 40px;
+            max-width: 689px;
+        }
+
+        #blog article:nth-child(odd) div p {
+            text-align: right;
+        }
+
+        #blog h2 {
+            color: #4f5877;
+            margin: 0;
+            padding: 0px 0px 0px 0px;
+            font-weight: 400;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        #blog p.date {
+            color: #4f5877;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        #blog p.author,
+        #blog p.tags {
+            color: #4e9bd3;
+        }
+
+        #related {
+            display: grid;
+            width: 100%;
+            grid-template-columns: auto auto;
+        }
+
+        #related h1 {
+            color: #c0cbcf;
+            text-align: left;
+            font-size: 28px;
+            font-weight: 500;
+            max-width: 978px;
+            margin: 0 auto;
+            padding: 30px 0;
+            grid-column: 1 / 3;
+        }
+
+        #related h2 {
+            color: #f08e51;
+            text-transform: uppercase;
+            font-size: 16px;
+            margin: 0;
+            padding: 30px 0px 0px 0px;
+        }
+
+        #related h3 {
+            color: #4f5877;
+            margin: 0;
+            padding: 0px 0px 0px 0px;
+        }
+
+        #related h3 a {
+            color: #4f5877;
+            font-size: 28px;
+            font-weight: 400;
+            text-decoration: none;
+        }
+
+        #related h3 a:hover {
+            text-decoration: underline;
+        }
+
+        #related span.date {
+            color: #9299b6;
+            margin-right: 10px;
+        }
+
+        #related span.author {
+            color: #4e9bd3;
+            margin-left: 10px;
+        }
+
+        #related article {
+            width: 100%;
+            box-sizing: border-box;
+            padding-top: 0;
+            padding-bottom: 50px;
+        }
+
+        #related article:nth-child(even) div {
+            float: right;
+            padding-right: 40px;
+            max-width: 489px;
+        }
+
+        #related article:nth-child(odd) div {
+            float: left;
+            padding-left: 40px;
+            max-width: 489px;
+        }
+
+        @media (max-width: 480px) {
+            #blog, #related {
+                grid-template-columns: auto;
+            }
+            #blog article,
+            #blog article:nth-child(odd),
+            #blog article:nth-child(even) {
+                border-right: none;
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+            #blog article div,
+            #blog article:nth-child(odd) div,
+            #blog article:nth-child(even) div {
+                max-width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            #blog p.author, #blog p.tags {
+                margin-bottom: 10px;
+            }
+            #blog article:nth-child(even) {
+                padding-top: 40px;
+            }
+            #related h1 {
+                grid-column: 1 / 2;
+            }
+            #related article div,
+            #related article:nth-child(odd) div,
+            #related article:nth-child(even) div {
+                max-width: 100%;
+                padding-left: 20px;
+                padding-right: 20px;
+                float: left;
+            }
+            #related article,
+            #related article:nth-child(odd),
+            #related article:nth-child(even) {
+                padding-bottom: 0;
+            }
+            #related {
+                padding-bottom: 50px;
+            }
+        }
+
+    </style>
+
+    <section id="blog">
+
+        <article>
+            <div>
+                <p class="date">
+                    15.12.2018
+                </p>
+                <p class="author">
+                    Fabián Valero Moldes
+                </p>
+                <p class="tags">
+                    <span class="tag">Protocolos</span>
+                </p>
+            </div>
+        </article>
+
+        <article>
+            <div>
+                <h2>Uso de equipos informáticos</h2>
+                <p>
+                    La proliferación de dispositivos inteligentes en el ámbito laboral, con la introducción de software integrado y dispositivos que ayudan a los trabajadores en su desempeño diario, y la capacidad que tienen de almacenar información podrían generar nuevos problemas laborales que muchas veces no se tienen en cuenta hasta que surge un conflicto Asimismo el uso racional y controlado de los equipos informáticos que la empresa pone a disposición de sus empleados evita pérdidas de tiempo y problemas de seguridad.
+                </p>
+                <p>
+                    Son numerosos los retos empresariales que vendrán en los próximos años: tablets de empleados con información confidencial, aplicaciones internas conectadas a servidores de la empresa, fugas de conocimiento y datos, ataques informáticos, ciberdelincuencia.... Las partes intervinientes en los procesos industriales se multiplican y el nivel de integración es cada vez mayor, y al final los empleados son el activo más valioso que hay en una empresa, desempeñando un papel fundamental en su protección y seguridad.
+                </p>
+                <p>
+                    Por este motivo, desde Zeres Abogados hemos combinado nuestra experiencia como asesores con las nuevas tecnologías, y hemos desarrollado una solución tecnológica a estas cuestiones, para complementar esa protección que cada organización necesita. La implantación de nuestros protocolos ayudará a su empresa a fijar reglas claras y precisas sobre el manejo de los equipos informáticos, internet, correo electrónico, teléfonos móviles, o cualquier otro dispositivo por parte de los trabajadores. Rellenando un sencillo formulario podrá proteger a su empresa frente a múltiples riesgos laborales vinculados a las nuevas técnoclogías de la información y el conocimiento, así como también disponer de una herramienta con plena validez legal para el adecuado control del desempeño laboral.
+                </p>
+                <p>
+                    La debida precaución a la hora de informar a la plantilla sobre el uso racional de las nuevas tecnologías debe plasmarse en protocolos debidamente comunicados a los trabajadores, fijando en estos los mecanismos de control que la empresa empleará para controlar su cumplimiento.
+                </p>
+                <p>
+                    Para obtener más información sobre cómo Ammana puede ayudarle a implementar un protocolo de prevención de riesgos tecnológicos asociados al uso de equipos informáticos, póngase en contacto con nosotros hoy mismo.
+                </p>
+            </div>
+        </article>
+
+    </section>
+
+    <section id="related">
+
+        <h1>Otras noticias relacionadas</h1>
+
+        <article>
+            <div>
+                <h2>Protocolos</h2>
+                <h3><a href="{{ path('blog_redes') }}">Uso de redes</a></h3>
+                <p>
+                    <span class="date">15.12.2018</span> | <span class="author">Fabián Valero Moldes</span>
+                </p>
+            </div>
+        </article>
+
+        <article>
+            <div>
+                <h2>Protocolos</h2>
+                <h3><a href="{{ path('blog_mensajeria') }}">Uso de sistema de mensajería</a></h3>
+                <p>
+                    <span class="date">15.12.2018</span> | <span class="author">Fabián Valero Moldes</span>
+                </p>
+            </div>
+        </article>
+
+    </section>
+
+        <script language="javascript">
+            window.addEventListener("DOMContentLoaded", function() {
+                var submit = document.getElementById("contact_form_submit");
+                var check = document.getElementById("accept_terms");
+
+                submit.disabled = !check.checked;
+
+                check.onchange = function() {
+                    submit.disabled = !check.checked;
+                };
+            }, false);
+        </script>
+
+<style>
+    #contact {
+        background: #2b313d;
+    }
+    #contact .left {
+        float: left;
+        width: 50%;
+        color: white;
+    }
+    #contact .right {
+        float: right;
+        width: 50%;
+        color: white;
+    }
+    #contact .left h1 {
+        font-size: 40px;
+        margin-bottom: 0;
+    }
+    #contact .left h2 {
+        font-size: 40px;
+        color: #64ade4;
+        font-weight: 100;
+        padding-top: 20px;
+    }
+    #contact .left p {
+        font-size: 20px;
+        font-weight: 100;
+        padding-right: 80px;
+        text-align: left;
+    }
+    #contact .left p {
+        color: white;
+    }
+    #contact .right {
+        margin-bottom: 80px;
+    }
+    #contact .right form {
+        width: 100%;
+        padding-top: 40px;
+    }
+    #contact .right form .row,
+    #contact .right form > div > div {
+        width: 100%;
+        float: left;
+    }
+    #contact .right form .row label,
+    #contact .right form > div > div label {
+        float: left;
+        width: 30%;
+        text-align: left;
+        font-size: 18px;
+    }
+    #contact .right form .row input,
+    #contact .right form .row div.form-buttons,
+    #contact .right form > div > div input,
+    #contact .right form > div > div div.form-buttons {
+        float: left;
+        width: 70%;
+        height: 30px;
+        font-size: 12px;
+        margin-top: 15px;
+    }
+    #contact .right form .row textarea,
+    #contact .right form > div > div textarea {
+        float: right;
+        width: 70%;
+        margin-top: 15px;
+        height: 250px;
+    }
+    #contact .right form .row div.form-buttons > div,
+    #contact .right form > div > div div.form-buttons > div {
+        width: 50%;
+    }
+    #contact .right form .row div.form-buttons > div.left,
+    #contact .right form > div > div div.form-buttons > div.left {
+        float: left;
+        text-align: left;
+        line-height: 30px;
+        color: #979797;
+    }
+    #contact .right form .row div.form-buttons > div.right,
+    #contact .right form > div > div div.form-buttons > div.right {
+        float: right;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type=checkbox],
+    #contact .right form > div > div div.form-buttons > div.left input[type=checkbox] {
+        width: 1px;
+        margin-top: 0;
+        visibility:hidden;
+        margin-right: 0;
+    }
+    #contact .right form .row div.form-buttons > div.left label,
+    #contact .right form > div > div div.form-buttons > div.left label {
+        cursor: pointer;
+        font-size: 12px;
+        width: auto;
+        line-height: 20px;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type=checkbox] + label:before,
+    #contact .right form > div > div div.form-buttons > div.left input[type=checkbox] + label:before {
+        border: 1px solid #979797;
+        content: "\00a0";
+        display: inline-block;
+        font: 16px/1em sans-serif;
+        height: 16px;
+        margin: 0 8px 0 0;
+        padding: 0;
+        vertical-align: top;
+        width: 16px;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:checked + label:before,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:checked + label:before {
+        color: #979797;
+        content: "\2713";
+        text-align: center;
+    }
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:checked + label:after,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:checked + label:after {
+        font-weight: bold;
+    }
+
+    #contact .right form .row div.form-buttons > div.left input[type="checkbox"]:focus + label::before,
+    #contact .right form > div > div div.form-buttons > div.left input[type="checkbox"]:focus + label::before {
+        outline: #979797 auto 5px;
+    }
+
+    #contact .right form .row div.form-buttons > div.right input[type="submit"],
+    #contact .right form > div > div div.form-buttons > div.right input[type="submit"] {
+        background-color: #61ace3;
+        border-radius: 15px;
+        line-height: 4px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        float: right;
+        margin-top: 10px;
+    }
+    #contact .right form .row div.form-buttons > div.right input[type="submit"]:disabled,
+    #contact .right form > div > div div.form-buttons > div.right input[type="submit"]:disabled {
+        background-color: #98a3ab;
+        color: #3a3a3a;
+        cursor: default;
+    }
+
+
+    @media (max-width: 480px) {
+
+        #contact .left,
+        #contact .right {
+            width: 100%;
+        }
+
+        #contact .left,
+        #contact .left p {
+            text-align: center;
+        }
+
+        #contact .left h1 {
+            margin-top: 30px;
+            padding: 0;
+            font-size: 36px;
+        }
+
+        #contact .left h2 {
+            font-size: 28px;
+            padding: 0;
+        }
+
+        #contact .left p {
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #contact_form label {
+            display: none;
+        }
+
+        #contact .right form .row div.form-buttons,
+        #contact .right form > div > div textarea,
+        #contact .right form > div > div input {
+            width: 100%;
+        }
+
+        #contact .right form {
+            padding-top: 10px;
+        }
+
+    }
+
+    #contact .left span.phone {
+        color: #64ade4;
+    }
+
+</style>
+
+    <section id="contact">
+
+        <div class="wrap">
+            <div class="left">
+                <h1>Contacto</h1>
+                <h2>¿Tienes alguna duda?</h2>
+                <p>
+                    Si tienes un caso especial en tu empresa o
+                    necesitas ayuda con cualquier paso del proceso
+                    de creación, no dudes en consultarnos.<br/>
+                    Te ayudaremos encantados.
+                </p>
+                <p>
+                    T. <span class="phone">+(34) 986 437 211</span>
+                </p>
+            </div>
+            <div class="right">
+                {{ form_start(contact_form) }}
+                    {{ form_widget(contact_form) }}
+                    <div class="row">
+                        <label></label>
+                        <div class="form-buttons">
+                            <div class="left">
+                                <input id="accept_terms" type="checkbox">
+                                <label for="accept_terms">Acepto condiciones</label>
+                            </div>
+                            <div class="right">
+                                <input id="contact_form_submit" type="submit" value="Enviar"/>
+                            </div>
+                        </div>
+                    </div>
+                {{ form_end(contact_form) }}
+            </div>
+        </div>
+
+        <script language="javascript">
+            window.addEventListener("DOMContentLoaded", function() {
+                var submit = document.getElementById("contact_form_submit");
+                var check = document.getElementById("accept_terms");
+
+                submit.disabled = !check.checked;
+
+                check.onchange = function() {
+                    submit.disabled = !check.checked;
+                };
+            }, false);
+        </script>
+
+    </section>
+{% endblock %}

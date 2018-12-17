@@ -28,6 +28,7 @@ web/uploads
 
 # Blog
 /web/blog/wp-config.php
+/web/wp-blog/wp-config.php
 /deploy/wp-config.php
 /deploy/wp-config_pre.php
 /deploy/wp-config_pro.php

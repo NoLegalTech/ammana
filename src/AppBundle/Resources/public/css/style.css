@@ -1757,7 +1757,6 @@ body.single.single-post .related-news h1.entry-title {
     width: 100%;
     text-align: justify;
     color: #2B313D;
-    font-family: 'Merriweather', serif;
     font-weight: bold;
     font-size: 17px;
     line-height: 28px;
@@ -1825,7 +1824,6 @@ h2, h3 {
     text-decoration: none;
     margin-left: -2px;
     color: #2B313D;
-    font-family: 'Merriweather', serif;
     font-size: 26px;
     font-weight: bold;
     line-height: 39px;
@@ -4401,4 +4399,9 @@ footer#colophon,
 
 section#steps {
     height: auto;
+}
+
+
+body {
+	font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }

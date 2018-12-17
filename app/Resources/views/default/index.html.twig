@@ -412,13 +412,14 @@ section#steps h3 > .title {
         padding-right: 50px;
         margin-bottom: 40px;
     }
-    #blog .left h2 {
+    #blog .left h2,
+    #blog .left h2 a {
         font-size: 24px;
         font-weight: 400;
         margin-top: 0;
         padding-top: 10px;
     }
-    #blog .left h2:hover {
+    #blog .left h2 a:hover {
         text-decoration: underline;
         cursor: pointer;
     }
@@ -514,7 +515,7 @@ section#steps h3 > .title {
             <div class="left">
                 <h1>Actualidad</h1>
                 <article>
-                    <h2>Uso de redes</h2>
+                    <h2><a href="{{ path('blog_redes') }}">Uso de redes</a></h2>
                     <p>
                         <span class="date">14.08.2018</span>
                         <span class="author">Fabián Valero Moldes</span>
@@ -526,7 +527,7 @@ section#steps h3 > .title {
                     </p>
                 </article>
                 <article>
-                    <h2>Uso de equipos informáticos</h2>
+                    <h2><a href="{{ path('blog_equipos') }}">Uso de equipos informáticos</a></h2>
                     <p>
                         <span class="date">14.08.2018</span>
                         <span class="author">Fabián Valero Moldes</span>
@@ -540,7 +541,7 @@ section#steps h3 > .title {
                     </p>
                 </article>
                 <article>
-                    <h2>Uso de sistema de mensajería</h2>
+                    <h2><a href="{{ path('blog_mensajeria') }}">Uso de sistema de mensajería</a></h2>
                     <p>
                         <span class="date">14.08.2018</span>
                         <span class="author">Fabián Valero Moldes</span>

@@ -17,32 +17,32 @@ app:
 info_legal:
     path:     /legal
     defaults: { _controller: "AppBundle:Default:legal" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_privacy:
     path:     /privacidad
     defaults: { _controller: "AppBundle:Default:privacy" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_cookies:
     path:     /cookies
     defaults: { _controller: "AppBundle:Default:cookies" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_redes:
     path:     /servicios/redes
     defaults: { _controller: "AppBundle:Default:redes" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_mensajerias:
     path:     /servicios/sistemas-mensajeria
     defaults: { _controller: "AppBundle:Default:mensajerias" }
-    methods:  GET
+    methods:  [GET, POST]
 
 info_equipos:
     path:     /servicios/equipos-informaticos
     defaults: { _controller: "AppBundle:Default:equipos" }
-    methods:  GET
+    methods:  [GET, POST]
 
 user:
     resource: "@AppBundle/Resources/config/routing.yml"
@@ -61,30 +61,30 @@ icons:
 who_are_we:
     path:     /quienes-somos
     defaults: { _controller: "AppBundle:Default:who" }
-    methods:  GET
+    methods:  [GET, POST]
 
 blog:
     path:     /blog
     defaults: { _controller: "AppBundle:Default:blog" }
-    methods:  GET
+    methods:  [GET, POST]
 
 blog_redes:
     path:     /blog/redes
     defaults: { _controller: "AppBundle:Default:blogRedes" }
-    methods:  GET
+    methods:  [GET, POST]
 
 blog_mensajeria:
     path:     /blog/mensajeria
     defaults: { _controller: "AppBundle:Default:blogMensajeria" }
-    methods:  GET
+    methods:  [GET, POST]
 
 blog_equipos:
     path:     /blog/equipos
     defaults: { _controller: "AppBundle:Default:blogEquipos" }
-    methods:  GET
+    methods:  [GET, POST]
 
 contact:
     path:     /contacto
     defaults: { _controller: "AppBundle:Default:contact" }
-    methods:  GET
+    methods:  [GET, POST]
 

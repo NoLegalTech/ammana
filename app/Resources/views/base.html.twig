@@ -176,6 +176,9 @@ body {
                 #masthead .custom-header .wrap.main-menu > ul.general {
                     height: 280px;
                 }
+                #masthead .custom-header .wrap.main-menu > ul.user.logged {
+                    height: 280px;
+                }
             }
 
         </style>
@@ -190,49 +193,53 @@ body {
 
                 <img class="menubar" src="/images/menubar.png">
 
-                <ul class="user">
-                    {% if not app.session.get('user') %}
+                {% if not app.session.get('user') %}
+                    <ul class="user">
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
                             <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.login }}</a>
                         </li>
-                    {% endif %}
-                    {% if app.session.get('user') %}
+                    </ul>
+                {% endif %}
+                {% if app.session.get('user') %}
+                    <ul class="user logged">
                         {% for option in app.session.get('menu') %}
                         <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
                             <a href="{{ path(option.path) }}">{{ option.text }}</a>
                         </li>
                         {% endfor %}
-                    {% endif %}
-                </ul>
+                    </ul>
+                {% endif %}
 
-                <ul class="general">
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                        <a href="{{ path('who_are_we') }}">{{ i18n.es.menus.new_user.who_we_are }}</a>
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                        <a href="{{ path('protocol_public_redes') }}">{{ i18n.es.menus.new_user.protocols }}</a>
+                {% if not app.session.get('user') %}
+                    <ul class="general">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <a href="{{ path('who_are_we') }}">{{ i18n.es.menus.new_user.who_we_are }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <a href="{{ path('protocol_public_redes') }}">{{ i18n.es.menus.new_user.protocols }}</a>
 
-                        <!--
-                        <ul class="protocols">
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_redes }}</a>
-                            </li>
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_mensajeria }}</a>
-                            </li>
-                            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                                <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_telematica }}</a>
-                            </li>
-                        </ul>
-                        -->
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                        <a href="{{ path('blog') }}">{{ i18n.es.menus.new_user.news }}</a>
-                    </li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
-                        <a href="{{ path('contact') }}">{{ i18n.es.menus.new_user.contact }}</a>
-                    </li>
-                </ul>
+                            <!--
+                            <ul class="protocols">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                    <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_redes }}</a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                    <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_mensajeria }}</a>
+                                </li>
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                                    <a href="{{ path('user_login') }}">{{ i18n.es.menus.new_user.protocol_uso_telematica }}</a>
+                                </li>
+                            </ul>
+                            -->
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <a href="{{ path('blog') }}">{{ i18n.es.menus.new_user.news }}</a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-10">
+                            <a href="{{ path('contact') }}">{{ i18n.es.menus.new_user.contact }}</a>
+                        </li>
+                    </ul>
+                {% endif %}
 
         </div><!-- .wrap -->
 

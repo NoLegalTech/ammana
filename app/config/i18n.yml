@@ -62,17 +62,17 @@ twig:
                     slogan:     Protocolos laborales
                 protocols:
                     models:
-                        uso_redes:      Protocolo laboral de uso de las redes sociales de empresa
-                        uso_mensajeria: Protocolo laboral de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Protocolo laboral de uso de los equipos informáticos
+                        uso_redes:       Protocolo laboral de uso de las redes sociales de empresa
+                        uso_mensajerias: Protocolo laboral de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Protocolo laboral de uso de los equipos informáticos
                     instructions:
-                        uso_redes:      Instrucciones de uso de las redes sociales de empresa
-                        uso_mensajeria: Instrucciones de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Instrucciones de uso de los equipos informáticos
+                        uso_redes:       Instrucciones de uso de las redes sociales de empresa
+                        uso_mensajerias: Instrucciones de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Instrucciones de uso de los equipos informáticos
                     recibi:
-                        uso_redes:      Recibí de uso de las redes sociales de empresa
-                        uso_mensajeria: Recibí de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Recibí de uso de los equipos informáticos
+                        uso_redes:       Recibí de uso de las redes sociales de empresa
+                        uso_mensajerias: Recibí de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Recibí de uso de los equipos informáticos
                 # =================================================================================
 
                 # Menus

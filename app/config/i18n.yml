@@ -399,6 +399,7 @@ twig:
                         link:     "Activa tu cuenta"
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
+                        legal:    "Al registrarte consientes el tratamiento de tus datos por Zeres Abogados y Consultores Laborales SLP para gestionar tu relación con nosotros. Para el ejercicio de tus derechos de acceso, rectificación, supresión y otros, consulta nuestra Política de privacidad."
                     error:
                         title:       ammana.es - Se ha producido un error
                         client_data: "Datos del cliente:"

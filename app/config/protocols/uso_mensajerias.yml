@@ -179,7 +179,8 @@ parameters:
                     - "jornada de trabajo."
                   condition: "cuando_se_remiten_ordenes=1"
                 - h2:
-                    - "Protección frente al acoso en el uso y manejo de los sistemas de mensajería instantánea."
+                    - "Protección frente al acoso en el uso y manejo de los sistemas de"
+                    - "mensajería instantánea."
                   condition: "proteccion_frente_al_acoso=0"
                 - p:
                     - "La Constitución Española reconoce como derechos fundamentales de las"

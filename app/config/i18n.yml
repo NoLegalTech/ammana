@@ -62,17 +62,17 @@ twig:
                     slogan:     Protocolos laborales
                 protocols:
                     models:
-                        uso_redes:      Protocolo laboral de uso de las redes sociales de empresa
-                        uso_mensajeria: Protocolo laboral de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Protocolo laboral de uso de los equipos informáticos
+                        uso_redes:       Protocolo laboral de uso de las redes sociales de empresa
+                        uso_mensajerias: Protocolo laboral de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Protocolo laboral de uso de los equipos informáticos
                     instructions:
-                        uso_redes:      Instrucciones de uso de las redes sociales de empresa
-                        uso_mensajeria: Instrucciones de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Instrucciones de uso de los equipos informáticos
+                        uso_redes:       Instrucciones de uso de las redes sociales de empresa
+                        uso_mensajerias: Instrucciones de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Instrucciones de uso de los equipos informáticos
                     recibi:
-                        uso_redes:      Recibí de uso de las redes sociales de empresa
-                        uso_mensajeria: Recibí de uso de los sistemas de mensajería instantánea
-                        uso_telematica: Recibí de uso de los equipos informáticos
+                        uso_redes:       Recibí de uso de las redes sociales de empresa
+                        uso_mensajerias: Recibí de uso de los sistemas de mensajería instantánea
+                        uso_telematica:  Recibí de uso de los equipos informáticos
                 # =================================================================================
 
                 # Menus
@@ -399,6 +399,7 @@ twig:
                         link:     "Activa tu cuenta"
                         fallback: "Si el enlace no funciona, copia y pega esto en tu navegador:"
                         alt_text: "Por favor, confirma tu cuenta de correo pegando el siguiente enlace en tu navegador:"
+                        legal:    "Al registrarte consientes el tratamiento de tus datos por Zeres Abogados y Consultores Laborales SLP para gestionar tu relación con nosotros. Para el ejercicio de tus derechos de acceso, rectificación, supresión y otros, consulta nuestra Política de privacidad."
                     error:
                         title:       ammana.es - Se ha producido un error
                         client_data: "Datos del cliente:"

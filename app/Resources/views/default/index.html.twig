@@ -813,6 +813,31 @@ section#steps h3 > .title {
         cursor: default;
     }
 
+    #contact .right form .row div.form-buttons.legal-notice,
+    #contact .right form > div > div div.form-buttons.legal-notice {
+        height: 100px;
+        padding-top: 10px;
+        color: #979797;
+        text-align: justify;
+        line-height: 18px;
+    }
+
+    #contact .right form .row div.form-buttons.legal-notice a,
+    #contact .right form > div > div div.form-buttons.legal-notice a {
+        color: #64ade4;
+        line-height: 18px;
+        font-size: 12px;
+    }
+
+    @media (max-width: 1000px) {
+
+        #contact .right form .row div.form-buttons.legal-notice,
+        #contact .right form > div > div div.form-buttons.legal-notice {
+            margin-top: 60px;
+            margin-bottom: 40px;
+        }
+
+    }
 
     @media (max-width: 480px) {
 
@@ -856,6 +881,16 @@ section#steps h3 > .title {
             padding-top: 10px;
         }
 
+        #contact .right form .row div.form-buttons.legal-notice,
+        #contact .right form > div > div div.form-buttons.legal-notice {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+    }
+
+    #contact .left span.phone {
+        color: #64ade4;
     }
 
 </style>
@@ -886,6 +921,15 @@ section#steps h3 > .title {
                             <div class="right">
                                 <input id="contact_form_submit" type="submit" value="Enviar"/>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label></label>
+                        <div class="form-buttons legal-notice">
+                            Tus datos van a ser tratados por Zeres Abogados y Consultores Laborales SLP
+                            con la finalidad de gestionar tu consulta y siempre con tu consentimiento.
+                            Si quieres acceder, rectificar o suprimir tus datos así como ejercer otros derechos,
+                            contacta con nosotros. Para más información, consulta <a href="{{ path('info_privacy') }}">nuestra política de privacidad.</a>
                         </div>
                     </div>
                 {{ form_end(contact_form) }}

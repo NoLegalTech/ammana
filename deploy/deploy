@@ -7,55 +7,65 @@
 
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+get_config() {
+    key=$1
+
+    grep $key ${script_dir}/parameters.yml | awk 'BEGIN {FS=":"} {print $2}' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+}
+
 err=${script_dir}/error.log
 out=${script_dir}/out.log
 
 target=${1:-pre}
+server=$(get_config "server")
 
-get_parameter() {
-    key=$1
+run_scp() {
+    local_file=$1
+    remote_file=$2
 
-    grep $key deploy/parameters.yml | awk 'BEGIN {FS=":"} {print $2}' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//'
+    echo "    scp ${local_file} ${remote_file}"
+
+    scp ${local_file} ${remote_file} > $out  2> $err || {
+        echo '        << failed >>'
+        exit 1
+    }
+}
+
+run_ssh() {
+    command=$1
+    remote_file=$2
+
+    echo "    ssh ${server} "'"'$command'"'
+
+    ssh ${server} "$command" > $out 2> $err || {
+        echo '        << failed >>'
+        exit 1
+    }
 }
 
 deploy() {
     target=$1
     remote_folder=$2
-    server=$(get_parameter "server")
+    server=$(get_config "server")
 
     rm -f $err
     rm -f $out
 
-    echo -n "Deploying $target... "
-    scp ${script_dir}/.htaccess_${target} ${server}:${remote_folder}/.htaccess > $out  2> $err || {
-        echo "KO"
-        exit 1
-    }
-    ssh ${server} "cd ${remote_folder} && git checkout -- . && git fetch && git pull --rebase" > $out 2> $err || {
-        echo "KO"
-        exit 1
-    }
-    ssh ${server} "cd ${remote_folder} && php tools/composer.phar update && php tools/composer.phar install" > $out 2> $err || {
-        echo "KO"
-        exit 1
-    }
-    scp ${script_dir}/parameters_${target}.yml ${server}:${remote_folder}/app/config/parameters.yml > $out  2> $err || {
-        echo "KO"
-        exit 1
-    }
-    scp ${script_dir}/wp-config_${target}.php ${server}:${remote_folder}/web/blog/wp-config > $out  2> $err || {
-        echo "KO"
-        exit 1
-    }
-    ssh ${server} "cd ${remote_folder} && php bin/console doctrine:migrations:migrate" > $out 2> $err || {
-        echo "KO"
-        exit 1
-    }
-    ssh ${server} "cd ${remote_folder} && php bin/console cache:clear --env=prod" > $out 2> $err || {
-        echo "KO"
-        exit 1
-    }
-    echo "OK"
+    echo "Deploying $target... "
+
+    run_scp "${script_dir}/.htaccess"_"${target} ${server}:${remote_folder}/.htaccess"
+
+    run_ssh "cd ${remote_folder} && git checkout -- . && git fetch && git pull --rebase"
+
+    run_ssh "cd ${remote_folder} && php tools/composer.phar update && php tools/composer.phar install"
+
+    run_scp "${script_dir}/parameters_${target}.yml" "${server}:${remote_folder}/app/config/parameters.yml"
+
+    run_scp "${script_dir}/wp-config_${target}.php" "${server}:${remote_folder}/web/blog/wp-config"
+
+    run_ssh "cd ${remote_folder} && php bin/console doctrine:migrations:migrate"
+
+    run_ssh "cd ${remote_folder} && php bin/console cache:clear --env=prod"
 }
 
 case "$target" in

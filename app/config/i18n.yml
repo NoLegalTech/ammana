@@ -425,6 +425,10 @@ twig:
                     register_form:
                         email:    Email
                         password: Contraseña
+                    adviser_register_form:
+                        email:    Email
+                        password: Contraseña
+                        pack:     Escoge un pack
                     new_password_form:
                         email:    Email
                     set_password_form:

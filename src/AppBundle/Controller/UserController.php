@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
+use AppBundle\Entity\AdviserRegister;
 use AppBundle\Entity\NewsletterSubscriber;
 use AppBundle\Entity\User;
 
@@ -210,8 +211,8 @@ class UserController extends Controller
      */
     public function registerAdviserAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher, AlertsService $alerts)
     {
-        $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+        $adviserRegister = new AdviserRegister();
+        $form = $this->createForm('AppBundle\Form\AdviserRegisterType', $adviserRegister, array(
             'i18n' => $this->getI18n(),
             'csrf_protection' => false
         ));
@@ -219,6 +220,9 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $user = new User();
+                $user->setEmail($adviserRegister->getEmail());
+                $user->setPassword($adviserRegister->getPassword());
                 $user->setEnabled(false);
                 $user->setRoles('adviser');
                 $user->setActivationHash($hasher->generate());
@@ -259,7 +263,7 @@ class UserController extends Controller
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){
-                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $user->getEmail());
+                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $adviserRegister->getEmail());
                 $logger->error($e);
                 return $this->redirectToRoute('error', array(
                     'message' => $this->getI18n()['errors']['cannot_register_user']['user']
@@ -269,7 +273,7 @@ class UserController extends Controller
 
         return $this->render('user/register.adviser.html.twig', array(
             'title' => $this->getI18n()['register_page']['title'],
-            'user' => $user,
+            'user' => $adviserRegister,
             'form' => $form->createView(),
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()

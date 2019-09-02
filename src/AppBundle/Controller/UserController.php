@@ -223,6 +223,8 @@ class UserController extends Controller
                 $user = new User();
                 $user->setEmail($adviserRegister->getEmail());
                 $user->setPassword($adviserRegister->getPassword());
+                $user->setCif($adviserRegister->getCif());
+                $user->setAddress($adviserRegister->getAddress());
                 $user->setEnabled(false);
                 $user->setRoles('adviser');
                 $user->setActivationHash($hasher->generate());

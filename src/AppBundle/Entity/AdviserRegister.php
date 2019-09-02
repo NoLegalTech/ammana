@@ -28,6 +28,16 @@ class AdviserRegister
     /**
      * @var string
      */
+    private $cif;
+
+    /**
+     * @var string
+     */
+    private $address;
+
+    /**
+     * @var string
+     */
     private $password;
 
     /**
@@ -67,6 +77,54 @@ class AdviserRegister
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set cif
+     *
+     * @param string $cif
+     *
+     * @return User
+     */
+    public function setCif($cif)
+    {
+        $this->cif = $cif;
+
+        return $this;
+    }
+
+    /**
+     * Get cif
+     *
+     * @return string
+     */
+    public function getCif()
+    {
+        return $this->cif;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 
     /**

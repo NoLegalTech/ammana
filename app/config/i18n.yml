@@ -437,6 +437,7 @@ twig:
                         email:          Email
                         company_name:   Nombre de la compañía
                         cif:            CIF
+                        password:       Contraseña
                         address:        Domicilio social
                         contact_person: Persona de contacto
                         sector:         Sector

@@ -349,6 +349,9 @@ class UserController extends Controller
             if ($permissions->currentRolesInclude("admin")) {
                 return $this->redirectToRoute('user_index');
             }
+            if ($permissions->currentRolesInclude("adviser")) {
+                return $this->redirectToRoute('profile_homepage');
+            }
             return $this->redirectToRoute('protocol_index');
         }
 

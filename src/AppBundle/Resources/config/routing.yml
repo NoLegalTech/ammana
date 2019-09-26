@@ -23,3 +23,8 @@ app_protocol:
 app_order:
     resource: "@AppBundle/Resources/config/routing/order.yml"
     prefix:   /
+
+app_adviser:
+    resource: "@AppBundle/Resources/config/routing/adviser.yml"
+    prefix:   /
+

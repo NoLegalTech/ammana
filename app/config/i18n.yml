@@ -30,6 +30,7 @@ parameters:
 
     # protocol urls
     # -------------
+    urls.adviser_protocol_index:    /adviser/protocol/
     urls.protocol_index:    /protocol/
     urls.protocol_buy:      /protocol/buy/{id}
     urls.protocol_pay:      /protocol/pay/{id}
@@ -88,6 +89,10 @@ twig:
                         protocol_uso_redes:      Uso de las redes sociales de empresa
                         protocol_uso_mensajeria: Uso de los sistemas de mensajería instantánea
                         protocol_uso_telematica: Uso de los equipos informáticos
+                    adviser:
+                        profile:   Perfil
+                        protocols: Protocolos
+                        logout:    Cerrar sesión
                     registered_user:
                         profile:   Mi perfil
                         protocols: Mis protocolos

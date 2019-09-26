@@ -99,3 +99,8 @@ protocol_public_mensajeria:
     defaults: { _controller: "AppBundle:Protocol:publicMensajeria" }
     methods:  GET
 
+adviser_protocol_index:
+    path:     "%urls.protocol_index%"
+    defaults: { _controller: "AppBundle:Protocol:index" }
+    methods:  GET
+

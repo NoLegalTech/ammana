@@ -352,7 +352,7 @@ class UserController extends Controller
                 return $this->redirectToRoute('user_index');
             }
             if ($permissions->currentRolesInclude("adviser")) {
-                return $this->redirectToRoute('profile_homepage');
+                return $this->redirectToRoute('adviser_protocol_index');
             }
             return $this->redirectToRoute('protocol_index');
         }
@@ -428,14 +428,19 @@ class UserController extends Controller
             ),
             'adviser' => array(
                 array(
+                    'icon' => 'fa-files-o',
+                    'path' => 'adviser_protocol_index',
+                    'text' => $this->getI18n()['menus']['adviser']['protocols']
+                ),
+                array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => $this->getI18n()['menus']['registered_user']['profile']
+                    'text' => $this->getI18n()['menus']['adviser']['profile']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => $this->getI18n()['menus']['registered_user']['logout']
+                    'text' => $this->getI18n()['menus']['adviser']['logout']
                 )
             )
         );

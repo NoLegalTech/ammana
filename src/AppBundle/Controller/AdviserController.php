@@ -189,6 +189,11 @@ class AdviserController extends Controller
             $em->persist($purchasedProtocol);
             $em->flush();
 
+            $user = $permissions->getCurrentUser();
+            $user->setCredits($user->getCredits() - 1);
+            $em->persist($user);
+            $em->flush();
+
             return $this->redirectToRoute('adviser_protocol_index');
         }
 

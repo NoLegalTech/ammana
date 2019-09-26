@@ -30,7 +30,9 @@ parameters:
 
     # protocol urls
     # -------------
-    urls.adviser_protocol_index:    /adviser/protocol/
+    urls.adviser_protocol_index:       /adviser/protocol/
+    urls.adviser_protocol_generate:    /adviser/protocol/generate/{id}
+    urls.adviser_buy_pack:             /adviser/protocol/pack
     urls.protocol_index:    /protocol/
     urls.protocol_buy:      /protocol/buy/{id}
     urls.protocol_pay:      /protocol/pay/{id}
@@ -207,6 +209,28 @@ twig:
                         date:     Fecha pedido
                     mark_paid: Marcar como cobrado
                     no_orders: No hay ningún pedido pendiente de cobro.
+
+                adviser_protocols_page:
+                    title: Lista de protocolos
+                    headers:
+                        name:     Nombre
+                        download: Descargar
+                        invoice:  Factura
+                    download: Protocolo
+                    instructions: Instrucciones
+                    recibi: Recibí
+                    not_available: No disponible
+                    pay: pagar
+                    download_invoice: Descargar factura
+                    invoice_not_available: Factura no disponible
+                    no_protocols: No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
+                    protocols_left_1: Puedes generar 
+                    protocols_left_2: protocolos. ¿Necesitas más?
+                    buy:
+                        button: Compra aquí
+                    generate:
+                        title: Generar protocolos
+                        button: Generar
 
                 protocols_page:
                     title: Lista de protocolos

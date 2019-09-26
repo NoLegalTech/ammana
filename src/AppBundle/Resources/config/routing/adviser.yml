@@ -9,3 +9,13 @@ adviser_protocol_index:
     defaults: { _controller: "AppBundle:Adviser:protocols" }
     methods:  GET
 
+adviser_protocol_generate:
+    path:     "%urls.adviser_protocol_generate%"
+    defaults: { _controller: "AppBundle:Adviser:generateProtocol" }
+    methods:  [GET, POST]
+
+adviser_buy_pack:
+    path:     "%urls.adviser_buy_pack%"
+    defaults: { _controller: "AppBundle:Adviser:buyPack" }
+    methods:  [GET, POST]
+

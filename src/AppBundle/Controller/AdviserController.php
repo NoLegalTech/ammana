@@ -63,13 +63,13 @@ class AdviserController extends Controller
         }
 
         $names = [];
-        $to_buy = [];
+        $to_generate = [];
         $protocols_specs = $this->container->getParameter('protocols');
         foreach ($protocols_specs as $id) {
             $protocol_spec = $this->container->getParameter('protocol.'.$id);
             $names[$id] = $protocol_spec['name'];
             if (!in_array($id, $already_ordered_ids)) {
-                $to_buy []= array(
+                $to_generate []= array(
                     'id' => $id,
                     'name' => $protocol_spec['name']
                 );
@@ -81,7 +81,8 @@ class AdviserController extends Controller
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
-            'to_buy' => $to_buy,
+            'to_generate' => $to_generate,
+            'credits' => $user->getCredits(),
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));

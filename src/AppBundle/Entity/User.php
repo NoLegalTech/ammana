@@ -452,7 +452,7 @@ class User
                 . "    contactPerson: " . $this->getContactPerson() . ",\n"
                 . "    roles:         " . $this->getRoles()         . ",\n"
                 . "    quadernoId:    " . $this->getQuadernoId()    . ",\n"
-                . "    credits:       " . $this->getQuadernoId()    . "\n"
+                . "    credits:       " . $this->getCredits()       . "\n"
                 . "}";
     }
 

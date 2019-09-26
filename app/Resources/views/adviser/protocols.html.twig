@@ -12,13 +12,20 @@
         <main class="hoc container clear"> 
             <div class="btmspace-50">
 
+                <p>
+                    {{ i18n.es.adviser_protocols_page.protocols_left_1 }}
+                    {{ credits }}
+                    {{ i18n.es.adviser_protocols_page.protocols_left_2 }}
+                    <a href="{{ path('adviser_buy_pack') }}">{{ i18n.es.adviser_protocols_page.buy.button }}</a>
+                </p>
+
                 {% if protocols %}
                     <table class="full">
                         <thead>
                             <tr>
-                                <th>{{ i18n.es.protocols_page.headers.name }}</th>
-                                <th>{{ i18n.es.protocols_page.headers.download }}</th>
-                                <th>{{ i18n.es.protocols_page.headers.invoice }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.name }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.download }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.invoice }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -27,17 +34,17 @@
                                 <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
                                     <td>
-                                        <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.recibi }}</a>
+                                        <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.recibi }}</a>
                                     </td>
                                 {% else %}
-                                    <td>{{ i18n.es.protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.pay }}</a>)</td>
+                                    <td>{{ i18n.es.adviser_protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.pay }}</a>)</td>
                                 {% endif %}
                                 {% if invoices[protocol.id] %}
-                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank" rel="noopener">{{ i18n.es.protocols_page.download_invoice }}</a></td>
+                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank" rel="noopener">{{ i18n.es.adviser_protocols_page.download_invoice }}</a></td>
                                 {% else %}
-                                    <td>{{ i18n.es.protocols_page.invoice_not_available }}</td>
+                                    <td>{{ i18n.es.adviser_protocols_page.invoice_not_available }}</td>
                                 {% endif %}
                             </tr>
                         {% endfor %}
@@ -45,18 +52,18 @@
                     </table>
                 {% else %}
                     <p>
-                        {{ i18n.es.protocols_page.no_protocols }}
+                        {{ i18n.es.adviser_protocols_page.no_protocols }}
                     </p>
                 {% endif %}
 
-                {% if to_buy %}
-                    <h3 class="heading">{{ i18n.es.protocols_page.buy.title }}</h2>
+                {% if to_generate %}
+                    <h3 class="heading">{{ i18n.es.adviser_protocols_page.generate.title }}</h2>
                     <table>
                         <tbody>
-                            {% for protocol in to_buy %}
+                            {% for protocol in to_generate %}
                                 <tr>
                                     <td>{{ protocol.name }}</td>
-                                    <td><a href="{{ path('protocol_buy', { 'id': protocol.id }) }}">{{ i18n.es.protocols_page.buy.button }}</a></td>
+                                    <td><a href="{{ path('adviser_protocol_generate', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.generate.button }}</a></td>
                                 </tr>
                             {% endfor %}
                         </tbody>

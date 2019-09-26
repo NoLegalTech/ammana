@@ -14,6 +14,11 @@ adviser_protocol_generate:
     defaults: { _controller: "AppBundle:Adviser:generateProtocol" }
     methods:  [GET, POST]
 
+adviser_protocol_config:
+    path:     "%urls.adviser_protocol_config%"
+    defaults: { _controller: "AppBundle:Adviser:configProtocol" }
+    methods:  [GET, POST]
+
 adviser_buy_pack:
     path:     "%urls.adviser_buy_pack%"
     defaults: { _controller: "AppBundle:Adviser:buyPack" }

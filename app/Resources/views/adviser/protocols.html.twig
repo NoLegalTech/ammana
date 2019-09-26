@@ -14,7 +14,7 @@
 
                 <p>
                     {{ i18n.es.adviser_protocols_page.protocols_left_1 }}
-                    {{ credits }}
+                    <strong> {{ credits }} </strong>
                     {{ i18n.es.adviser_protocols_page.protocols_left_2 }}
                     <a href="{{ path('adviser_buy_pack') }}">{{ i18n.es.adviser_protocols_page.buy.button }}</a>
                 </p>
@@ -56,7 +56,7 @@
                     </p>
                 {% endif %}
 
-                {% if to_generate %}
+                {% if to_generate and credits > 0 %}
                     <h3 class="heading">{{ i18n.es.adviser_protocols_page.generate.title }}</h2>
                     <table>
                         <tbody>

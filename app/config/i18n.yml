@@ -32,6 +32,7 @@ parameters:
     # -------------
     urls.adviser_protocol_index:       /adviser/protocol/
     urls.adviser_protocol_generate:    /adviser/protocol/generate/{id}
+    urls.adviser_protocol_config:      /adviser/protocol/config/{id}/{company_id}
     urls.adviser_buy_pack:             /adviser/protocol/pack
     urls.protocol_index:    /protocol/
     urls.protocol_buy:      /protocol/buy/{id}
@@ -223,7 +224,7 @@ twig:
                     pay: pagar
                     download_invoice: Descargar factura
                     invoice_not_available: Factura no disponible
-                    no_protocols: No tienes ningún protocolo todavía. ¿Por qué no escoges alguno de la siguiente lista?
+                    no_protocols: No tienes ningún protocolo todavía.
                     protocols_left_1: Puedes generar 
                     protocols_left_2: protocolos. ¿Necesitas más?
                     buy:
@@ -231,6 +232,12 @@ twig:
                     generate:
                         title: Generar protocolos
                         button: Generar
+
+                adviser_protocol_confirmation_page:
+                    title:   Confirmación
+                    please_review: Por favor, revisa tus respuestas y confirma que son correctas.
+                    confirm: Confirmar
+                    cancel:  Cancelar
 
                 protocols_page:
                     title: Lista de protocolos
@@ -299,6 +306,10 @@ twig:
                     generate_protocol: Generar protocolo
 
                 questions_admin_page:
+                    title:  Planifica el uso del protocolo laboral
+                    generate_protocol: Generar protocolo
+
+                questions_adviser_page:
                     title:  Planifica el uso del protocolo laboral
                     generate_protocol: Generar protocolo
 

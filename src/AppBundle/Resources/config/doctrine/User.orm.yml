@@ -72,4 +72,6 @@ AppBundle\Entity\User:
             length: '10'
             column: quaderno_id
             nullable: true
+        credits:
+            type: integer
     lifecycleCallbacks: {  }

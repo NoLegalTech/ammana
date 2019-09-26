@@ -152,6 +152,7 @@ class UserController extends Controller
                 $user->setEnabled(false);
                 $user->setRoles('customer');
                 $user->setActivationHash($hasher->generate());
+                $user->setCredits(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
@@ -228,6 +229,7 @@ class UserController extends Controller
                 $user->setEnabled(false);
                 $user->setRoles('adviser');
                 $user->setActivationHash($hasher->generate());
+                $user->setCredits(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();

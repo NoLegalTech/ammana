@@ -19,6 +19,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 use AppBundle\Entity\AdviserRegister;
 use AppBundle\Entity\NewsletterSubscriber;
+use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 
 use AppBundle\Service\PermissionsService;
@@ -607,6 +608,41 @@ class UserController extends Controller
         ));
     }
 
+    /**
+     * Show orders of user.
+     */
+    public function ordersAction($id, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findById($id)[0];
+
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByUser($id);
+
+        $names = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+        }
+
+        return $this->render('user/orders.html.twig', array(
+            'title' => $this->getI18n()['orders_page']['title'],
+            'protocols' => $protocols,
+            'names' => $names,
+            'user' => $user,
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }

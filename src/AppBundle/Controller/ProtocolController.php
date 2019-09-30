@@ -97,7 +97,7 @@ class ProtocolController extends Controller
 
         $protocols = $this->getDoctrine()
             ->getRepository(Protocol::class)
-            ->findByEnabled(false);
+            ->findAll();
 
         $names = [];
         $protocols_specs = $this->container->getParameter('protocols');

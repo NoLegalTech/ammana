@@ -15,6 +15,7 @@ parameters:
     urls.user_index:     /admin/user/
     urls.user_edit:      /admin/user/{id}/edit
     urls.user_delete:    /admin/user/{id}/delete
+    urls.user_orders:    /admin/user/{id}/orders
     urls.advisers_list:  /admin/adviser/
 
     # invoice urls
@@ -211,6 +212,7 @@ twig:
                         customer: Cliente
                         date:     Fecha pedido
                     mark_paid: Marcar como cobrado
+                    paid: Pagado
                     no_orders: No hay ningún pedido pendiente de cobro.
 
                 adviser_protocols_page:
@@ -342,6 +344,7 @@ twig:
                         cif: CIF
                         address: Domicilio social
                         contact_person: Persona de contacto
+                        see_orders: Ver pedidos
                     is_active:
                         yes: Sí
                         no: No

@@ -17,4 +17,15 @@ namespace AppBundle\Repository;
  */
 class ProtocolRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findAll()
+    {
+        return $this->findBy(array(), array('orderDate' => 'DESC'));
+    }
+
+    public function findByUser($id)
+    {
+        return $this->findBy(array('user' => $id), array('orderDate' => 'DESC'));
+    }
+
 }

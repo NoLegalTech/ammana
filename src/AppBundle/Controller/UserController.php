@@ -62,6 +62,36 @@ class UserController extends Controller
     }
 
     /**
+     * Lists all advisers.
+     *
+     */
+    public function advisersListAction(Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('AppBundle:User')->findAll();
+        $advisers = [];
+        foreach ($users as $user) {
+            if (in_array('adviser', explode(',', $user->getRoles()))) {
+                $advisers[]= $user;
+            }
+        }
+
+        return $this->render('user/advisers.html.twig', array(
+            'title' => $this->getI18n()['advisers_list_page']['title'],
+            'advisers' => $advisers,
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing user entity.
      *
      */
@@ -404,6 +434,11 @@ class UserController extends Controller
                     'icon' => 'fa-user',
                     'path' => 'user_index',
                     'text' => $this->getI18n()['menus']['admin']['customers']
+                ),
+                array(
+                    'icon' => 'fa-users',
+                    'path' => 'advisers_list',
+                    'text' => $this->getI18n()['menus']['admin']['advisers']
                 ),
                 array(
                     'icon' => 'fa-eur',

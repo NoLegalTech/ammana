@@ -1,0 +1,58 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>{{ i18n.es.advisers_list_page.headers.id }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.active }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.email }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.company_name }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.cif }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.address }}</th>
+                            <th>{{ i18n.es.advisers_list_page.headers.contact_person }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for adviser in advisers %}
+                        <tr>
+                            <td><a href="{{ path('user_edit', { 'id': adviser.id }) }}">{{ adviser.id }}</a></td>
+                            <td>
+                                {% if adviser.enabled %}
+                                    {{ i18n.es.advisers_list_page.is_active.yes }}
+                                {% else %}
+                                    {{ i18n.es.advisers_list_page.is_active.no }}
+                                {% endif %}
+                            </td>
+                            <td>{{ adviser.email }}</td>
+                            <td>{{ adviser.companyName }}</td>
+                            <td>{{ adviser.cif }}</td>
+                            <td>{{ adviser.address }}</td>
+                            <td>{{ adviser.contactPerson }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <ul>
+                    <li>
+                        <a href="{{ path('register_user') }}">{{ i18n.es.advisers_list_page.new_adviser }}</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

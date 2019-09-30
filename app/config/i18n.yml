@@ -12,9 +12,10 @@ parameters:
     urls.forgot_password:  /forgot_password
     urls.sent_password_email: /resetting_password
     urls.new_password:        /newPassword/{activationHash}
-    urls.user_index:  /admin/user/
-    urls.user_edit:   /admin/user/{id}/edit
-    urls.user_delete: /admin/user/{id}/delete
+    urls.user_index:     /admin/user/
+    urls.user_edit:      /admin/user/{id}/edit
+    urls.user_delete:    /admin/user/{id}/delete
+    urls.advisers_list:  /admin/adviser/
 
     # invoice urls
     # ------------
@@ -107,6 +108,7 @@ twig:
                         invoices:  Facturas
                         logout:    Cerrar sesión
                         customers: Clientes
+                        advisers:  Asesorías
                         orders:    Pedidos
                         protocols: Protocolos
                 # =================================================================================
@@ -344,6 +346,21 @@ twig:
                         yes: Sí
                         no: No
                     new_user: Nuevo usuario
+
+                advisers_list_page:
+                    title: Lista de asesorías
+                    headers:
+                        id: Id
+                        active: Activo
+                        email: Email
+                        company_name: Nombre de compañía
+                        cif: CIF
+                        address: Domicilio social
+                        contact_person: Persona de contacto
+                    is_active:
+                        yes: Sí
+                        no: No
+                    new_adviser: Nueva asesoría
 
                 login_page:
                     title: Identifícate

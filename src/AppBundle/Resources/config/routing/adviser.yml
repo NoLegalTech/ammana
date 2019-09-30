@@ -24,3 +24,8 @@ adviser_buy_pack:
     defaults: { _controller: "AppBundle:Adviser:buyPack" }
     methods:  [GET, POST]
 
+advisers_list:
+    path:     "%urls.advisers_list%"
+    defaults: { _controller: "AppBundle:User:advisersList" }
+    methods:  GET
+

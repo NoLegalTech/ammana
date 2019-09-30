@@ -1,0 +1,54 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+                <h2>
+                    Historial de pedidos de {{ adviser.companyName }} ({{ adviser.email }})
+                </h2>
+                {% if protocols %}
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>{{ i18n.es.orders_page.headers.code }}</th>
+                                <th>{{ i18n.es.orders_page.headers.protocol }}</th>
+                                <th>{{ i18n.es.orders_page.headers.date }}</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for protocol in protocols %}
+                            <tr>
+                                <td>{{ protocol.orderHash }}</td>
+                                <td>{{ names[protocol.identifier] }}</td>
+                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
+                                <td>
+                                    {% if protocol.enabled %}
+                                        {{ i18n.es.orders_page.paid }}
+                                    {% else %}
+                                        <a href="{{ path('protocol_pay_transfer', { 'id': protocol.id }) }}">{{ i18n.es.orders_page.mark_paid }}</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>
+                        {{ i18n.es.orders_page.no_orders }}
+                    </p>
+                {% endif %}
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

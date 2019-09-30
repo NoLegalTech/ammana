@@ -18,10 +18,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 use \Firebase\JWT\JWT;
 
+use AppBundle\Entity\AdviserPack;
 use AppBundle\Entity\Company;
-use AppBundle\Entity\Protocol;
 use AppBundle\Entity\ContactMessage;
 use AppBundle\Entity\NewsletterSubscriber;
+use AppBundle\Entity\Pack;
+use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 use AppBundle\Service\HashGenerator;
 use AppBundle\Service\Invoices;
@@ -205,6 +207,92 @@ class AdviserController extends Controller
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
+
+    /**
+     * Show orders of adviser.
+     */
+    public function ordersAction($id, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $adviser = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findById($id)[0];
+
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByUser($id);
+
+        $names = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+        }
+
+        return $this->render('adviser/orders.html.twig', array(
+            'title' => $this->getI18n()['orders_page']['title'],
+            'protocols' => $protocols,
+            'names' => $names,
+            'adviser' => $adviser,
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Buys a pack.
+     *
+     */
+    public function buyPackAction(Request $request, PermissionsService $permissions, HashGenerator $hasher)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $adviser = $permissions->getCurrentUser();
+
+        $profile_completed = $this->adviserHasCompletedProfile($adviser);
+
+        $adviserPack = new AdviserPack();
+
+        $form = $this->createForm('AppBundle\Form\AdviserPackType', $adviserPack, array(
+            'i18n' => $this->getI18n()
+        ));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $purchasedPack = new Pack();
+            $purchasedPack->setEnabled(false);
+            $purchasedPack->setUser($adviser->getId());
+            $purchasedPack->setOrderHash($hasher->generate(8, false));
+            $purchasedPack->setOrderDate(new \DateTime(date('Y-m-d')));
+            $purchasedPack->setPrice($adviserPack->getPrice());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($purchasedPack);
+            $em->flush();
+
+            return $this->redirectToRoute('pack_pay', array(
+                'id' => $purchasedPack->getId()
+            ));
+        }
+
+        return $this->render('adviser/buy_pack.html.twig', array(
+            'title' => $this->getI18n()['buy_pack_page']['title'],
+            'profile_completed' => $profile_completed,
+            'form' => $form->createView(),
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }
@@ -280,6 +368,14 @@ class AdviserController extends Controller
         }
 
         return $formBuilder ->getForm();
+    }
+
+    private function adviserHasCompletedProfile($adviser) {
+        return ( $adviser->getEmail() != null )
+            && ( $adviser->getPassword() != null )
+            && ( $adviser->getCompanyName() != null )
+            && ( $adviser->getCif() != null )
+            && ( $adviser->getAddress() != null );
     }
 
 }

@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class AdviserRegisterType extends AbstractType {
+class AdviserPackType extends AbstractType {
 
     /**
      * {@inheritdoc}
@@ -26,31 +26,7 @@ class AdviserRegisterType extends AbstractType {
     {
         $i18n = $options['i18n'];
         $builder
-            ->add('companyName', TextType::class, array(
-                'label' => $i18n['forms']['profile_form']['company_name'] . ':',
-                'required' => true,
-                'required' => false
-            ))
-            ->add('email', EmailType::class, array(
-                'label' => $i18n['forms']['profile_form']['email'] . ':',
-                'required' => true,
-                'attr' => [ 'placeholder' => 'Correo electrónico' ]
-            ))
-            ->add('password', PasswordType::class, array(
-                'label' => $i18n['forms']['profile_form']['password'] . ':',
-                'required' => true,
-                'attr' => [ 'placeholder' => 'Contraseña' ]
-            ))
-            ->add('cif', TextType::class, array(
-                'label' => $i18n['forms']['profile_form']['cif'] . ':',
-                'required' => false
-            ))
-            ->add('address', TextType::class, array(
-                'label' => $i18n['forms']['profile_form']['address'] . ':',
-                'required' => false
-            ))
             ->add('pack', ChoiceType::class, array(
-                'label' => 'Escoge un pack:',
                 'label' => $i18n['forms']['adviser_register_form']['pack'] . ':',
                 'required' => true,
                 'choices' => array(
@@ -68,7 +44,7 @@ class AdviserRegisterType extends AbstractType {
     {
         $resolver->setRequired('i18n');
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\AdviserRegister'
+            'data_class' => 'AppBundle\Entity\AdviserPack'
         ));
     }
 
@@ -77,7 +53,7 @@ class AdviserRegisterType extends AbstractType {
      */
     public function getBlockPrefix()
     {
-        return 'adviser_register_form';
+        return 'adviser_pack_form';
     }
 
 }

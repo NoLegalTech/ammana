@@ -643,6 +643,7 @@ class UserController extends Controller
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
     }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }

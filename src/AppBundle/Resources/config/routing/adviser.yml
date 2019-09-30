@@ -29,3 +29,8 @@ advisers_list:
     defaults: { _controller: "AppBundle:User:advisersList" }
     methods:  GET
 
+adviser_orders:
+    path:     "%urls.adviser_orders%"
+    defaults: { _controller: "AppBundle:Adviser:orders" }
+    methods:  GET
+

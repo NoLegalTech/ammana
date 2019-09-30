@@ -17,6 +17,7 @@ parameters:
     urls.user_delete:    /admin/user/{id}/delete
     urls.user_orders:    /admin/user/{id}/orders
     urls.advisers_list:  /admin/adviser/
+    urls.adviser_orders: /admin/adviser/{id}/orders
 
     # invoice urls
     # ------------
@@ -237,6 +238,10 @@ twig:
                         title: Generar protocolos
                         button: Generar
 
+                buy_pack_page:
+                    title: Comprar pack de protocolos
+                    button: Comprar
+
                 adviser_protocol_confirmation_page:
                     title:   Confirmación
                     please_review: Por favor, revisa tus respuestas y confirma que son correctas.
@@ -360,6 +365,7 @@ twig:
                         cif: CIF
                         address: Domicilio social
                         contact_person: Persona de contacto
+                        see_orders: Ver pedidos
                     is_active:
                         yes: Sí
                         no: No

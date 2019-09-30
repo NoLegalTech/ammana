@@ -22,6 +22,7 @@
                             <th>{{ i18n.es.advisers_list_page.headers.cif }}</th>
                             <th>{{ i18n.es.advisers_list_page.headers.address }}</th>
                             <th>{{ i18n.es.advisers_list_page.headers.contact_person }}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,9 @@
                             <td>{{ adviser.cif }}</td>
                             <td>{{ adviser.address }}</td>
                             <td>{{ adviser.contactPerson }}</td>
+                            <td>
+                                <a href="{{ path('adviser_orders', { 'id': adviser.id }) }}">{{ i18n.es.advisers_list_page.headers.see_orders }}</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

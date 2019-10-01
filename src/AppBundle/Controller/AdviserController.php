@@ -274,12 +274,13 @@ class AdviserController extends Controller
             $purchasedPack->setOrderHash($hasher->generate(8, false));
             $purchasedPack->setOrderDate(new \DateTime(date('Y-m-d')));
             $purchasedPack->setPrice($adviserPack->getPrice());
+            $purchasedPack->setAmount($adviserPack->getAmount());
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($purchasedPack);
             $em->flush();
 
-            return $this->redirectToRoute('pack_pay', array(
+            return $this->redirectToRoute('adviser_pay_pack', array(
                 'id' => $purchasedPack->getId()
             ));
         }
@@ -291,6 +292,100 @@ class AdviserController extends Controller
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
+    }
+
+    /**
+     * Pays a pack.
+     *
+     */
+    public function payPackAction(Pack $pack, Request $request, Quaderno $quaderno, \Swift_Mailer $mailer, PermissionsService $permissions, OrderNumberFormatter $formatter, Invoices $invoices, AlertsService $alerts)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $adviser = $permissions->getCurrentUser();
+        if ($pack->getUser() != $adviser->getId()) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        if ($pack->getEnabled()) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['already_paid_pack']['user']
+            ));
+        }
+
+        if ($request->query->get('quaderno_error_message') != null) {
+            $alerts->error(
+                $this->getI18n()['errors']['quaderno_paypal_error']['log'],
+                $request->query->get('quaderno_error_message'),
+                $pack->__toString()
+            );
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['quaderno_paypal_error']['user']
+            ));
+        }
+
+        if ($request->isMethod('POST')) {
+            $postData = $request->request;
+            $payer_status = $postData->get('payer_status');
+            $item_number = $postData->get('item_number');
+
+            if ($payer_status != 'VERIFIED' || $formatter->format($pack->getId()) != $item_number) {
+                $alerts->error(
+                    $this->getI18n()['errors']['wrong_paypal_callback']['log'],
+                    $request->query->get('quaderno_error_message'),
+                    $pack->__toString()
+                );
+                return $this->redirectToRoute('error', array(
+                    'message' => $this->getI18n()['errors']['wrong_paypal_callback']['user']
+                ));
+            }
+            $pack->setEnabled(true);
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('adviser_pack_paid');
+        }
+
+        $amount = $pack->getPrice();
+        $token = array(
+            "iat" => time(),
+            "amount" => $amount,
+            "currency" => "EUR",
+            "description" => "Pack de " . $pack->getAmount() . " protocolos",
+            "item_number" => $formatter->format($pack->getId()),
+            "quantity" => 1
+        );
+        $jwt = JWT::encode($token, $this->container->getParameter('quaderno_api_key'));
+
+        $vatnumber = $adviser->getCif();
+        if (!$quaderno->isValidVAT($vatnumber)) {
+            $vatnumber = "";
+        }
+
+        return $this->render('adviser/pack.payment.html.twig', array(
+            'title' => $this->getI18n()['pack_payment_page']['title'],
+            'adviser' => $adviser,
+            'vatnumber' => $vatnumber,
+            'amount' => $amount,
+            'charge' => $jwt,
+            'quaderno_public_api_key' => $this->container->getParameter('quaderno_api_public_key'),
+            'payment_data' => array(
+                'order_hash' => $pack->getOrderHash(),
+                'bank_account' => $this->container->getParameter('account_number'),
+                'amount' => $this->formatEuro($amount)
+            ),
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    private function formatEuro($amount) {
+        $amount = "$amount";
+        return substr($amount, 0, strlen($amount) - 2) . '.' . substr($amount, -2);
     }
 
     private function getI18n() {

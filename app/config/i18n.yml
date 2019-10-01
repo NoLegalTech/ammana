@@ -37,13 +37,14 @@ parameters:
     urls.adviser_protocol_generate:    /adviser/protocol/generate/{id}
     urls.adviser_protocol_config:      /adviser/protocol/config/{id}/{company_id}
     urls.adviser_buy_pack:             /adviser/protocol/pack
-    urls.protocol_index:    /protocol/
-    urls.protocol_buy:      /protocol/buy/{id}
-    urls.protocol_pay:      /protocol/pay/{id}
-    urls.protocol_paid:     /protocol/payment_complete
-    urls.protocol_download: /protocol/{id}
+    urls.adviser_pay_pack:             /adviser/protocol/pack/pay/{id}
+    urls.protocol_index:               /protocol/
+    urls.protocol_buy:                 /protocol/buy/{id}
+    urls.protocol_pay:                 /protocol/pay/{id}
+    urls.protocol_paid:                /protocol/payment_complete
+    urls.protocol_download:            /protocol/{id}
     urls.protocol_download_instructions: /protocol/{id}/instructions
-    urls.protocol_download_recibi: /protocol/{id}/recibi
+    urls.protocol_download_recibi:       /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
     urls.protocol_admin_index:  /admin/protocol/
     urls.protocol_create:       /admin/protocol/create/{id}
@@ -145,6 +146,9 @@ twig:
                     already_paid_protocol:
                         user: Ha ocurrido un error inesperado.
                         log:  Se ha intentado pagar un protocolo ya pagado.
+                    already_paid_pack:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Se ha intentado pagar un pack ya pagado.
                     wrong_paypal_callback:
                         user: Ha ocurrido un error inesperado.
                         log:  ERROR al completar el pago con el botón de Paypal de quaderno
@@ -247,6 +251,17 @@ twig:
                     please_review: Por favor, revisa tus respuestas y confirma que son correctas.
                     confirm: Confirmar
                     cancel:  Cancelar
+
+                pack_payment_page:
+                    title: Pagar pack
+                    info:  En cuanto pagues tu pack, dispondrás del número de protocolos seleccionado inmediatamente.
+                    pay_with_paypal: Pagar con <img src="/web/images/paypal.png">
+                    transfer:
+                        info: "Si prefieres pagar por transferencia bancaria, debes realizar una transferencia con los siguientes datos:"
+                        contact: Concepto
+                        account_number: Número de cuenta
+                        amount: Importe
+                    note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
 
                 protocols_page:
                     title: Lista de protocolos

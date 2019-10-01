@@ -24,6 +24,9 @@ AppBundle\Entity\Pack:
             type: boolean
             column: enabled
             nullable: false
+        amount:
+            type: integer
+            nullable: false
         orderHash:
             type: string
             length: '8'

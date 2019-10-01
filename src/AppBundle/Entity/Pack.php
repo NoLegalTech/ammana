@@ -35,6 +35,11 @@ class Pack
     private $invoice;
 
     /**
+     * @var int
+     */
+    private $amount;
+
+    /**
      * @var string
      */
     private $orderHash;
@@ -65,7 +70,7 @@ class Pack
      *
      * @param boolean $enabled
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setEnabled($enabled)
     {
@@ -89,7 +94,7 @@ class Pack
      *
      * @param int $user
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setUser($user)
     {
@@ -113,7 +118,7 @@ class Pack
      *
      * @param int $invoice
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setInvoice($invoice)
     {
@@ -133,11 +138,35 @@ class Pack
     }
 
     /**
+     * Set amount
+     *
+     * @param int $amount
+     *
+     * @return Pack
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
      * Set orderHash
      *
      * @param string $orderHash
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setOrderHash($orderHash)
     {
@@ -161,7 +190,7 @@ class Pack
      *
      * @param date $orderDate
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setOrderDate($orderDate)
     {
@@ -185,7 +214,7 @@ class Pack
      *
      * @param int $price
      *
-     * @return Protocol
+     * @return Pack
      */
     public function setPrice($price)
     {
@@ -210,7 +239,7 @@ class Pack
      * @return string
      */
     public function __toString() {
-        return "Protocol {\n"
+        return "Pack {\n"
                 . "    id: "         . $this->getId()                         . ",\n"
                 . "    enabled: "    . $this->getEnabled()                    . ",\n"
                 . "    user: "       . $this->getUser()                       . ",\n"

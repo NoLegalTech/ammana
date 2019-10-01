@@ -15,21 +15,46 @@ namespace AppBundle\Entity;
  */
 class AdviserPack
 {
+    private $prices_plan = [
+        'S' =>  5 * 7000,
+        'M' => 15 * 6500,
+        'L' => 25 * 6000
+    ];
+
+    private $amounts_plan = [
+        'S' =>  5,
+        'M' => 15,
+        'L' => 25
+    ];
+
     /**
      * @var string
      */
     private $pack;
 
     /**
+     * @var int
+     */
+    private $price;
+
+    /**
+     * @var int
+     */
+    private $amount;
+
+    /**
      * Set pack
      *
      * @param string $pack
      *
-     * @return User
+     * @return Pack
      */
     public function setPack($pack)
     {
         $this->pack = $pack;
+
+        $this->price = $this->prices_plan[$this->pack];
+        $this->amount = $this->amounts_plan[$this->pack];
 
         return $this;
     }
@@ -44,18 +69,24 @@ class AdviserPack
         return $this->pack;
     }
 
+    /**
+     * Get price
+     *
+     * @return int
+     */
     public function getPrice()
     {
-        if ($this->pack == 'S') {
-            return 5 * 70;
-        }
-        if ($this->pack == 'S') {
-            return 15 * 65;
-        }
-        if ($this->pack == 'S') {
-            return 25 * 60;
-        }
-        return 999;
+        return $this->price;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
     }
 
 }

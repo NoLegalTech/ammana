@@ -1,0 +1,23 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50 sheet80">
+                <h2 class="heading">{{ protocol.name }}</h2>
+                {{ form_start(form) }}
+                    {{ form_widget(form) }}
+                    <input class="btn" type="submit" value="{{ i18n.es.questions_adviser_page.generate_protocol }}">
+                {{ form_end(form) }}
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

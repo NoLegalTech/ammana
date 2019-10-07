@@ -11,13 +11,15 @@
     <div class="wrapper row3">
         <main class="hoc container clear"> 
             <div class="btmspace-50">
+                <h2>
+                    Historial de pedidos de {{ user.companyName }} ({{ user.email }})
+                </h2>
                 {% if protocols %}
                     <table>
                         <thead>
                             <tr>
                                 <th>{{ i18n.es.orders_page.headers.code }}</th>
                                 <th>{{ i18n.es.orders_page.headers.protocol }}</th>
-                                <th>{{ i18n.es.orders_page.headers.customer }}</th>
                                 <th>{{ i18n.es.orders_page.headers.date }}</th>
                                 <th></th>
                             </tr>
@@ -27,7 +29,6 @@
                             <tr>
                                 <td>{{ protocol.orderHash }}</td>
                                 <td>{{ names[protocol.identifier] }}</td>
-                                <td>{{ users[protocol.user].companyName }} ({{ users[protocol.user].email }})</td>
                                 <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
                                 <td>
                                     {% if protocol.enabled %}

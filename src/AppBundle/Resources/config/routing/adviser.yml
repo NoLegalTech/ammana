@@ -1,0 +1,76 @@
+#!
+# ammana.es - job protocols generator
+# https://github.com/NoLegalTech/ammana
+# Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+# https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+
+adviser_protocol_index:
+    path:     "%urls.adviser_protocol_index%"
+    defaults: { _controller: "AppBundle:Adviser:protocols" }
+    methods:  GET
+
+adviser_protocol_generate:
+    path:     "%urls.adviser_protocol_generate%"
+    defaults: { _controller: "AppBundle:Adviser:generateProtocol" }
+    methods:  [GET, POST]
+
+adviser_protocol_config:
+    path:     "%urls.adviser_protocol_config%"
+    defaults: { _controller: "AppBundle:Adviser:configProtocol" }
+    methods:  [GET, POST]
+
+adviser_buy_pack:
+    path:     "%urls.adviser_buy_pack%"
+    defaults: { _controller: "AppBundle:Adviser:buyPack" }
+    methods:  [GET, POST]
+
+adviser_pay_pack:
+    path:     "%urls.adviser_pay_pack%"
+    defaults: { _controller: "AppBundle:Adviser:payPack" }
+    methods:  [GET, POST]
+
+adviser_pay_transfer:
+    path:     "%urls.adviser_pay_transfer%"
+    defaults: { _controller: "AppBundle:Adviser:payPackTransfer" }
+    methods:  GET
+
+adviser_pack_paid:
+    path:     "%urls.adviser_pack_paid%"
+    defaults: { _controller: "AppBundle:Adviser:paymentCompletePack" }
+    methods:  GET
+
+advisers_list:
+    path:     "%urls.advisers_list%"
+    defaults: { _controller: "AppBundle:User:advisersList" }
+    methods:  GET
+
+adviser_orders:
+    path:     "%urls.adviser_orders%"
+    defaults: { _controller: "AppBundle:Adviser:orders" }
+    methods:  GET
+
+protocol_adviser_download:
+    path:     "%urls.protocol_adviser_download%"
+    defaults: { _controller: "AppBundle:Protocol:downloadAdviser" }
+    methods:  GET
+
+protocol_adviser_download_instructions:
+    path:     "%urls.protocol_adviser_download_instructions%"
+    defaults: { _controller: "AppBundle:Protocol:downloadInstructionsAdviser" }
+    methods:  GET
+
+protocol_adviser_download_recibi:
+    path:     "%urls.protocol_adviser_download_recibi%"
+    defaults: { _controller: "AppBundle:Protocol:downloadRecibiAdviser" }
+    methods:  GET
+
+protocol_adviser_html:
+    path:     "%urls.protocol_adviser_html%"
+    defaults: { _controller: "AppBundle:Protocol:htmlAdviser" }
+    methods:  GET
+
+protocol_adviser_delete:
+    path:     "%urls.protocol_adviser_delete%"
+    defaults: { _controller: "AppBundle:Protocol:deleteAdviser" }
+    methods:  GET
+

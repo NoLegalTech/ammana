@@ -109,6 +109,61 @@ class Quaderno {
         return $invoice;
     }
 
+    public function createInvoiceForPack($theUser, $pack) {
+        $qInvoice = new QuadernoInvoice(array(
+            'payment_method' => 'wire_transfer',
+            'currency' => 'EUR'
+        ));
+
+        if ($pack->getInvoice() != null) {
+            return null;
+        }
+
+        $contact = $this->findContact($theUser);
+        if ($contact == null) {
+            $contact = $this->createContact($theUser);
+            if ($contact == null) {
+                $contact = $this->createContactWithoutVAT($theUser);
+            }
+        }
+
+        if ($contact == null) {
+            return null;
+        }
+
+        $tax = array(
+            'name' => 'iva',
+            'rate' => 21
+        );
+
+        $item = new QuadernoDocumentItem(array(
+            'description' => "Pack de " . $pack->getAmount() . " protocolos",
+            'unit_price' => $pack->getPrice() / (100 + $tax['rate']),
+            'quantity' => 1,
+            'tax_1_name' => $tax['name'],
+            'tax_1_rate' => $tax['rate']
+        ));
+
+        $qInvoice->addItem($item);
+        $qInvoice->addContact($contact);
+
+        if (!$qInvoice->save()) {
+            $this->logErrors(
+                'Error while creating invoice for pack ' . print_r($pack, true),
+                $qInvoice->errors
+            );
+            return null;
+        }
+
+        $invoice = new Invoice();
+        $invoice->setUser($theUser->getId());
+        $invoice->setEmittedAt(new \DateTime($qInvoice->__get('issue_date')));
+        $invoice->setNumber($qInvoice->__get('number'));
+        $invoice->setUrl($qInvoice->__get('pdf'));
+        $invoice->setQuadernoId($qInvoice->__get('id'));
+        return $invoice;
+    }
+
     public function createContact($user) {
         $contact = new QuadernoContact(array(
             'first_name' => $user->getCompanyName(),

@@ -961,6 +961,214 @@ class ProtocolController extends Controller
         ));
     }
 
+    /**
+     * Downloads a protocol.
+     *
+     */
+    public function downloadAdviserAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($protocol->getUser());
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $document = $protocol_spec['document'];
+        $printer->setFileName($protocol_spec['name'].'.pdf');
+
+        if ($company->getLogo() != null) {
+            $printer->setLogo($this->get('kernel')->getRootDir() . '/../web/uploads/' . $company->getLogo());
+        }
+
+        $variables = [];
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            $variables[$var] = $val;
+        }
+        $variables['company_name'] = $company->getCompanyName();
+        $printer->setVariables($variables);
+        $printer->setQuestions($protocol_spec['questions']);
+
+        $printer->setStyles($document['styles']);
+        $printer->setContent($document['content']);
+
+        return new Response($printer->print(), 200, array( 'Content-Type' => 'application/pdf'));
+    }
+
+    /**
+     * Downloads a protocol's instructions.
+     *
+     */
+    public function downloadInstructionsAdviserAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/instrucciones_' . $protocol->getIdentifier() . '.pdf';
+        $fileName = $this->getI18n()['protocols']['instructions'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".pdf"
+            )
+        );
+    }
+
+    /**
+     * Downloads a protocol's recibi.
+     *
+     */
+    public function downloadRecibiAdviserAction(Protocol $protocol, PDFPrinter $printer, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $path_to_document = $this->get('kernel')->getRootDir() . '/../app/Resources/downloads/recibi_' . $protocol->getIdentifier() . '.docx';
+        $fileName = $this->getI18n()['protocols']['recibi'][$protocol->getIdentifier()];
+
+        return new Response(
+            file_get_contents($path_to_document),
+            200,
+            array(
+                'Content-Type' => 'mime/type',
+                'Content-Disposition' => 'attachment;filename="'.$fileName.".docx"
+            )
+        );
+    }
+
+    /**
+     * Shows a protocol in HTML.
+     *
+     */
+    public function htmlAdviserAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $company = $em->getRepository('AppBundle:Company')->find($protocol->getUser());
+
+        $protocol_spec = $this->container->getParameter('protocol.'.$protocol->getIdentifier());
+        if ($protocol_spec == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['missing_protocol_definition']['user']
+            ));
+        }
+
+        if (!isset($protocol_spec['document'])) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['wrong_protocol_definition']['user']
+            ));
+        }
+
+        $document = $protocol_spec['document'];
+
+        $with_logo = false;
+        $logo_url = '';
+        if ($company->getLogo() != null) {
+            $with_logo = true;
+            $logo_url = '/web/uploads/' . $company->getLogo();
+        }
+
+        $variables = [];
+        $asignments = explode(',', $protocol->getAnswers());
+        foreach ($asignments as $asignment) {
+            list($var, $val) = explode('=', $asignment);
+            $variables[$var] = $val;
+        }
+        $variables['company_name'] = $company->getCompanyName();
+
+        return $this->render('protocol/show.adviser.html.twig', array(
+            'title' => $protocol_spec['short_name'] ." " . $company->getCompanyName(),
+            'protocol' => $protocol,
+            'variables' => $variables,
+            'questions' => $protocol_spec['questions'],
+            'styles' => $document['styles'],
+            'content' => $document['content'],
+            'with_logo' => $with_logo,
+            'logo_url' => $logo_url,
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Deletes a protocol.
+     *
+     */
+    public function deleteAdviserAction(Protocol $protocol, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("adviser")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $em->remove($protocol);
+        $em->flush();
+
+        return $this->redirectToRoute('adviser_protocol_index');
+    }
+
     private function getI18n() {
         return $this->container->get('twig')->getGlobals()['i18n']['es'];
     }

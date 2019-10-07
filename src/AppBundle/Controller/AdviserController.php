@@ -59,9 +59,12 @@ class AdviserController extends Controller
             ->getRepository(Protocol::class)
             ->findByCreatedBy($user->getId());
 
-        $already_ordered_ids = [];
-        foreach ($protocols as $protocol) {
-            $already_ordered_ids []= $protocol->getIdentifier();
+        $company_names = [];
+        foreach($protocols as $protocol) {
+            $company_names[$protocol->getId()] = $this->getDoctrine()
+                ->getRepository(Company::class)
+                ->find($protocol->getUser())
+                ->getCompanyName();
         }
 
         $names = [];
@@ -81,6 +84,7 @@ class AdviserController extends Controller
             'protocols' => $protocols,
             'invoices' => $invoices->getInvoicesForProtocols($protocols),
             'names' => $names,
+            'company_names' => $company_names,
             'to_generate' => $to_generate,
             'credits' => $user->getCredits(),
             'google_analytics' => $this->getAnalyticsCode(),

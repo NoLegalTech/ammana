@@ -23,29 +23,31 @@
                     <table class="full">
                         <thead>
                             <tr>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.date }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.company }}</th>
                                 <th>{{ i18n.es.adviser_protocols_page.headers.name }}</th>
                                 <th>{{ i18n.es.adviser_protocols_page.headers.download }}</th>
-                                <th>{{ i18n.es.adviser_protocols_page.headers.invoice }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.html }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.delete }}</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for protocol in protocols %}
                             <tr>
+                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
+                                <td>{{ company_names[protocol.id] }}</td>
                                 <td>{{ names[protocol.identifier] }}</td>
                                 {% if protocol.enabled %}
                                     <td>
-                                        <a href="{{ path('protocol_download', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ path('protocol_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ path('protocol_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.recibi }}</a>
+                                        <a href="{{ path('protocol_adviser_download', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_adviser_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_adviser_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.recibi }}</a>
                                     </td>
                                 {% else %}
                                     <td>{{ i18n.es.adviser_protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.pay }}</a>)</td>
                                 {% endif %}
-                                {% if invoices[protocol.id] %}
-                                    <td><a href="{{ invoices[protocol.id].url }}" target="_blank" rel="noopener">{{ i18n.es.adviser_protocols_page.download_invoice }}</a></td>
-                                {% else %}
-                                    <td>{{ i18n.es.adviser_protocols_page.invoice_not_available }}</td>
-                                {% endif %}
+                                <td><a href="{{ path('protocol_adviser_html', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.see_in_html }}</a></td>
+                                <td><a href="{{ path('protocol_adviser_delete', { 'id': protocol.id }) }}" onclick="return confirm('Estás seguro de borrar este protocolo?')">{{ i18n.es.adviser_protocols_page.delete }}</a></td>
                             </tr>
                         {% endfor %}
                         </tbody>

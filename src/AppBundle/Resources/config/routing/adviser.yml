@@ -49,3 +49,28 @@ adviser_orders:
     defaults: { _controller: "AppBundle:Adviser:orders" }
     methods:  GET
 
+protocol_adviser_download:
+    path:     "%urls.protocol_adviser_download%"
+    defaults: { _controller: "AppBundle:Protocol:downloadAdviser" }
+    methods:  GET
+
+protocol_adviser_download_instructions:
+    path:     "%urls.protocol_adviser_download_instructions%"
+    defaults: { _controller: "AppBundle:Protocol:downloadInstructionsAdviser" }
+    methods:  GET
+
+protocol_adviser_download_recibi:
+    path:     "%urls.protocol_adviser_download_recibi%"
+    defaults: { _controller: "AppBundle:Protocol:downloadRecibiAdviser" }
+    methods:  GET
+
+protocol_adviser_html:
+    path:     "%urls.protocol_adviser_html%"
+    defaults: { _controller: "AppBundle:Protocol:htmlAdviser" }
+    methods:  GET
+
+protocol_adviser_delete:
+    path:     "%urls.protocol_adviser_delete%"
+    defaults: { _controller: "AppBundle:Protocol:deleteAdviser" }
+    methods:  GET
+

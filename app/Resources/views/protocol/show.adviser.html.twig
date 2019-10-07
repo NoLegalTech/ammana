@@ -1,0 +1,178 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <button onclick="copyToClipboard('the-protocol', 'copyButtonTooltip')" onmouseout="outOfButtonFunc('copyButtonTooltip')">
+                <span class="tooltiptext hidden" id="copyButtonTooltip"></span>
+                {{ i18n.es.show_protocol_adviser_page.copy_button }}
+            </button>
+
+            <style>
+                #the-protocol img.logo {
+                    max-width: 200px;
+                    max-height: 100px;
+                    float: right;
+                }
+                #the-protocol h1,
+                #the-protocol h2,
+                #the-protocol p,
+                #the-protocol li {
+                    line-height: 28px;
+                    font-family: Cambria;
+                    font-size: 26px;
+                    font-weight: normal;
+                    text-align: justify;
+                    text-style: none;
+                }
+                #the-protocol h1 {
+                    font-weight: bold;
+                    text-align: center;
+                    margin-bottom: 10px;
+                }
+                #the-protocol h2 {
+                    font-weight: bold;
+                    text-decoration: underline;
+                    text-align: left;
+                    margin-top: 4px;
+                    margin-bottom: 40px;
+                }
+                #the-protocol li {
+                    margin-left: 26px;
+                    padding-left: 30px;
+                }
+            </style>
+
+            <style>
+                span.tooltiptext {
+                    width: auto;
+                    background-color: #555;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 8px 14px;
+                    position: absolute;
+                    z-index: 1;
+                    transition: opacity 0.3s;
+                    white-space: nowrap;
+                    margin-top: -58px;
+                }
+                span.tooltiptext:after {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 50%;
+                    margin-left: -5px;
+                    border-width: 5px;
+                    border-style: solid;
+                    border-color: #555 transparent transparent transparent;
+                }
+                span.tooltiptext.hidden {
+                    display: none;
+                }
+            </style>
+
+            <script>
+                function copyToClipboard(id, tootip_id) {
+                    (function() {
+                        function selectText(element) {
+                            var doc = document
+                                , text = element
+                                , range, selection
+                            ;
+                            if (doc.body.createTextRange) { //ms
+                                range = doc.body.createTextRange();
+                                range.moveToElementText(text);
+                                range.select();
+                            } else if (window.getSelection) { //all others
+                                selection = window.getSelection();
+                                range = doc.createRange();
+                                range.selectNodeContents(text);
+                                selection.removeAllRanges();
+                                selection.addRange(range);
+                            }
+                        }
+                        selectText(document.getElementById(id));
+                    })();
+                    document.execCommand("Copy");
+                    var tooltip = document.getElementById(tootip_id);
+                    tooltip.innerHTML = "Copiado al portapapeles!";
+                    document.getElementById(tootip_id).classList.remove('hidden');
+                    (function() {
+                        function unselectText() {
+                            var selection;
+                            if (window.getSelection) { //real browsers
+                                selection = window.getSelection();
+                                selection.removeAllRanges();
+                            } else { //ms
+                                document.selection.empty();
+                            }
+                        }
+                        unselectText();
+                    })();
+                }
+
+                function outOfButtonFunc(tootip_id) {
+                    document.getElementById(tootip_id).classList.add('hidden');
+
+                }
+            </script>
+
+            <div id="the-protocol" class="btmspace-50">
+
+                {% if with_logo %}
+                    <img class="logo" src="{{ logo_url }}" />
+                {% endif %}
+
+                {% set h2_counter = 1 %}
+                {% set ol_counter = 0 %}
+                {% set previous = '' %}
+                {% set previous_tag = '' %}
+                {% for element in content %}
+                    {% for tag in element|keys %}
+
+                        {% if ( loop.first ) and ( tag == 'li' ) and ( previous_tag != 'li' ) %}
+                            {% set ol_counter = ol_counter + 1 %}
+                            <ol id="ol_{{ ol_counter }}">
+                        {% endif %}
+
+                        {% if ( loop.first ) and ( tag != 'li' ) and ( previous_tag == 'li' ) %}
+                            </ol>
+                        {% endif %}
+
+                        {% include 'protocol/show.adviser.' ~ tag ~ '.html.twig' with {'tag': element[tag], 'id': loop.parent.loop.index, 'sub': loop.index } %}
+
+                        {% if tag == 'h2' %}
+                            {% set h2_counter = h2_counter + 1 %}
+                        {% endif %}
+
+                        {% if ( tag == 'condition' ) and ( previous == 'h2' ) %}
+                            {% set h2_counter = h2_counter - 1 %}
+                            {% for key in variables|keys %}
+                                {% if key ~ "=" ~ variables[key] == element[tag] %}
+                                    {% set h2_counter = h2_counter + 1 %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        {% set previous = tag %}
+
+                        {% if loop.index == 1 %}
+                            {% set previous_tag = tag %}
+                        {% endif %}
+
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}
+

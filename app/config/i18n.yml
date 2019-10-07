@@ -59,6 +59,11 @@ parameters:
     urls.protocol_public_redes:       /protocolos/redes
     urls.protocol_public_equipos:     /protocolos/equipos
     urls.protocol_public_mensajeria:  /protocolos/mensajeria
+    urls.protocol_adviser_download:              /adviser/protocol/{id}
+    urls.protocol_adviser_download_instructions: /adviser/protocol/{id}/instructions
+    urls.protocol_adviser_download_recibi:       /adviser/protocol/{id}/recibi
+    urls.protocol_adviser_html:                  /adviser/protocol/{id}/html
+    urls.protocol_adviser_delete:                /adviser/protocol/{id}/delete
 
 twig:
     globals:
@@ -236,9 +241,12 @@ twig:
                 adviser_protocols_page:
                     title: Lista de protocolos
                     headers:
+                        date:     Fecha
+                        company:  Empresa
                         name:     Nombre
-                        download: Descargar
-                        invoice:  Factura
+                        download: Descargas
+                        html:     HTML
+                        delete:   Borrar
                     download: Protocolo
                     instructions: Instrucciones
                     recibi: Recibí
@@ -254,6 +262,8 @@ twig:
                     generate:
                         title: Generar protocolos
                         button: Generar
+                    delete: Borrar
+                    see_in_html: Ver en HTML
 
                 buy_pack_page:
                     title: Comprar pack de protocolos
@@ -320,6 +330,10 @@ twig:
                         button: Crear
 
                 show_protocol_admin_page:
+                    copy_button: Copiar protocolo
+                    copied: Protocolo copiado al portapapeles
+
+                show_protocol_adviser_page:
                     copy_button: Copiar protocolo
                     copied: Protocolo copiado al portapapeles
 

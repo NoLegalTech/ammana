@@ -14,27 +14,27 @@
                 <h2>
                     Historial de pedidos de {{ adviser.companyName }} ({{ adviser.email }})
                 </h2>
-                {% if protocols %}
+                {% if packs %}
                     <table>
                         <thead>
                             <tr>
-                                <th>{{ i18n.es.orders_page.headers.code }}</th>
-                                <th>{{ i18n.es.orders_page.headers.protocol }}</th>
-                                <th>{{ i18n.es.orders_page.headers.date }}</th>
+                                <th>{{ i18n.es.adviser_orders_page.headers.code }}</th>
+                                <th>{{ i18n.es.adviser_orders_page.headers.pack }}</th>
+                                <th>{{ i18n.es.adviser_orders_page.headers.date }}</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                        {% for protocol in protocols %}
+                        {% for pack in packs %}
                             <tr>
-                                <td>{{ protocol.orderHash }}</td>
-                                <td>{{ names[protocol.identifier] }}</td>
-                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
+                                <td>{{ pack.orderHash }}</td>
+                                <td>Pack de {{ pack.amount }} protocolos</td>
+                                <td>{{ pack.orderDate | date('d/m/Y') }}</td>
                                 <td>
-                                    {% if protocol.enabled %}
-                                        {{ i18n.es.orders_page.paid }}
+                                    {% if pack.enabled %}
+                                        {{ i18n.es.adviser_orders_page.paid }}
                                     {% else %}
-                                        <a href="{{ path('protocol_pay_transfer', { 'id': protocol.id }) }}">{{ i18n.es.orders_page.mark_paid }}</a>
+                                        <a href="{{ path('adviser_pay_transfer', { 'id': pack.id }) }}">{{ i18n.es.adviser_orders_page.mark_paid }}</a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -43,7 +43,7 @@
                     </table>
                 {% else %}
                     <p>
-                        {{ i18n.es.orders_page.no_orders }}
+                        {{ i18n.es.adviser_orders_page.no_orders }}
                     </p>
                 {% endif %}
 

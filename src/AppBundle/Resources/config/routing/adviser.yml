@@ -29,6 +29,16 @@ adviser_pay_pack:
     defaults: { _controller: "AppBundle:Adviser:payPack" }
     methods:  [GET, POST]
 
+adviser_pay_transfer:
+    path:     "%urls.adviser_pay_transfer%"
+    defaults: { _controller: "AppBundle:Adviser:payPackTransfer" }
+    methods:  GET
+
+adviser_pack_paid:
+    path:     "%urls.adviser_pack_paid%"
+    defaults: { _controller: "AppBundle:Adviser:paymentCompletePack" }
+    methods:  GET
+
 advisers_list:
     path:     "%urls.advisers_list%"
     defaults: { _controller: "AppBundle:User:advisersList" }

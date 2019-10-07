@@ -38,6 +38,8 @@ parameters:
     urls.adviser_protocol_config:      /adviser/protocol/config/{id}/{company_id}
     urls.adviser_buy_pack:             /adviser/protocol/pack
     urls.adviser_pay_pack:             /adviser/protocol/pack/pay/{id}
+    urls.adviser_pay_transfer:         /adviser/protocol/pack/pay_transfer/{id}
+    urls.adviser_pack_paid:            /adviser/protocol/pack/payment_complete
     urls.protocol_index:               /protocol/
     urls.protocol_buy:                 /protocol/buy/{id}
     urls.protocol_pay:                 /protocol/pay/{id}
@@ -220,6 +222,17 @@ twig:
                     paid: Pagado
                     no_orders: No hay ningún pedido pendiente de cobro.
 
+                adviser_orders_page:
+                    title: Packs pendientes de cobro
+                    headers:
+                        code:     Código
+                        pack:     Pack
+                        customer: Cliente
+                        date:     Fecha pedido
+                    mark_paid: Marcar como cobrado
+                    paid: Pagado
+                    no_orders: No hay ningún pedido pendiente de cobro.
+
                 adviser_protocols_page:
                     title: Lista de protocolos
                     headers:
@@ -262,6 +275,12 @@ twig:
                         account_number: Número de cuenta
                         amount: Importe
                     note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
+
+                pack_payment_complete_page:
+                    title: Pago de pack completado
+                    message: El pago ha sido completado con éxito, con lo que el número seleccionado de protocolos se ha agregado a tu total disponible.
+                    check_it_now: Compruébalo yendo ahora a
+                    protocols_list: la lista de protocolos
 
                 protocols_page:
                     title: Lista de protocolos

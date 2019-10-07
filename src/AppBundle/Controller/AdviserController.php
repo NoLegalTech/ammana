@@ -223,21 +223,13 @@ class AdviserController extends Controller
             ->getRepository(User::class)
             ->findById($id)[0];
 
-        $protocols = $this->getDoctrine()
-            ->getRepository(Protocol::class)
+        $packs = $this->getDoctrine()
+            ->getRepository(Pack::class)
             ->findByUser($id);
 
-        $names = [];
-        $protocols_specs = $this->container->getParameter('protocols');
-        foreach ($protocols_specs as $id) {
-            $protocol_spec = $this->container->getParameter('protocol.'.$id);
-            $names[$id] = $protocol_spec['name'];
-        }
-
         return $this->render('adviser/orders.html.twig', array(
-            'title' => $this->getI18n()['orders_page']['title'],
-            'protocols' => $protocols,
-            'names' => $names,
+            'title' => $this->getI18n()['adviser_orders_page']['title'],
+            'packs' => $packs,
             'adviser' => $adviser,
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
@@ -381,6 +373,61 @@ class AdviserController extends Controller
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
+    }
+
+    /**
+     * Shows a pack payment completion status page.
+     *
+     */
+    public function paymentCompletePackAction(Request $request)
+    {
+        return $this->render('adviser/pack.payment_complete.html.twig', array(
+            'title' => $this->getI18n()['pack_payment_complete_page']['title'],
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Marks a pack as paid by transfer.
+     *
+     */
+    public function payPackTransferAction(Pack $pack, PermissionsService $permissions, Quaderno $quaderno, Protocols $protocols)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        if ($pack->getEnabled()) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['already_paid_pack']['user']
+            ));
+        }
+
+        $theAdviser = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->find($pack->getUser());
+
+        $theInvoice = $quaderno->createInvoiceForPack($theAdviser, $pack);
+
+        if ($theInvoice == null) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['quaderno_invoice_not_created']['user'],
+                'technical_info' => $quaderno->popErrors()
+            ));
+        }
+
+        $this->getDoctrine()->getManager()->persist($theInvoice);
+        $pack->setEnabled(true);
+        $pack->setInvoice($theInvoice->getId());
+        $theAdviser->setCredits($theAdviser->getCredits() + $pack->getAmount());
+        $this->getDoctrine()->getManager()->flush();
+
+        $quaderno->sendToClient($theInvoice);
+
+        return $this->redirectToRoute('adviser_orders', array('id' => $theAdviser->getId()));
     }
 
     private function formatEuro($amount) {

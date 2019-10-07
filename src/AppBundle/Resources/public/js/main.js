@@ -24,6 +24,15 @@ jQuery(document).ready(function () {
             $(this).submit();
         }
     });
+    $('form[name="adviser_register_form"]').on('submit', function(e) {
+        if (!$(this).data('encoded')) {
+            e.preventDefault();
+            var password = $('#adviser_register_form_password').val();
+            $('#adviser_register_form_password').val(CryptoJS.SHA3(password, { outputLength: 128 }));
+            $(this).data('encoded', true);
+            $(this).submit();
+        }
+    });
     $('.has-condition').each(function() {
         var $element = $(this);
         var showElement = function(element) {

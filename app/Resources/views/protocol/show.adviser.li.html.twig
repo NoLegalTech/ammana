@@ -1,0 +1,22 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% if tag is iterable %}
+
+    <li>
+    {% for line in tag %}
+        {% include 'protocol/show.adviser.line.html.twig' with {'line': line } %}
+    {% endfor %}
+    </li>
+
+{% else %}
+
+    <li>
+        {% include 'protocol/show.adviser.line.html.twig' with {'line': tag } %}
+    </li>
+
+{% endif %}

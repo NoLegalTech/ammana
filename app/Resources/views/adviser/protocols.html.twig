@@ -1,0 +1,79 @@
+{#
+ # ammana.es - job protocols generator
+ # https://github.com/NoLegalTech/ammana
+ # Copyright (C) 2018 Zeres Abogados y Consultores Laborales SLP <zeres@zeres.es>
+ # https://github.com/NoLegalTech/ammana/blob/master/LICENSE
+ #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="wrapper row3">
+        <main class="hoc container clear"> 
+            <div class="btmspace-50">
+
+                <p>
+                    {{ i18n.es.adviser_protocols_page.protocols_left_1 }}
+                    <strong> {{ credits }} </strong>
+                    {{ i18n.es.adviser_protocols_page.protocols_left_2 }}
+                    <a href="{{ path('adviser_buy_pack') }}">{{ i18n.es.adviser_protocols_page.buy.button }}</a>
+                </p>
+
+                {% if protocols %}
+                    <table class="full">
+                        <thead>
+                            <tr>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.date }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.company }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.name }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.download }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.html }}</th>
+                                <th>{{ i18n.es.adviser_protocols_page.headers.delete }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for protocol in protocols %}
+                            <tr>
+                                <td>{{ protocol.orderDate | date('d/m/Y') }}</td>
+                                <td>{{ company_names[protocol.id] }}</td>
+                                <td>{{ names[protocol.identifier] }}</td>
+                                {% if protocol.enabled %}
+                                    <td>
+                                        <a href="{{ path('protocol_adviser_download', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.download }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_adviser_download_instructions', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.instructions }}</a> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ path('protocol_adviser_download_recibi', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.recibi }}</a>
+                                    </td>
+                                {% else %}
+                                    <td>{{ i18n.es.adviser_protocols_page.not_available }} (<a href="{{ path('protocol_pay', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.pay }}</a>)</td>
+                                {% endif %}
+                                <td><a href="{{ path('protocol_adviser_html', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.see_in_html }}</a></td>
+                                <td><a href="{{ path('protocol_adviser_delete', { 'id': protocol.id }) }}" onclick="return confirm('Estás seguro de borrar este protocolo?')">{{ i18n.es.adviser_protocols_page.delete }}</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>
+                        {{ i18n.es.adviser_protocols_page.no_protocols }}
+                    </p>
+                {% endif %}
+
+                {% if to_generate and credits > 0 %}
+                    <h3 class="heading">{{ i18n.es.adviser_protocols_page.generate.title }}</h2>
+                    <table>
+                        <tbody>
+                            {% for protocol in to_generate %}
+                                <tr>
+                                    <td>{{ protocol.name }}</td>
+                                    <td><a href="{{ path('adviser_protocol_generate', { 'id': protocol.id }) }}">{{ i18n.es.adviser_protocols_page.generate.button }}</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+
+            </div>
+            <div class="clear"></div>
+        </main>
+    </div>
+{% endblock %}

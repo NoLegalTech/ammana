@@ -73,3 +73,9 @@ user_delete:
     path:     "%urls.user_delete%"
     defaults: { _controller: "AppBundle:User:delete" }
     methods:  DELETE
+
+user_orders:
+    path:     "%urls.user_orders%"
+    defaults: { _controller: "AppBundle:User:orders" }
+    methods:  GET
+

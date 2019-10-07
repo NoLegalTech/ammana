@@ -17,7 +17,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
+use AppBundle\Entity\AdviserRegister;
 use AppBundle\Entity\NewsletterSubscriber;
+use AppBundle\Entity\Protocol;
 use AppBundle\Entity\User;
 
 use AppBundle\Service\PermissionsService;
@@ -55,6 +57,36 @@ class UserController extends Controller
         return $this->render('user/index.html.twig', array(
             'title' => $this->getI18n()['user_list_page']['title'],
             'users' => $customers,
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Lists all advisers.
+     *
+     */
+    public function advisersListAction(Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $users = $em->getRepository('AppBundle:User')->findAll();
+        $advisers = [];
+        foreach ($users as $user) {
+            if (in_array('adviser', explode(',', $user->getRoles()))) {
+                $advisers[]= $user;
+            }
+        }
+
+        return $this->render('user/advisers.html.twig', array(
+            'title' => $this->getI18n()['advisers_list_page']['title'],
+            'advisers' => $advisers,
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));
@@ -151,6 +183,7 @@ class UserController extends Controller
                 $user->setEnabled(false);
                 $user->setRoles('customer');
                 $user->setActivationHash($hasher->generate());
+                $user->setCredits(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
@@ -210,8 +243,8 @@ class UserController extends Controller
      */
     public function registerAdviserAction(Request $request, LoggerInterface $logger, \Swift_Mailer $mailer, HashGenerator $hasher, AlertsService $alerts)
     {
-        $user = new User();
-        $form = $this->createForm('AppBundle\Form\CredentialsType', $user, array(
+        $adviserRegister = new AdviserRegister();
+        $form = $this->createForm('AppBundle\Form\AdviserRegisterType', $adviserRegister, array(
             'i18n' => $this->getI18n(),
             'csrf_protection' => false
         ));
@@ -219,9 +252,15 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $user = new User();
+                $user->setEmail($adviserRegister->getEmail());
+                $user->setPassword($adviserRegister->getPassword());
+                $user->setCif($adviserRegister->getCif());
+                $user->setAddress($adviserRegister->getAddress());
                 $user->setEnabled(false);
                 $user->setRoles('adviser');
                 $user->setActivationHash($hasher->generate());
+                $user->setCredits(0);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($user);
                 $em->flush();
@@ -259,7 +298,7 @@ class UserController extends Controller
 
                 return $this->redirectToRoute('thanks_for_registering');
             } catch(\Exception $e){
-                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $user->getEmail());
+                $logger->error($this->getI18n()['errors']['cannot_register_user']['log'] . ' ' . $adviserRegister->getEmail());
                 $logger->error($e);
                 return $this->redirectToRoute('error', array(
                     'message' => $this->getI18n()['errors']['cannot_register_user']['user']
@@ -269,7 +308,7 @@ class UserController extends Controller
 
         return $this->render('user/register.adviser.html.twig', array(
             'title' => $this->getI18n()['register_page']['title'],
-            'user' => $user,
+            'user' => $adviserRegister,
             'form' => $form->createView(),
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
@@ -343,6 +382,9 @@ class UserController extends Controller
             if ($permissions->currentRolesInclude("admin")) {
                 return $this->redirectToRoute('user_index');
             }
+            if ($permissions->currentRolesInclude("adviser")) {
+                return $this->redirectToRoute('adviser_protocol_index');
+            }
             return $this->redirectToRoute('protocol_index');
         }
 
@@ -395,6 +437,11 @@ class UserController extends Controller
                     'text' => $this->getI18n()['menus']['admin']['customers']
                 ),
                 array(
+                    'icon' => 'fa-users',
+                    'path' => 'advisers_list',
+                    'text' => $this->getI18n()['menus']['admin']['advisers']
+                ),
+                array(
                     'icon' => 'fa-eur',
                     'path' => 'invoice_index',
                     'text' => $this->getI18n()['menus']['admin']['invoices']
@@ -417,14 +464,19 @@ class UserController extends Controller
             ),
             'adviser' => array(
                 array(
+                    'icon' => 'fa-files-o',
+                    'path' => 'adviser_protocol_index',
+                    'text' => $this->getI18n()['menus']['adviser']['protocols']
+                ),
+                array(
                     'icon' => 'fa-user',
                     'path' => 'profile_homepage',
-                    'text' => $this->getI18n()['menus']['registered_user']['profile']
+                    'text' => $this->getI18n()['menus']['adviser']['profile']
                 ),
                 array(
                     'icon' => 'fa-sign-out',
                     'path' => 'user_logout',
-                    'text' => $this->getI18n()['menus']['registered_user']['logout']
+                    'text' => $this->getI18n()['menus']['adviser']['logout']
                 )
             )
         );
@@ -551,6 +603,42 @@ class UserController extends Controller
             'title' => $this->getI18n()['new_password_page']['title'],
             'user' => $user,
             'form' => $form->createView(),
+            'google_analytics' => $this->getAnalyticsCode(),
+            'newsletter_form' => $this->getNewsletterForm($request)->createView()
+        ));
+    }
+
+    /**
+     * Show orders of user.
+     */
+    public function ordersAction($id, Request $request, PermissionsService $permissions)
+    {
+        if (!$permissions->currentRolesInclude("admin")) {
+            return $this->redirectToRoute('error', array(
+                'message' => $this->getI18n()['errors']['restricted_access']['user']
+            ));
+        }
+
+        $user = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findById($id)[0];
+
+        $protocols = $this->getDoctrine()
+            ->getRepository(Protocol::class)
+            ->findByUser($id);
+
+        $names = [];
+        $protocols_specs = $this->container->getParameter('protocols');
+        foreach ($protocols_specs as $id) {
+            $protocol_spec = $this->container->getParameter('protocol.'.$id);
+            $names[$id] = $protocol_spec['name'];
+        }
+
+        return $this->render('user/orders.html.twig', array(
+            'title' => $this->getI18n()['orders_page']['title'],
+            'protocols' => $protocols,
+            'names' => $names,
+            'user' => $user,
             'google_analytics' => $this->getAnalyticsCode(),
             'newsletter_form' => $this->getNewsletterForm($request)->createView()
         ));

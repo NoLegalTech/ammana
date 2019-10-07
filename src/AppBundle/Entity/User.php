@@ -84,6 +84,11 @@ class User
      */
     private $quadernoId;
 
+    /**
+     * @var int
+     */
+    private $credits;
+
 
     /**
      * Get id
@@ -408,21 +413,46 @@ class User
     }
 
     /**
+     * Set credits
+     *
+     * @param int $credits
+     *
+     * @return User
+     */
+    public function setCredits($credits)
+    {
+        $this->credits = $credits;
+
+        return $this;
+    }
+
+    /**
+     * Get credits
+     *
+     * @return int
+     */
+    public function getCredits()
+    {
+        return $this->credits;
+    }
+
+    /**
      * String representation fo this object
      *
      * @return string
      */
     public function __toString() {
         return "User {\n"
-                . "    id: "            . $this->getId()            . ",\n"
-                . "    email: "         . $this->getEmail()         . ",\n"
-                . "    companyName: "   . $this->getCompanyName()   . ",\n"
-                . "    enabled: "       . $this->getEnabled()       . ",\n"
-                . "    cif: "           . $this->getCif()           . ",\n"
-                . "    address: "       . $this->getAddress()       . ",\n"
+                . "    id:            " . $this->getId()            . ",\n"
+                . "    email:         " . $this->getEmail()         . ",\n"
+                . "    companyName:   " . $this->getCompanyName()   . ",\n"
+                . "    enabled:       " . $this->getEnabled()       . ",\n"
+                . "    cif:           " . $this->getCif()           . ",\n"
+                . "    address:       " . $this->getAddress()       . ",\n"
                 . "    contactPerson: " . $this->getContactPerson() . ",\n"
-                . "    roles: "         . $this->getRoles()         . ",\n"
-                . "    quadernoId: "    . $this->getQuadernoId()    . "\n"
+                . "    roles:         " . $this->getRoles()         . ",\n"
+                . "    quadernoId:    " . $this->getQuadernoId()    . ",\n"
+                . "    credits:       " . $this->getCredits()       . "\n"
                 . "}";
     }
 

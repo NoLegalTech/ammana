@@ -22,6 +22,7 @@
                             <th>{{ i18n.es.user_list_page.headers.cif }}</th>
                             <th>{{ i18n.es.user_list_page.headers.address }}</th>
                             <th>{{ i18n.es.user_list_page.headers.contact_person }}</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,6 +41,9 @@
                             <td>{{ user.cif }}</td>
                             <td>{{ user.address }}</td>
                             <td>{{ user.contactPerson }}</td>
+                            <td>
+                                <a href="{{ path('user_orders', { 'id': user.id }) }}">{{ i18n.es.user_list_page.headers.see_orders }}</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

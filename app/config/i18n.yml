@@ -12,9 +12,12 @@ parameters:
     urls.forgot_password:  /forgot_password
     urls.sent_password_email: /resetting_password
     urls.new_password:        /newPassword/{activationHash}
-    urls.user_index:  /admin/user/
-    urls.user_edit:   /admin/user/{id}/edit
-    urls.user_delete: /admin/user/{id}/delete
+    urls.user_index:     /admin/user/
+    urls.user_edit:      /admin/user/{id}/edit
+    urls.user_delete:    /admin/user/{id}/delete
+    urls.user_orders:    /admin/user/{id}/orders
+    urls.advisers_list:  /admin/adviser/
+    urls.adviser_orders: /admin/adviser/{id}/orders
 
     # invoice urls
     # ------------
@@ -30,13 +33,20 @@ parameters:
 
     # protocol urls
     # -------------
-    urls.protocol_index:    /protocol/
-    urls.protocol_buy:      /protocol/buy/{id}
-    urls.protocol_pay:      /protocol/pay/{id}
-    urls.protocol_paid:     /protocol/payment_complete
-    urls.protocol_download: /protocol/{id}
+    urls.adviser_protocol_index:       /adviser/protocol/
+    urls.adviser_protocol_generate:    /adviser/protocol/generate/{id}
+    urls.adviser_protocol_config:      /adviser/protocol/config/{id}/{company_id}
+    urls.adviser_buy_pack:             /adviser/protocol/pack
+    urls.adviser_pay_pack:             /adviser/protocol/pack/pay/{id}
+    urls.adviser_pay_transfer:         /adviser/protocol/pack/pay_transfer/{id}
+    urls.adviser_pack_paid:            /adviser/protocol/pack/payment_complete
+    urls.protocol_index:               /protocol/
+    urls.protocol_buy:                 /protocol/buy/{id}
+    urls.protocol_pay:                 /protocol/pay/{id}
+    urls.protocol_paid:                /protocol/payment_complete
+    urls.protocol_download:            /protocol/{id}
     urls.protocol_download_instructions: /protocol/{id}/instructions
-    urls.protocol_download_recibi: /protocol/{id}/recibi
+    urls.protocol_download_recibi:       /protocol/{id}/recibi
     urls.protocol_pay_transfer: /protocol/pay_transfer/{id}
     urls.protocol_admin_index:  /admin/protocol/
     urls.protocol_create:       /admin/protocol/create/{id}
@@ -49,6 +59,11 @@ parameters:
     urls.protocol_public_redes:       /protocolos/redes
     urls.protocol_public_equipos:     /protocolos/equipos
     urls.protocol_public_mensajeria:  /protocolos/mensajeria
+    urls.protocol_adviser_download:              /adviser/protocol/{id}
+    urls.protocol_adviser_download_instructions: /adviser/protocol/{id}/instructions
+    urls.protocol_adviser_download_recibi:       /adviser/protocol/{id}/recibi
+    urls.protocol_adviser_html:                  /adviser/protocol/{id}/html
+    urls.protocol_adviser_delete:                /adviser/protocol/{id}/delete
 
 twig:
     globals:
@@ -88,6 +103,10 @@ twig:
                         protocol_uso_redes:      Uso de las redes sociales de empresa
                         protocol_uso_mensajeria: Uso de los sistemas de mensajería instantánea
                         protocol_uso_telematica: Uso de los equipos informáticos
+                    adviser:
+                        profile:   Perfil
+                        protocols: Protocolos
+                        logout:    Cerrar sesión
                     registered_user:
                         profile:   Mi perfil
                         protocols: Mis protocolos
@@ -99,6 +118,7 @@ twig:
                         invoices:  Facturas
                         logout:    Cerrar sesión
                         customers: Clientes
+                        advisers:  Asesorías
                         orders:    Pedidos
                         protocols: Protocolos
                 # =================================================================================
@@ -133,6 +153,9 @@ twig:
                     already_paid_protocol:
                         user: Ha ocurrido un error inesperado.
                         log:  Se ha intentado pagar un protocolo ya pagado.
+                    already_paid_pack:
+                        user: Ha ocurrido un error inesperado.
+                        log:  Se ha intentado pagar un pack ya pagado.
                     wrong_paypal_callback:
                         user: Ha ocurrido un error inesperado.
                         log:  ERROR al completar el pago con el botón de Paypal de quaderno
@@ -201,7 +224,73 @@ twig:
                         customer: Cliente
                         date:     Fecha pedido
                     mark_paid: Marcar como cobrado
+                    paid: Pagado
                     no_orders: No hay ningún pedido pendiente de cobro.
+
+                adviser_orders_page:
+                    title: Packs pendientes de cobro
+                    headers:
+                        code:     Código
+                        pack:     Pack
+                        customer: Cliente
+                        date:     Fecha pedido
+                    mark_paid: Marcar como cobrado
+                    paid: Pagado
+                    no_orders: No hay ningún pedido pendiente de cobro.
+
+                adviser_protocols_page:
+                    title: Lista de protocolos
+                    headers:
+                        date:     Fecha
+                        company:  Empresa
+                        name:     Nombre
+                        download: Descargas
+                        html:     HTML
+                        delete:   Borrar
+                    download: Protocolo
+                    instructions: Instrucciones
+                    recibi: Recibí
+                    not_available: No disponible
+                    pay: pagar
+                    download_invoice: Descargar factura
+                    invoice_not_available: Factura no disponible
+                    no_protocols: No tienes ningún protocolo todavía.
+                    protocols_left_1: Puedes generar 
+                    protocols_left_2: protocolos. ¿Necesitas más?
+                    buy:
+                        button: Compra aquí
+                    generate:
+                        title: Generar protocolos
+                        button: Generar
+                    delete: Borrar
+                    see_in_html: Ver en HTML
+
+                buy_pack_page:
+                    title: Comprar pack de protocolos
+                    button: Comprar
+
+                adviser_protocol_confirmation_page:
+                    title:   Confirmación
+                    please_review: Por favor, revisa tus respuestas y confirma que son correctas.
+                    confirm: Confirmar
+                    cancel:  Cancelar
+
+                pack_payment_page:
+                    title: Pagar pack
+                    info:  En cuanto pagues tu pack, dispondrás del número de protocolos seleccionado inmediatamente.
+                    pay_with_paypal: Pagar con <img src="/web/images/paypal.png">
+                    transfer:
+                        info: "Si prefieres pagar por transferencia bancaria, debes realizar una transferencia con los siguientes datos:"
+                        contact: Concepto
+                        account_number: Número de cuenta
+                        amount: Importe
+                    note: No olvides poner el concepto indicado para que podamos identificar el pago de este pedido.
+
+                pack_payment_complete_page:
+                    title: Pago de pack completado
+                    message: El pago ha sido completado con éxito, con lo que el número seleccionado de protocolos se ha agregado a tu total disponible.
+                    check_it_now: Compruébalo yendo ahora a
+                    protocols_list: la lista de protocolos
 
                 protocols_page:
                     title: Lista de protocolos
@@ -244,6 +333,10 @@ twig:
                     copy_button: Copiar protocolo
                     copied: Protocolo copiado al portapapeles
 
+                show_protocol_adviser_page:
+                    copy_button: Copiar protocolo
+                    copied: Protocolo copiado al portapapeles
+
                 payment_page:
                     title: Pagar
                     info:  Tu protocolo está listo. Lo podrás descargar inmediatamente en cuanto pagues tu pedido.
@@ -270,6 +363,10 @@ twig:
                     generate_protocol: Generar protocolo
 
                 questions_admin_page:
+                    title:  Planifica el uso del protocolo laboral
+                    generate_protocol: Generar protocolo
+
+                questions_adviser_page:
                     title:  Planifica el uso del protocolo laboral
                     generate_protocol: Generar protocolo
 
@@ -300,10 +397,27 @@ twig:
                         cif: CIF
                         address: Domicilio social
                         contact_person: Persona de contacto
+                        see_orders: Ver pedidos
                     is_active:
                         yes: Sí
                         no: No
                     new_user: Nuevo usuario
+
+                advisers_list_page:
+                    title: Lista de asesorías
+                    headers:
+                        id: Id
+                        active: Activo
+                        email: Email
+                        company_name: Nombre de compañía
+                        cif: CIF
+                        address: Domicilio social
+                        contact_person: Persona de contacto
+                        see_orders: Ver pedidos
+                    is_active:
+                        yes: Sí
+                        no: No
+                    new_adviser: Nueva asesoría
 
                 login_page:
                     title: Identifícate
@@ -425,6 +539,10 @@ twig:
                     register_form:
                         email:    Email
                         password: Contraseña
+                    adviser_register_form:
+                        email:    Email
+                        password: Contraseña
+                        pack:     Escoge un pack
                     new_password_form:
                         email:    Email
                     set_password_form:
@@ -433,6 +551,7 @@ twig:
                         email:          Email
                         company_name:   Nombre de la compañía
                         cif:            CIF
+                        password:       Contraseña
                         address:        Domicilio social
                         contact_person: Persona de contacto
                         sector:         Sector

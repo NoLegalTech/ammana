@@ -326,6 +326,7 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF8F2B;}
 }
 
 #credentials_form > div,
+#adviser_register_form > div,
 #email_form > div,
 #user_form > div {
     white-space:nowrap;
@@ -338,11 +339,19 @@ input:focus, textarea:focus, *:required:focus{border-color:#FF8F2B;}
     float: left;
     width: 40%;
 }
+#adviser_register_form > div label {
+    float: left;
+    width: 100%;
+}
 #credentials_form > div input, #credentials_form > div select,
+#adviser_register_form > div input, #adviser_register_form > div select,
 #email_form > div input, #email_form > div select,
 #user_form > div input, #user_form > div select {
     float: right;
     width: 100%;
+}
+#adviser_register_form > div select {
+    margin: 10px;
 }
 form > input.btn {
     margin: 30px 0px 30px 20px;
